@@ -6,15 +6,15 @@
     <title>Sample</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
 </head>
 
 <body>
     <header class="d-flex justify-content-between" style="padding: 10px;">
         <div class="d-flex align-items-center justify-content-between">
-            <img src="/Images/logo.jpg" style="height: 40px;">
+            <img src="${pageContext.request.contextPath}/Images/logo.jpg" style="height: 40px;">
         </div>
     </header>
 
@@ -43,7 +43,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 p-4">
-                    <img src="/Images/logo.jpg" alt="" style="height: 40px;">
+                    <img src="${pageContext.request.contextPath}/Images/logo.jpg" alt="" style="height: 40px;">
                     <div>
                         <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
                     </div>
@@ -64,8 +64,6 @@
             </div>
         </div>
     </footer>
-    
-    <script src="script.js"></script>
 </body>
 
 </html
