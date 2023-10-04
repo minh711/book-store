@@ -1,17 +1,17 @@
 CREATE TABLE Publisher (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     publisher NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
 
 CREATE TABLE [Language] (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     language NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
 
 CREATE TABLE Book (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     title NVARCHAR(100) NOT NULL,
     [description] NVARCHAR(2000) NOT NULL,
     thumbnail VARCHAR(100) NOT NULL,
@@ -26,13 +26,13 @@ CREATE TABLE Book (
 )
 
 CREATE TABLE BookPicture (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     picture VARCHAR(100) NOT NULL,
     bookId INT FOREIGN KEY REFERENCES Book(id)
 )
 
 CREATE TABLE Author (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     author NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
@@ -43,7 +43,7 @@ CREATE TABLE BookAuthor (
 )
 
 CREATE TABLE Genre (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     genre NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
@@ -54,12 +54,12 @@ CREATE TABLE BookGenre (
 )
 
 CREATE TABLE Role (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     role NVARCHAR(50) NOT NULL
 )
 
 CREATE TABLE Account (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     fullName NVARCHAR(100) NOT NULL,
     phone VARCHAR(11) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE Account (
 )
 
 CREATE TABLE Address (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     fullName NVARCHAR(100) NOT NULL,
     phone VARCHAR(11),
     [address] NVARCHAR(500) NOT NULL,
@@ -81,26 +81,26 @@ CREATE TABLE Address (
 )
 
 CREATE TABLE NotificationType (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     [type] NVARCHAR(50) NOT NULL
 )
 
 CREATE TABLE Notification (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     notification NVARCHAR(1000) NOT NULL,
     isViewed BIT NOT NULL,
     notificationTypeId INT FOREIGN KEY REFERENCES NotificationType(id)
 )
 
 CREATE TABLE Rating (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     star INT NOT NULL,
     comment NVARCHAR(500),
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
 
 CREATE TABLE Distributor (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     distributor NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
@@ -114,14 +114,14 @@ CREATE TABLE BookTransaction (
 )
 
 CREATE TABLE Cart (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     quantity INT NOT NULL,
     bookId INT FOREIGN KEY REFERENCES Book(id)
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
 
 CREATE TABLE [Order] (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     saleTotal INT NOT NULL,
     total INT NOT NULL,
     fullName NVARCHAR(100) NOT NULL,
@@ -135,12 +135,12 @@ CREATE TABLE [Order] (
 )
 
 CREATE TABLE OrderStatus (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     status NVARCHAR(50) NOT NULL
 )
 
 CREATE TABLE OrderStatusDetail (
-    id INT PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     [date] DATETIME NOT NULL,
     orderId INT FOREIGN KEY REFERENCES [Order](id),
     orderStatusId INT FOREIGN KEY REFERENCES OrderStatus(id)
