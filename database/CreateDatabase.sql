@@ -132,7 +132,7 @@ SET IDENTITY_INSERT BookTransaction ON;
 CREATE TABLE Cart (
     id INT IDENTITY(1,1) PRIMARY KEY,
     quantity INT NOT NULL,
-    bookId INT FOREIGN KEY REFERENCES Book(id)
+    bookId INT FOREIGN KEY REFERENCES Book(id),
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
 SET IDENTITY_INSERT Cart ON;   
@@ -147,7 +147,7 @@ CREATE TABLE [Order] (
     isBanking BIT NOT NULL,
     bankingImage VARCHAR(100),
     note NVARCHAR(500),
-    data DATETIME NOT NULL,
+    [date] DATETIME NOT NULL,
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
 SET IDENTITY_INSERT [Order] ON;   
