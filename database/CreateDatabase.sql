@@ -3,12 +3,14 @@ CREATE TABLE Publisher (
     publisher NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
+SET IDENTITY_INSERT Publisher ON;
 
 CREATE TABLE [Language] (
     id INT IDENTITY(1,1) PRIMARY KEY,
     language NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
+SET IDENTITY_INSERT [Language] ON;
 
 CREATE TABLE Book (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -24,40 +26,47 @@ CREATE TABLE Book (
     publisherId INT FOREIGN KEY REFERENCES Publisher(id),
     languageId INT FOREIGN KEY REFERENCES [Language](id)
 )
+SET IDENTITY_INSERT Book ON;
 
 CREATE TABLE BookPicture (
     id INT IDENTITY(1,1) PRIMARY KEY,
     picture VARCHAR(100) NOT NULL,
     bookId INT FOREIGN KEY REFERENCES Book(id)
 )
-
+SET IDENTITY_INSERT BookPicture ON;
+    
 CREATE TABLE Author (
     id INT IDENTITY(1,1) PRIMARY KEY,
     author NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
+SET IDENTITY_INSERT Author ON;
 
 CREATE TABLE BookAuthor (
     bookId INT FOREIGN KEY REFERENCES Book(id),
     authorId INT FOREIGN KEY REFERENCES Author(id)
 )
+SET IDENTITY_INSERT BookAuthor ON;
 
 CREATE TABLE Genre (
     id INT IDENTITY(1,1) PRIMARY KEY,
     genre NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
-
+SET IDENTITY_INSERT Genre ON;
+    
 CREATE TABLE BookGenre (
     bookId INT FOREIGN KEY REFERENCES Book(id),
     genreId INT FOREIGN KEY REFERENCES Genre(id)
 )
+SET IDENTITY_INSERT BookGenre ON;    
 
 CREATE TABLE Role (
     id INT IDENTITY(1,1) PRIMARY KEY,
     role NVARCHAR(50) NOT NULL
 )
-
+SET IDENTITY_INSERT Role ON;    
+    
 CREATE TABLE Account (
     id INT IDENTITY(1,1) PRIMARY KEY,
     fullName NVARCHAR(100) NOT NULL,
@@ -71,6 +80,7 @@ CREATE TABLE Account (
     isAvailable BIT NOT NULL,
     roleId INT FOREIGN KEY REFERENCES [Role](id)
 )
+SET IDENTITY_INSERT Account ON;   
 
 CREATE TABLE Address (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -79,32 +89,37 @@ CREATE TABLE Address (
     [address] NVARCHAR(500) NOT NULL,
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
+SET IDENTITY_INSERT Address ON;   
 
 CREATE TABLE NotificationType (
     id INT IDENTITY(1,1) PRIMARY KEY,
     [type] NVARCHAR(50) NOT NULL
 )
-
+SET IDENTITY_INSERT NotificationType ON;   
+    
 CREATE TABLE Notification (
     id INT IDENTITY(1,1) PRIMARY KEY,
     notification NVARCHAR(1000) NOT NULL,
     isViewed BIT NOT NULL,
     notificationTypeId INT FOREIGN KEY REFERENCES NotificationType(id)
 )
-
+SET IDENTITY_INSERT Notification ON;   
+    
 CREATE TABLE Rating (
     id INT IDENTITY(1,1) PRIMARY KEY,
     star INT NOT NULL,
     comment NVARCHAR(500),
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
+SET IDENTITY_INSERT Rating ON;   
 
 CREATE TABLE Distributor (
     id INT IDENTITY(1,1) PRIMARY KEY,
     distributor NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
-
+SET IDENTITY_INSERT Distributor ON;   
+    
 CREATE TABLE BookTransaction (
     bookId INT FOREIGN KEY REFERENCES Book(id),
     distributorId INT FOREIGN KEY REFERENCES Distributor(id),
@@ -112,6 +127,7 @@ CREATE TABLE BookTransaction (
     quantity INT NOT NULL,
     [date] DATETIME NOT NULL
 )
+SET IDENTITY_INSERT BookTransaction ON;   
 
 CREATE TABLE Cart (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -119,6 +135,7 @@ CREATE TABLE Cart (
     bookId INT FOREIGN KEY REFERENCES Book(id)
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
+SET IDENTITY_INSERT Cart ON;   
 
 CREATE TABLE [Order] (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -133,18 +150,21 @@ CREATE TABLE [Order] (
     data DATETIME NOT NULL,
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
+SET IDENTITY_INSERT [Order] ON;   
 
 CREATE TABLE OrderStatus (
     id INT IDENTITY(1,1) PRIMARY KEY,
     status NVARCHAR(50) NOT NULL
 )
-
+SET IDENTITY_INSERT OrderStatus ON;   
+    
 CREATE TABLE OrderStatusDetail (
     id INT IDENTITY(1,1) PRIMARY KEY,
     [date] DATETIME NOT NULL,
     orderId INT FOREIGN KEY REFERENCES [Order](id),
     orderStatusId INT FOREIGN KEY REFERENCES OrderStatus(id)
 )
+SET IDENTITY_INSERT OrderStatusDetail ON;   
 
 CREATE TABLE OrderDetail (
     orderId INT FOREIGN KEY REFERENCES [Order](id),
@@ -153,3 +173,4 @@ CREATE TABLE OrderDetail (
     salePrice INT NOT NULL,
     price INT NOT NULL
 )
+SET IDENTITY_INSERT OrderDetail ON;   
