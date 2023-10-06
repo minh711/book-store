@@ -65,4 +65,34 @@ public class BookPictureDAO {
         }
         return result;
     }
+    
+    public int delete(int id) {
+        int result = 0;
+        String sql
+                = "DELETE FROM BookPicture "
+                + "WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookPictureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public int deleteAllByBookId(int bookId) {
+        int result = 0;
+        String sql
+                = "DELETE FROM BookPicture "
+                + "WHERE bookId = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bookId);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookPictureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }
