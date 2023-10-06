@@ -46,7 +46,8 @@
                   
             <div class="row">
                 <form class="form mt-2 mb-2" method="post"
-                      action="${pageContext.request.contextPath}/BookPictureCtrl">
+                      action="${pageContext.request.contextPath}/BookPictureCtrl"
+                      onsubmit="return confirm('Bạn có chắc muốn xóa tất cả hình ảnh?')" >
                     <input type="hidden" name="bookId" value="1">
                     <input type="submit" class="btn btn-danger" name="btnDeleteAllPics" value="Xóa tất cả">
                 </form>
@@ -64,12 +65,13 @@
                         
                         <input type="hidden" name="picId" value="<%= bookPictures[i].getId()%>">
                         
-                        <button 
+                        <input 
                             onclick="return confirm('Bạn có chắc muốn xóa hình ảnh này?')" 
                             class="mt-2 btn btn-danger form-control" 
                             type="submit" 
                             name="btnDeletePic" 
-                        >Xóa</button>
+                            value="Xóa"
+                        >
                     </form>
                 </div>
                 <%
