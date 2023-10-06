@@ -11,6 +11,7 @@
     <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/add-book-picture/style.css""/>
 </head>
 
 <body>
@@ -43,41 +44,14 @@
                   enctype="multipart/form-data">
                 <input type="file" class="form-control" id="pics" name="fPics" multiple>
             </form>
-                  
-            <div class="row">
-                <form class="form mt-2 mb-2" method="post"
-                      action="${pageContext.request.contextPath}/BookPictureCtrl"
-                      onsubmit="return confirm('Bạn có chắc muốn xóa tất cả hình ảnh?')" >
-                    <input type="hidden" name="bookId" value="1">
-                    <input type="submit" class="btn btn-danger" name="btnDeleteAllPics" value="Xóa tất cả">
-                </form>
-                <%
-                    BookPictureDAO dao = new BookPictureDAO();
-                    BookPicture[] bookPictures = dao.getAllByBookId(1);
-                    for (int i = 0; i < bookPictures.length; i++) {
-                %>
-                <div class="mx-2 my-2" style="width: 120px;">
-                    <form style="width: 120px;" class="form" method="post" 
-                          action="${pageContext.request.contextPath}/BookPictureCtrl">
-                        
-                        <img style="width: 120px; height: 160px; object-fit: contain;" 
-                             src="${pageContext.request.contextPath}/Images/<%= bookPictures[i].getPicture()%>">
-                        
-                        <input type="hidden" name="picId" value="<%= bookPictures[i].getId()%>">
-                        
-                        <input 
-                            onclick="return confirm('Bạn có chắc muốn xóa hình ảnh này?')" 
-                            class="mt-2 btn btn-danger form-control" 
-                            type="submit" 
-                            name="btnDeletePic" 
-                            value="Xóa"
-                        >
-                    </form>
-                </div>
-                <%
-                    }
-                %>
+            
+            <div class="d-flex d-none" id="select-btns">
+                <button onclick="return selectAll();" id="btn-select-all" class="btn btn-link">Chọn tất cả</button>
+                <button onclick="return unselectAll();" id="btn-unselect-all" class="btn btn-link" disabled>Bỏ chọn tất cả</button>
+                <button onclick="return deleteSelected()" id="btn-delete-selected" class="btn btn-link" disabled>Xoá tất cả hình ảnh đã chọn</button>
             </div>
+                  
+            <div class="row" id="bookPictures"></div>
         </div>
     </main>
     
@@ -108,7 +82,7 @@
     </footer>
     
     <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>                
-    <script src="scripts.js"></script>
+    <script src="${pageContext.request.contextPath}/Views/add-book-picture/scripts.js"></script>
 </body>
 
 </html
