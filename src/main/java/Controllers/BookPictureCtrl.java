@@ -1,19 +1,17 @@
 package Controllers;
 
+import DAOs.DBModelDAOs.BookPictureDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Handle Book's image upload and delete
+ * General controller for book picture.
  * @author MinhTD
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10, // 10 MB
-        maxRequestSize = 1024 * 1024 * 50) // 50 MB
 public class BookPictureCtrl extends HttpServlet {
 
     /**
@@ -27,7 +25,6 @@ public class BookPictureCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     /**
@@ -41,7 +38,17 @@ public class BookPictureCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] pics = Utilities.FileMethods.UploadPictures(request, "fPics", "");
-        response.sendRedirect("index.html");
+        if (request.getParameter("btnDeletePic") != null && !request.getParameter("btnDeletePic").equals("")) {
+            int picId = Integer.valueOf(request.getParameter("picId"));
+            BookPictureDAO bookPictureDAO = new BookPictureDAO();
+            bookPictureDAO.delete(picId);
+        }
+        
+        if (request.getParameter("btnDeleteAllPics") != null && !request.getParameter("btnDeleteAllPics").equals("")) {
+            int bookId = Integer.valueOf(request.getParameter("bookId"));
+            BookPictureDAO bookPictureDAO = new BookPictureDAO();
+            bookPictureDAO.deleteAllByBookId(bookId);
+        }
+        response.sendRedirect(request.getContextPath() + "/Views/add-book-picture/add-book-picture.jsp");
     }
 }
