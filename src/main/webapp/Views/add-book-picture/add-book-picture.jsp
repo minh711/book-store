@@ -1,3 +1,5 @@
+<%@page import="Models.DBModels.BookPicture"%>
+<%@page import="DAOs.DBModelDAOs.BookPictureDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,11 +38,44 @@
         
         <div class="container">
             <form class="form" id="form-pics" method="post" 
-                  action="${pageContext.request.contextPath}/BookPictureCtrl" 
+                  action="${pageContext.request.contextPath}/BookPictureUploadCtrl" 
                   onsubmit="return formValidate();" 
                   enctype="multipart/form-data">
                 <input type="file" class="form-control" id="pics" name="fPics" multiple>
             </form>
+                  
+            <div class="row">
+                <form class="form mt-2 mb-2" method="post"
+                      action="${pageContext.request.contextPath}/BookPictureCtrl">
+                    <input type="hidden" name="bookId" value="1">
+                    <input type="submit" class="btn btn-danger" name="btnDeleteAllPics" value="Xóa tất cả">
+                </form>
+                <%
+                    BookPictureDAO dao = new BookPictureDAO();
+                    BookPicture[] bookPictures = dao.getAllByBookId(1);
+                    for (int i = 0; i < bookPictures.length; i++) {
+                %>
+                <div class="mx-2 my-2" style="width: 120px;">
+                    <form style="width: 120px;" class="form" method="post" 
+                          action="${pageContext.request.contextPath}/BookPictureCtrl">
+                        
+                        <img style="width: 120px; height: 160px; object-fit: contain;" 
+                             src="${pageContext.request.contextPath}/Images/<%= bookPictures[i].getPicture()%>">
+                        
+                        <input type="hidden" name="picId" value="<%= bookPictures[i].getId()%>">
+                        
+                        <button 
+                            onclick="return confirm('Bạn có chắc muốn xóa hình ảnh này?')" 
+                            class="mt-2 btn btn-danger form-control" 
+                            type="submit" 
+                            name="btnDeletePic" 
+                        >Xóa</button>
+                    </form>
+                </div>
+                <%
+                    }
+                %>
+            </div>
         </div>
     </main>
     
@@ -71,42 +106,7 @@
     </footer>
     
     <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>                
-    <script>
-        $(document).ready(function () {
-            $('#pics').val(''); // clear the input
-            
-            $('#pics').change(function () {
-                if (formValidate()) {
-                $('#form-pics').submit();
-                } else {
-                    $('#pics').val('');
-                }
-            });
-        });
-        
-        function formValidate() {
-            let pics = $("#pics")[0].files;
-    
-            if (pics.length === 0) {
-                alert("Vui lòng chọn một hoặc nhiều ảnh!");
-                return false;
-            }
-            
-            for (let i = 0; i < pics.length; i++) {
-                let fileName = pics[i].name;
-                if (!hasExtension(fileName, ['.jpg', '.jpeg', '.png'])) {
-                    alert("Vui lòng chọn file hình ảnh!");
-                    return false;
-                }
-            }
-            
-            return true;
-        }
-        
-        function hasExtension(fileName, exts) {
-            return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 
 </html
