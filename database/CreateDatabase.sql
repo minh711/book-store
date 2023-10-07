@@ -116,7 +116,7 @@ CREATE TABLE BookTransaction (
 CREATE TABLE Cart (
     id INT IDENTITY(1,1) PRIMARY KEY,
     quantity INT NOT NULL,
-    bookId INT FOREIGN KEY REFERENCES Book(id)
+    bookId INT FOREIGN KEY REFERENCES Book(id),
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
 
