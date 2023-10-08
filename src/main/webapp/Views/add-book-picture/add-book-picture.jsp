@@ -38,12 +38,7 @@
         </aside>
         
         <div class="container">
-            <form class="form" id="form-pics" method="post" 
-                  action="${pageContext.request.contextPath}/BookPictureUploadCtrl" 
-                  onsubmit="return formValidate();" 
-                  enctype="multipart/form-data">
-                <input type="file" class="form-control" id="pics" name="fPics" multiple>
-            </form>
+            <input type="file" class="form-control" id="pics" name="fPics" multiple>
             
             <div class="d-flex d-none" id="select-btns">
                 <button onclick="return selectAll();" id="btn-select-all" class="btn btn-link">Chọn tất cả</button>
