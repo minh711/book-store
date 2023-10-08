@@ -4,9 +4,25 @@ $(document).ready(function () {
     $('#pics').val(''); // clear the input
 
     $('#pics').change(function () {
-        if (formValidate()) {
-            $('#form-pics').submit();
-            loadBookPictures();
+        if (pictureValidate()) {
+            let fileContent = new FormData();
+            let files = $('#pics')[0].files;
+            for (let i = 0; i < files.length; i++) {
+                fileContent.append("files", files[i]);
+            }
+            $.ajax({
+                type: "POST",
+                enctype: "multipart/form-data",
+                url: "/BookPictureUploadCtrl",
+                data: fileContent,
+                traditional: true,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    $('#pics').val('');
+                    loadBookPictures();
+                }
+            });
         } else {
             $('#pics').val('');
         }
@@ -44,8 +60,11 @@ function unselectAll() {
     $("#btn-delete-selected").prop("disabled", true);
 }
 
-function formValidate() {
+function pictureValidate() {
     let pics = $("#pics")[0].files;
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    let totalSize = 0;
+    const maxTotalSize = 50 * 1024 * 1024; // 50MB
 
     if (pics.length === 0) {
         alert("Vui lòng chọn một hoặc nhiều ảnh!");
@@ -58,8 +77,23 @@ function formValidate() {
             alert("Vui lòng chọn file hình ảnh!");
             return false;
         }
-    }
+        
+        let fileSize = pics[i].size; // Size in bytes
 
+        if (fileSize > maxSize) {
+            alert("Kích thước file quá lớn. Vui lòng chọn file có kích thước nhỏ hơn 5MB.");
+            return false;
+        }
+        
+        totalSize += fileSize;
+        console.log(totalSize);
+        if (totalSize > maxTotalSize) {
+            console.log('yes');
+            alert("Tổng kích thước ảnh vượt quá 50MB. Vui lòng chọn ít ảnh hơn hoặc giảm kích thước của ảnh.");
+            return false;
+        }
+    }
+    
     return true;
 }
 
