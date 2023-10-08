@@ -22,12 +22,11 @@ public class DbConnection {
     public static Connection getConnection() {
         if (conn == null) {
             // Rename to match your database here
-            String server = "MINHPC\\SQLEXPRESS";
+            String server = "MUMMYKIARABFCE\\SQLEXPRESS";
             String port = "1433";
-            String database = "SWP_v0";
+            String database = "SWPProject";
             String user = "sa";
-            String password = "123456";
-
+            String password = "nhulnt";
             try {
                 // Declare driver
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -35,11 +34,15 @@ public class DbConnection {
                         + server + ":" + port + ";databaseName=" + database + ";"
                         + "user=" + user + ";password=" + password
                         + ";encrypt=true;" + "trustServerCertificate=true;");
+                System.out.println("Connect");
             } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(DbConnection.class.getName())
-                        .log(Level.SEVERE, null, ex);
+                Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return conn;
+    }
+    
+    public static void main(String[]args){
+        DbConnection a = new DbConnection();
     }
 }
