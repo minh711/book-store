@@ -2,14 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Models.DBModels;
+package newModel;
 
 /**
  *
  * @author mummykiara
  */
 public class BookDetail {
-     private int id;
+
+    private int id;
     private String title;
     private String description;
     private String thumbnail;
@@ -22,15 +23,13 @@ public class BookDetail {
     private String publisher;
     private String genre;
     private String language;
-    
+
     //contructor for BookDetail
-    
-    public BookDetail(){
-        
+    public BookDetail() {
+
     }
-    
-    
-    public BookDetail(int id, String title, String author, String publisher, String genre, String language, int salePrice, int discount, int price, int quantity ,String description, String thumbnail) {
+
+    public BookDetail(int id, String title, String author, String publisher, String genre, String language, int salePrice, int discount, int price, int quantity, String description, String thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -148,6 +147,5 @@ public class BookDetail {
     public void setLanguage(String language) {
         this.language = language;
     }
-    
-    
+
 }

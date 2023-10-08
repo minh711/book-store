@@ -5,14 +5,14 @@
 
 package control;
 
-import DBConnection.BookDAO;
-import Models.DBModels.BookDetail;
+import DAO.BookDAO;
+import newModel.BookDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 /**
@@ -77,9 +77,6 @@ public class bookDetailServlet extends HttpServlet {
         } catch (IOException | ServletException e) {
             System.err.println(e);
         }
-        
-        
-        
     } 
 
     /** 

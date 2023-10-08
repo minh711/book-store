@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  * Class for managing a database connection using JDBC.
- * @author MinhTD
+ * @author mummykiara
  */
 public class DbConnection {
     
