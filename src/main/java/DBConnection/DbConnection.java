@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 /**
  * Class for managing a database connection using JDBC.
  * @author MinhTD
@@ -36,8 +38,7 @@ public class DbConnection {
                         + "user=" + user + ";password=" + password
                         + ";encrypt=true;" + "trustServerCertificate=true;");
             } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(DbConnection.class.getName())
-                        .log(Level.SEVERE, null, ex);
+                Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return conn;

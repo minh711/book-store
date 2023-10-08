@@ -13,8 +13,8 @@
     </head>
     <body>
         <h1>THÀNH CÔNG</h1>
-        <h4> Hello: ${sessionScope.account.fullname} </h4>
-        <a href="logout">Log out</a><br><br>
-        <a href="Login.jsp">back</a>
+       
+       
+        <a href="Views/LoginBookStore.jsp">back</a>
     </body>
 </html>

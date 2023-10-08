@@ -1,4 +1,5 @@
-package DAO;
+package DAO.DBModels;
+
 
 import DBConnection.DbConnection;
 import Models.DBModels.Account;
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ASP_REF
+ * @author DatNTT
  */
 public class loginDao extends DbConnection {
 

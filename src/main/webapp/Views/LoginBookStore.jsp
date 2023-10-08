@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-<!--        <script defer="" src="LoginValidate.js"></script>      -->
+<!--        <script defer="" src="js\LoginValidate.js"></script>      -->
 
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,22 +35,27 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card p-4">
-                        <form id="form" action="${pageContext.request.contextPath}/login" method="post">
+                        <form id="form" action="login" method="post"   >
                             <h1 class="text-center mb-3">Đăng nhập</h1>
                             
-                             <p  class=" text-danger">${mess}</p>
-                             <div id ="mess"> </div>
-                            <input type="text" class="form-control mb-3" placeholder="Tên tài khoản"  required="" name="name" value="${cookie.user.value}" >
-                            <input type="password" class="form-control mb-3" placeholder="Mật khẩu"  required="" name="pass" value="${cookie.pass.value}" >
+                             <p class=" text-danger">${mess}</p>
+                              
+                             <input type="text" class="form-control mb-3" placeholder="Tên tài khoản"  required="" name="name" value="${cookie.user.value}" onkeyup="vali()" >
+                             <p class=" text-danger" id ="messName" ></p>
+                             
+                             <input type="password" class="form-control mb-3" placeholder="Mật khẩu"  required="" name="pass" value="${cookie.pass.value}"  onkeyup="vali()" >
+                             <p class=" text-danger" id ="messPass" ></p>
                             
+                            <input type="checkbox" ${(cookie.rem.value eq 'ON')?"checked":""} name="rem" value="ON" /> Ghi nhớ mật khẩu<br><br> 
                             
-                            <input type="checkbox" ${(cookie.rem.value eq 'ON')?"checked":""} name="rem" value="ON" /> Ghi nh? m?t kh?u<br><br> 
-                            
-                            <button class="btn btn-success btn-block mb-3 w-100" type="submit"><i class="fas fa-sign-in-alt"></i> Đăng nhập</button><br>
+                            <button class="btn btn-success btn-block mb-3 w-100"  type="submit"><i class="fas fa-sign-in-alt"></i> Đăng nhập</button><br>
                             
                             <a href="#">Quên mật khẩu?</a>
                             <hr>
-                            <button class="btn btn-primary btn-block w-100" type="button"><i class="fa fa-user-plus"></i> Tạo tài khoản mới</button><br>
+                            <button  class="btn btn-primary btn-block w-100" type="button"><i class="fa fa-user-plus"></i> Tạo tài khoản mới</button><br>
+                            
+                            
+                            
                             <a href="sample.jsp" >Back</a>
                         </form>
                     </div>
