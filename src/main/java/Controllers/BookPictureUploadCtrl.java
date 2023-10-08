@@ -10,12 +10,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Handle Book's image upload and delete
+ * Handle Book's picture uploading.
  * @author MinhTD
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10, // 10 MB
-        maxRequestSize = 1024 * 1024 * 50) // 50 MB
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB maximum that can store in memory, for larger, it will store on disk.
+        maxFileSize = 1024 * 1024 * 5, // 5 MB for each file.
+        maxRequestSize = 1024 * 1024 * 50 // 50 MB can be upload at once.
+    ) 
 public class BookPictureUploadCtrl extends HttpServlet {
 
     /**
@@ -29,7 +31,6 @@ public class BookPictureUploadCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     /**
@@ -43,7 +44,13 @@ public class BookPictureUploadCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] pics = Utilities.FileMethods.UploadPictures(request, "fPics", "");
+        String[] pics = Utilities.FileMethods.UploadPictures(request, "files", "");
+        
+        /* Test for resizing picture, will use to get the book thumbnail.
+         * Not been used yet.
+         */
+        // pics[0] = Utilities.FileMethods.resizePicture(request, pics[0], "", 100, 100);
+        
         int length = pics.length;
         
         BookPictureDAO bookPictureDAO = new BookPictureDAO();
@@ -54,6 +61,5 @@ public class BookPictureUploadCtrl extends HttpServlet {
             BookPicture bookPicture = new BookPicture(0, pics[i], bookId);
             bookPictureDAO.addNew(bookPicture);
         }
-        response.sendRedirect(request.getContextPath() + "/Views/add-book-picture/add-book-picture.jsp");
     }
 }
