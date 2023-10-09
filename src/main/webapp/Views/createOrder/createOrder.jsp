@@ -152,25 +152,25 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="col-1 text-center">Chọn mua</th>
-                                <th class="col-4 text-center">Sản phẩm</th>
+                               
+                                <th class="col-6 text-center">Sản phẩm</th>
                                 <th class="col-2 text-center">Đơn giá</th>
                                 <th class="col-2 text-center">Số lượng</th>
                                 <th class="col-2 text-center">Số tiền</th>
-                                <th class="col-1 text-center"></th>
+                               
                             </tr>
                         </thead>
                         <tbody class="align-middle">
-                            <c:forEach items="${requestScope.data}" var="item">
+                            <c:forEach items="${requestScope.OrderItems}" var="item">
                                 <tr>
-                                    <td class="text-center">
-                                        <input class="form-check-input" type="checkbox" style="width: 30px; height: 30px;">
-                                    </td>
+                                  
                                     <td>
                                         <div class="d-flex p-2">
                                             <img
-                                                src="https://th.bing.com/th/id/OIP.PFTzM3Ssdy6IgbU2q5cwgAHaHa?pid=ImgDet&rs=1"
+                                                src="${item.getThumbnail()}"
+                                                
                                                 class="rounded" alt="..." style="width: 100px; height: 100px; object-fit: contain;">
+                                            <input type="hidden" name="thumbnailPath" value="${item.getThumbnail()}">
                                             <div class="fs-5 mx-2 d-flex align-items-start">
                                                 ${item.getTittle()}
                                             </div>
@@ -180,7 +180,7 @@
                                     <td class="text-center quantity">${item.getQuantity()}</td>  
                                     <td class="text-center subtotal">${item.getSalePrice()* item.getQuantity()}</td>
                             <h5 class="subSale" style="display: none">${item.getPrice()* item.getQuantity()}</h5>
-                            <td class="text-center"><i class="fa fa-remove"></i></td>
+                          
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -231,11 +231,11 @@
                                 <label class="mb-2">Phương thức thanh toán</label>
                                 <div class="d-flex">
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input payment-radio" name="payment-method" value="0">
+                                        <input type="radio" class="form-check-input payment-radio" name="payment-method" value="false">
                                         <label class="form-check-label">Thanh toán khi nhận hàng</label>
                                     </div>
                                     <div class="form-check mx-2">
-                                        <input type="radio" class="form-check-input payment-radio" name="payment-method" value="1">
+                                        <input type="radio" class="form-check-input payment-radio" name="payment-method" value="true">
                                         <label class="form-check-label">Chuyển khoản</label>
                                     </div>
 
@@ -320,7 +320,7 @@
                 total2Element.textContent = total.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
                 for (var i = 0; i < paymentRadios.length; i++) {
                     paymentRadios[i].addEventListener("change", function () {
-                        if (this.value === "1") {
+                        if (this.value === "true") {
                             bankingDetails.style.display = "block";
                             CodDetails.style.display = "none";
                         } else {
@@ -438,7 +438,7 @@
                     valid = false;
                     alert('Please select a payment method before submitting.');
                 }
-                if (selectedPayment && selectedPayment.value === "1") {
+                if (selectedPayment && selectedPayment.value === "true") {
                     // Check if a file is uploaded
                     var fileInput = document.querySelector('input[type="file"]');
                     if (!fileInput || !fileInput.files.length) {

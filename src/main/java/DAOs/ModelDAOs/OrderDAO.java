@@ -34,7 +34,7 @@ public class OrderDAO {
     public void AddNew(Order od) {
         String sql
                 = "INSERT INTO [Order] (saleTotal, total, fullName, phone,"
-                + " [address], isBanking, bankingImage, note, data, customerId)\n"
+                + " [address], isBanking, bankingImage, note, date, customerId)\n"
                 + "VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = conn.prepareStatement(sql);
