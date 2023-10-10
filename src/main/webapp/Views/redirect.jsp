@@ -15,6 +15,6 @@
         <h1>THÀNH CÔNG</h1>
        
        
-        <a href="Views/LoginBookStore.jsp">back</a>
+        <a href="../Views/LoginBookStore.jsp">back</a>
     </body>
 </html>

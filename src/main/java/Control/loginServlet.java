@@ -34,15 +34,15 @@ public class loginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet loginServlet</title>");  
+            out.println("<title>Servlet signupServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet loginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet signupServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,9 +77,18 @@ public class loginServlet extends HttpServlet {
             String pass = request.getParameter("pass");
             String rem = request.getParameter("rem");
             loginDao dao = new loginDao();
-            Account a = dao.check(user, pass);
-            if (a == null) {
-                request.setAttribute("mess", "Wrong user or password");
+            Account a = dao.checkUser(user);
+            //kiểm tra xem user có tồn tại ko
+            if(a==null){
+                request.setAttribute("mess", "User not exit");
+                request.getRequestDispatcher("Views/LoginBookStore.jsp").forward(request, response);
+            }
+            
+            else{
+            //nếu user có tồn tại thì nhảy qua kiểm tra mật khẩu
+            Account b = dao.checkPass(user, pass);
+            if (b == null) {
+                request.setAttribute("mess", "Wrong password");
                 request.getRequestDispatcher("Views/LoginBookStore.jsp").forward(request, response);
             } else {
 
@@ -100,6 +109,7 @@ public class loginServlet extends HttpServlet {
                 response.addCookie(cp);
                 HttpSession session = request.getSession();
                 response.sendRedirect("Views/redirect.jsp");
+            }
             }
         } catch (Exception ex) {
               Logger.getLogger(loginServlet.class.getName()).log(Level.SEVERE, null, ex);
