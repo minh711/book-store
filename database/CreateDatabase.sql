@@ -30,7 +30,7 @@ CREATE TABLE BookPicture (
     picture VARCHAR(100) NOT NULL,
     bookId INT FOREIGN KEY REFERENCES Book(id)
 )
-
+    
 CREATE TABLE Author (
     id INT IDENTITY(1,1) PRIMARY KEY,
     author NVARCHAR(100) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE Genre (
     genre NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
-
+    
 CREATE TABLE BookGenre (
     bookId INT FOREIGN KEY REFERENCES Book(id),
     genreId INT FOREIGN KEY REFERENCES Genre(id)
@@ -56,8 +56,8 @@ CREATE TABLE BookGenre (
 CREATE TABLE Role (
     id INT IDENTITY(1,1) PRIMARY KEY,
     role NVARCHAR(50) NOT NULL
-)
-
+) 
+    
 CREATE TABLE Account (
     id INT IDENTITY(1,1) PRIMARY KEY,
     fullName NVARCHAR(100) NOT NULL,
@@ -84,14 +84,14 @@ CREATE TABLE NotificationType (
     id INT IDENTITY(1,1) PRIMARY KEY,
     [type] NVARCHAR(50) NOT NULL
 )
-
+    
 CREATE TABLE Notification (
     id INT IDENTITY(1,1) PRIMARY KEY,
     notification NVARCHAR(1000) NOT NULL,
     isViewed BIT NOT NULL,
     notificationTypeId INT FOREIGN KEY REFERENCES NotificationType(id)
 )
-
+    
 CREATE TABLE Rating (
     id INT IDENTITY(1,1) PRIMARY KEY,
     star INT NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE Distributor (
     distributor NVARCHAR(100) NOT NULL,
     isAvailable BIT NOT NULL
 )
-
+    
 CREATE TABLE BookTransaction (
     bookId INT FOREIGN KEY REFERENCES Book(id),
     distributorId INT FOREIGN KEY REFERENCES Distributor(id),
@@ -130,7 +130,7 @@ CREATE TABLE [Order] (
     isBanking BIT NOT NULL,
     bankingImage VARCHAR(100),
     note NVARCHAR(500),
-    data DATETIME NOT NULL,
+    [date] DATETIME NOT NULL,
     customerId INT FOREIGN KEY REFERENCES Account(id)
 )
 
@@ -138,7 +138,7 @@ CREATE TABLE OrderStatus (
     id INT IDENTITY(1,1) PRIMARY KEY,
     status NVARCHAR(50) NOT NULL
 )
-
+    
 CREATE TABLE OrderStatusDetail (
     id INT IDENTITY(1,1) PRIMARY KEY,
     [date] DATETIME NOT NULL,
