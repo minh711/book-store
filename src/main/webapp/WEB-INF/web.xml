@@ -8,6 +8,7 @@
         <servlet-name>BookPictureCtrl</servlet-name>
         <servlet-class>Controllers.BookPictureCtrl</servlet-class>
     </servlet>
+    <servlet>
         <servlet-name>CreateOrderCtrl</servlet-name>
         <servlet-class>Controllers.CreateOrderCtrl</servlet-class>
     </servlet>
@@ -34,10 +35,6 @@
     <servlet-mapping>
         <servlet-name>AccountCtrl</servlet-name>
         <url-pattern>/account</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AccountCtrl</servlet-name>
-        <url-pattern>/account/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>bookDetailServlet</servlet-name>

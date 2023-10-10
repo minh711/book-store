@@ -57,7 +57,7 @@ public class AccountCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("/Views/AccountList.jsp").forward(request, response);
+       request.getRequestDispatcher("/Views/create-account/AccountList.jsp").forward(request, response);
     }
 
     /**
@@ -82,9 +82,9 @@ String fullName = request.getParameter("fullName");
         AccountDAO account = new AccountDAO();
         int ketqua = account.addAccount(fullName,phone, email, gender,birthday,username,password,roleId);
         if (ketqua==1) {
-            response.sendRedirect("/Views/AccountList.jsp");
+            response.sendRedirect("/Views/create-account/AccountList.jsp");
         } else{
-            response.sendRedirect("/Views/createAccount.jsp");
+            response.sendRedirect("/Views/create-account/createAccount.jsp");
         }    }
 
     /**
