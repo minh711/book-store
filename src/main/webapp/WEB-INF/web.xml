@@ -3,11 +3,22 @@
     <servlet>
         <servlet-name>bookDetailServlet</servlet-name>
         <servlet-class>Controllers.bookDetailServlet</servlet-class>
-    </servlet><servlet-mapping>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountCtrl</servlet-name>
+        <servlet-class>Controllers.AccountCtrl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccountCtrl</servlet-name>
+        <url-pattern>/account/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>bookDetailServlet</servlet-name>
         <url-pattern>/bookdetail</url-pattern>
-    </servlet-mapping><session-config>
+    </servlet-mapping>
+    <session-config>
         <session-timeout>
             30
         </session-timeout>
-    </session-config></web-app>
+    </session-config>
+</web-app>
