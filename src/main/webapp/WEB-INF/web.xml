@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+        <servlet-name>CreateOrderCtrl</servlet-name>
+        <servlet-class>Controllers.CreateOrderCtrl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>bookDetailServlet</servlet-name>
         <servlet-class>Controllers.bookDetailServlet</servlet-class>
     </servlet>
@@ -8,6 +12,14 @@
         <servlet-name>AccountCtrl</servlet-name>
         <servlet-class>Controllers.AccountCtrl</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateOrderCtrl</servlet-name>
+        <url-pattern>/CreateOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountCtrl</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountCtrl</servlet-name>
         <url-pattern>/account/*</url-pattern>
