@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  * Class for managing a database connection using JDBC.
- * @author MinhTD
+ * @author mummykiara
  */
 public class DbConnection {
     
@@ -27,7 +27,7 @@ public class DbConnection {
             String database = "swp";
             String user = "sa";
             String password = "duyen651900";
-
+          
             try {
                 // Declare driver
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -35,14 +35,15 @@ public class DbConnection {
                         + server + ":" + port + ";databaseName=" + database + ";"
                         + "user=" + user + ";password=" + password
                         + ";encrypt=true;" + "trustServerCertificate=true;");
-                System.out.println("uke");
+                System.out.println("Connect");
             } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println("khum");
-                Logger.getLogger(DbConnection.class.getName())
-                        .log(Level.SEVERE, null, ex);
-                
+                Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return conn;
+    }
+    
+    public static void main(String[]args){
+        DbConnection a = new DbConnection();
     }
 }
