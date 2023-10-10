@@ -34,9 +34,7 @@ public class BookDAO extends DbConnection {
         String query = "SELECT\n"
                 + "	Book.id,\n"
                 + "    Book.title,\n"
-                + "	Author.author,\n"
                 + "    Publisher.publisher,\n"
-                + "	Genre.genre,\n"
                 + "    [Language].language,\n"
                 + "	Book.salePrice,\n"
                 + "	Book.discount,\n"
@@ -67,7 +65,7 @@ public class BookDAO extends DbConnection {
             System.out.println(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                BookDetail b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12));
+                BookDetail b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -80,7 +78,8 @@ public class BookDAO extends DbConnection {
     public static void main(String[] args) {
         BookDAO book = new BookDAO();
         ArrayList<BookDetail> list = book.getBookDetailByID(1);
-        System.out.println(list.get(0).getTitle() + list.get(0).getAuthor() + list.get(0).getGenre() + list.get(0).getPublisher());
+        System.out.println(list.get(0).getTitle() +  list.get(0).getPublisher());
 
     }
+    
 }

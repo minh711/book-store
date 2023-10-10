@@ -7,9 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Locale" %>
 <%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="newModel.BookAuthorDetail"%>
+<%@page import="newModel.BookGenreDetail"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<%  NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());  %>
+<%  NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -127,7 +131,7 @@
                             <div class="col-md-6">
                                 <div>
                                     <div>
-                                        <h2><%= request.getAttribute("BookTittle") %></h2>
+                                        <h2><%= request.getAttribute("BookTittle")%></h2>
                                         <div class="mt-3">
                                             <div class="d-flex">
                                                 <!-- Element on the left -->
@@ -142,11 +146,20 @@
                                                 <div class="vr vr-blurry" style=""></div>
                                                 <!-- Element on the left -->
                                                 <div class="px-4">
-                                                    <p><%= request.getAttribute("BookName") %></p>
-                                                    <p><%= request.getAttribute("BookAuthor")%></p>
+                                                    <p><%= request.getAttribute("BookName")%></p>
+                                                    <p>
+                                                     <c:forEach items="${requestScope.BookAuthor}" var="author" varStatus="loop">
+                                                         <span>${author.getAuthor()}${!loop.last?', ':' '} </span>
+                                                     </c:forEach>
+                                                    </p>
                                                     <p><%= request.getAttribute("BookPublisher")%></p>
-                                                    <p><%= request.getAttribute("BookGenre")%></p>
+                                                    <p>
+                                                     <c:forEach items="${requestScope.BookGenre}" var="genre" varStatus="loop">
+                                                         <span>${genre.getGenre()}${!loop.last?', ':' '} </span>
+                                                     </c:forEach>
+                                                    </p>
                                                     <p><%= request.getAttribute("BookLanguage")%></p>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -156,10 +169,10 @@
                                         <div>
                                             <div class="d-flex">
                                                 <% String saleprice = numberFormat.format(request.getAttribute("BookSalePrice")); %>
-                                                <% String price = numberFormat.format(request.getAttribute("BookPrice")); %>
-                                                
+                                                <% String price = numberFormat.format(request.getAttribute("BookPrice"));%>
+
                                                 <h3 class="text-danger"><strong><%= saleprice%></strong></h3>
-                                                
+
                                                 <div class="ts-lg mx-2 d-flex align-items-center">-<%= request.getAttribute("BookDiscount")%>%</div>
                                             </div>
                                             <div class="ts-lg text-decoration-line-through"><%= price%>đ</div>

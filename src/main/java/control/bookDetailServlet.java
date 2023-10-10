@@ -5,7 +5,9 @@
 
 package control;
 
+import DAO.BookAuthorDAO;
 import DAO.BookDAO;
+import DAO.BookGenreDAO;
 import newModel.BookDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +16,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
+import newModel.BookAuthorDetail;
+import newModel.BookGenreDetail;
 
 /**
  *
@@ -58,20 +63,26 @@ public class bookDetailServlet extends HttpServlet {
     throws ServletException, IOException {
         int id =1;
         BookDAO book = new BookDAO();
+        BookGenreDAO bookgenre = new BookGenreDAO();
+        BookAuthorDAO bookauthor = new BookAuthorDAO();
         try {
-            ArrayList<BookDetail> list = book.getBookDetailByID(id);
+            List<BookDetail> list =  book.getBookDetailByID(id);
+            List<BookGenreDetail> genrelist = bookgenre.getBookGenreByID(list.get(0).getId());
+            List<BookAuthorDetail> authorlist = bookauthor.getBookAuthorByID(list.get(0).getId());
+            
             if (!list.isEmpty()) {
             request.setAttribute("BookTittle", list.get(0).getTitle());
             request.setAttribute("BookName", list.get(0).getTitle());
-            request.setAttribute("BookAuthor", list.get(0).getAuthor());
             request.setAttribute("BookPublisher", list.get(0).getPublisher());
-            request.setAttribute("BookGenre", list.get(0).getGenre());
             request.setAttribute("BookLanguage", list.get(0).getLanguage());
             request.setAttribute("BookSalePrice", list.get(0).getSalePrice());
             request.setAttribute("BookDiscount", list.get(0).getDiscount());
             request.setAttribute("BookPrice", list.get(0).getPrice());
             request.setAttribute("BookQuantity", list.get(0).getQuantity());
             request.setAttribute("BookDescription", list.get(0).getDescription());
+                System.out.println(genrelist.get(0).getGenre());
+            request.setAttribute("BookAuthor", authorlist);
+            request.setAttribute("BookGenre", genrelist);
             request.getRequestDispatcher("Views/BookDetail/BookDetail.jsp").forward(request, response);
             }
         } catch (IOException | ServletException e) {
@@ -89,19 +100,7 @@ public class bookDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id = 1;
-        BookDAO book = new BookDAO();
-        ArrayList<BookDetail> list = book.getBookDetailByID(id);
-        try {
-            if (!list.isEmpty()) {
-                System.out.println(list.get(0).getTitle());
-                System.out.println(list.get(0).getAuthor());
-                request.setAttribute("bookDetail", list);
-                request.getRequestDispatcher("Views/BookDetail/BookDetail.jsp").forward(request, response);
-            }
-        } catch (IOException e) {
-            System.err.println(e);
-        }
+        
     }
 
     /** 

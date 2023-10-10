@@ -19,9 +19,7 @@ public class BookDetail {
     private int discount;
     private int quantity;
     private int soleTotal;
-    private String author;
     private String publisher;
-    private String genre;
     private String language;
 
     //contructor for BookDetail
@@ -29,7 +27,7 @@ public class BookDetail {
 
     }
 
-    public BookDetail(int id, String title, String author, String publisher, String genre, String language, int salePrice, int discount, int price, int quantity, String description, String thumbnail) {
+    public BookDetail(int id, String title, String publisher, String language, int salePrice, int discount, int price, int quantity, String description, String thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -38,9 +36,7 @@ public class BookDetail {
         this.price = price;
         this.discount = discount;
         this.quantity = quantity;
-        this.author = author;
         this.publisher = publisher;
-        this.genre = genre;
         this.language = language;
     }
 
@@ -116,28 +112,12 @@ public class BookDetail {
         this.soleTotal = soleTotal;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getPublisher() {
         return publisher;
     }
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getLanguage() {
