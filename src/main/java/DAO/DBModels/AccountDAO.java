@@ -14,13 +14,13 @@ import java.util.logging.Logger;
  *
  * @author DatNTT
  */
-public class loginDao extends DbConnection {
+public class AccountDAO extends DbConnection {
 
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
 
-    public loginDao() {
+    public AccountDAO() {
         conn = DBConnection.DbConnection.getConnection();
     }
 
@@ -38,7 +38,7 @@ public class loginDao extends DbConnection {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(loginDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             
         }
         
@@ -62,7 +62,7 @@ public class loginDao extends DbConnection {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(loginDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             
         }
         

@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Control;
+package Controllers;
 
-import DAO.DBModels.loginDao;
+import DAO.DBModels.AccountDAO;
 import Models.DBModels.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,32 +23,7 @@ import java.util.logging.Logger;
  * @author DatNTTce171366
  */
 public class loginServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet signupServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet signupServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -59,7 +34,6 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
     } 
 
     /** 
@@ -76,12 +50,12 @@ public class loginServlet extends HttpServlet {
             String user = request.getParameter("name");
             String pass = request.getParameter("pass");
             String rem = request.getParameter("rem");
-            loginDao dao = new loginDao();
+            AccountDAO dao = new AccountDAO();
             Account a = dao.checkUser(user);
             //kiểm tra xem user có tồn tại ko
             if(a==null){
                 request.setAttribute("mess", "User not exit");
-                request.getRequestDispatcher("Views/LoginBookStore.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/login/LoginBookStore.jsp").forward(request, response);
             }
             
             else{
@@ -89,7 +63,7 @@ public class loginServlet extends HttpServlet {
             Account b = dao.checkPass(user, pass);
             if (b == null) {
                 request.setAttribute("mess", "Wrong password");
-                request.getRequestDispatcher("Views/LoginBookStore.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/login/LoginBookStore.jsp").forward(request, response);
             } else {
 
                 Cookie cu = new Cookie("user", user);
@@ -108,7 +82,7 @@ public class loginServlet extends HttpServlet {
                 response.addCookie(cr);
                 response.addCookie(cp);
                 HttpSession session = request.getSession();
-                response.sendRedirect("Views/redirect.jsp");
+                response.sendRedirect("Views/login/redirect.jsp");
             }
             }
         } catch (Exception ex) {
@@ -123,6 +97,5 @@ public class loginServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
