@@ -4,9 +4,9 @@
  */
 package Controllers;
 
-import DAOs.ModelDAOs.BookAuthorDAO;
-import DAOs.ModelDAOs.BookDAO;
-import DAOs.ModelDAOs.BookGenreDAO;
+import DAOs.DBModelDAOs.BookAuthorDAO;
+import DAOs.DBModelDAOs.BookDAO;
+import DAOs.DBModelDAOs.BookGenreDAO;
 import Models.MgrModels.BookDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
