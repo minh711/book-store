@@ -4,16 +4,16 @@
  */
 package Controllers;
 
-import DAOs.ModelDAOs.AddressDAO;
-import DAOs.ModelDAOs.CartDAO;
-import DAOs.ModelDAOs.OrderItemDAO;
-import DAOs.ModelDAOs.OrderDAO;
-import DAOs.ModelDAOs.OrderDetailDao;
-import DAOs.ModelDAOs.OrderStatusDetailDAO;
+import DAOs.DBModelDAOs.AddressDAO;
+import DAOs.DBModelDAOs.CartDAO;
+import DAOs.MgrModelDAOs.OrderItemDAO;
+import DAOs.DBModelDAOs.OrderDAO;
+import DAOs.DBModelDAOs.OrderDetailDao;
+import DAOs.DBModelDAOs.OrderStatusDetailDAO;
 import Models.DBModels.Address;
 import Models.DBModels.Order;
 import Models.DBModels.OrderDetail;
-import Models.MngModels.OrderItem;
+import Models.MgrModels.OrderItem;
 import Models.DBModels.OrderStatusDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,35 +27,9 @@ import java.sql.Timestamp;
 /**
  * a servlet to handle order creation
  *
- * @author PC
+ * @author HienHT
  */
 public class CreateOrderCtrl extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CreateOrderCtrl</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CreateOrderCtrl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

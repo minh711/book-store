@@ -152,23 +152,23 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                               
+
                                 <th class="col-6 text-center">Sản phẩm</th>
                                 <th class="col-2 text-center">Đơn giá</th>
                                 <th class="col-2 text-center">Số lượng</th>
                                 <th class="col-2 text-center">Số tiền</th>
-                               
+
                             </tr>
                         </thead>
                         <tbody class="align-middle">
                             <c:forEach items="${requestScope.OrderItems}" var="item">
                                 <tr>
-                                  
+
                                     <td>
                                         <div class="d-flex p-2">
                                             <img
                                                 src="${item.getThumbnail()}"
-                                                
+
                                                 class="rounded" alt="..." style="width: 100px; height: 100px; object-fit: contain;">
                                             <input type="hidden" name="thumbnailPath" value="${item.getThumbnail()}">
                                             <div class="fs-5 mx-2 d-flex align-items-start">
@@ -180,7 +180,7 @@
                                     <td class="text-center quantity">${item.getQuantity()}</td>  
                                     <td class="text-center subtotal">${item.getSalePrice()* item.getQuantity()}</td>
                             <h5 class="subSale" style="display: none">${item.getPrice()* item.getQuantity()}</h5>
-                          
+
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -224,7 +224,7 @@
                                     <input type="text" class="mt-3 form-control" id="homeAddress" placeholder="Số nhà, tên đường">
                                 </div>
                                 <div class="mt-3">
-                                    <textarea class="form-control" style="resize: none;" placeholder="Ghi chú" rows="3" name="note"></textarea>
+                                    <textarea class="form-control" style="resize: none;" placeholder="Ghi chú" rows="3" name="note" id="noteTextarea"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -349,6 +349,21 @@
                     } else {
                         addNewAddressDetails.style.display = "none";
                         isAddAddressVisible = false;
+                    }
+                });
+
+                // Select the textarea element by its id
+                var noteTextarea = document.getElementById("noteTextarea");
+
+                // Add an input event listener to the textarea
+                noteTextarea.addEventListener("input", function () {
+                    // Get the current text in the textarea
+                    var currentText = noteTextarea.value;
+
+                    // Check if the length of the text exceeds the limit (500 characters)
+                    if (currentText.length > 500) {
+                        // If it exceeds, truncate the text to 500 characters
+                        noteTextarea.value = currentText.slice(0, 500);
                     }
                 });
             });

@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAOs.ModelDAOs;
+package DAOs.MgrModelDAOs;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import Models.MngModels.OrderItem;
+import Models.MgrModels.OrderItem;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
