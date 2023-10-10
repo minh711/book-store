@@ -1,5 +1,3 @@
-﻿USE [Book]
-GO
 SET IDENTITY_INSERT [OrderStatus] ON;
 INSERT [dbo].[OrderStatus] ([id], [status]) VALUES (1, N'Đang xử lý')
 INSERT [dbo].[OrderStatus] ([id], [status]) VALUES (2, N'Đã tiếp nhận')

@@ -1,0 +1,43 @@
+.book-picture .delete-pic-button {
+    background-color: #fff;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-picture .delete-pic-checkbox {
+    width: 16px;
+    height: 16px;
+}
+
+.book-picture .delete-pic-checkbox,
+.book-picture .delete-pic-button {
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s; 
+}
+
+.book-picture:hover .delete-pic-checkbox,
+.book-picture:hover .delete-pic-button {
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+.book-picture .delete-pic-button:hover {
+    transform: scale(1.1);
+    transition: scale 0.3s;
+}
+
+.book-picture .delete-pic-checkbox:checked {
+    opacity: 1;
+    pointer-events: auto; 
+}
+
+.book-picture .delete-pic-checkbox:checked ~ .delete-pic-button {
+    opacity: 1;
+    pointer-events: auto; 
+}

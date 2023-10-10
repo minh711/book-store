@@ -4,8 +4,53 @@
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>Controllers.loginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookPictureUploadCtrl</servlet-name>
+        <servlet-class>Controllers.BookPictureUploadCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookPictureCtrl</servlet-name>
+        <servlet-class>Controllers.BookPictureCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateOrderCtrl</servlet-name>
+        <servlet-class>Controllers.CreateOrderCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>bookDetailServlet</servlet-name>
+        <servlet-class>Controllers.bookDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountCtrl</servlet-name>
+        <servlet-class>Controllers.AccountCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
+        <servlet-name>BookPictureUploadCtrl</servlet-name>
+        <url-pattern>/BookPictureUploadCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookPictureCtrl</servlet-name>
+        <url-pattern>/BookPictureCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateOrderCtrl</servlet-name>
+        <url-pattern>/CreateOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountCtrl</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>bookDetailServlet</servlet-name>
+        <url-pattern>/bookdetail</url-pattern>
+    </servlet-mapping>
+   <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>

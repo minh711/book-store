@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  * Class for managing a database connection using JDBC.
- * @author MinhTD
+ * @author mummykiara
  */
 public class DbConnection {
     
@@ -29,7 +29,7 @@ public class DbConnection {
             String database = "Book";
             String user = "sa";
             String password = "12345";
-
+          
             try {
                 // Declare driver
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -42,5 +42,9 @@ public class DbConnection {
             }
         }
         return conn;
+    }
+    
+    public static void main(String[]args){
+        DbConnection a = new DbConnection();
     }
 }
