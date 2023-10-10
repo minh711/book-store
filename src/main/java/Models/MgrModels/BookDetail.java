@@ -1,10 +1,15 @@
-package Models.DBModels;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Models.MgrModels;
 
 /**
- * Write later
- * @author MinhTD
+ *
+ * @author mummykiara
  */
-public class Book {
+public class BookDetail {
+
     private int id;
     private String title;
     private String description;
@@ -14,14 +19,15 @@ public class Book {
     private int discount;
     private int quantity;
     private int soleTotal;
-    private boolean isAvailable;
-    private int pubisherId;
-    private int languageId;
+    private String publisher;
+    private String language;
 
-    public Book() {
+    //contructor for BookDetail
+    public BookDetail() {
+
     }
 
-    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId) {
+    public BookDetail(int id, String title, String publisher, String language, int salePrice, int discount, int price, int quantity, String description, String thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -30,17 +36,10 @@ public class Book {
         this.price = price;
         this.discount = discount;
         this.quantity = quantity;
-        this.soleTotal = soleTotal;
-        this.isAvailable = isAvailable;
-        this.pubisherId = pubisherId;
-        this.languageId = languageId;
+        this.publisher = publisher;
+        this.language = language;
     }
-    
-    
-    
-    
 
-    // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public int getId() {
         return id;
     }
@@ -113,35 +112,20 @@ public class Book {
         this.soleTotal = soleTotal;
     }
 
-    public boolean isIsAvailable() {
-        return isAvailable;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public void setIsAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
-    public int getPubisherId() {
-        return pubisherId;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setPubisherId(int pubisherId) {
-        this.pubisherId = pubisherId;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
-    public int getLanguageId() {
-        return languageId;
-    }
-
-    public void setLanguageId(int languageId) {
-        this.languageId = languageId;
-    }
-    
-    
-    
-    
-    // </editor-fold>
-    
 }
-
-    
