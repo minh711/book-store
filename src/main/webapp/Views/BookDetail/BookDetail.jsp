@@ -8,8 +8,8 @@
 <%@page import="java.util.Locale" %>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
-<%@page import="newModel.BookAuthorDetail"%>
-<%@page import="newModel.BookGenreDetail"%>
+<%@page import="Models.MgrModels.BookAuthorDetail"%>
+<%@page import="Models.MgrModels.BookGenreDetail"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
