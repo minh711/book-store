@@ -26,9 +26,15 @@
                 </a>
                 <ul class="list-unstyled ps-0">
                     <li class="mb-1">
-                        <a href="#" class="text-light nav-link bg-primary rounded p-2">
-                            Sample
+                       
+                        
+                        
+                        <a href="LoginBookStore.jsp" class="text-light nav-link bg-primary rounded p-2">
+                            Login
                         </a>
+                    
+                    
+                    
                     </li>
                 </ul>
             </div>
