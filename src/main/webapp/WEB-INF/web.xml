@@ -8,6 +8,10 @@
         <servlet-name>BookPictureCtrl</servlet-name>
         <servlet-class>Controllers.BookPictureCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountCtrl</servlet-name>
+        <servlet-class>Controllers.AccountCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>BookPictureCtrl</servlet-name>
         <url-pattern>/BookPictureCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountCtrl</servlet-name>
+        <url-pattern>/account/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
