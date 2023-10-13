@@ -1,7 +1,7 @@
 <%-- 
     Document   : SignupBookStore
     Created on : Oct 8, 2023, 3:45:03 PM
-    Author     : ASP_REF
+    Author     : DatNTT
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,6 +16,7 @@
 
 
 
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     </head>
@@ -23,7 +24,7 @@
     <body>
         <header class="d-flex p-2">
             <div class="d-flex align-items-center justify-content-between">
-                <img src="/image/logo.png" style="height: 40px;">
+                <img src="${pageContext.request.contextPath}/Images/logo.jpg" style="height: 40px;">
             </div>
         </header>
 
@@ -31,46 +32,47 @@
             <div class="container d-flex justify-content-center align-items-center" style="height: 800px;">
                 <div class="col-md-5 ">
                     <div class="card p-4" >
-                        <form  action="signup" class="form-signup" method="post" >
+                        <form  onsubmit="return validateFormSignUp()"  action="${pageContext.request.contextPath}/signup" class="form" method="post" >
                             <h1 class="text-center mb-3">Đăng ký</h1>
-                            
-                              <p class=" text-danger">${mess}</p>
-                            
-                            <input name="fullname" type="text" class="form-control mb-3" placeholder="Họ và tên"  required="">
-                            <input name="sdt" type="text" class="form-control mb-3" placeholder="Số điện thoại"  required="">
-                            <input name="mail" type="email" class="form-control mb-3" placeholder="Địa chỉ Email"  required="">
-                            <br>
-                            <input name="username" type="text" class="form-control mb-3" placeholder="Tên đăng nhập" required="">
-                            <input name="pass" type="password" class="form-control mb-3" placeholder="Mật khẩu" required="">
-                            <input name="repass" type="password" class="form-control mb-3" placeholder="Nhập lại mật khẩu" required="">
-                            
-                             <br>
-                            
-                            
+
+                            <p class=" text-danger">${mess}</p>
+
+                            <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName" required="">
+                            <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone" required="">
+                            <input type="email" class="form-control mb-3" placeholder="Địa chỉ Email" name="email" required="">
+                            <input type="text" class="form-control mb-3" placeholder="Tên đăng nhập" name="username" required="">
+                            <input type="password" class="form-control mb-3" placeholder="Mật khẩu" name="password" required="">
+                            <input type="password" class="form-control mb-3" placeholder="Nhập lại mật khẩu" name="resetPWD" required="">
+
+
+
+
                             <label class="mb-2">Giới tính</label>
-                            <div  class="d-flex mb-3">
+                            <div class="d-flex mb-3">
                                 <div class="form-check mx-2">
-                                    <input name="a" type="radio" class="form-check-input" name="radio"  required="">
+                                    <input type="radio" class="form-check-input" value="Nam" name="gender" required="">
                                     <label class="form-check-label">Nam</label>
                                 </div>
                                 <div class="form-check mx-2">
-                                    <input name="a" type="radio" class="form-check-input"  name="radio"  required="">
+                                    <input type="radio" class="form-check-input"  value="Nữ" name="gender" required="">
                                     <label class="form-check-label">Nữ</label>
                                 </div>
                                 <div class="form-check mx-2">
-                                    <input name="a" type="radio" class="form-check-input" name="radio"  required="">
+                                    <input type="radio" class="form-check-input"  value="Khác" name="gender" required="">
                                     <label class="form-check-label">Khác</label>
                                 </div>                  
                             </div>
-                           
-                            
-                            
-                           
-                            
+
+
+
+
                             <label class="mb-2">Ngày sinh</label>
-                            <input name="namsinh" type="date" class="form-control mb-3"  required="">
+                            <input type="date" class="form-control mb-3" name="birthday" required="">
+
+
+
                             <br>
-                            <button class="btn btn-primary w-100 mb-2" type="submit"><i class="fa fa-user-plus"></i> Đăng ký</button>
+                            <button class="btn btn-primary w-100 mb-2"  type="submit"><i class="fa fa-user-plus"></i> Đăng ký</button>
                             <br>
                             <a href="LoginBookStore.jsp" ><i class="fa fa-angle-left mx-2"></i>Quay lại</a>
                         </form>
@@ -83,7 +85,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 p-4">
-                        <img src="/image/logo.png" alt="" style="height: 40px;">
+                        <img src="${pageContext.request.contextPath}/Images/logo.jpg" alt="" style="height: 40px;">
                         <div>
                             <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
                         </div>
@@ -104,5 +106,10 @@
                 </div>
             </div>
         </footer>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="SignupValidate.js"></script>
+
     </body>
 </html>
