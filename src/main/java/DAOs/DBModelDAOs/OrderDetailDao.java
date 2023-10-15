@@ -28,7 +28,7 @@ public class OrderDetailDao {
 
     /**
      * add order data to OrderDetail table
-     *
+     * @author HienHT
      * @param tem is an OrderDetail object
      */
     public void AddOrderDetails(OrderDetail tem) {
@@ -47,5 +47,6 @@ public class OrderDetailDao {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+   
 }

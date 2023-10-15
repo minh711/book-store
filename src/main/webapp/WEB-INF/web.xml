@@ -24,6 +24,10 @@
         <servlet-name>AccountCtrl</servlet-name>
         <servlet-class>Controllers.AccountCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>orderDetailCustomerCtrl</servlet-name>
+        <servlet-class>Controllers.orderDetailCustomerCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -44,9 +48,13 @@
         <servlet-name>bookDetailServlet</servlet-name>
         <url-pattern>/bookdetail</url-pattern>
     </servlet-mapping>
-   <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>orderDetailCustomerCtrl</servlet-name>
+        <url-pattern>/orderDetailCustomerCtrl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
