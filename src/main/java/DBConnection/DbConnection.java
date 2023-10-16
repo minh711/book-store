@@ -24,11 +24,11 @@ public class DbConnection {
     public static Connection getConnection() {
         if (conn == null) {
             // Rename to match your database here
-            String server = "DESKTOP-TT4LHQA\\SQLEXPRESS";
+            String server = "MUMMYKIARABFCE\\SQLEXPRESS";
             String port = "1433";
-            String database = "Book";
+            String database = "SWPProject";
             String user = "sa";
-            String password = "12345";
+            String password = "nhulnt";
           
             try {
                 // Declare driver
