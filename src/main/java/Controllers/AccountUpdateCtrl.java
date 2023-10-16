@@ -4,8 +4,10 @@
  */
 package Controllers;
 
-import DAOs.MgrModelDAOs.AccountDAO;
+import DAOs.AccountDAO;
+import Models.DBModels.Account;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +18,7 @@ import java.sql.Date;
  *
  * @author DuyenLTM
  */
-public class AccountCtrl extends HttpServlet {
+public class AccountUpdateCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -30,7 +32,9 @@ public class AccountCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Views/account/AccountCreate.jsp").forward(request, response);
+        AccountDAO accountDAO = new AccountDAO();
+        request.setAttribute("accountDetail", accountDAO.getAccountDetails(29).get(0));
+        request.getRequestDispatcher("Views/account/AccountUpdate.jsp").forward(request, response);
     }
 
     /**
@@ -44,6 +48,7 @@ public class AccountCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = 26;
         String fullName = request.getParameter("fullName");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
@@ -52,13 +57,16 @@ public class AccountCtrl extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
-        AccountDAO account = new AccountDAO();
-        int ketqua = account.addAccount(fullName, phone, email, gender, birthday, username, password, roleId);
-        if (ketqua == 1) {
-            response.sendRedirect("/Views/account/AccountList.jsp");
+        AccountDAO accountDao = new AccountDAO();
+        Account account = new Account(id, fullName, phone, email, gender, birthday, username, password, null, true, roleId);
+        int ketqua = accountDao.Update(account);
+        if (ketqua == 0) {
+            System.out.println("no");
+            response.sendRedirect("/Views/account/AccountUpdate.jsp");
         } else {
-            response.sendRedirect("/Views/account/AccountCreate.jsp");
+            System.out.println("yes");
+            response.sendRedirect("/Views/account/AccountList.jsp");
         }
-
     }
+
 }
