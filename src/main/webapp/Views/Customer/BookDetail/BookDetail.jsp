@@ -30,21 +30,7 @@
     </head>
 
     <body>
-        <header class="d-flex justify-content-between" style="padding: 10px;">
-            <div class="d-flex align-items-center justify-content-between">
-                <img src="${pageContext.request.contextPath}/Images/logo.jpg" style="height: 40px;">
-            </div>
-            <div class="dropdown">
-                <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Xin chào,<br>Nguyễn Văn A
-                </a>
-                <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item p-2" href="#">Thông tin tài khoản</a></li>
-                    <li><a class="dropdown-item p-2" href="#">Đăng xuất <i class="fa fa-sign-out"></i></a></li>
-                </ul>
-            </div>
-        </header>
+        <jsp:include page="/Views/header.jsp"/>s
 
         <div class="container" style="display: flex;justify-content: center;align-items: center;margin-top: 10px;">
             <div class="input-group mb-2 d-flex align-items-center" style="width: 60%;">
@@ -296,33 +282,7 @@
             </div>
         </main>
 
-
-
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 p-4">
-                        <img src="${pageContext.request.contextPath}/Images/logo.jpg" alt="" style="height: 40px;">
-                        <div>
-                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-4">
-                        <div class="d-flex">
-                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
-                            <div>
-                                business@oceanbook.com
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 d-flex justify-content-between p-4">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-facebook-messenger"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <jsp:include page="/Views/footer.jsp"/>
 
         <script>
 

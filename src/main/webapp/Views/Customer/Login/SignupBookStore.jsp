@@ -22,11 +22,7 @@
     </head>
 
     <body>
-        <header class="d-flex p-2">
-            <div class="d-flex align-items-center justify-content-between">
-                <img src="${pageContext.request.contextPath}/Images/logo.jpg" style="height: 40px;">
-            </div>
-        </header>
+        <jsp:include page="/Views/header.jsp"/>
 
         <main>
             <div class="container d-flex justify-content-center align-items-center" style="height: 800px;">
@@ -81,31 +77,8 @@
             </div>
         </main>
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 p-4">
-                        <img src="${pageContext.request.contextPath}/Images/logo.jpg" alt="" style="height: 40px;">
-                        <div>
-                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-4">
-                        <div class="d-flex">
-                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
-                            <div>
-                                business@oceanbook.com
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 d-flex justify-content-between p-4">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-facebook-messenger"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <jsp:include page="/Views/footer.jsp"/>
+        
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
