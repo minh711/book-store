@@ -5,10 +5,9 @@
 
 package Controllers;
 
-import DAO.DBModels.AccountDAO;
+import DAOs.MgrModelDAOs.AccountDAO;
 import Models.DBModels.Account;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -51,7 +50,7 @@ public class loginServlet extends HttpServlet {
             String pass = request.getParameter("pass");
             String rem = request.getParameter("rem");
             AccountDAO dao = new AccountDAO();
-            Account a = dao.checkUser(user);
+            Account a = dao.checkUserName(user);
             //kiểm tra xem user có tồn tại ko
             if(a==null){
                 request.setAttribute("mess", "User not exit");

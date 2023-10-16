@@ -4,20 +4,20 @@
  */
 package Controllers;
 
-import DAOs.MgrModelDAOs.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
+import java.util.Random;
+import java.util.*;
 
 /**
  *
- * @author VTOS
+ * @author DatNTTce171366
  */
-public class AccountCtrl extends HttpServlet {
+public class OTPServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class AccountCtrl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccountCtrl</title>");            
+            out.println("<title>Servlet OTPServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AccountCtrl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OTPServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,12 +54,36 @@ public class AccountCtrl extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
+    private String otpValue ;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("/Views/create-account/AccountList.jsp").forward(request, response);
+        otpValue =OtpPass();
+        System.out.println("1: "+otpValue);
+        request.setAttribute("mess", "Mã OTP của bạn là: " + otpValue);
+        request.getRequestDispatcher("Views/login-signup-customer/OTPBookStore.jsp").forward(request, response);
+
     }
 
+    private String OtpPass() {
+        Random rndm = new Random();
+        String values = "012345";
+        char[] password = new char[6];
+
+        for (int i = 0; i < 6; i++) {
+            // Use of charAt() method : to get character value 
+            // Use of nextInt() as it is scanning the value as int 
+            password[i] = values.charAt(rndm.nextInt(values.length()));
+
+        }
+      return new String(password);
+    }
+
+    
+    
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -71,21 +95,17 @@ public class AccountCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-String fullName = request.getParameter("fullName");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        Date birthday=Date.valueOf(request.getParameter("birthday"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        int roleId=Integer.parseInt(request.getParameter("roleId"));
-        AccountDAO account = new AccountDAO();
-        int ketqua = account.addAccount(fullName,phone, email, gender,birthday,username,password,roleId);
-        if (ketqua==1) {
-            response.sendRedirect("/Views/create-account/AccountList.jsp");
-        } else{
-            response.sendRedirect("/Views/create-account/createAccount.jsp");
-        }    }
+
+        String ot = request.getParameter("otp");
+        
+        System.out.println("2: "+otpValue);
+        if (ot.equals(otpValue)) {
+            response.sendRedirect("Views/login-signup-customer/redirect.jsp");
+        } else {
+            request.setAttribute("mess", "Sai OTP");
+            request.getRequestDispatcher("Views/login-signup-customer/OTPBookStore.jsp").forward(request, response);
+        }
+    }
 
     /**
      * Returns a short description of the servlet.

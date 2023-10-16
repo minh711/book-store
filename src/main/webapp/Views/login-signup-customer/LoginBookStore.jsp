@@ -1,7 +1,7 @@
 <%-- 
     Document   : Login
     Created on : Oct 6, 2023, 4:10:42 PM
-    Author     : ASP_REF
+    Author     : DatNTT
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -58,7 +58,7 @@
 
                             <a href="#">Quên mật khẩu?</a>
                             <hr>
-                            <button  class="btn btn-primary btn-block w-100"  type="button"> <i class="fa fa-user-plus"></i> Tạo tài khoản mới</button><br>
+                            <button onclick="window.location.href = 'SignupBookStore.jsp';"  class="btn btn-primary btn-block w-100"  type="button"> <i class="fa fa-user-plus"></i> Tạo tài khoản mới</button><br>
 
 
 
