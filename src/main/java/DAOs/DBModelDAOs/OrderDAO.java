@@ -29,7 +29,7 @@ public class OrderDAO {
 
     /**
      * add data of a new order
-     *
+     *HienHT
      * @param od is a Order Object
      */
     public void AddNew(Order od) {
@@ -66,7 +66,7 @@ public class OrderDAO {
      * to retrieve the orderID of the user's latest order because the orderID is
      * automatically created we cannot get an correct ID when that order is
      * created
-     *
+     *@author HienHT
      * @param customerID is a customer ID
      * @return orderID
      */
@@ -86,5 +86,40 @@ public class OrderDAO {
         return -1;
 
     }
+    /**
+     * @author HienHT
+     *  this method is used to retrieve an order by ID
+     * @param ID
+     * @return an Order object
+     */
+    
+   
+    public Order getOrderByID( int ID){
 
+         String sql = "SELECT * FROM [Order] WHERE id =?";
+         Order item = null;
+          try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+            item = new Order(rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getInt(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getBoolean(7),
+                    rs.getString(8),
+                    rs.getString(9),
+                    rs.getTimestamp(10),
+                    rs.getInt(11));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return item;
+    }
+    
 }

@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import Models.MgrModels.OrderItem;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +33,7 @@ public class OrderItemDAO {
      * @param bookID is a id of a book
      * @return an OrderItem object including bookID, title, price, salePrice
      */
-    public OrderItem getOrderItem(int bookID) {
+    public OrderItem getOrderItemFromCart(int bookID) {
         OrderItem item = null;
         String sql = "SELECT book.id, book.title, book.price, book.salePrice,"
                 + "cart.quantity, book.thumbnail FROM Cart cart"
@@ -54,6 +55,31 @@ public class OrderItemDAO {
             Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return item;
+    }
+
+    public ArrayList<OrderItem> getOrderItemByID(int orderID) {
+        ArrayList<OrderItem> items = new ArrayList<>();
+        String sql = "SELECT bookId,title,OrderDetail.price,"
+                + " OrderDetail.salePrice,OrderDetail.quantity,"
+                + " thumbnail FROM OrderDetail LEFT JOIN Book ON"
+                + " bookId = Book.id WHERE orderId = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, orderID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                items.add(new OrderItem(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getString(6)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return items;
     }
 
 }
