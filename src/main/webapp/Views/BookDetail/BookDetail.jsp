@@ -330,11 +330,11 @@
             const decreaseBtn = document.getElementById("decreaseQuantity");
             const increaseBtn = document.getElementById("increaseQuantity");
 
-            //giới hạn lại số lượng nhỏ nhất, lớn nhất
+            //Limit the smallest quantity, and the largest
             const minQuantity = 1;
             const maxQuantity = <%= remainquatity%>;
 
-            //check điều kiện nhấn nút giảm
+            //Check the condition if the Decrease button is pressed
             decreaseBtn.addEventListener("click", () => {
                 let currentQuantity = parseInt(quantityInput.value);
                 if (!isNaN(currentQuantity) && currentQuantity > minQuantity) {
@@ -342,7 +342,7 @@
                 }
             });
 
-            //check điều kiện nhấn nút tang
+            //Check the condition if the Increase button is pressed
             increaseBtn.addEventListener("click", () => {
                 let currentQuantity = parseInt(quantityInput.value);
                 if (!isNaN(currentQuantity) && currentQuantity < maxQuantity) {
@@ -350,7 +350,7 @@
                 }
             });
 
-            //check điều kiện nhấn nút tăng
+            //Check conditions for increasing and decreasing value then update value.
             quantityInput.addEventListener("input", () => {
                 let currentQuantity = parseInt(quantityInput.value);
                 if (isNaN(currentQuantity) || currentQuantity < minQuantity) {
@@ -365,17 +365,18 @@
             const cusEditQuantity = document.getElementById("cusEditQuantity");
             const quantityBook = document.getElementById("quantityBook");
 
+            //Set the value to quantityBook when submitting a form
             addToCartForm.addEventListener("submit", function (event) {
-                //lấy giá trị từ cusEditQuantity
+
                 const cusEditQuantityValue = cusEditQuantity.value;
 
-                //đặt giá trị vào quantityBook
                 quantityBook.value = cusEditQuantityValue;
             });
-           
-           function showSuccess() {
-            alert("Sản phẩm đã được thêm vào giỏ hàng!");
-        }
+
+
+            function showSuccess() {
+                alert("Sản phẩm đã được thêm vào giỏ hàng!");
+            }
         </script>
 
 

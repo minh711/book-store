@@ -239,30 +239,28 @@
             </div>
         </footer>
         <script>
-            // Hàm tính toán giá trị và cập nhật tổng cho từng sản phẩm
+            //Function calculates values and updates totals for each product
             function calculateTotalForProduct() {
-                // Lặp qua tất cả các sản phẩm trong giỏ hàng
                 $('.BookPrice').each(function (index) {
-                    // Lấy giá và số lượng cho từng sản phẩm
+                    
                     var price = parseFloat($(this).val().replace(/[^0-9.-]+/g, ''));
                     var quantity = parseInt($(this).closest('tr').find('.BookQuantity').val());
-
-                    // Tính tổng cho từng sản phẩm
+                    
                     var total = price * quantity;
 
-                    // Định dạng lại số thành chuỗi có dấu phẩy
+                    //Format numbers
                     var formatTotalPrice = total.toLocaleString('en-US');
 
-                    // Cập nhật giá trị cho thẻ input "totalEachProduct" tương ứng
+                    // Update the value for the "totalEachProduct" input tag.
                     $(this).closest('tr').find('.totalEachProduct').val(formatTotalPrice);
                 });
             }
 
-// Gọi hàm tính toán khi trang web tải hoặc khi số lượng sản phẩm thay đổi
+            // Call a calculation function when a webpage loads
             $(document).ready(function () {
                 calculateTotalForProduct();
 
-                // Sự kiện khi số lượng sản phẩm thay đổi
+                //When the number of products changes, the value will be recalculated.
                 $('.BookQuantity').on('input', function () {
                     calculateTotalForProduct();
                 });

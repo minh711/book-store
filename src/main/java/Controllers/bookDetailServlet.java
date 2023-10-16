@@ -67,6 +67,7 @@ public class bookDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         CartDAO cart = new CartDAO();
 
         String customerid = request.getParameter("customerid");
