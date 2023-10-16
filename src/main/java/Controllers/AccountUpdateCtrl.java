@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import DAOs.AccountDAO;
+import DAOs.DBModelDAOs.AccountDAO;
 import Models.DBModels.Account;
 import java.io.IOException;
 import java.io.PrintWriter;

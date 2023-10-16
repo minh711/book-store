@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import DAOs.AccountDAO;
+import DAOs.DBModelDAOs.AccountDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
