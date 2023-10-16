@@ -28,6 +28,42 @@
         <servlet-name>Cart</servlet-name>
         <servlet-class>Controllers.CartCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>orderDetailCustomerCtrl</servlet-name>
+        <servlet-class>Controllers.orderDetailCustomerCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>signupServlet</servlet-name>
+        <servlet-class>Controllers.signupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OTPServlet</servlet-name>
+        <servlet-class>Controllers.OTPServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DistributorCtrl</servlet-name>
+        <servlet-class>Controllers.DistributorCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookController</servlet-name>
+        <servlet-class>Controllers.BookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookTransactionCtrl</servlet-name>
+        <servlet-class>Controllers.BookTransactionCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountListCtrl</servlet-name>
+        <servlet-class>Controllers.AccountListCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountUpdateCtrl</servlet-name>
+        <servlet-class>Controllers.AccountUpdateCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountDetailCtrl</servlet-name>
+        <servlet-class>Controllers.AccountDetailCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -42,7 +78,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountCtrl</servlet-name>
-        <url-pattern>/account</url-pattern>
+        <url-pattern>/Account</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>bookDetailServlet</servlet-name>
@@ -55,6 +91,42 @@
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
         <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>orderDetailCustomerCtrl</servlet-name>
+        <url-pattern>/orderDetailCustomerCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signupServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OTPServlet</servlet-name>
+        <url-pattern>/otp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DistributorCtrl</servlet-name>
+        <url-pattern>/DistributorCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookController</servlet-name>
+        <url-pattern>/BookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookTransactionCtrl</servlet-name>
+        <url-pattern>/BookTransactionCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountListCtrl</servlet-name>
+        <url-pattern>/AccountList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountUpdateCtrl</servlet-name>
+        <url-pattern>/AccountUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountDetailCtrl</servlet-name>
+        <url-pattern>/AccountDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

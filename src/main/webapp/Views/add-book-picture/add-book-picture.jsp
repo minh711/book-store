@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/add-book-picture/style.css""/>
 </head>
 

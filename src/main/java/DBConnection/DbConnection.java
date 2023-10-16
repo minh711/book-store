@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 /**
  * Class for managing a database connection using JDBC.
- * @author mummykiara
  */
 public class DbConnection {
     
@@ -24,11 +23,11 @@ public class DbConnection {
     public static Connection getConnection() {
         if (conn == null) {
             // Rename to match your database here
-            String server = "MUMMYKIARABFCE\\SQLEXPRESS";
+            String server = "MINHPC\\SQLEXPRESS";
             String port = "1433";
-            String database = "SWPProject";
+            String database = "SWP_v0";
             String user = "sa";
-            String password = "nhulnt";
+            String password = "123456";
           
             try {
                 // Declare driver
@@ -42,9 +41,5 @@ public class DbConnection {
             }
         }
         return conn;
-    }
-    
-    public static void main(String[]args){
-        DbConnection a = new DbConnection();
     }
 }

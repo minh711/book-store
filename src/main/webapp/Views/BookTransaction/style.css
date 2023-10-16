@@ -1,0 +1,102 @@
+.thumbnail {
+    width: 80px;
+    height: 120px;
+    margin: 10px;
+    object-fit: contain;
+}
+
+.select-distributor-container
+{
+    width: 370px;
+}
+
+.select-book-container {
+    width: 100%;
+    position: relative;
+}
+
+
+.select-btn, .options li {
+    display: flex;
+    cursor: pointer;
+    align-items: start;
+}
+.select-btn {
+    height: 40px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-radius: 7px;
+    background: #fff;
+}
+
+select-btn i {
+    transition: transform 0.3s linear;
+}
+
+.content {
+    display: none;
+    position: fixed;
+    width: 370px;
+    padding: 20px;
+    margin-top: 10px;
+    z-index: 999;
+    border-radius: 7px;
+    background: #fff;
+}
+
+.select-book-container .content {
+    position: absolute;
+    width: 100%;
+}
+
+.select-distributor-container.active .select-btn i,
+.select-book-container.active .select-btn i
+{
+    transform: rotate(-180deg);
+}
+
+.select-distributor-container.active .content,
+.select-book-container.active .content
+{
+    display: block;
+}
+
+.content .search {
+    position: relative;
+}
+
+.search i {
+    left: 15px;
+    color: #999;
+    line-height: 40px;
+    position: absolute;
+}
+
+.search input {
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    padding: 0 15px 0 43px;
+    border: 1px solid #b3b3b3;
+}
+
+.content .options {
+    margin-top: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-left: 0;
+}
+
+
+.options li {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.options li:hover {
+    background:  #f2f2f2;
+}

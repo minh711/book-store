@@ -30,6 +30,44 @@ public class BookDAO extends DbConnection {
         conn = DBConnection.DbConnection.getConnection();
     }
 
+    /**
+     * Get all available Books.
+     * 
+     * @return Book object array.
+     * @author MinhTD
+     */
+    public Book[] getALl() {
+        List<Book> ls = new ArrayList<>();
+        String sql 
+                = "SELECT * FROM Book "
+                + "WHERE isAvailable = 1";
+        try {
+            ps = conn.prepareStatement(sql);
+            rs  = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new Book(
+                        rs.getInt(1),
+                        rs.getNString(2),
+                        rs.getNString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getBoolean(10),
+                        rs.getInt(11),
+                        rs.getInt(12)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Book[] arr = new Book[ls.size()];
+        ls.toArray(arr);
+        return arr;
+    }
+    
     public ArrayList<BookDetail> getBookDetailByID(int bookid) {
         String query = "SELECT\n"
                 + "	Book.id,\n"

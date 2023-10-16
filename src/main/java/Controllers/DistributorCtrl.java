@@ -4,21 +4,22 @@
  */
 package Controllers;
 
-import DAOs.MgrModelDAOs.AccountDAO;
+import DAOs.DBModelDAOs.DistributorDAO;
+import Models.DBModels.Distributor;
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
 
 /**
  *
- * @author DuyenLTM
+ * @author MinhTD
  */
-public class AccountCtrl extends HttpServlet {
+public class DistributorCtrl extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -30,7 +31,14 @@ public class AccountCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Views/account/AccountCreate.jsp").forward(request, response);
+        DistributorDAO distributorDAO = new DistributorDAO();
+        Distributor[] distributors = distributorDAO.getAll();
+        
+        String json = new Gson().toJson(distributors);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     /**
@@ -44,21 +52,15 @@ public class AccountCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullName = request.getParameter("fullName");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        Date birthday = Date.valueOf(request.getParameter("birthday"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        int roleId = Integer.parseInt(request.getParameter("roleId"));
-        AccountDAO account = new AccountDAO();
-        int ketqua = account.addAccount(fullName, phone, email, gender, birthday, username, password, roleId);
-        if (ketqua == 1) {
-            response.sendRedirect("/Views/account/AccountList.jsp");
-        } else {
-            response.sendRedirect("/Views/account/AccountCreate.jsp");
-        }
+    }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
     }
 }

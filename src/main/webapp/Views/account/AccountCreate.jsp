@@ -1,7 +1,7 @@
 <%-- 
     Document   : createAccount
     Created on : Oct 7, 2023, 10:49:13 PM
-    Author     : VTOS
+    Author     : DuyenLTM
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -65,7 +65,7 @@
             <div class="container d-flex justify-content-center align-items-center" style="">
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
-                        <form action="${pageContext.request.contextPath}/account" method="POST">
+                        <form action="/Account" method="POST">
                             <h1 class="text-center mb-3">Thông tin tài khoản</h1>
                             <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName">
                             <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone">
@@ -91,7 +91,7 @@
                             <label class="mb-2">Ngày sinh</label>
                             <input type="date" class="form-control mb-3" name="birthday">
                             <select class="form-select" name="roleId">
-                                <option>Chọn Chức vụ</option>
+                                <option value="0">Chọn Chức vụ</option>
                                 <option value="2">Quản lý sách</option>
                                 <option value="3">Quản lý Đơn hàng</option>
                             </select>
@@ -267,11 +267,9 @@
 //                }
                 // Sử dụng phương thức submit() để gửi form đến controller
                 form.submit();
-                alert('Thêm tài khoảng thành công');
+                alert('Thêm tài khoản thành công');
 
             }
-
-
 
             // Gắn sự kiện validateForm vào sự kiện submit của form
             const form = document.querySelector('form');
