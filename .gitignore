@@ -23,9 +23,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-# Database connection class
-DbConnection.java
-
 # Compiled class file
 *.class
 
