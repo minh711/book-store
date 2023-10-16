@@ -24,6 +24,18 @@
         <servlet-name>AccountCtrl</servlet-name>
         <servlet-class>Controllers.AccountCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountListCtrl</servlet-name>
+        <servlet-class>Controllers.AccountListCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountUpdateCtrl</servlet-name>
+        <servlet-class>Controllers.AccountUpdateCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountDetailCtrl</servlet-name>
+        <servlet-class>Controllers.AccountDetailCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -38,15 +50,27 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountCtrl</servlet-name>
-        <url-pattern>/account</url-pattern>
+        <url-pattern>/Account</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>bookDetailServlet</servlet-name>
         <url-pattern>/bookdetail</url-pattern>
     </servlet-mapping>
-   <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountListCtrl</servlet-name>
+        <url-pattern>/AccountList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountUpdateCtrl</servlet-name>
+        <url-pattern>/AccountUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountDetailCtrl</servlet-name>
+        <url-pattern>/AccountDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
