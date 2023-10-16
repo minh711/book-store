@@ -28,6 +28,10 @@
         <servlet-name>signupServlet</servlet-name>
         <servlet-class>Controllers.signupServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OTPServlet</servlet-name>
+        <servlet-class>Controllers.OTPServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>signupServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OTPServlet</servlet-name>
+        <url-pattern>/otp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
