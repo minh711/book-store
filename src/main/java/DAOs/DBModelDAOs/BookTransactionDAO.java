@@ -42,11 +42,10 @@ public class BookTransactionDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 ls.add(new BookTransaction(
-                        rs.getInt("bookId"), 
-                        rs.getInt("distributorId"),
+                        rs.getInt("id"), 
                         rs.getInt("executorId"),
-                        rs.getInt("quantity"),
-                        rs.getTimestamp("date")
+                        rs.getTimestamp("date"),
+                        rs.getInt("total")
                 ));
             }
         } catch (SQLException ex) {
@@ -71,11 +70,10 @@ public class BookTransactionDAO {
                 + "(?, ?, ?, ?, ?)";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, bookTransaction.getBookId());
-            ps.setInt(2, bookTransaction.getDistributorId());
-            ps.setInt(3, bookTransaction.getExcutorId());
-            ps.setInt(4, bookTransaction.getQuantiy());
-            ps.setTimestamp(5, bookTransaction.getDate());
+            ps.setInt(1, bookTransaction.getId());
+            ps.setInt(2, bookTransaction.getExecutorId());
+            ps.setTimestamp(3, bookTransaction.getDate());
+            ps.setInt(4, bookTransaction.getTotal());
             result = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BookTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
