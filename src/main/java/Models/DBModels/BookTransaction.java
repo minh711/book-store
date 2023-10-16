@@ -7,54 +7,36 @@ import java.sql.Timestamp;
  * @author MinhTD
  */
 public class BookTransaction {
-    private int bookId;
-    private int distributorId;
-    private int excutorId;
-    private int quantiy;
+    private int id;
+    private int executorId; // Account ID of the person perform the book transaction
     private Timestamp date;
+    private int total;
 
     public BookTransaction() {
     }
 
-    public BookTransaction(int bookId, int distributorId, int excutorId, int quantiy, Timestamp date) {
-        this.bookId = bookId;
-        this.distributorId = distributorId;
-        this.excutorId = excutorId;
-        this.quantiy = quantiy;
+    public BookTransaction(int id, int executorId, Timestamp date, int total) {
+        this.id = id;
+        this.executorId = executorId;
         this.date = date;
+        this.total = total;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
-    public int getBookId() {
-        return bookId;
+    public int getId() {
+        return id;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getDistributorId() {
-        return distributorId;
+    public int getExecutorId() {
+        return executorId;
     }
 
-    public void setDistributorId(int distributorId) {
-        this.distributorId = distributorId;
-    }
-
-    public int getExcutorId() {
-        return excutorId;
-    }
-
-    public void setExcutorId(int excutorId) {
-        this.excutorId = excutorId;
-    }
-
-    public int getQuantiy() {
-        return quantiy;
-    }
-
-    public void setQuantiy(int quantiy) {
-        this.quantiy = quantiy;
+    public void setExecutorId(int executorId) {
+        this.executorId = executorId;
     }
 
     public Timestamp getDate() {
@@ -63,6 +45,14 @@ public class BookTransaction {
 
     public void setDate(Timestamp date) {
         this.date = date;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
     // </editor-fold>
 }
