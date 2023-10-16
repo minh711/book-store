@@ -1,10 +1,16 @@
 # Book Store Management Web Application
 
-## Version 0
-First backup version, including:
-- Project configuration files (pom.xml)
-- Database connection code (DbConnection.java)
-- Model classes for database entities
+## Version 0.1
+
+First merged version, including functions below:
+
+- Login  
+- Create Order 
+- View Book Detail
+- Create Account
+- Add Book picture
+
+Some of the function above is not the completed function.
 
 ## Project Info
 
