@@ -1,4 +1,4 @@
-package Models.DBModels;
+package Models.MgrModels;
 
 import java.sql.Timestamp;
 
@@ -6,18 +6,26 @@ import java.sql.Timestamp;
  * Write later
  * @author MinhTD
  */
-public class BookTransaction {
+public class BookTransactionMgr {
     private int id;
-    private int executorId; // Account ID of the person perform the book transaction
+    private String thumbnail;
+    private int bookId;
+    private String title;
+    private String distributor;
+    private int quantity;
     private Timestamp date;
     private int total;
 
-    public BookTransaction() {
+    public BookTransactionMgr() {
     }
 
-    public BookTransaction(int id, int executorId, Timestamp date, int total) {
+    public BookTransactionMgr(int id, String thumbnail, int bookId, String title, String distributor, int quantity, Timestamp date, int total) {
         this.id = id;
-        this.executorId = executorId;
+        this.thumbnail = thumbnail;
+        this.bookId = bookId;
+        this.title = title;
+        this.distributor = distributor;
+        this.quantity = quantity;
         this.date = date;
         this.total = total;
     }
@@ -31,12 +39,44 @@ public class BookTransaction {
         this.id = id;
     }
 
-    public int getExecutorId() {
-        return executorId;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setExecutorId(int executorId) {
-        this.executorId = executorId;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDistributor() {
+        return distributor;
+    }
+
+    public void setDistributor(String distributor) {
+        this.distributor = distributor;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Timestamp getDate() {

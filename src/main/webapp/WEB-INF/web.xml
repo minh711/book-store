@@ -28,6 +28,14 @@
         <servlet-name>DistributorCtrl</servlet-name>
         <servlet-class>Controllers.DistributorCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookController</servlet-name>
+        <servlet-class>Controllers.BookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookTransactionCtrl</servlet-name>
+        <servlet-class>Controllers.BookTransactionCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>DistributorCtrl</servlet-name>
         <url-pattern>/DistributorCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookController</servlet-name>
+        <url-pattern>/BookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookTransactionCtrl</servlet-name>
+        <url-pattern>/BookTransactionCtrl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -42,10 +42,13 @@ public class BookTransactionDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 ls.add(new BookTransaction(
-                        rs.getInt("id"), 
-                        rs.getInt("executorId"),
-                        rs.getTimestamp("date"),
-                        rs.getInt("total")
+                        rs.getInt(1), 
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getTimestamp(6),
+                        rs.getInt(7)
                 ));
             }
         } catch (SQLException ex) {
@@ -66,14 +69,32 @@ public class BookTransactionDAO {
         int result = 0;
         String sql 
                 = "INSERT INTO BookTransaction "
+                + "(bookId, distributorId, executorId, quantity, date, total) "
                 + "VALUES "
-                + "(?, ?, ?, ?, ?)";
+                + "(?, ?, ?, ?, ?, ?)";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, bookTransaction.getId());
-            ps.setInt(2, bookTransaction.getExecutorId());
-            ps.setTimestamp(3, bookTransaction.getDate());
-            ps.setInt(4, bookTransaction.getTotal());
+            ps.setInt(1, bookTransaction.getBookId());
+            ps.setInt(2, bookTransaction.getDistributorId());
+            ps.setInt(3, bookTransaction.getExecutorId());
+            ps.setInt(4, bookTransaction.getQuantity());
+            ps.setTimestamp(5, bookTransaction.getDate());
+            ps.setInt(6, bookTransaction.getTotal());
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public int delete(int id) {
+        int result = 0;
+        String sql 
+                = "DELETE FROM BookTransaction "
+                + "WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
             result = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BookTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);

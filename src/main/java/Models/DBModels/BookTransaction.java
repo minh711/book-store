@@ -8,16 +8,22 @@ import java.sql.Timestamp;
  */
 public class BookTransaction {
     private int id;
+    private int bookId;
+    private int distributorId;
     private int executorId; // Account ID of the person perform the book transaction
+    private int quantity;
     private Timestamp date;
     private int total;
 
     public BookTransaction() {
     }
 
-    public BookTransaction(int id, int executorId, Timestamp date, int total) {
+    public BookTransaction(int id, int bookId, int distributorId, int executorId, int quantity, Timestamp date, int total) {
         this.id = id;
+        this.bookId = bookId;
+        this.distributorId = distributorId;
         this.executorId = executorId;
+        this.quantity = quantity;
         this.date = date;
         this.total = total;
     }
@@ -31,12 +37,36 @@ public class BookTransaction {
         this.id = id;
     }
 
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    public int getDistributorId() {
+        return distributorId;
+    }
+
+    public void setDistributorId(int distributorId) {
+        this.distributorId = distributorId;
+    }
+
     public int getExecutorId() {
         return executorId;
     }
 
     public void setExecutorId(int executorId) {
         this.executorId = executorId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Timestamp getDate() {

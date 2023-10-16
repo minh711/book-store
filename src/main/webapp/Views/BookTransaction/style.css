@@ -1,16 +1,28 @@
-.wrapper {
-    width: 370px;
-    margin: 130px auto 0;
+.thumbnail {
+    width: 80px;
+    height: 120px;
+    margin: 10px;
+    object-fit: contain;
 }
+
+.select-distributor-container
+{
+    width: 370px;
+}
+
+.select-book-container {
+    width: 100%;
+    position: relative;
+}
+
 
 .select-btn, .options li {
     display: flex;
     cursor: pointer;
-    align-items: center;
+    align-items: start;
 }
 .select-btn {
-    height: 65px;
-    font-size: 22px;
+    height: 40px;
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -20,24 +32,35 @@
     background: #fff;
 }
 
-.select-btn i {
-    font-size: 31px;
+select-btn i {
     transition: transform 0.3s linear;
 }
 
 .content {
     display: none;
+    position: fixed;
+    width: 370px;
     padding: 20px;
-    margin-top: 15px;
+    margin-top: 10px;
+    z-index: 999;
     border-radius: 7px;
     background: #fff;
 }
 
-.wrapper.active .select-btn i {
+.select-book-container .content {
+    position: absolute;
+    width: 100%;
+}
+
+.select-distributor-container.active .select-btn i,
+.select-book-container.active .select-btn i
+{
     transform: rotate(-180deg);
 }
 
-.wrapper.active .content {
+.select-distributor-container.active .content,
+.select-book-container.active .content
+{
     display: block;
 }
 
@@ -48,16 +71,14 @@
 .search i {
     left: 15px;
     color: #999;
-    font-size: 20px;
-    line-height: 53px;
+    line-height: 40px;
     position: absolute;
 }
 
 .search input {
-    height: 53px;
+    height: 40px;
     width: 100%;
     outline: none;
-    font-size: 17px;
     border-radius: 5px;
     padding: 0 15px 0 43px;
     border: 1px solid #b3b3b3;
@@ -72,9 +93,7 @@
 
 
 .options li {
-    height: 50px;
-    padding: 0 13px;
-    font-size: 21px;
+    padding: 10px;
     border-radius: 5px;
 }
 
