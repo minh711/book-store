@@ -25,6 +25,14 @@
         <servlet-class>Controllers.AccountCtrl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>signupServlet</servlet-name>
+        <servlet-class>Controllers.signupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OTPServlet</servlet-name>
+        <servlet-class>Controllers.OTPServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>DistributorCtrl</servlet-name>
         <servlet-class>Controllers.DistributorCtrl</servlet-class>
     </servlet>
@@ -59,6 +67,14 @@
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signupServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OTPServlet</servlet-name>
+        <url-pattern>/otp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DistributorCtrl</servlet-name>
