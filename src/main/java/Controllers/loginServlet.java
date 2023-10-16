@@ -54,7 +54,7 @@ public class loginServlet extends HttpServlet {
             //kiểm tra xem user có tồn tại ko
             if(a==null){
                 request.setAttribute("mess", "User not exit");
-                request.getRequestDispatcher("Views/login/LoginBookStore.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/Customer/Login/LoginBookStore.jsp").forward(request, response);
             }
             
             else{
@@ -62,7 +62,7 @@ public class loginServlet extends HttpServlet {
             Account b = dao.checkPass(user, pass);
             if (b == null) {
                 request.setAttribute("mess", "Wrong password");
-                request.getRequestDispatcher("Views/login/LoginBookStore.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/Customer/Login/LoginBookStore.jsp").forward(request, response);
             } else {
 
                 Cookie cu = new Cookie("user", user);
@@ -81,7 +81,7 @@ public class loginServlet extends HttpServlet {
                 response.addCookie(cr);
                 response.addCookie(cp);
                 HttpSession session = request.getSession();
-                response.sendRedirect("Views/login/redirect.jsp");
+                response.sendRedirect("Views/Customer/Login/redirect.jsp");
             }
             }
         } catch (Exception ex) {

@@ -93,20 +93,20 @@ public class signupServlet extends HttpServlet {
                     Account c = dao.checkExistEmail(email);
                     if (c == null) {
                         dao.addAccountC(fullName, phone, email, gender, birthday, username, password);
-                        response.sendRedirect("Views/login-signup-customer/redirect.jsp");
+                        response.sendRedirect("Views/Customer/Login/redirect.jsp");
                     } else {
                         request.setAttribute("mess", "Email này đã được sử dụng");
-                        request.getRequestDispatcher("Views/login-signup-customer/SignupBookStore.jsp").forward(request, response);
+                        request.getRequestDispatcher("Views/Customer/Login/SignupBookStore.jsp").forward(request, response);
                     }
                     
                 } else {
                     request.setAttribute("mess", "Số điện thoại này đã được sử dụng");
-                    request.getRequestDispatcher("Views/login-signup-customer/SignupBookStore.jsp").forward(request, response);
+                    request.getRequestDispatcher("Views/Customer/Login/SignupBookStore.jsp").forward(request, response);
                 }
                 
             } else {
                 request.setAttribute("mess", "Tên tài khoản đã được sử dụng");
-                request.getRequestDispatcher("Views/login-signup-customer/SignupBookStore.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/Customer/Login/SignupBookStore.jsp").forward(request, response);
             }
 
         } catch (Exception e) {

@@ -29,7 +29,7 @@ public class CartCtrl extends HttpServlet {
             
             if (!list.isEmpty()) {
                 request.setAttribute("CartList", list);
-                request.getRequestDispatcher("Views/Cart/Cart.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/Customer/Cart/Cart.jsp").forward(request, response);
             }
         } catch (IOException | ServletException e) {
             System.out.println(e);

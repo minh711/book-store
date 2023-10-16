@@ -33,8 +33,8 @@ public class AccountUpdateCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
-        request.setAttribute("accountDetail", accountDAO.getAccountDetails(29).get(0));
-        request.getRequestDispatcher("Views/account/AccountUpdate.jsp").forward(request, response);
+        request.setAttribute("accountDetail", accountDAO.getAccountDetails(1).get(0));
+        request.getRequestDispatcher("Views/Admin/account/AccountUpdate.jsp").forward(request, response);
     }
 
     /**
@@ -62,10 +62,10 @@ public class AccountUpdateCtrl extends HttpServlet {
         int ketqua = accountDao.Update(account);
         if (ketqua == 0) {
             System.out.println("no");
-            response.sendRedirect("/Views/account/AccountUpdate.jsp");
+            response.sendRedirect("/Views/Admin/account/AccountUpdate.jsp");
         } else {
             System.out.println("yes");
-            response.sendRedirect("/Views/account/AccountList.jsp");
+            response.sendRedirect("/Account");
         }
     }
 

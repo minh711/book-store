@@ -32,8 +32,8 @@ public class AccountDetailCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
-        request.setAttribute("accountDetail", accountDAO.getAccountDetails(26).get(0));
-        request.getRequestDispatcher("Views/account/AccountDetail.jsp").forward(request, response);
+        request.setAttribute("accountDetail", accountDAO.getAccountDetails(1).get(0));
+        request.getRequestDispatcher("Views/Admin/account/AccountDetail.jsp").forward(request, response);
     }
 
     /**

@@ -32,7 +32,7 @@ public class OrderStatusDAO {
     */ 
     public String getOrderStatusName(int ID){
         OrderStatus tem = new OrderStatus();
-        String sql ="SELECT * FROM [SWP].[dbo].[OrderStatus] WHERE id =?";
+        String sql ="SELECT * FROM [dbo].[OrderStatus] WHERE id =?";
         try{
            ps = conn.prepareStatement(sql);
             ps.setInt(1, ID);

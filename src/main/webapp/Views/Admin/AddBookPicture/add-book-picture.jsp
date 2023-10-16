@@ -18,20 +18,7 @@
     <jsp:include page="/Views/header.jsp"/>
 
     <main class="bg-light d-flex">
-        <aside>
-            <div class="flex-shrink-0 p-3" style="width: 280px;">
-                <a href="#" class="text-dark d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                    Admin
-                </a>
-                <ul class="list-unstyled ps-0">
-                    <li class="mb-1">
-                        <a href="#" class="text-light nav-link bg-primary rounded p-2">
-                            Thêm ảnh (sample)
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+        <jsp:include page="/Views/aside.jsp"/>
         
         <div class="container">
             <input type="file" class="form-control" id="pics" name="fPics" multiple>

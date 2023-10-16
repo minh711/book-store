@@ -46,7 +46,7 @@ public class orderDetailCustomerCtrl extends HttpServlet {
         OrderStatusDetailDAO orderStatusDetailDAO = new OrderStatusDetailDAO();
         OrderStatusDAO orderStatusDAO = new OrderStatusDAO();
         // suppose the OrderID is retrieve from the session
-        int OrderID = 26;
+        int OrderID = 1;
         // get the items of an order and its information
         ArrayList<OrderItem> listItem = orderItemDao.getOrderItemByID(OrderID);
         Order order = orderDao.getOrderByID(OrderID);
@@ -64,7 +64,7 @@ public class orderDetailCustomerCtrl extends HttpServlet {
                 request.setAttribute("currentStatus", currentStatus);
                 request.setAttribute("previousStatus", previousStatus);
                 request.setAttribute("currentStatusName", currentStatusName);
-                request.getRequestDispatcher("Views/orderDetailCustomer/orderDetailCustomer.jsp").forward(request, response);
+                request.getRequestDispatcher("/Views/Customer/OrderDetail/orderDetailCustomer.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -84,7 +84,7 @@ public class orderDetailCustomerCtrl extends HttpServlet {
             throws ServletException, IOException {
     
 
-        int orderID = 26;
+        int orderID = 1;
         OrderStatusDetail orderStatusDetail = new OrderStatusDetail(1, new Timestamp(System.currentTimeMillis()), orderID, 5);
         OrderStatusDetailDAO orderStatusDetailDAO = new OrderStatusDetailDAO();
         orderStatusDetailDAO.AddOrderStatusDetail(orderStatusDetail);

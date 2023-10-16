@@ -12,27 +12,14 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/BookTransaction/style.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Admin/BookTransaction/style.css"/>
 </head>
 
 <body>
     <jsp:include page="/Views/header.jsp"/>
 
     <main class="bg-light d-flex">
-        <aside>
-            <div class="flex-shrink-0 p-3" style="width: 280px;">
-                <a href="#" class="text-dark d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                    Sample
-                </a>
-                <ul class="list-unstyled ps-0">
-                    <li class="mb-1">
-                        <a href="LoginBookStore.jsp" class="text-light nav-link bg-primary rounded p-2">
-                            Login
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+        <jsp:include page="/Views/aside.jsp"/>
         
         <div class="container">
             <div>
@@ -100,7 +87,7 @@
     <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>             
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="${pageContext.request.contextPath}/Views/BookTransaction/script.js"></script>
+    <script src="${pageContext.request.contextPath}/Views/Admin/BookTransaction/script.js"></script>
 </body>
 
 </html

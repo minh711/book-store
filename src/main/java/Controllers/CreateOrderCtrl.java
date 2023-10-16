@@ -57,7 +57,7 @@ public class CreateOrderCtrl extends HttpServlet {
                 request.setAttribute("OrderItems", listItem);
                 System.out.println(listItem.get(0).getThumbnail());
                 request.setAttribute("addresses", addressDao.getAll(customerID));
-                request.getRequestDispatcher("Views/createOrder/createOrder.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.out.println(e);

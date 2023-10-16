@@ -24,22 +24,11 @@
         <jsp:include page="/Views/header.jsp"/>
 
         <main class="bg-light d-flex">
-            <aside>
-                <div class="flex-shrink-0 p-3" style="width: 280px;">
-                    <a href="#"
-                       class="text-dark d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                        Bộ phận Quản lý Nhân sự
-                    </a>
-                    <ul class="list-unstyled ps-0">
-                        <li class="mb-1 bg-primary rounded">
-                            <a href="#" class="text-light nav-link">Danh sách tài khoản</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            <jsp:include page="/Views/aside.jsp"/>
+            
             <div class="container">
                 <h1 class="text-center mt-3">Danh sách tài khoản</h1>
-                <button class="btn btn-primary mb-3">Thêm Tài khoản mới</button>
+                <a href="/Account" class="btn btn-primary mb-3">Thêm Tài khoản mới</a>
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-12">
                         <table id="example" class="display mt-3">

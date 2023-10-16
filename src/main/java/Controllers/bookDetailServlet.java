@@ -48,7 +48,7 @@ public class bookDetailServlet extends HttpServlet {
                 request.setAttribute("BookDescription", list.get(0).getDescription());
                 request.setAttribute("BookAuthor", authorlist);
                 request.setAttribute("BookGenre", genrelist);
-                request.getRequestDispatcher("Views/BookDetail/BookDetail.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/Customer/BookDetail/BookDetail.jsp").forward(request, response);
                 System.out.println(list.get(0).getPublisher() + "\t" + list.get(0).getTitle());
             }
         } catch (IOException | ServletException e) {

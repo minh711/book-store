@@ -15,6 +15,6 @@
         <h1>THÀNH CÔNG</h1>
        
        
-        <a href="Views/login-signup-customer/OTPBookStore.jsp">back</a>
+        <a href="Views/Customer/Login/OTPBookStore.jsp">back</a>
     </body>
 </html>
