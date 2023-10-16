@@ -25,6 +25,10 @@
         <servlet-class>Controllers.AccountCtrl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>Controllers.CartCtrl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>orderDetailCustomerCtrl</servlet-name>
         <servlet-class>Controllers.orderDetailCustomerCtrl</servlet-class>
     </servlet>
@@ -83,6 +87,10 @@
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>orderDetailCustomerCtrl</servlet-name>
