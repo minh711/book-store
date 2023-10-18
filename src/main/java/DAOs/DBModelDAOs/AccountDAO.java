@@ -105,8 +105,8 @@ public class AccountDAO {
         return accountDetail;
     }
 
-    public ArrayList<AccountDetail> getAccountDetails(int id) {
-        ArrayList<AccountDetail> accounts = new ArrayList<>();
+    public AccountDetail getAccountDetails(int id) {
+        AccountDetail account = new AccountDetail();
         String sql = "select fullName, phone, email, username, [password], gender, birthday, [Role].[role]\n"
                 + "from Account\n"
                 + "INNER JOIN [Role]\n"
@@ -118,14 +118,13 @@ public class AccountDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                accounts.add(new AccountDetail(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6), rs.getDate(7), rs.getString(8)));
+                account = new AccountDetail(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getString(6), rs.getDate(7), rs.getString(8));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            return null;
         }
-        return accounts;
+        return account;
     }
 
     public int Update(Account newAccount) {

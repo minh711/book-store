@@ -15,12 +15,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import Models.MgrModels.BookAuthorDetail;
 import Models.MgrModels.BookGenreDetail;
+import java.util.ArrayList;
 
 /**
  *
  * @author mummykiara
  */
-public class bookDetailServlet extends HttpServlet {
+public class BookDetailCtrl extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,26 +31,16 @@ public class bookDetailServlet extends HttpServlet {
         BookGenreDAO bookgenre = new BookGenreDAO();
         BookAuthorDAO bookauthor = new BookAuthorDAO();
         try {
-            List<BookDetail> list = book.getBookDetailByID(id);
-            List<BookGenreDetail> genrelist = bookgenre.getBookGenreByID(list.get(0).getId());
-            List<BookAuthorDetail> authorlist = bookauthor.getBookAuthorByID(list.get(0).getId());
+            BookDetail bookDetail = book.getBookDetailByID(id);
+            List<BookGenreDetail> genrelist = bookgenre.getBookGenreByID(bookDetail.getId());
+            List<BookAuthorDetail> authorlist = bookauthor.getBookAuthorByID(bookDetail.getId());
+            System.out.println(bookDetail.getLanguage() +"\t" + bookDetail.getPublisher());
 
-            if (!list.isEmpty()) {
-                request.setAttribute("BookID", list.get(0).getId());
-                request.setAttribute("BookTittle", list.get(0).getTitle());
-                request.setAttribute("BookName", list.get(0).getTitle());
-                request.setAttribute("BookThumbnail", list.get(0).getThumbnail());
-                request.setAttribute("BookPublisher", list.get(0).getPublisher());
-                request.setAttribute("BookLanguage", list.get(0).getLanguage());
-                request.setAttribute("BookSalePrice", list.get(0).getSalePrice());
-                request.setAttribute("BookDiscount", list.get(0).getDiscount());
-                request.setAttribute("BookPrice", list.get(0).getPrice());
-                request.setAttribute("BookQuantity", list.get(0).getQuantity());
-                request.setAttribute("BookDescription", list.get(0).getDescription());
+            if (bookDetail != null) {
+                request.setAttribute("bookDetail", bookDetail);
                 request.setAttribute("BookAuthor", authorlist);
                 request.setAttribute("BookGenre", genrelist);
-                request.getRequestDispatcher("Views/Customer/BookDetail/BookDetail.jsp").forward(request, response);
-                System.out.println(list.get(0).getPublisher() + "\t" + list.get(0).getTitle());
+                request.getRequestDispatcher("/Views/Customer/BookDetail/BookDetail.jsp").forward(request, response);
             }
         } catch (IOException | ServletException e) {
             System.err.println(e);
@@ -68,6 +59,7 @@ public class bookDetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        ArrayList<Cart> listcart = new ArrayList<>();
         CartDAO cart = new CartDAO();
 
         String customerid = request.getParameter("customerid");
@@ -78,12 +70,18 @@ public class bookDetailServlet extends HttpServlet {
         int bookId = Integer.parseInt(bookid);
         int quanTity = Integer.parseInt(quantity);
         try {
-            cart.AddNewItemToCart(new Cart(cusId, quanTity, bookId));
-            response.sendRedirect("bookdetail");
-            
+            listcart = cart.GetCartByID(cusId, bookId);
+            if (listcart.size() != 0) {
+                int oldquantity = listcart.get(0).getQuantity();
+                int newquantity = oldquantity + quanTity;
+                cart.UpdateCart(bookId, cusId, newquantity);
+            }else {
+                cart.AddNewItemToCart(new Cart(cusId, quanTity, bookId));
+            }
+            response.sendRedirect("Book");
         } catch (IOException e) {
+            System.out.println(e);
         }
-
     }
 
 }

@@ -23,11 +23,11 @@
 
         <main class="bg-light d-flex">
             <jsp:include page="/Views/aside.jsp"/>
-            
+
             <div class="container d-flex justify-content-center align-items-center" style="">
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
-                        <form action="/AccountDetail" method="POST">
+                        <form action="/Account/Update" method="POST">
                             <h1 class="text-center mb-3">Thông tin tài khoản</h1>
                             <label class="mb-2 text-primary text-opacity-50" >Họ và tên</label>
                             <input type="text" class="form-control mb-3" readonly="" value="<c:out value="${accountDetail.fullName}" ></c:out>" name="fullName">
@@ -60,6 +60,8 @@
                             <select class="form-select" name="roleId" disabled >
                                 <option value="${accountDetail.roleName}" >${accountDetail.roleName}</option>
                             </select>
+
+                            <a href="/Account/Update?id=${id}" class="w-100 mt-3 btn btn-primary" ${accountDetail.roleName=='Khách hàng'?'disable':''}>Cập nhật tài khoản</a>
                         </form>
                     </div>
                 </div>

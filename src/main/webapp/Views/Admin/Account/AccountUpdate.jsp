@@ -23,11 +23,11 @@
 
         <main class="bg-light d-flex">
             <jsp:include page="/Views/aside.jsp"/>
-            
+
             <div class="container d-flex justify-content-center align-items-center" style="">
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
-                        <form action="/AccountUpdate" method="post">
+                        <form action="/Account/Update?id=${id}" method="post">
                             <h1 class="text-center mb-3">Thông tin tài khoản</h1>
                             <label class="mb-2 text-primary text-opacity-50" >Họ và tên</label>
                             <input type="text" class="form-control mb-3"  value="${accountDetail.fullName}" name="fullName">
@@ -60,9 +60,8 @@
                             <input type="date" class="form-control mb-3"  name="birthday" value="${accountDetail.birthdate}">
                             <label class="mb-2 text-primary text-opacity-50" >Chức vụ</label>
                             <select class="form-select" name="roleId">
-                                <option value="0">Chọn Chức vụ</option>
-                                <option value="2">Quản lý sách</option>
-                                <option value="3">Quản lý Đơn hàng</option>
+                                <option value="2" ${accountDetail.roleName=='Quản lí Sách'? 'selected' :''}>Quản lý sách</option>
+                                <option value="3" ${accountDetail.roleName=='Quản lí Đơn'? 'selected' :''}>Quản lý Đơn hàng</option>
                             </select>
 
                             <button class="btn btn-danger w-100 mt-3">Xóa tài khoản</button>
