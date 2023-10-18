@@ -29,7 +29,7 @@ public class AccountListCtrl extends HttpServlet {
             throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
         request.setAttribute("accountList", accountDAO.getAccounts());
-        request.getRequestDispatcher("Views/Admin/account/AccountList.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Admin/Account/AccountList.jsp").forward(request, response);
     }
 
 

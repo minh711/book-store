@@ -30,7 +30,7 @@ public class AccountCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Views/Admin/account/AccountCreate.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Admin/Account/AccountCreate.jsp").forward(request, response);
     }
 
     /**
@@ -57,7 +57,7 @@ public class AccountCtrl extends HttpServlet {
         if (ketqua == 1) {
             response.sendRedirect("/AccountList");
         } else {
-            response.sendRedirect("/Views/Admin/account/AccountCreate.jsp");
+            response.sendRedirect("/Views/Admin/Account/AccountCreate.jsp");
         }
 
     }

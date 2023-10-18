@@ -33,7 +33,7 @@ public class AccountDetailCtrl extends HttpServlet {
             throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
         request.setAttribute("accountDetail", accountDAO.getAccountDetails(1).get(0));
-        request.getRequestDispatcher("Views/Admin/account/AccountDetail.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Admin/Account/AccountDetail.jsp").forward(request, response);
     }
 
     /**
