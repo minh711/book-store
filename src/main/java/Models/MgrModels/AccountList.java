@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Models.MgrModels;
 
 /**
- *
- * @author Duyên
+ * Model for showing short account information in the account list.
+ * @author DuyenLTM
  */
 public class AccountList {
     private int id;
@@ -18,8 +14,6 @@ public class AccountList {
     public AccountList() {
     }
     
-    
-
     public AccountList(int id, String username, String fullName, String roleName, String isAvailString) {
         this.id = id;
         this.username = username;
@@ -67,7 +61,4 @@ public class AccountList {
     public void setIsAvailString(String isAvailString) {
         this.isAvailString = isAvailString;
     }
-    
-    
-    
 }

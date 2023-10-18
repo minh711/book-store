@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>loginServlet</servlet-name>
-        <servlet-class>Controllers.loginServlet</servlet-class>
+        <servlet-name>LoginCtrl</servlet-name>
+        <servlet-class>Controllers.LoginCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
@@ -33,12 +33,12 @@
         <servlet-class>Controllers.orderDetailCustomerCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>signupServlet</servlet-name>
-        <servlet-class>Controllers.signupServlet</servlet-class>
+        <servlet-name>RegisterCtrl</servlet-name>
+        <servlet-class>Controllers.RegisterCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>OTPServlet</servlet-name>
-        <servlet-class>Controllers.OTPServlet</servlet-class>
+        <servlet-name>OTPCtrl</servlet-name>
+        <servlet-class>Controllers.OTPCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DistributorCtrl</servlet-name>
@@ -85,8 +85,8 @@
         <url-pattern>/Book</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>loginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <servlet-name>LoginCtrl</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
@@ -97,12 +97,12 @@
         <url-pattern>/orderDetailCustomerCtrl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>signupServlet</servlet-name>
-        <url-pattern>/signup</url-pattern>
+        <servlet-name>RegisterCtrl</servlet-name>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>OTPServlet</servlet-name>
-        <url-pattern>/otp</url-pattern>
+        <servlet-name>OTPCtrl</servlet-name>
+        <url-pattern>/Otp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DistributorCtrl</servlet-name>
@@ -118,15 +118,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountListCtrl</servlet-name>
-        <url-pattern>/AccountList</url-pattern>
+        <url-pattern>/Account/List</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountUpdateCtrl</servlet-name>
-        <url-pattern>/AccountUpdate</url-pattern>
+        <url-pattern>/Account/Update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountDetailCtrl</servlet-name>
-        <url-pattern>/AccountDetail</url-pattern>
+        <url-pattern>/Account/Detail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

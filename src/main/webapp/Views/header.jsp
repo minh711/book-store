@@ -13,8 +13,8 @@
     
     <c:if test = "${!isLogin}">
     <div>
-        <a href="" class="btn btn-success mx-2">Đăng nhập</a>
-        <a href="" class="btn btn-primary">Đăng ký</a>
+        <a href="/Login" class="btn btn-success mx-2">Đăng nhập</a>
+        <a href="/Register" class="btn btn-primary">Đăng ký</a>
     </div>
     </c:if>
     
