@@ -53,7 +53,7 @@ public class AccountDAO extends DbConnection {
     
 //Login
 //kiểm tra password có đúng hay ko
-    public Account checkPass(String user, String pass) throws SQLException {
+    public boolean checkPass(String user, String pass) throws SQLException {
         String sql = "SELECT * FROM [dbo].[Account] WHERE username=? AND password=?";
 //        pass = Utilities.MD5Hash.MD5Hash(pass);
         try {
@@ -63,7 +63,7 @@ public class AccountDAO extends DbConnection {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getBoolean(10), rs.getInt(11));
+                return true;
             }
 
         } catch (SQLException ex) {
@@ -71,12 +71,12 @@ public class AccountDAO extends DbConnection {
 
         }
 
-        return null;
+       return false;
 
     }
 
 //kiểm tra tài khoản có tồn taih hay ko
-     public Account checkUserName(String user) throws SQLException {
+     public boolean checkUserName(String user) throws SQLException {
         String sql = "SELECT * FROM [dbo].[Account] WHERE username=? ";
 
         try {
@@ -86,7 +86,7 @@ public class AccountDAO extends DbConnection {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getBoolean(10), rs.getInt(11));
+               return true;
             }
 
         } catch (SQLException ex) {
@@ -94,7 +94,7 @@ public class AccountDAO extends DbConnection {
 
         }
 
-        return null;
+        return false;
     }
      
      
@@ -126,7 +126,7 @@ public class AccountDAO extends DbConnection {
 
     }
 
-    public Account checkExistUserName(String username) throws SQLException {
+    public boolean checkExistUserName(String username) throws SQLException {
         String sql = "SELECT * FROM [dbo].[Account] WHERE username=? ";
 
         try {
@@ -136,7 +136,7 @@ public class AccountDAO extends DbConnection {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getBoolean(10), rs.getInt(11));
+                return true;
             }
 
         } catch (SQLException ex) {
@@ -144,10 +144,10 @@ public class AccountDAO extends DbConnection {
 
         }
 
-        return null;
+        return false;
     }
 
-    public Account checkExistUserSDT(String phone) throws SQLException {
+    public boolean checkExistUserSDT(String phone) throws SQLException {
         String sql = "SELECT * FROM [dbo].[Account] WHERE phone=? ";
 
         try {
@@ -157,7 +157,7 @@ public class AccountDAO extends DbConnection {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getBoolean(10), rs.getInt(11));
+               return true;
             }
 
         } catch (SQLException ex) {
@@ -165,10 +165,10 @@ public class AccountDAO extends DbConnection {
 
         }
 
-        return null;
+        return false;
     }
 
-    public Account checkExistEmail(String email) throws SQLException {
+    public boolean checkExistEmail(String email) throws SQLException {
        String sql = "SELECT * FROM [dbo].[Account] WHERE email=? ";
 
         try {
@@ -178,7 +178,7 @@ public class AccountDAO extends DbConnection {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getBoolean(10), rs.getInt(11));
+                return true;
             }
 
         } catch (SQLException ex) {
@@ -186,7 +186,7 @@ public class AccountDAO extends DbConnection {
 
         }
 
-        return null;
+        return false;
     }
 
 }
