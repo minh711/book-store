@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controllers;
 
 import DAOs.MgrModelDAOs.AccountDAO;
@@ -55,7 +51,9 @@ public class AccountCtrl extends HttpServlet {
         AccountDAO account = new AccountDAO();
         int ketqua = account.addAccount(fullName, phone, email, gender, birthday, username, password, roleId);
         if (ketqua == 1) {
-            response.sendRedirect("/AccountList");
+            DAOs.DBModelDAOs.AccountDAO accountDAO = new DAOs.DBModelDAOs.AccountDAO();
+            request.setAttribute("accountList", accountDAO.getAccounts());
+            request.getRequestDispatcher("/Views/Admin/Account/AccountList.jsp").forward(request, response);
         } else {
             response.sendRedirect("/Views/Admin/Account/AccountCreate.jsp");
         }

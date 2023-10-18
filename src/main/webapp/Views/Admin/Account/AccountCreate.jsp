@@ -22,7 +22,7 @@
 
         <main class="bg-light d-flex">
             <jsp:include page="/Views/aside.jsp"/>
-            
+
             <div class="container d-flex justify-content-center align-items-center" style="">
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
@@ -196,16 +196,9 @@
                     alert('Mật khẩu và Nhập lại mật khẩu không khớp nhau.');
                     return;
                 }
-
-//                // Kiểm tra xem Email có duy nhất hay không
-//                if (!isEmailUnique(emailInput.value)) {
-//                    alert('Email đã tồn tại, vui lòng chọn một địa chỉ email khác.');
-//                    return;
-//                }
                 // Sử dụng phương thức submit() để gửi form đến controller
                 form.submit();
                 alert('Thêm tài khoản thành công');
-
             }
 
             // Gắn sự kiện validateForm vào sự kiện submit của form

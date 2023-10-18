@@ -25,7 +25,7 @@
 
         <main class="bg-light d-flex">
             <jsp:include page="/Views/aside.jsp"/>
-            
+
             <div class="container">
                 <h1 class="text-center mt-3">Danh sách tài khoản</h1>
                 <a href="/Account" class="btn btn-primary mb-3">Thêm Tài khoản mới</a>
@@ -50,7 +50,7 @@
                                         <td class="text-success">${account.roleName}</td>
                                         <td class="text-primary">${account.isAvailString}</td>
 
-                                        <td class="text-primary"><a href="#">Chi tiết</a></td>
+                                        <td class="text-primary"><a href="/Account/Detail?id=${account.id}">Chi tiết</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

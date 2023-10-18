@@ -118,15 +118,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountListCtrl</servlet-name>
-        <url-pattern>/AccountList</url-pattern>
+        <url-pattern>/Account/List</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountUpdateCtrl</servlet-name>
-        <url-pattern>/AccountUpdate</url-pattern>
+        <url-pattern>/Account/Update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountDetailCtrl</servlet-name>
-        <url-pattern>/AccountDetail</url-pattern>
+        <url-pattern>/Account/Detail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
