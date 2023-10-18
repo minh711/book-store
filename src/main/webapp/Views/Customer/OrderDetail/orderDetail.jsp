@@ -1,5 +1,5 @@
 <%-- 
-    Document   : orderDetailCustomer
+    Document   : OrderDetail
     Created on : Oct 11, 2023, 8:36:28 AM
     Author     : hienHT
 --%>
@@ -13,7 +13,7 @@
         <title>Blank Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Customer/OrderDetail/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/orderDetailCustomer/style.css">
         <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
@@ -30,17 +30,132 @@
     </head>
 
     <body>
-        <jsp:include page="/Views/header.jsp"/>
-        
+        <header class="d-flex justify-content-between" style="padding: 10px;">
+            <div class="d-flex align-items-center justify-content-between" style="width: 30%;">
+                <div class="d-flex">
+                    <img src="/image/logo.png" style="height: 40px;">
+                </div>
+                <div class="dropdown">
+                    <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-solid fa-bars fa-2x p-2"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <div class="d-flex" style="height: 300px;">
+                                <div class="p-4">
+                                    <div class="fs-4 text-nowrap">Danh mục sản phẩm</div>
+                                    <hr class="hr">
+                                    <div class="bg-light mb-3 rounded p-2">Nhà xuất bản</div>
+                                    <div class="mb-3 rounded p-2">Tác giả</div>
+                                    <div class="mb-3 rounded p-2">Thể loại</div>
+                                    <div>Ngôn ngữ</div>
+                                </div>
+                                <div class="d-flex p-3">
+                                    <div style="width: 280px;">
+                                        <div class="mb-3">Nguyễn Nhật Ánh</div>
+                                        <div class="mb-3">Xuân Diệu</div>
+                                        <div class="mb-3">Hồ Anh Thái</div>
+                                        <div class="mb-3">Nguyễn Trương Quý</div>
+                                        <div class="mb-3">Nguyễn Vĩnh Khuyên</div>
+                                        <div>Trang Hạ</div>
+                                    </div>
+                                    <div style="width: 300px;">
+                                        <div class="mb-3">Nguyễn Phong Việt</div>
+                                        <div class="mb-3">Nguyễn Ngọc Thạch</div>
+                                        <div class="mb-3">Hamlet Trương</div>
+                                        <div class="mb-3">Rosie Nguyễn</div>
+                                        <div class="mb-3">Anh Khang</div>
+                                        <div class="text-primary">Xem tất cả</div>
+                                    </div>
+                                </div>
+                            </div>
+                        <li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="input-group d-flex align-items-center" style="width: 40%;">
+                <input id="search-input" type="search" id="form1" class="form-control" placeholder="Tìm kiếm..." style="height: 40px;"/>
+                <button id="search-button" type="button" class="btn btn-primary" style="height: 40px;">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center" style="width: 30%;">
+                <div>
+                    <button class="btn btn-success mx-2"><i class="fa fa-shopping-cart mx-2"></i><br>Giỏ hàng</button>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                        <a class="text-dark text-center nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bell mx-2"></i><br>
+                            Thông báo <span class="text-danger">(3)</span>
+                        </a>
+                        <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
+                            <li style="width: 400px;" class="p-2">
+                                <div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <div><strong>Đánh giá sản phẩm</strong></div>
+                                        <div class="text-secondary">11:00 01/01/2023</div>
+                                    </div>
+                                    <div>Bạn có sản phẩm <strong>Book Title 1</strong> từ đơn hàng <strong>#123456</strong> chưa đánh giá</div>
+                                </div>
+                            </li>
+                            <hr>
+                            <li style="width: 400px;" class="p-2">
+                                <div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <div><strong>Đánh giá sản phẩm</strong></div>
+                                        <div class="text-secondary">11:00 01/01/2023</div>
+                                    </div>
+                                    <div>Bạn có sản phẩm <strong>Book Title 2</strong> từ đơn hàng <strong>#456789</strong> chưa đánh giá</div>
+                                </div>
+                            </li>
+                            <hr>
+                            <li style="width: 400px;" class="p-2">
+                                <div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <div><strong>Đã giao thành công</strong></div>
+                                        <div class="text-secondary">11:00 01/01/2023</div>
+                                    </div>
+                                    <div>Đơn hàng <strong>#456789</strong> đã được giao thành công</div>
+                                </div>
+                            </li>
+                            <hr>
+                            <li class="p-2">
+                                <div class="text-primary">Xem tất cả</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Xin chào,<br>Nguyễn Văn A
+                        </a>
+                        <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item p-2" href="#">Đơn hàng</a></li>
+                            <li><a class="dropdown-item p-2" href="#">Thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item p-2" href="#">Đăng xuất <i class="fa fa-sign-out"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
         <c:set var="currentStatus" value="${requestScope.currentStatus}" />
         <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
         <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">
+        
         <!--        <input type="hidden" id="currentStatus" name="currentStatus" value="5">
                 <input type="hidden" id="previousStatus" name="previousStatus" value="1">-->
         <main class="bg-light">
             <div class="container">
                 <h1 class="text-center mt-3 mb-3">Thông tin đơn hàng</h1>
                 <form id="form"  method="post" action="orderDetailCustomerCtrl" onsubmit="return validateForm()">
+                     <input type="hidden" id="orderID" name="OrderID" value="${requestScope.OrderID}">
+                    
                     <div class="border">
                         <div class="text-success text-center fs-5 mt-3 mb-3" id="currentStatusName">Trạng thái: ${requestScope.currentStatusName}</div>
                         <div class="d-flex justify-content-center">
@@ -111,6 +226,8 @@
                                 </c:forEach>                        </tbody>
                         </table>
                         <c:set var="order" value="${requestScope.Order}" />
+                         
+                      
                         <div class="card p-3">
                             <div class="row">
                                 <div class="col-md-7">
@@ -163,28 +280,59 @@
             </div>
         </main>
 
-        <jsp:include page="/Views/footer.jsp"/>
-        
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 p-4">
+                        <img src="/image/logo.png" alt="" style="height: 40px;">
+                        <div>
+                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
+                        </div>
+                    </div>
+                    <div class="col-md-4 p-4">
+                        <div class="d-flex">
+                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
+                            <div>
+                                business@oceanbook.com
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-between p-4">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-facebook-messenger"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
 
                 // Get the currentStatus value from your database or JSP scriptlet.
                 const currentStatus = document.getElementById("currentStatus").value;
+                const currentStatusName =document.getElementById("currentStatusName");
                 // Define the progress step elements.
                 const inProcessing = document.querySelector(".inProcessing");
                 const inPackaging = document.querySelector(".inPackaging");
                 const inDelivery = document.querySelector(".inDelivery");
                 const complete = document.querySelector(".complete");
                 const finalStage = document.querySelector(".finalStage");
+                
+                
                 //define the progress step in progress bar
+               const changeStatusButton = document.getElementById("changeStatusButton");
                 const processingStep = document.getElementById("inProcessing");
                 const packagingStep = document.getElementById("inPackaging");
                 const deliveryStep = document.getElementById("inDelivery");
                 const completeStep = document.getElementById("complete");
                 const finalStep = document.getElementById("finalStage");
                 const previousStatus = document.getElementById("previousStatus").value;
+                 const orderID = document.getElementById("orderID").value;
                 console.log("Previous Status: " + previousStatus);
                 console.log("current Status: " + currentStatus);
+                 console.log("current orderID: " + orderID);
+               
+                 
                 // Function to update progress based on currentStatus.
 
                 function cleanStatus() {
@@ -198,12 +346,14 @@
                     deliveryStep.style.display = "none";
                     completeStep.style.display = "none";
                     finalStep.style.display = "none";
+                      changeStatusButton.style.display ="none";
                 }
 
                 function updateProgress() {
 
                     if (currentStatus === "1") {
                         cleanStatus();
+                          changeStatusButton.style.display ="block";
                         inProcessing.style.display = "block";
                         inPackaging.style.display = "block";
                         inDelivery.style.display = "block";
@@ -281,6 +431,8 @@
 
 
                     } else if (currentStatus === "5") {
+                        currentStatusName.classList.remove("text-success");
+                        currentStatusName.classList.add("text-danger");
                         if (previousStatus === "1") {
                             cleanStatus();
                             inProcessing.style.display = "block";
