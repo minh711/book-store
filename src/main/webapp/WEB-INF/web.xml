@@ -17,8 +17,8 @@
         <servlet-class>Controllers.CreateOrderCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>bookDetailServlet</servlet-name>
-        <servlet-class>Controllers.bookDetailServlet</servlet-class>
+        <servlet-name>BookDetailCtrl</servlet-name>
+        <servlet-class>Controllers.BookDetailCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AccountCtrl</servlet-name>
@@ -81,8 +81,8 @@
         <url-pattern>/Account</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>bookDetailServlet</servlet-name>
-        <url-pattern>/bookdetail</url-pattern>
+        <servlet-name>BookDetailCtrl</servlet-name>
+        <url-pattern>/Book</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
@@ -90,7 +90,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
-        <url-pattern>/cart</url-pattern>
+        <url-pattern>/Cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>orderDetailCustomerCtrl</servlet-name>

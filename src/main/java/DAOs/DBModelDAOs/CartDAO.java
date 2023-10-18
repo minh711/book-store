@@ -78,8 +78,30 @@ public class CartDAO {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    public ArrayList<Cart> GetCartByID(int userid, int bookid) {
+        ArrayList<Cart> list = new ArrayList<>();
+        String sqlquery = "SELECT [customerId],"
+                + "[quantity]\n"
+                + ",[bookId]\n"
+                + "  FROM [Cart]\n"
+                + "  WHERE bookId = ? and customerId = ?";
+        try {
+            ps = conn.prepareStatement(sqlquery);
+            ps.setInt(1, bookid);
+            ps.setInt(2, userid);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Cart cart = new Cart(rs.getInt(1),rs.getInt(2),rs.getInt(3));
+                list.add(cart);
+                
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
 
-    public ArrayList<UserCartDetail> GetCartByID(int userid) {
+    public ArrayList<UserCartDetail> GetUserCartDetailByID(int userid) {
         ArrayList<UserCartDetail> list = new ArrayList<>();
         String sqlquery = "SELECT\n"
                 + "                    Book.title,\n"
@@ -111,5 +133,18 @@ public class CartDAO {
         }
         return list;
     }
-
+    public void UpdateCart(int bookid, int customerid, int quantity) {
+        String sqlquery = "UPDATE [Cart]\n"
+                + "   SET [quantity] = ?\n"
+                + " WHERE bookId = ? and customerId = ?";
+        try {
+            ps = conn.prepareStatement(sqlquery);
+            ps.setInt(1, quantity);
+            ps.setInt(2, bookid);
+            ps.setInt(3, customerid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }

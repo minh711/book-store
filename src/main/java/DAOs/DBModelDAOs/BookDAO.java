@@ -68,7 +68,7 @@ public class BookDAO extends DbConnection {
         return arr;
     }
     
-    public ArrayList<BookDetail> getBookDetailByID(int bookid) {
+    public BookDetail getBookDetailByID(int bookid) {
         String query = "SELECT\n"
                 + "	Book.id,\n"
                 + "    Book.title,\n"
@@ -77,6 +77,7 @@ public class BookDAO extends DbConnection {
                 + "	Book.salePrice,\n"
                 + "	Book.discount,\n"
                 + "	Book.price,\n"
+                + "     Book.soleTotal,"
                 + "	Book.quantity,\n"
                 + "	Book.description,\n"
                 + "	Book.thumbnail\n"
@@ -96,28 +97,21 @@ public class BookDAO extends DbConnection {
                 + "    Genre ON BookGenre.genreId = Genre.id\n"
                 + "WHERE\n"
                 + "    Book.id = ?";
-        ArrayList<BookDetail> list = new ArrayList<>();
+       BookDetail b =null;
         try {
+            
             ps = conn.prepareStatement(query);
             ps.setInt(1, bookid);
             System.out.println(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                BookDetail b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getString(10));
-                list.add(b);
+                b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8),rs.getInt(9), rs.getString(10), rs.getString(11));
+                
             }
         } catch (SQLException e) {
             System.out.println(e);
             Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
         }
-        return list;
+        return b;
     }
-
-    public static void main(String[] args) {
-        BookDAO book = new BookDAO();
-        ArrayList<BookDetail> list = book.getBookDetailByID(1);
-        System.out.println(list.get(0).getTitle() +  list.get(0).getPublisher());
-
-    }
-    
 }
