@@ -1,16 +1,24 @@
 # Book Store Management Web Application
 
-## Version 0.1
+## Version 1.0
 
-First merged version, including functions below:
-
-- Login  
-- Create Order 
+End of Iteration 1 (or Iteration 2 if include documenting as Iteration 1). Included features:
+- Login
+- Register
+- Create Order
+- Order Detail
+- Cancel Order
+- Order History
 - View Book Detail
+- Add item to Cart
+- View Cart
+- View Account List
 - Create Account
+- Update Account
 - Add Book picture
+- Add Book transaction
 
-Some of the function above is not the completed function.
+Some of the features above is not completed yet in this release.
 
 ## Project Info
 
