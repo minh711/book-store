@@ -56,11 +56,4 @@ public class BookAuthorDAO extends DbConnection{
         return list;
     }
     
-     public static void main(String[] args) {
-        BookAuthorDAO genre = new BookAuthorDAO();
-        ArrayList<BookAuthorDetail> list = genre.getBookAuthorByID(1);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getBookId()+  list.get(i).getAuthor());
-        }
-    }
 }

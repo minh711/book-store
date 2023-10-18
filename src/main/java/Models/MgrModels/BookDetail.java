@@ -27,18 +27,21 @@ public class BookDetail {
 
     }
 
-    public BookDetail(int id, String title, String publisher, String language, int salePrice, int discount, int price, int quantity, String description, String thumbnail) {
+    public BookDetail(int id, String title, String publisher, String language, int salePrice, int discount, int price, int soleTotal, int quantity, String description, String thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.thumbnail = thumbnail;
         this.salePrice = salePrice;
         this.price = price;
+        this.soleTotal = soleTotal;
         this.discount = discount;
         this.quantity = quantity;
         this.publisher = publisher;
         this.language = language;
     }
+    
+    
 
     public int getId() {
         return id;
@@ -127,5 +130,4 @@ public class BookDetail {
     public void setLanguage(String language) {
         this.language = language;
     }
-
 }

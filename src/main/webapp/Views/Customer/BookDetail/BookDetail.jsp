@@ -11,6 +11,7 @@
 <%@page import="Models.MgrModels.BookAuthorDetail"%>
 <%@page import="Models.MgrModels.BookGenreDetail"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%  NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());%>
@@ -30,7 +31,21 @@
     </head>
 
     <body>
-        <jsp:include page="/Views/header.jsp"/>s
+        <header class="d-flex justify-content-between" style="padding: 10px;">
+            <div class="d-flex align-items-center justify-content-between">
+                <img src="${pageContext.request.contextPath}/Images/logo.jpg" style="height: 40px;">
+            </div>
+            <div class="dropdown">
+                <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    Xin chào,<br>Nguyễn Văn A
+                </a>
+                <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item p-2" href="#">Thông tin tài khoản</a></li>
+                    <li><a class="dropdown-item p-2" href="#">Đăng xuất <i class="fa fa-sign-out"></i></a></li>
+                </ul>
+            </div>
+        </header>
 
         <div class="container" style="display: flex;justify-content: center;align-items: center;margin-top: 10px;">
             <div class="input-group mb-2 d-flex align-items-center" style="width: 60%;">
@@ -87,10 +102,10 @@
                                     </div>
                                 </div>
 
-                                <form id="addToCart" method="post" action="bookdetail">                   
+                                <form id="addToCart" method="post" action="Book">                   
                                     <div class="d-flex align-items-center mb-3 justify-content-center">
                                         <input type="hidden" name="customerid" value="1">
-                                        <input type="hidden" name="bookid" value ="${requestScope.BookID}">
+                                        <input type="hidden" name="bookid" value ="${bookDetail.id}">
                                         <input type="hidden" id="quantityBook" name="quantityBook" value="">
                                         <div class="mx-2">
                                             <button class="btn btn-outline-secondary" type="submit" onclick="showSuccess()">
@@ -108,7 +123,7 @@
                             <div class="col-md-6">
                                 <div>
                                     <div>
-                                        <h2 id="BookID"><%= request.getAttribute("BookTittle")%></h2>
+                                        <h2>${bookDetail.title}</h2>
                                         <div class="mt-3">
                                             <div class="d-flex">
                                                 <!-- Element on the left -->
@@ -123,19 +138,20 @@
                                                 <div class="vr vr-blurry" style=""></div>
                                                 <!-- Element on the left -->
                                                 <div class="px-4">
-                                                    <p><%= request.getAttribute("BookName")%></p>
+                                                    <p>${bookDetail.title}</p>
                                                     <p>
                                                         <c:forEach items="${requestScope.BookAuthor}" var="author" varStatus="loop">
                                                             <span>${author.getAuthor()}${!loop.last?', ':' '} </span>
                                                         </c:forEach>
                                                     </p>
-                                                    <p><%= request.getAttribute("BookPublisher")%></p>
+                                                    <p>${bookDetail.getPublisher()}</p>
                                                     <p>
                                                         <c:forEach items="${requestScope.BookGenre}" var="genre" varStatus="loop">
                                                             <span>${genre.getGenre()}${!loop.last?', ':' '} </span>
                                                         </c:forEach>
                                                     </p>
-                                                    <p><%= request.getAttribute("BookLanguage")%></p>
+
+                                                    <p>${bookDetail.getLanguage()}</p>
 
                                                 </div>
                                             </div>
@@ -145,14 +161,12 @@
                                     <div>
                                         <div>
                                             <div class="d-flex">
-                                                <% String saleprice = numberFormat.format(request.getAttribute("BookSalePrice")); %>
-                                                <% String price = numberFormat.format(request.getAttribute("BookPrice"));%>
 
-                                                <h3 class="text-danger"><strong><%= saleprice%></strong></h3>
+                                                <h3 class="text-danger"><strong><fmt:formatNumber type="number" value="${bookDetail.salePrice}" pattern="#,###" /></strong></h3>
 
-                                                <div class="ts-lg mx-2 d-flex align-items-center">-<%= request.getAttribute("BookDiscount")%>%</div>
+                                                <div class="ts-lg mx-2 d-flex align-items-center">-${bookDetail.discount}%</div>
                                             </div>
-                                            <div class="ts-lg text-decoration-line-through"><%= price%>đ</div>
+                                            <div class="ts-lg text-decoration-line-through"><fmt:formatNumber type="number" value="${bookDetail.price}" pattern="#,###" />đ</div>
                                             <div class="d-flex">
                                                 <p>
                                                     <strong class="mx-2">4.5</strong>
@@ -166,10 +180,8 @@
                                                 </p>
                                                 <p class="mx-2 text-black-50">(10 đánh giá)</p>
                                             </div>
-                                            <%
-                                                int remainquatity = Integer.parseInt(String.valueOf(request.getAttribute("BookQuantity")));
-                                            %>
-                                            <div class="text-danger mb-3">Số lượng còn lại:<%= request.getAttribute("BookQuantity")%></div>
+
+                                            <div class="text-danger mb-3">Số lượng còn lại: ${bookDetail.soleTotal}</div>
                                             <div class="d-flex">
                                                 <div class="text-nowrap mx-2 d-flex align-items-center">Số lượng</div>
                                                 <div class="input-group d-flex justify-content-start align-items-center">
@@ -197,7 +209,7 @@
                             <hr>
                             <h2>MÔ TẢ SẢN PHẨM</h2>
                             <p style="text-align: justify;">
-                                <%= request.getAttribute("BookDescription")%>
+                                ${bookDetail.description}
                             </p><br>
                         </div>
                         <hr>
@@ -282,7 +294,33 @@
             </div>
         </main>
 
-        <jsp:include page="/Views/footer.jsp"/>
+
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 p-4">
+                        <img src="${pageContext.request.contextPath}/Images/logo.jpg" alt="" style="height: 40px;">
+                        <div>
+                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
+                        </div>
+                    </div>
+                    <div class="col-md-4 p-4">
+                        <div class="d-flex">
+                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
+                            <div>
+                                business@oceanbook.com
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-between p-4">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-facebook-messenger"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <script>
 
@@ -292,7 +330,7 @@
 
             //Limit the smallest quantity, and the largest
             const minQuantity = 1;
-            const maxQuantity = <%= remainquatity%>;
+            const maxQuantity = ${bookDetail.soleTotal};
 
             //Check the condition if the Decrease button is pressed
             decreaseBtn.addEventListener("click", () => {
@@ -333,12 +371,9 @@
                 quantityBook.value = cusEditQuantityValue;
             });
 
-
             function showSuccess() {
                 alert("Sản phẩm đã được thêm vào giỏ hàng!");
             }
         </script>
-
-
     </body>
 </html>

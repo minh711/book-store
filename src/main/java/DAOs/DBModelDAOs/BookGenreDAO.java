@@ -57,14 +57,4 @@ public class BookGenreDAO extends DbConnection{
         return list;
         
     }
-    
-    
-    
-    public static void main(String[] args) {
-        BookGenreDAO genre = new BookGenreDAO();
-        ArrayList<BookGenreDetail> list = genre.getBookGenreByID(1);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getBookId()+  list.get(i).getGenre());
-        }
-    }
 }
