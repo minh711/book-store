@@ -16,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -40,23 +41,32 @@ public class orderDetailCustomerCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
+        
+        // create objects
         OrderItemDAO orderItemDao = new OrderItemDAO();
         OrderDAO orderDao = new OrderDAO();
         OrderStatusDetailDAO orderStatusDetailDAO = new OrderStatusDetailDAO();
         OrderStatusDAO orderStatusDAO = new OrderStatusDAO();
-        // suppose the OrderID is retrieve from the session
-        int OrderID = 1;
+        
+        
+        // suppose the OrderID is retrieve from the request
+        int OrderID = Integer.parseInt(request.getParameter("id"));
+         request.setAttribute("OrderID", OrderID);
+         
+         
+        
         // get the items of an order and its information
         ArrayList<OrderItem> listItem = orderItemDao.getOrderItemByID(OrderID);
         Order order = orderDao.getOrderByID(OrderID);
-        
+
         // get the current and previous status
         int currentStatus = orderStatusDetailDAO.getCurrentStatus(OrderID).getOrderStatusId();
         int previousStatus = orderStatusDetailDAO.getPreviousStatus(OrderID).getOrderStatusId();
         String currentStatusName = orderStatusDAO.getOrderStatusName(currentStatus);
-
-
+         
+        
+        
+        // set attributes used in JSP
         try {
             if (listItem.isEmpty() == false) {
                 request.setAttribute("OrderItems", listItem);
@@ -64,7 +74,8 @@ public class orderDetailCustomerCtrl extends HttpServlet {
                 request.setAttribute("currentStatus", currentStatus);
                 request.setAttribute("previousStatus", previousStatus);
                 request.setAttribute("currentStatusName", currentStatusName);
-                request.getRequestDispatcher("/Views/Customer/OrderDetail/orderDetailCustomer.jsp").forward(request, response);
+                 request.setAttribute("OrderID", OrderID);
+                request.getRequestDispatcher("Views/Customer/OrderDetail/OrderDetail.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -82,23 +93,19 @@ public class orderDetailCustomerCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
 
-        int orderID = 1;
+       // suppose the OrderID is retrieve from the request
+       int orderID = Integer.parseInt(request.getParameter("OrderID"));
+        
+       //  add cancel information 
         OrderStatusDetail orderStatusDetail = new OrderStatusDetail(1, new Timestamp(System.currentTimeMillis()), orderID, 5);
         OrderStatusDetailDAO orderStatusDetailDAO = new OrderStatusDetailDAO();
         orderStatusDetailDAO.AddOrderStatusDetail(orderStatusDetail);
-        response.sendRedirect("orderDetailCustomerCtrl");
+        response.sendRedirect("orderDetailCustomerCtrl?id=" + orderID);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
+
+
+
+
