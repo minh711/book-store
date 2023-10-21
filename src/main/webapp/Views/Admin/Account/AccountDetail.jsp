@@ -8,7 +8,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <title>Blank Page</title>
         <meta charset="utf-8">
@@ -62,8 +61,6 @@
                             <select class="form-select" name="roleId" disabled >
                                 <option value="${accountDetail.roleName}" >${accountDetail.roleName}</option>
                             </select>
-
-
                         </form>
                     </div>
                 </div>
@@ -76,7 +73,7 @@
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
-            new DataTable('#example');
+                                new DataTable('#example');
         </script>
     </body>
 
