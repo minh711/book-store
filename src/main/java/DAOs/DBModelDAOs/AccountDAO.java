@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOs.DBModelDAOs;
 
 import Models.DBModels.Account;
 import Models.MgrModels.AccountDetail;
 import Models.MgrModels.AccountList;
+import Utilities.StringMethods;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -129,25 +126,60 @@ public class AccountDAO {
 
     public int Update(Account newAccount) {
         int ketqua = 0;
-        String sql = "Update Account set fullName=?,phone=?,email=?,gender=?,birthday=?, username=?,"
-                + "password=?, roleId=? where id=?";
+        if (newAccount.getPassword() == "") {
+            String sql = "Update Account set fullName=?,phone=?,email=?,gender=?,birthday=?, username=?,"
+                    + "roleId=? where id=?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(sql);
+
+                ps.setString(1, newAccount.getFullName());
+                ps.setString(2, newAccount.getPhone());
+                ps.setString(3, newAccount.getEmail());
+                ps.setString(4, newAccount.getGender());
+                ps.setDate(5, newAccount.getBirthday());
+                ps.setString(6, newAccount.getUsername());
+                ps.setInt(7, newAccount.getRoleId());
+                ps.setInt(8, newAccount.getId());
+                ketqua = ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            String sql = "Update Account set fullName=?,phone=?,email=?,gender=?,birthday=?, username=?,"
+                    + "password=?, roleId=? where id=?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, newAccount.getFullName());
+                ps.setString(2, newAccount.getPhone());
+                ps.setString(3, newAccount.getEmail());
+                ps.setString(4, newAccount.getGender());
+                ps.setDate(5, newAccount.getBirthday());
+                ps.setString(6, newAccount.getUsername());
+                ps.setString(7, StringMethods.MD5Hash(newAccount.getPassword()));
+                ps.setInt(8, newAccount.getRoleId());
+                ps.setInt(9, newAccount.getId());
+                ketqua = ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return ketqua;
+    }
+
+    public int deleteAccount(int id) {
+        int result = 0;
+        String sql = "update Account\n"
+                + "set isAvailable=0\n"
+                + "where id=?;";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-
-            ps.setString(1, newAccount.getFullName());
-            ps.setString(2, newAccount.getPhone());
-            ps.setString(3, newAccount.getEmail());
-            ps.setString(4, newAccount.getGender());
-            ps.setDate(5, newAccount.getBirthday());
-            ps.setString(6, newAccount.getUsername());
-            ps.setString(7, newAccount.getPassword());
-            ps.setInt(8, newAccount.getRoleId());
-            ps.setInt(9, newAccount.getId());
-            ketqua = ps.executeUpdate();
+            ps.setInt(1, id);
+            result = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ketqua;
+        return result;
     }
 
 }

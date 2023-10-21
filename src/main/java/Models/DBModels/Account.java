@@ -1,5 +1,6 @@
 package Models.DBModels;
 
+import static Utilities.StringMethods.Decrypt;
 import java.sql.Date;
 
 /**

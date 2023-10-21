@@ -28,21 +28,23 @@
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
                         <form action="/Account/Update" method="POST">
+                            <a href="/Account/Update?id=${id}" class="btn btn-primary mb-3" ${accountDetail.roleName=='Khách hàng'?'disable':''}>Chỉnh sửa tài khoản</a>
+                            <br>
+                            <a href="/Account/Delete?id=${id}" onclick="return confirm('Bạn chắc chắc muốn xóa tài khoản này?');" class="btn btn-danger mb-3" style="width: 165px;">Xóa tài khoản</a>
                             <h1 class="text-center mb-3">Thông tin tài khoản</h1>
                             <label class="mb-2 text-primary text-opacity-50" >Họ và tên</label>
-                            <input type="text" class="form-control mb-3" readonly="" value="<c:out value="${accountDetail.fullName}" ></c:out>" name="fullName">
-                                <label class="mb-2 text-primary text-opacity-50" readonly="">Số điện thoại</label>
-                                <input type="text" class="form-control mb-3" readonly="" value="<c:out value="${accountDetail.phone}"  ></c:out>" name="phone">
-                                <label class="mb-2 text-primary text-opacity-50" readonly="">Địa chỉ Email</label>
-                                <input type="email" class="form-control mb-3" readonly="" value="<c:out value="${accountDetail.email}" ></c:out>"  name="email">
-                                <label class="mb-2 text-primary text-opacity-50">Tên đăng nhập</label>
-                                <input type="text" class="form-control mb-3" readonly="" value="<c:out value="${accountDetail.username}"  ></c:out>" name="username">
-                                <label class="mb-2 text-primary text-opacity-50" >Mật khẩu</label>
-                                <input type="password" class="form-control mb-3" readonly="" value="<c:out value="${accountDetail.password}"  ></c:out>" name="password">
-                                <label class="mb-2 text-primary text-opacity-50">Giới tính</label>
-                                <div class="d-flex mb-3" >
-                                    <div class="form-check mx-2" >
-                                        <input type="radio" class="form-check-input" disabled value="Nam" name="gender" ${accountDetail.gender=='Nam'?'checked':''}>
+                            <input type="text" class="form-control mb-3" readonly="" value=" ${accountDetail.fullName}" name="fullName">
+                            <label class="mb-2 text-primary text-opacity-50" readonly="">Số điện thoại</label>
+                            <input type="text" class="form-control mb-3" readonly="" value="${accountDetail.phone}" name="phone">
+                            <label class="mb-2 text-primary text-opacity-50" readonly="">Địa chỉ Email</label>
+                            <input type="email" class="form-control mb-3" readonly="" value=" ${accountDetail.email}" name="email">
+                            <label class="mb-2 text-primary text-opacity-50">Tên đăng nhập</label>
+                            <input type="text" class="form-control mb-3" readonly="" value="${accountDetail.username}" name="username">
+
+                            <label class="mb-2 text-primary text-opacity-50">Giới tính</label>
+                            <div class="d-flex mb-3" >
+                                <div class="form-check mx-2" >
+                                    <input type="radio" class="form-check-input" disabled value="Nam" name="gender" ${accountDetail.gender=='Nam'?'checked':''}>
                                     <label class="form-check-label">Nam</label>
                                 </div>
                                 <div class="form-check mx-2">
@@ -61,7 +63,7 @@
                                 <option value="${accountDetail.roleName}" >${accountDetail.roleName}</option>
                             </select>
 
-                            <a href="/Account/Update?id=${id}" class="w-100 mt-3 btn btn-primary" ${accountDetail.roleName=='Khách hàng'?'disable':''}>Cập nhật tài khoản</a>
+
                         </form>
                     </div>
                 </div>

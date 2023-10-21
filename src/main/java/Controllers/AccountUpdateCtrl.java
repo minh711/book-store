@@ -32,6 +32,7 @@ public class AccountUpdateCtrl extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO();
         request.setAttribute("accountDetail", accountDAO.getAccountDetails(id));
         request.getRequestDispatcher("/Views/Admin/Account/AccountUpdate.jsp").forward(request, response);
+
     }
 
     /**
@@ -45,25 +46,30 @@ public class AccountUpdateCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.valueOf(request.getParameter("id"));
-        String fullName = request.getParameter("fullName");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        Date birthday = Date.valueOf(request.getParameter("birthday"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        int roleId = Integer.parseInt(request.getParameter("roleId"));
-        AccountDAO accountDao = new AccountDAO();
-        Account account = new Account(id, fullName, phone, email, gender, birthday, username, password, null, true, roleId);
-        int ketqua = accountDao.Update(account);
-        if (ketqua == 0) {
-            System.out.println("no");
-            response.sendRedirect("/Views/Admin/Account/AccountUpdate.jsp");
+        String formType = request.getParameter("formType");
+        if (formType.equals("delete")) {
+            AccountDAO accountDao = new AccountDAO();
+            int id = Integer.valueOf(request.getParameter("id"));
+            request.setAttribute("id", id);
+            int result = accountDao.deleteAccount(id);
         } else {
-            System.out.println("yes");
-            response.sendRedirect("/Account/List");
+            int id = Integer.valueOf(request.getParameter("id"));
+            String fullName = request.getParameter("fullName");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String gender = request.getParameter("gender");
+            Date birthday = Date.valueOf(request.getParameter("birthday"));
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            int roleId = Integer.parseInt(request.getParameter("roleId"));
+            AccountDAO accountDao = new AccountDAO();
+            Account account = new Account(id, fullName, phone, email, gender, birthday, username, password, null, true, roleId);
+            int ketqua = accountDao.Update(account);
+            if (ketqua == 0) {
+                response.sendRedirect("/Views/Admin/Account/AccountUpdate.jsp");
+            } else {
+                response.sendRedirect("/Account/List");
+            }
         }
     }
 
