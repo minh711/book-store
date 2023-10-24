@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
                         <form action="/Account" method="POST">
-                            <h1 class="text-center mb-3">Thông tin tài khoản</h1>
+                            <h1 class="text-center mb-3">Tạo tài khoản</h1>
                             <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName">
                             <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone">
                             <input type="email" class="form-control mb-3" placeholder="Địa chỉ Email" name="email">
@@ -56,7 +56,6 @@
                                 <option value="2">Quản lý sách</option>
                                 <option value="3">Quản lý Đơn hàng</option>
                             </select>
-                            <button class="btn btn-danger w-100 mt-3">Xóa tài khoản</button>
                             <hr>
                             <button class="btn btn-success w-100" name="btnAddNew" type="submit" value="Submit" onclick="return validateForm()">Tạo tài khoản</button>
                         </form>

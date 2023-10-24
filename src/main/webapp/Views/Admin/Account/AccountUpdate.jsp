@@ -219,7 +219,7 @@
             }
                 // Sử dụng phương thức submit() để gửi form đến controller
                 form.submit();
-                alert('Thêm tài khoản thành công');
+                alert('Cập nhật tài khoản thành công');
             }
 
             // Gắn sự kiện validateForm vào sự kiện submit của form

@@ -79,28 +79,28 @@ public class AccountDAO {
         }
         return accounts;
     }
-
-    public AccountDetail getAccount(int id) {
-        AccountDetail accountDetail = null;
-        ResultSet rs = null;
-        PreparedStatement ps;
-        String sql = "select fullName, phone, email, username, [password], gender, birthday, [Role].[role]\n"
-                + "from Account\n"
-                + "INNER JOIN [Role]\n"
-                + "on Account.roleId=[Role].id\n"
-                + "WHERE Account.id=?;";
-
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            accountDetail = new AccountDetail(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                    rs.getString(5), rs.getString(6), rs.getDate(7), rs.getString(8));
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return accountDetail;
-    }
+//
+//    public AccountDetail getAccount(int id) {
+//        AccountDetail accountDetail = null;
+//        ResultSet rs = null;
+//        PreparedStatement ps;
+//        String sql = "select fullName, phone, email, username, [password], gender, birthday, [Role].[role]\n"
+//                + "from Account\n"
+//                + "INNER JOIN [Role]\n"
+//                + "on Account.roleId=[Role].id\n"
+//                + "WHERE Account.id=?;";
+//
+//        try {
+//            ps = conn.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            rs = ps.executeQuery();
+//            accountDetail = new AccountDetail(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+//                    rs.getString(5), rs.getString(6), rs.getDate(7), rs.getString(8));
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return accountDetail;
+//    }
 
     public AccountDetail getAccountDetails(int id) {
         AccountDetail account = new AccountDetail();
