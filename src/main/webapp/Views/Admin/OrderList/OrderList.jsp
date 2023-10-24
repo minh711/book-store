@@ -60,7 +60,7 @@
                     </a>
                     <ul class="list-unstyled ps-0">
                         <li class="mb-1 rounded bg-primary">
-                            <a href="#" class="text-light nav-link">Lịch sử đơn hàng</a>
+                            <a href="OrderList" class="text-light nav-link">Danh sách đơn hàng</a>
                         </li>
                     </ul>
                 </div>
@@ -70,10 +70,10 @@
                     <h1 class="text-center mt-3">Lịch sử đơn hàng</h1>
                     <div class="row justify-content-center mb-3">
                         <div class="col-md-12">
-                            <table id="example" class="table table-bordered text-center mt-3">
-                                <thead class="table-danger">
+                            <table id="example" class="table table-bordered text-center mt-3 table-striped pt-2 ">
+                                <thead class="table-primary">
                                 <th>ID</th>
-                                <th>Họ và tên</th>
+                                <th>ID khách hàng</th>
                                 <th>Ngày đặt</th>
                                 <th>Tổng cộng</th>
                                 <th>Trạng thái</th>
@@ -83,13 +83,13 @@
                                 <tbody class="align-middle">
                                     <c:forEach items="${requestScope.orders}" var="order">
                                     <tr class="text-success">
-                                          <td>${order.getId()}</td>
-                                        <td>${order.fullName}</td>
+                                        <td>${order.getId()}</td>
+                                        <td>${order.getCustomerId()}</td>
                                         <td class="date">${order.getDate()}</td>
                                         <td class="totals">${order.getSaleTotal()}</td>
                                         <td class="status">${orderDAO.getOrderStatusName(order.getId())}</td>
                                         <td class="text-primary"> 
-                                            <a href="orderDetailCustomerCtrl?id=${order.getId()}">Chi tiết</a></td>
+                                            <a href="OrderStatusUpdate?id=${order.getId()}">Chi tiết</a></td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
@@ -149,7 +149,7 @@
                 });
             });
         </script>
-           <script>
+       <script>
     document.addEventListener("DOMContentLoaded", function () {
         var cancels = document.querySelectorAll(".status");
         cancels.forEach(function (subElement) {

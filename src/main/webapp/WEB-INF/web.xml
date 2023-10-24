@@ -68,6 +68,18 @@
         <servlet-name>orderListCustomerCtrl</servlet-name>
         <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderListCtrl</servlet-name>
+        <servlet-class>Controllers.OrderListCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderStatusUpdate</servlet-name>
+        <servlet-class>Controllers.OrderStatusUpdateCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderAddNewAddressCtrl</servlet-name>
+        <servlet-class>Controllers.OrderAddNewAddressCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -135,6 +147,18 @@
     <servlet-mapping>
         <servlet-name>orderListCustomerCtrl</servlet-name>
         <url-pattern>/orderListCustomerCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderListCtrl</servlet-name>
+        <url-pattern>/OrderList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderStatusUpdate</servlet-name>
+        <url-pattern>/OrderStatusUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderAddNewAddressCtrl</servlet-name>
+        <url-pattern>/Order/AddNewAddress</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

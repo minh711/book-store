@@ -1,11 +1,10 @@
 <%-- 
-    Document   : OrderDetail
-    Created on : Oct 11, 2023, 8:36:28 AM
-    Author     : hienHT
+    Document   : OrderList
+    Created on : Oct 21, 2023, 5:45:27 PM
+    Author     : PC
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,122 +17,25 @@
         <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <style>
-            .bankingDetails {
-                display: none;
-            }
-            .CodDetails {
-                display: block;
-            }
-
-        </style>
     </head>
 
     <body>
         <header class="d-flex justify-content-between" style="padding: 10px;">
-            <div class="d-flex align-items-center justify-content-between" style="width: 30%;">
-                <div class="d-flex">
-                    <img src="/image/logo.png" style="height: 40px;">
-                </div>
-                <div class="dropdown">
-                    <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-solid fa-bars fa-2x p-2"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li>
-                            <div class="d-flex" style="height: 300px;">
-                                <div class="p-4">
-                                    <div class="fs-4 text-nowrap">Danh mục sản phẩm</div>
-                                    <hr class="hr">
-                                    <div class="bg-light mb-3 rounded p-2">Nhà xuất bản</div>
-                                    <div class="mb-3 rounded p-2">Tác giả</div>
-                                    <div class="mb-3 rounded p-2">Thể loại</div>
-                                    <div>Ngôn ngữ</div>
-                                </div>
-                                <div class="d-flex p-3">
-                                    <div style="width: 280px;">
-                                        <div class="mb-3">Nguyễn Nhật Ánh</div>
-                                        <div class="mb-3">Xuân Diệu</div>
-                                        <div class="mb-3">Hồ Anh Thái</div>
-                                        <div class="mb-3">Nguyễn Trương Quý</div>
-                                        <div class="mb-3">Nguyễn Vĩnh Khuyên</div>
-                                        <div>Trang Hạ</div>
-                                    </div>
-                                    <div style="width: 300px;">
-                                        <div class="mb-3">Nguyễn Phong Việt</div>
-                                        <div class="mb-3">Nguyễn Ngọc Thạch</div>
-                                        <div class="mb-3">Hamlet Trương</div>
-                                        <div class="mb-3">Rosie Nguyễn</div>
-                                        <div class="mb-3">Anh Khang</div>
-                                        <div class="text-primary">Xem tất cả</div>
-                                    </div>
-                                </div>
-                            </div>
-                        <li>
-                    </ul>
-                </div>
+            <div class="d-flex align-items-center justify-content-between">
+                <img src="/image/logo.png" style="height: 40px;">
             </div>
 
-            <div class="input-group d-flex align-items-center" style="width: 40%;">
-                <input id="search-input" type="search" id="form1" class="form-control" placeholder="Tìm kiếm..." style="height: 40px;"/>
-                <button id="search-button" type="button" class="btn btn-primary" style="height: 40px;">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center" style="width: 30%;">
-                <div>
-                    <button class="btn btn-success mx-2"><i class="fa fa-shopping-cart mx-2"></i><br>Giỏ hàng</button>
-                </div>
-
+            <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <div class="dropdown">
-                        <a class="text-dark text-center nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-bell mx-2"></i><br>
-                            Thông báo <span class="text-danger">(3)</span>
-                        </a>
-                        <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
-                            <li style="width: 400px;" class="p-2">
-                                <div>
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <div><strong>Đánh giá sản phẩm</strong></div>
-                                        <div class="text-secondary">11:00 01/01/2023</div>
-                                    </div>
-                                    <div>Bạn có sản phẩm <strong>Book Title 1</strong> từ đơn hàng <strong>#123456</strong> chưa đánh giá</div>
-                                </div>
-                            </li>
-                            <hr>
-                            <li style="width: 400px;" class="p-2">
-                                <div>
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <div><strong>Đánh giá sản phẩm</strong></div>
-                                        <div class="text-secondary">11:00 01/01/2023</div>
-                                    </div>
-                                    <div>Bạn có sản phẩm <strong>Book Title 2</strong> từ đơn hàng <strong>#456789</strong> chưa đánh giá</div>
-                                </div>
-                            </li>
-                            <hr>
-                            <li style="width: 400px;" class="p-2">
-                                <div>
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <div><strong>Đã giao thành công</strong></div>
-                                        <div class="text-secondary">11:00 01/01/2023</div>
-                                    </div>
-                                    <div>Đơn hàng <strong>#456789</strong> đã được giao thành công</div>
-                                </div>
-                            </li>
-                            <hr>
-                            <li class="p-2">
-                                <div class="text-primary">Xem tất cả</div>
-                            </li>
-                        </ul>
-                    </div>
+                    <a class="text-dark text-center nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell mx-2"></i><br>
+                        Thông báo <span class="text-danger">(3)</span>
+                    </a>
                     <div class="dropdown">
                         <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Xin chào,<br>Nguyễn Văn A
+                            Xin chào,<br>Nguyễn Văn B
                         </a>
                         <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item p-2" href="#">Đơn hàng</a></li>
@@ -144,17 +46,35 @@
                 </div>
             </div>
         </header>
-        <c:set var="currentStatus" value="${requestScope.currentStatus}" />
-        <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
-        <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">
-        <!--        
-                        <input type="hidden" id="currentStatus" name="currentStatus" value="5">
-                        <input type="hidden" id="previousStatus" name="previousStatus" value="3">-->
-        <main class="d-flex">
 
+        <c:set var="currentStatus" value="${requestScope.currentStatus}" />
+<!--        <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
+        <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">-->
+
+           
+                        <input type="hidden" id="currentStatus" name="currentStatus" value="1">
+                        <input type="hidden" id="previousStatus" name="previousStatus" value="1">
+        <main class="d-flex">
+            <!-- Sidebar -->
+            <aside>
+                <div class="flex-shrink-0 p-3" style="width: 280px;">
+                    <a href="#"
+                       class="text-dark d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                        Bộ phận Quản lý Đơn hàng
+                    </a>
+                    <ul class="list-unstyled ps-0">
+                        <li class="mb-1">
+                            <a href="OrderList" class="text-dark nav-link">Danh sách đơn hàng</a>
+                        </li>
+                        <li class="mb-1 bg-primary rounded p-2">
+                            <a href="#" class="text-light nav-link">Thông tin đơn hàng</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
             <div class="container">
                 <h1 class="text-center mt-3 mb-3">Thông tin đơn hàng</h1>
-                <form id="form"  method="post" action="orderDetailCustomerCtrl" onsubmit="return validateForm()">
+                <form id="form"  method="post" action="OrderStatusUpdate" onsubmit="return validateForm()">
                     <input type="hidden" id="orderID" name="OrderID" value="${requestScope.OrderID}">
 
                     <div class="border">
@@ -182,12 +102,21 @@
                                     </li>
                                 </ul>
                                 <ul class="progressbar">
-                                    <li  style="width: 25%;"  class="" id="inProcessing">Đang xử lý</li>
-                                    <li  style="width: 25%;" class="" id="inPackaging">Đã tiếp nhận</li>
-                                    <li  style="width: 25%;" class="" id="inDelivery">Đang giao</li>
-                                    <li  style="width: 25%;" class="" id="complete">Đã giao thành công</li>
-                                    <li  style="width: 25%;" class="" id="finalStage">Đã hủy</li>
-
+                                    <li style="width: 25%;" class="" id="inProcessing">
+                                        <button class="btn btn-secondary" name="statusButton" value="1" id="btnProcessing">Xác nhận Đã xử lý</button>
+                                    </li>
+                                    <li style="width: 25%;" class="" id="inPackaging">
+                                        <button class="btn btn-secondary" name="statusButton" value="2" id="btnPackaging">Xác nhận đã tiếp nhận</button>
+                                    </li>
+                                    <li style="width: 25%;" class="" id="inDelivery">
+                                        <button class="btn btn-secondary" name="statusButton" value="3" id="btnDelivery">Xác nhận Đang giao</button>
+                                    </li>
+                                    <li style="width: 25%;" class="" id="complete">
+                                        <button class="btn btn-secondary" name="statusButton" value="4" id="btnComplete">Xác nhận Đã giao thành công</button>
+                                    </li>
+                                    <li style="width: 25%;" class="" id="finalStage">
+                                        <button class="btn btn-danger" disabled>Đã hủy</button>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -258,12 +187,7 @@
                                                 <div>Số tiền</div>
                                                 <h3 class="text-danger"><strong class="total">${order.getSaleTotal()}</strong></h3>
                                                 <label class="mb-2">Ảnh chụp màn hình chuyển khoản</label><br>
-                                                <div class="card-body">
-                                                   
-                                                        <img id="paymentImage" src="/Images${order.bankingImage}" style="width: 100px; height: 100px; object-fit: contain">
-                                                  
-                                                </div>
-
+                                                <img src="/Images${order.bankingImage}" style="width: 100px; height: 100px; object-fit: contain">
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +235,7 @@
                 </div>
             </div>
         </footer>
-        <script src="${pageContext.request.contextPath}/Views/Customer/OrderDetail/scripts.js"></script>                    
+        <script src="${pageContext.request.contextPath}/Views/Admin/OrderList/scripts.js"></script>                                     
     </body>
 
 </html
