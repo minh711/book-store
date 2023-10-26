@@ -67,7 +67,74 @@
             </aside>
             <div class="container">
                 <div class="container">
-                    <h1 class="text-center mt-3">Lịch sử đơn hàng</h1>
+
+                    <h1 class="text-center mt-3">Danh sách đơn hàng</h1>
+                    <div class="row pb-3">
+                        <div class="col-md-3 pt-2 pb-2 ">
+                            <div class=" card border text-light rounded" style=" background: #48bbde;">
+                                <div class="card-body d-flex justify-content-between">
+                                    <div>
+                                        <li style="width: 75%;" class="fs-1 text-secondary list-unstyled text-center inProcessing"  >
+                                            <i class="fa fa-scroll text-light" style="font-size: 1.8em;"></i>
+                                        </li>
+                                    </div>
+                                    <div>
+                                        <h2><strong id="countOrder">0</strong></h2>
+                                        <h6>Đơn Hàng</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 pt-2 pb-2 ">
+                            <div class=" card border text-light" style=" background: #33B440 ;">
+                                <div class="card-body d-flex justify-content-between">
+                                    <div>
+                                        <li style="width: 5%;" class="fs-1 text-secondary list-unstyled text-center inProcessing"  >
+                                            <i class="fas fa-handshake text-light" style="font-size: 1.8em;"></i>
+                                        </li>
+                                    </div>
+                                    <div>
+                                        <h2><strong id="countSuccess">0</strong></h2>
+                                        <h6>Thành Công</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 pt-2 pb-2 ">
+                            <div class=" card border text-light" style=" background: #f3b61f ;">
+                                <div class="card-body d-flex justify-content-between">
+                                    <div>
+                                        <li style="width: 5%;" class="fs-1 text-secondary list-unstyled text-center inProcessing"  >
+                                            <i class="far fa-clock text-light" style="font-size: 1.8em;"></i>
+                                        </li>
+                                    </div>
+                                    <div>
+                                        <h2><strong id="countProcessing">0</strong></h2>
+                                        <h6>Đang Thực Hiện</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 pt-2 pb-2 ">
+                            <div class=" card border text-light" style=" background: #d44a43 ;">
+                                <div class="card-body d-flex justify-content-between">
+                                    <div>
+                                        <li style="width: 5%;" class="fs-1 text-secondary list-unstyled text-center inProcessing"  >
+                                            <i class="far fa-times-circle text-light" style="font-size: 1.8em;"></i>
+                                        </li>
+                                    </div>
+                                    <div>
+                                        <h2><strong id="countCancel">0</strong></h2>
+                                        <h6>Đã Hủy</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                     <div class="row justify-content-center mb-3">
                         <div class="col-md-12">
                             <table id="example" class="table table-bordered text-center mt-3 table-striped pt-2 ">
@@ -79,18 +146,18 @@
                                 <th>Trạng thái</th>
                                 <th></th>
                                 </thead>
-                                 <c:set var="orderDAO" value="${requestScope.orderDAO}" />
+                                <c:set var="orderDAO" value="${requestScope.orderDAO}" />
                                 <tbody class="align-middle">
                                     <c:forEach items="${requestScope.orders}" var="order">
-                                    <tr class="text-success">
-                                        <td>${order.getId()}</td>
-                                        <td>${order.getCustomerId()}</td>
-                                        <td class="date">${order.getDate()}</td>
-                                        <td class="totals">${order.getSaleTotal()}</td>
-                                        <td class="status">${orderDAO.getOrderStatusName(order.getId())}</td>
-                                        <td class="text-primary"> 
-                                            <a href="OrderStatusUpdate?id=${order.getId()}">Chi tiết</a></td>
-                                    </tr>
+                                        <tr class="text-success">
+                                            <td>${order.getId()}</td>
+                                            <td>${order.getCustomerId()}</td>
+                                            <td class="date">${order.getDate()}</td>
+                                            <td class="totals">${order.getSaleTotal()}</td>
+                                            <td class="status">${orderDAO.getOrderStatusName(order.getId())}</td>
+                                            <td class="text-primary"> 
+                                                <a href="OrderStatusUpdate?id=${order.getId()}">Chi tiết</a></td>
+                                        </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
@@ -149,37 +216,54 @@
                 });
             });
         </script>
-       <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var cancels = document.querySelectorAll(".status");
-        cancels.forEach(function (subElement) {
-            var statusText = subElement.textContent.trim(); // Trim any leading/trailing spaces
-            if (statusText === 'Đã hủy') {
-                subElement.classList.add("text-danger"); // Use 'classList' instead of 'ClassList'
-            }
-            if (statusText === 'Thành công') {
-                subElement.classList.add("text-success"); // Use 'classList' instead of 'ClassList'
-            }
-        });
-        
-        var totals = document.querySelectorAll('.totals');
-         totals.forEach(function (priceElement) {
-                var price = parseFloat(priceElement.textContent);
-                if (!isNaN(price)) {
-                    var formattedPrice = price.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
-                    var currencySymbol = '₫';
-                    priceElement.textContent = formattedPrice.replace(currencySymbol, '') + 'đ';
-                }
-            });
-       var dates = document.querySelectorAll('.date');
-dates.forEach(function (dateElement) {
-    var dateText = dateElement.textContent;
-    var formattedDate = dateText.replace(/\.\d+/g, ''); // Remove the dot and numbers after it
-    dateElement.textContent = formattedDate;
-});
+        <script>
 
-    });
-</script>
+            var OrderValue = 0;
+            var SuccessValue = 0;
+            var ProcessValue = 0;
+            var CancelValue = 0;
+            document.addEventListener("DOMContentLoaded", function () {
+                var cancels = document.querySelectorAll(".status");
+                cancels.forEach(function (subElement) {
+                    OrderValue++;
+                    var statusText = subElement.textContent.trim(); // Trim any leading/trailing spaces
+                    if (statusText === 'Đã hủy') {
+                        CancelValue++;
+                        subElement.classList.add("text-danger"); // Use 'classList' instead of 'ClassList'
+                    } else if (statusText === 'Thành công') {
+                        SuccessValue++;
+                        subElement.classList.add("text-success"); // Use 'classList' instead of 'ClassList'
+                    } else {
+                        ProcessValue++;
+                    }
+
+
+                });
+                document.getElementById("countOrder").textContent = OrderValue.toString();
+                document.getElementById("countSuccess").textContent = SuccessValue.toString();
+                document.getElementById("countProcessing").textContent = ProcessValue.toString();
+                document.getElementById("countCancel").textContent = CancelValue.toString();
+
+                var totals = document.querySelectorAll('.totals');
+                totals.forEach(function (priceElement) {
+                    var price = parseFloat(priceElement.textContent);
+                    if (!isNaN(price)) {
+                        var formattedPrice = price.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
+                        var currencySymbol = '₫';
+                        priceElement.textContent = formattedPrice.replace(currencySymbol, '') + 'đ';
+                    }
+                });
+                var dates = document.querySelectorAll('.date');
+                dates.forEach(function (dateElement) {
+                    var dateText = dateElement.textContent;
+                    var formattedDate = dateText.replace(/\.\d+/g, ''); // Remove the dot and numbers after it
+                    dateElement.textContent = formattedDate;
+                });
+
+            });
+
+
+        </script>
     </body>
 
 </html>

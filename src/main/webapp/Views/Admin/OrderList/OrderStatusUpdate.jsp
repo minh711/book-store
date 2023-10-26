@@ -20,40 +20,14 @@
     </head>
 
     <body>
-        <header class="d-flex justify-content-between" style="padding: 10px;">
-            <div class="d-flex align-items-center justify-content-between">
-                <img src="/image/logo.png" style="height: 40px;">
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <a class="text-dark text-center nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-bell mx-2"></i><br>
-                        Thông báo <span class="text-danger">(3)</span>
-                    </a>
-                    <div class="dropdown">
-                        <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Xin chào,<br>Nguyễn Văn B
-                        </a>
-                        <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item p-2" href="#">Đơn hàng</a></li>
-                            <li><a class="dropdown-item p-2" href="#">Thông tin tài khoản</a></li>
-                            <li><a class="dropdown-item p-2" href="#">Đăng xuất <i class="fa fa-sign-out"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
 
         <c:set var="currentStatus" value="${requestScope.currentStatus}" />
-<!--        <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
-        <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">-->
+        <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
+        <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">
 
            
-                        <input type="hidden" id="currentStatus" name="currentStatus" value="1">
-                        <input type="hidden" id="previousStatus" name="previousStatus" value="1">
+<!--                        <input type="hidden" id="currentStatus" name="currentStatus" value="1">
+                        <input type="hidden" id="previousStatus" name="previousStatus" value="1">-->
         <main class="d-flex">
             <!-- Sidebar -->
             <aside>
@@ -210,31 +184,6 @@
             </div>
         </main>
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 p-4">
-                        <img src="/image/logo.png" alt="" style="height: 40px;">
-                        <div>
-                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-4">
-                        <div class="d-flex">
-                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
-                            <div>
-                                business@oceanbook.com
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 d-flex justify-content-between p-4">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-facebook-messenger"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
         <script src="${pageContext.request.contextPath}/Views/Admin/OrderList/scripts.js"></script>                                     
     </body>
 
