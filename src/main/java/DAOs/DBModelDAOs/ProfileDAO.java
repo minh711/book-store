@@ -60,11 +60,4 @@ public class ProfileDAO {
 
         return ketqua;
     }
-    
-//    public static void main(String[] args) {
-//        ProfileDAO a=new ProfileDAO();
-//        
-//        int b=a.UpdateCustomer(new Account(52, "Duyen nè", "", "", "", '03-03-2003', "", "", null, true, 4));
-//        System.out.println(b);
-//    }
 }

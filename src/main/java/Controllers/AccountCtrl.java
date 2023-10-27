@@ -1,7 +1,6 @@
 package Controllers;
 
 import DAOs.MgrModelDAOs.AccountDAO;
-import static Utilities.StringMethods.MD5Hash;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

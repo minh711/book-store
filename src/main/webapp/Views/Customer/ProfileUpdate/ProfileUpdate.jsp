@@ -200,7 +200,7 @@
 
 
                                         $.ajax({
-                                            url: '/Address', // Đường dẫn đến Servlet Java xử lý xóa địa chỉ
+                                            url: '/Address', 
                                             type: 'post',
                                             data: {
                                                 customerId: customerId,
