@@ -15,10 +15,9 @@ import Models.DBModels.Order;
 import Models.DBModels.OrderDetail;
 import Models.MgrModels.OrderItem;
 import Models.DBModels.OrderStatusDetail;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -31,9 +30,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
 import java.sql.Timestamp;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Part;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+        
 
 /**
  * a servlet to handle order creation
@@ -42,7 +49,6 @@ import java.util.stream.Collectors;
  */
 @WebServlet("/CreateOrderCtrl")
 @MultipartConfig
-
 public class CreateOrderCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,6 +64,30 @@ public class CreateOrderCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        OrderItem item1 = new OrderItem(4, "あの花見", 40520, 38990, 21, "hehe.png");
+        OrderItem item2 = new OrderItem(5, "ドラえもん ", 33000, 24000, 2, "hehe.png");
+        int customerID = 3;
+        AddressDAO addressDao = new AddressDAO();
+        ArrayList<OrderItem> listItem = new ArrayList<>();
+        listItem.add(item1);
+        listItem.add(item2);
+
+        try {
+            if (listItem.isEmpty() == false) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonList = objectMapper.writeValueAsString(listItem);              
+                System.out.println(jsonList);
+                request.setAttribute("jsonList", jsonList.replace("\"", "'"));
+                request.setAttribute("OrderItems", listItem);
+                request.setAttribute("addresses", addressDao.getAll(customerID));
+                request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     /**
@@ -71,50 +101,61 @@ public class CreateOrderCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        
         OrderDAO orderDAO = new OrderDAO();
         Order order;
         OrderDetailDao orderDetailDAO = new OrderDetailDao();
 
         AddressDAO addressDAO = new AddressDAO();
         Address address;
+
+        
+        
         //Assume customerID and item list retrieve from session 
-        OrderItem item1 = new OrderItem(4, "あの花見", 40520, 38990, 21, "hehe.png");
-        OrderItem item2 = new OrderItem(5, "ドラえもん ", 33000, 24000, 2, "hehe.png");
         int customerID = 3;
         // Retrieve data from the form
         long currentTimeMillis = System.currentTimeMillis();
-
         // get data from JSP to create Order object
         Timestamp timestamp = new Timestamp(currentTimeMillis);
         Collection<Part> parts = request.getParts();
         String selectedAddress = "";
         String total = "";
         String saleTotal = "";
-        String note = "";
+        String note = request.getParameter("note");
         String paymentMethod = "";
+        
+        String jsonList = "";
         for (Part part : parts) {
             String fieldName = part.getName();
             if (fieldName != null) {
                 if (fieldName.equals("selectedAddress")) {
                     selectedAddress = getPartValue(part);
-
                 } else if (fieldName.equals("total1Value")) {
                     saleTotal = getPartValue(part);
                 } else if (fieldName.equals("totalSaleValue")) {
                     total = getPartValue(part);
-                } else if (fieldName.equals("note")) {
-                    note = getPartValue(part);
                 } else if (fieldName.equals("payment-method")) {
                     paymentMethod = getPartValue(part);
+                }  
+                else if (fieldName.equals("data")){
+                    jsonList = getPartValue(part).replace("'", "\"");
                 }
 
                 // Handle other form fields here
             }
         }
+                 ObjectMapper objectMapper = new ObjectMapper();
+        List<OrderItem> orderItems = objectMapper.readValue(jsonList, new TypeReference<List<OrderItem>>() {
+        });
+        System.out.println("dy nef choi oiwP: "+ orderItems.size());
+       
+         
         String[] pics = Utilities.FileMethods.UploadPictures(request, "paymentImage", "");
-         String picPath ="";
-        if(pics.length>0){
-           picPath = pics[0];
+        String picPath = "";
+        if (pics.length > 0) {
+            picPath = pics[0];
         }
         int saleTotalValue = Integer.parseInt(saleTotal);
         int totalValue = Integer.parseInt(total);
@@ -123,20 +164,20 @@ public class CreateOrderCtrl extends HttpServlet {
         // retrieve more infor from address oject then call AddNew to create Order
         address = addressDAO.getAddressByID(customerID, Integer.parseInt(selectedAddress));
         order = new Order(customerID, saleTotalValue, totalValue, address.getFullName(), address.getPhone(),
-                address.getAddress(), paymentMethod.equals("true"),picPath , note, timestamp, customerID);
+                address.getAddress(), paymentMethod.equals("true"), picPath, note, timestamp, customerID);
         orderDAO.AddNew(order);
         ///
 
         /// get OrderID to insert OrderDetail //
         int LatestID = orderDAO.getLatestOrderID(customerID);
-        ArrayList<OrderItem> orderItems = new ArrayList<>();
+
+       
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
-        orderItems.add(item1);
-        orderItems.add(item2);
         for (OrderItem orderItem : orderItems) {
             orderDetails.add(new OrderDetail(LatestID, orderItem.getBookID(),
                     orderItem.getQuantity(), orderItem.getSalePrice(), orderItem.getPrice()));
         }
+        
         for (OrderDetail orderDetail1 : orderDetails) {
             orderDetailDAO.AddOrderDetails(orderDetail1);
         }
@@ -153,13 +194,13 @@ public class CreateOrderCtrl extends HttpServlet {
 //        }
         PrintWriter out = response.getWriter();
         out.println("Address Select: " + selectedAddress);
+        out.println("Address Select: " + selectedAddress);
         out.println("Payment Method: " + paymentMethod);
         out.println("Total: " + total);
         out.println("Sale total: " + saleTotal);
         out.println("note: " + request.getParameter("note"));
         out.println("Address: " + address.getAddress());
         out.println("hinh:" + picPath);
-//        out.println("object ne:" + order.getSaleTotal() + " " + order.getTotal() + " " + order.getFullName() + " " + order.getDate() + order.isIsBanking());
 
     }
 
@@ -178,4 +219,12 @@ public class CreateOrderCtrl extends HttpServlet {
                 .lines()
                 .collect(Collectors.joining("\n"));
     }
+    
 }
+
+ 
+
+
+    
+ 
+
