@@ -48,10 +48,14 @@
                                         <td>${account.username}</td>
                                         <td>${account.fullName}</td>
                                         <td class="text-success">${account.roleName}</td>
-                                        <td class="text-primary">${account.isAvailString}</td>
+                                        <c:set var="TextColor" value="text-success"></c:set>
+                                        <c:if test="${account.isAvailString == 'Đã xóa'}">
+                                            <c:set var="TextColor" value="text-danger"></c:set>
+                                        </c:if>
+                                        <td class="${TextColor}">${account.isAvailString}</td>
 
-                                        <td class="text-primary"><a href="/Account/Detail?id=${account.id}">Chi tiết</a></td>
-                                    </tr>
+                                        <td> <a style="text-decoration: none;" href="/Account/Detail?id=${account.id}">Chi tiết</a></td>
+                                    </tr>s
                                 </c:forEach>
                             </tbody>
                         </table>

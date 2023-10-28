@@ -1,80 +1,4 @@
-<%-- 
-    Document   : createAccount
-    Created on : Oct 7, 2023, 10:49:13 PM
-    Author     : DuyenLTM
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <title>Blank Page</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
-    </head>
-
-    <body>
-        <jsp:include page="/Views/header.jsp"/>
-
-        <main class="bg-light d-flex">
-            <jsp:include page="/Views/aside.jsp"/>
-
-            <div class="container d-flex justify-content-center align-items-center" style="">
-                <div class="col-md-12">
-                    <div class="bg-white rounded p-4" >
-                        <form action="/Account" method="POST">
-                            <h1 class="text-center mb-3">Tạo tài khoản</h1>
-                            <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName">
-                            <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone">
-                            <input type="email" class="form-control mb-3" placeholder="Địa chỉ Email" name="email">
-                            <input type="text" class="form-control mb-3" placeholder="Tên đăng nhập" name="username">
-                            <input type="password" class="form-control mb-3" placeholder="Mật khẩu" name="password">
-                            <input type="password" class="form-control mb-3" placeholder="Nhập lại mật khẩu" name="resetPWD">
-                            <label class="mb-2">Giới tính</label>
-                            <div class="d-flex mb-3">
-                                <div class="form-check mx-2">
-                                    <input type="radio" class="form-check-input" value="Nam" name="gender">
-                                    <label class="form-check-label">Nam</label>
-                                </div>
-                                <div class="form-check mx-2">
-                                    <input type="radio" class="form-check-input"  value="Nữ" name="gender">
-                                    <label class="form-check-label">Nữ</label>
-                                </div>
-                                <div class="form-check mx-2">
-                                    <input type="radio" class="form-check-input"  value="Khác" name="gender">
-                                    <label class="form-check-label">Khác</label>
-                                </div>                  
-                            </div>
-                            <label class="mb-2">Ngày sinh</label>
-                            <input type="date" class="form-control mb-3" name="birthday">
-                            <select class="form-select" name="roleId">
-                                <option value="0">Chọn Chức vụ</option>
-                                <option value="2">Quản lý sách</option>
-                                <option value="3">Quản lý Đơn hàng</option>
-                            </select>
-                            <hr>
-                            <button class="btn btn-success w-100" name="btnAddNew" type="submit" value="Submit" onclick="return validateForm()">Tạo tài khoản</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <jsp:include page="/Views/footer.jsp"/>
-
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script>
-                                new DataTable('#example');
-        </script>
-        <script>
-            // Lấy ra các trường input
-            const fullNameInput = document.querySelector('input[name="fullName"]');
+const fullNameInput = document.querySelector('input[name="fullName"]');
             const phoneInput = document.querySelector('input[name="phone"]');
             const emailInput = document.querySelector('input[name="email"]');
             const usernameInput = document.querySelector('input[name="username"]');
@@ -82,7 +6,6 @@
             const resetPasswordInput = document.querySelector('input[name="resetPWD"]');
             const genderInputs = document.querySelectorAll('input[name="gender"]');
             const birthdayInput = document.querySelector('input[name="birthday"]');
-            const roleIdSelect = document.querySelector('select[name="roleId"]');
 
             // Hàm kiểm tra xem một trường input có rỗng hay không
             function isEmpty(input) {
@@ -153,10 +76,20 @@
             function validateForm(event) {
                 event.preventDefault(); // Ngăn chặn form gửi đi trước khi kiểm tra
 
-                // Kiểm tra từng trường input
+               
+//                // Kiểm tra từng trường input
                 if (isEmpty(fullNameInput) || isEmpty(phoneInput) || isEmpty(emailInput) || isEmpty(usernameInput) ||
-                        isEmpty(passwordInput) || isEmpty(resetPasswordInput) || genderInputs.length === 0 || !birthdayInput.value || roleIdSelect.value === 'Chọn Chức vụ') {
-                    alert('Vui lòng điền đầy đủ thông tin và chọn chức vụ.');
+                        genderInputs.length === 0 || !birthdayInput.value ) {
+                    alert('Vui lòng điền đầy đủ thông tin.');
+                    return;
+                }
+//                //kiểm tra mật khẩu và mật khẩu xác nhận (nếu có) 
+                if(!isEmpty(passwordInput)&&isEmpty(resetPasswordInput)){
+                    alert('Vui lòng nhập lại mật khẩu để xác nhận.');
+                    return;
+                }
+                if(isEmpty(passwordInput)&&!isEmpty(resetPasswordInput)){
+                    alert('Vui lòng nhập mật khẩu mới trước khi nhập lại mật khẩu xác nhận.');
                     return;
                 }
 
@@ -185,26 +118,24 @@
                 }
 
                 // Kiểm tra xem mật khẩu hợp lệ
+                if(!isEmpty(passwordInput)){
                 if (!isValidPassword(passwordInput.value)) {
                     alert('Mật khẩu phải có 8-50 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.');
                     return;
                 }
-
+            }
+                if(!isEmpty(passwordInput)&&!isEmpty(resetPasswordInput)){
                 // Kiểm tra xem mật khẩu nhập lại hợp lệ
                 if (passwordInput.value !== resetPasswordInput.value) {
                     alert('Mật khẩu và Nhập lại mật khẩu không khớp nhau.');
                     return;
                 }
+            }
                 // Sử dụng phương thức submit() để gửi form đến controller
                 form.submit();
-                alert('Thêm tài khoản thành công');
+                alert('Cập nhật tài khoản thành công');
             }
 
             // Gắn sự kiện validateForm vào sự kiện submit của form
             const form = document.querySelector('form');
             form.addEventListener('submit', validateForm);
-        </script>
-
-    </body>
-
-</html>

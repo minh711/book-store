@@ -57,7 +57,11 @@ public class BookDAO extends DbConnection {
                         rs.getInt(9),
                         rs.getBoolean(10),
                         rs.getInt(11),
-                        rs.getInt(12)
+                        rs.getInt(12),
+                        rs.getInt(13),
+                         rs.getInt(14),
+                         rs.getInt(15)
+                       
                 ));
             }
         } catch (SQLException ex) {

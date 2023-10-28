@@ -68,6 +68,22 @@
         <servlet-name>orderListCustomerCtrl</servlet-name>
         <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountDelete</servlet-name>
+        <servlet-class>Controllers.AccountDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileUpdate</servlet-name>
+        <servlet-class>Controllers.ProfileUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddressCtrl</servlet-name>
+        <servlet-class>Controllers.AddressCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookSearch</servlet-name>
+        <servlet-class>Controllers.BookSearch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -135,6 +151,22 @@
     <servlet-mapping>
         <servlet-name>orderListCustomerCtrl</servlet-name>
         <url-pattern>/orderListCustomerCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountDelete</servlet-name>
+        <url-pattern>/Account/Delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileUpdate</servlet-name>
+        <url-pattern>/Profile/Update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddressCtrl</servlet-name>
+        <url-pattern>/Address</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookSearch</servlet-name>
+        <url-pattern>/BookSearch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -38,7 +38,7 @@
                             <label class="mb-2 text-primary text-opacity-50">Tên đăng nhập</label>
                             <input type="text" class="form-control mb-3"  value="${accountDetail.username}" name="username">
                             <label class="mb-2 text-primary text-opacity-50" >Mật khẩu</label>
-                            <input type="password" class="form-control mb-3" value="${accountDetail.password}" name="password">
+                            <input type="password" class="form-control mb-3" value="" name="password">
                             <label class="mb-2 text-primary text-opacity-50" >Nhập lại mật khẩu</label>
                             <input type="password" class="form-control mb-3" name="resetPWD">
                             <label class="mb-2 text-primary text-opacity-50">Giới tính</label>
@@ -61,12 +61,13 @@
                             <label class="mb-2 text-primary text-opacity-50" >Chức vụ</label>
                             <select class="form-select" name="roleId">
                                 <option value="2" ${accountDetail.roleName=='Quản lí Sách'? 'selected' :''}>Quản lý sách</option>
-                                <option value="3" ${accountDetail.roleName=='Quản lí Đơn'? 'selected' :''}>Quản lý Đơn hàng</option>
+                                <option value="3" ${accountDetail.roleName=='Quản lí Đơn'? 'selected' :''}>Quản lý đơn</option>
                             </select>
 
-                            <button class="btn btn-danger w-100 mt-3">Xóa tài khoản</button>
+                            
                             <hr>
                             <button class="btn btn-success w-100" name="btnUpdate" type="submit" value="Submit" onclick="return validateForm()">Cập nhật tài khoản</button>
+                            
                         </form>
                     </div>
                 </div>
@@ -82,7 +83,6 @@
                                 new DataTable('#example');
         </script>
         <script>
-            // Lấy ra các trường input
             const fullNameInput = document.querySelector('input[name="fullName"]');
             const phoneInput = document.querySelector('input[name="phone"]');
             const emailInput = document.querySelector('input[name="email"]');
@@ -162,10 +162,20 @@
             function validateForm(event) {
                 event.preventDefault(); // Ngăn chặn form gửi đi trước khi kiểm tra
 
-                // Kiểm tra từng trường input
+               
+//                // Kiểm tra từng trường input
                 if (isEmpty(fullNameInput) || isEmpty(phoneInput) || isEmpty(emailInput) || isEmpty(usernameInput) ||
-                        isEmpty(passwordInput) || isEmpty(resetPasswordInput) || genderInputs.length === 0 || !birthdayInput.value || roleIdSelect.value === 'Chọn Chức vụ') {
+                        genderInputs.length === 0 || !birthdayInput.value || roleIdSelect.value === 'Chọn Chức vụ') {
                     alert('Vui lòng điền đầy đủ thông tin và chọn chức vụ.');
+                    return;
+                }
+//                //kiểm tra mật khẩu và mật khẩu xác nhận (nếu có) 
+                if(!isEmpty(passwordInput)&&isEmpty(resetPasswordInput)){
+                    alert('Vui lòng nhập lại mật khẩu để xác nhận.');
+                    return;
+                }
+                if(isEmpty(passwordInput)&&!isEmpty(resetPasswordInput)){
+                    alert('Vui lòng nhập mật khẩu mới trước khi nhập lại mật khẩu xác nhận.');
                     return;
                 }
 
@@ -194,33 +204,28 @@
                 }
 
                 // Kiểm tra xem mật khẩu hợp lệ
+                if(!isEmpty(passwordInput)){
                 if (!isValidPassword(passwordInput.value)) {
                     alert('Mật khẩu phải có 8-50 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.');
                     return;
                 }
-
+            }
+                if(!isEmpty(passwordInput)&&!isEmpty(resetPasswordInput)){
                 // Kiểm tra xem mật khẩu nhập lại hợp lệ
                 if (passwordInput.value !== resetPasswordInput.value) {
                     alert('Mật khẩu và Nhập lại mật khẩu không khớp nhau.');
                     return;
                 }
-
-//                // Kiểm tra xem Email có duy nhất hay không
-//                if (!isEmailUnique(emailInput.value)) {
-//                    alert('Email đã tồn tại, vui lòng chọn một địa chỉ email khác.');
-//                    return;
-//                }
+            }
                 // Sử dụng phương thức submit() để gửi form đến controller
                 form.submit();
-                alert('Cập nhật tài khoản thành công!');
-
+                alert('Cập nhật tài khoản thành công');
             }
-
-
 
             // Gắn sự kiện validateForm vào sự kiện submit của form
             const form = document.querySelector('form');
             form.addEventListener('submit', validateForm);
+        </script>
         </script>
 
     </body>
