@@ -4,6 +4,7 @@
     Author     : PC
 --%>
 
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,6 +31,8 @@
         <jsp:include page="/Views/header.jsp"/>
         <div id="customAlertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050"></div>
 
+        <div id="customAlertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050"></div>
+
 
         <main class="bg-light">
             <div class="container">
@@ -48,13 +51,13 @@
                             </tr>
                         </thead>
                         <tbody class="align-middle">
-                            <c:forEach items="${requestScope.OrderItems}" var="item">
+                            <c:forEach items="${requestScope.orderList}" var="item">
                                 <tr>
 
                                     <td>
                                         <div class="d-flex p-2">
                                             <img
-                                                src="${item.getThumbnail()}"
+                                                src="${pageContext.request.contextPath}/Images/${item.getThumbnail()}"
 
                                                 class="rounded" alt="..." style="width: 100px; height: 100px; object-fit: contain;">
                                             <input type="hidden" name="thumbnailPath" value="${item.getThumbnail()}">
@@ -79,20 +82,24 @@
                                     <div class="card-body">
                                         <label class="mb-2">Địa chỉ đã lưu</label>
                                         <select class="form-select" id="addressSelect" name="selectedAddress">     
+                                        <select class="form-select" id="addressSelect" name="selectedAddress">     
                                             <c:forEach  items="${requestScope.addresses}" var="place">
                                                 <option value="${place.getId()}">${place.getFullName()}, ${place.getPhone()}, ${place.getAddress()} </option>
                                             </c:forEach>
 
                                         </select>
                                         <div class="mt-2 text-primary newAddress " role="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Thêm địa chỉ mới</div>
+                                        <div class="mt-2 text-primary newAddress " role="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Thêm địa chỉ mới</div>
                                     </div>
                                 </div>
+
 
                                 <div class="mt-3">
                                     <textarea class="form-control" style="resize: none;" placeholder="Ghi chú" rows="3" name="note" id="noteTextarea"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-5">
+                                <label class="mb-2"><h4>Phương thức thanh toán</h4></label>
                                 <label class="mb-2"><h4>Phương thức thanh toán</h4></label>
                                 <div class="d-flex">
                                     <div class="form-check">
@@ -108,6 +115,7 @@
                                 <div class="CodDetails">                                
                                     <div class="card mt-3">
                                         <div class="card-body">
+                                            <h5 class="card-title">Thông tin thanh toán</h5>
                                             <h5 class="card-title">Thông tin thanh toán</h5>
                                             <div>Đến ngày nhận hàng vui lòng chuẩn bị</div>
                                             <div>Số tiền</div>
@@ -126,6 +134,7 @@
                                             <div>Số tiền</div>
                                             <h3 class="text-danger"><strong id="total2"></strong></h3>
                                             <label class="mb-2">Ảnh chụp màn hình chuyển khoảng</label>
+                                            <input type="file" id="imageFile" name="paymentImage" class="form-control" accept="image/*">
                                             <input type="file" id="imageFile" name="paymentImage" class="form-control" accept="image/*">
 
                                         </div>
@@ -172,12 +181,48 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Thêm địa chỉ mới</h5>
+
+                            </div>
+                            <div class="modal-body ">
+                                <div class="container">
+                                    <div class="row mt-3">
+                                        <div class="col-6 ">
+                                            <input type="text" class="form-control"id="fullName" placeholder="Họ và tên">
+                                            <small class="text-danger d-none" id="errorName">Không được để trống</small>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control"id="phoneNumber" placeholder="Số điện thoại">
+                                              <small class="text-danger d-none" id="errorPhone">10 chữ số, bắt đầu bằng 0</small>
+                                        </div>
+                                    </div>
+                                    <div>
+                                         <input type="text" class="mt-3 form-control" id="homeAddress" placeholder="Số nhà, tên đường">
+                                         <small class="text-danger d-none" id="errorHome">Không được để trống</small>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="SaveButton">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
 
         <jsp:include page="/Views/footer.jsp"/>
 
+
         <script>
+//            var isAddAddressVisible = false;
 //            var isAddAddressVisible = false;
             document.addEventListener("DOMContentLoaded", function () {
                 var paymentRadios = document.querySelectorAll(".payment-radio");
@@ -186,16 +231,22 @@
 
                 var total1ValueInput = document.getElementById("total1Value");
                 var totalSaleValue = document.getElementById("totalSaleValue");
+                var totalSaleValue = document.getElementById("totalSaleValue");
                 var total = calculateTotal();
                 total1ValueInput.value = total;
                 totalSaleValue.value = calculateSaleTotal();
                 var imageFile = document.getElementById("imageFile");
                 console.log(total1ValueInput);
+                var imageFile = document.getElementById("imageFile");
+                console.log(total1ValueInput);
                 // Format as currency
+                 var currencySymbol = '₫';
                  var currencySymbol = '₫';
                 var total1Element = document.getElementById("total1");
                 total1Element.textContent = total.toLocaleString('en-US', {style: 'currency', currency: 'VND'}).replace(currencySymbol, '') + 'đ';
+                total1Element.textContent = total.toLocaleString('en-US', {style: 'currency', currency: 'VND'}).replace(currencySymbol, '') + 'đ';
                 var total2Element = document.getElementById("total2");
+                total2Element.textContent = total.toLocaleString('en-US', {style: 'currency', currency: 'VND'}).replace(currencySymbol, '') + 'đ';
                 total2Element.textContent = total.toLocaleString('en-US', {style: 'currency', currency: 'VND'}).replace(currencySymbol, '') + 'đ';
                 for (var i = 0; i < paymentRadios.length; i++) {
                     paymentRadios[i].addEventListener("change", function () {
@@ -205,6 +256,7 @@
                         } else {
                             bankingDetails.style.display = "none";
                             CodDetails.style.display = "block";
+                            imageFile.value = "";
                             imageFile.value = "";
                         }
 
@@ -248,14 +300,21 @@
                     var formattedPrice = price.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
                     var currencySymbol = '₫';
                     priceElement.textContent = formattedPrice.replace(currencySymbol, '') + 'đ';
+                    var formattedPrice = price.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
+                    var currencySymbol = '₫';
+                    priceElement.textContent = formattedPrice.replace(currencySymbol, '') + 'đ';
                 }
             });
+
 
 
 
             subtotalElements.forEach(function (subtotalElement) {
                 var subtotal = parseFloat(subtotalElement.textContent);
                 if (!isNaN(subtotal)) {
+                    var formattedSubtotal = subtotal.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
+                    var currencySymbol = '₫';
+                    subtotalElement.textContent = formattedSubtotal.replace(currencySymbol, '') + 'đ';
                     var formattedSubtotal = subtotal.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
                     var currencySymbol = '₫';
                     subtotalElement.textContent = formattedSubtotal.replace(currencySymbol, '') + 'đ';
@@ -273,11 +332,13 @@
 
             const form = document.getElementById('myForm');
 
+
             const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
             form.addEventListener('submit', function (e) {
 
                 let valid = true;
                 var selectedPayment = document.querySelector('input[name="payment-method"]:checked');
+
 
                 // Check if a payment method is selected
                 let paymentMethodSelected = false;
@@ -338,6 +399,124 @@
             }
 
 
+        </script>
+        <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>  
+        <script>
+            const fullNameInput = document.getElementById('fullName');
+            const phoneNumberInput = document.getElementById('phoneNumber');
+            const homeInput = document.getElementById('homeAddress');
+            const saveButton = document.getElementById('SaveButton');
+
+            const errorName = document.getElementById('errorName');
+             const errorHome = document.getElementById('errorHome');
+              const errorPhone = document.getElementById('errorPhone');
+             
+            const modal = document.getElementById('exampleModalCenter');
+            modal.addEventListener('show.bs.modal', function () {
+                // Clear the input fields
+                fullNameInput.value = '';
+                phoneNumberInput.value = '';
+                homeInput.value = '';
+                fullNameInput.classList.remove('is-invalid');
+                phoneNumberInput.classList.remove('is-invalid');
+                homeInput.classList.remove('is-invalid');
+                errorName.classList.add('d-none');
+                 errorHome.classList.add('d-none');  
+                   errorPhone.classList.add('d-none');
+            });
+
+
+            saveButton.addEventListener('click', function () {
+                
+                if (validateAddress()) {
+                    sendDataToServlet();
+                }
+            });
+
+              function validateAddress() {
+
+                let valid = true;
+                
+                if (fullNameInput.value.trim() === '') {
+                    valid = false;
+                    fullNameInput.classList.add('is-invalid');
+//                    errorName.classList.add('d-block');
+                    errorName.classList.remove('d-none');
+                }
+                else{
+                     fullNameInput.classList.remove('is-invalid');
+//                    errorName.classList.remove('d-block');
+                    errorName.classList.add('d-none');
+                }
+
+                if (homeInput.value.trim() === '') {
+                    valid = false;
+                    homeInput.classList.add('is-invalid');
+                    
+                     errorHome.classList.remove('d-none');  
+                }
+                else{
+                     homeInput.classList.remove('is-invalid');
+                   errorHome.classList.add('d-none');  
+                }
+
+                // Validate phone number (assuming it should be a valid numeric input)
+                const phoneNumberPattern = /^0\d{9}$/;
+                if (!phoneNumberPattern.test(phoneNumberInput.value.trim())) {
+                    valid = false;
+                    phoneNumberInput.classList.add('is-invalid');
+                   errorPhone.classList.remove('d-none');  
+                }
+                else{
+                     phoneNumberInput.classList.remove('is-invalid');
+                    errorPhone.classList.add('d-none');
+                }
+
+                return valid;
+            }
+
+
+            function sendDataToServlet() {
+                const fullName = fullNameInput.value;
+                const phoneNumber = phoneNumberInput.value;
+                const address = homeInput.value;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Order/AddNewAddress',
+                    data: {
+                        fullName: fullName,
+                        phoneNumber: phoneNumber,
+                        address: address
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        // Create and add a Bootstrap alert message to customAlertContainer
+                        const alertMessage = $('<div class="alert alert-success alert-dismissible fade show" role="alert"></div>');
+                        alertMessage.html('<strong>Success:</strong> Đã thêm địa chỉ thành công.' +
+                                '</button>');
+
+                        $('#customAlertContainer').append(alertMessage);
+
+                        // Hide the alert after 10 seconds
+                        setTimeout(function () {
+                            alertMessage.alert('close');
+                        }, 1500); // Adjust the time as needed
+
+                        const select = $('#addressSelect'); // Make sure '#addressSelect' matches the ID of your <select> element
+
+                        // Deselect all previously selected options
+                        select.find('option').prop('selected', false);
+
+                        const option = $('<option></option>').attr('value', response).text(fullName + ', ' + phoneNumber + ', ' + address);
+                        select.append(option);
+                        option.prop('selected', true);
+
+                        // Close the modal
+                        $('#exampleModalCenter').modal('hide');
+                    }
+                });
+            }
         </script>
         <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>  
         <script>

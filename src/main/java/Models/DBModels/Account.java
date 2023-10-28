@@ -1,5 +1,6 @@
 package Models.DBModels;
 
+import static Utilities.StringMethods.Decrypt;
 import java.sql.Date;
 
 /**
@@ -34,6 +35,17 @@ public class Account {
         this.otp = otp;
         this.isAvalable = isAvalable;
         this.roleId = roleId;
+    }
+    
+    public Account(int id, String fullName, String phone, String email, String gender, Date birthday, String username, String password) {
+        this.id = id;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.username = username;
+        this.password = password;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">

@@ -17,11 +17,16 @@ public class Book {
     private boolean isAvailable;
     private int pubisherId;
     private int languageId;
+    private int totalRating;
+    private int totalRatingStar;
+    private int avgRating;
 
     public Book() {
     }
 
-    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId) {
+    public Book(int id, String title, String description, String thumbnail, int salePrice, int price,
+            int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,
+            int totalRating, int totalRatingStar, int avgRating) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -34,6 +39,9 @@ public class Book {
         this.isAvailable = isAvailable;
         this.pubisherId = pubisherId;
         this.languageId = languageId;
+        this.totalRating=totalRating;
+        this.totalRatingStar=totalRatingStar;
+        this.avgRating=avgRating;
     }
     
     

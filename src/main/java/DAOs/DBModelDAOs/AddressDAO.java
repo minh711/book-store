@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOs.DBModelDAOs;
 
 import DAOs.MgrModelDAOs.OrderItemDAO;
@@ -111,10 +107,39 @@ public class AddressDAO {
         }
         return null;
     }
-    
-    public static void main(String[] args) {
-        AddressDAO da = new AddressDAO();
-        System.out.println(da.getLatestAddressID(3).getId());
+
+    //DuyenLTM
+    /*
+    This method is for deleting an address of a customer
+     */
+    public int deleteAddress(int addressID) {
+        int result = 0;
+        String sql = "delete [Address]\n"
+                + "where id=?;";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, addressID);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
-  
+
+    public int addAddress(String fullName, String phone, String address, int customerId) {
+        int result = 0;
+        String sql = "insert into [Address] values (?,?,?,?);";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, fullName);
+            ps.setString(2, phone);
+            ps.setString(3, address);
+            ps.setInt(4, customerId);
+            result=ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
 }
