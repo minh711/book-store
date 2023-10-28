@@ -12,7 +12,7 @@ import java.sql.Date;
  *
  * @author DuyenLTM
  */
-public class AccountCtrl extends HttpServlet {
+public class AccountCreateCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
