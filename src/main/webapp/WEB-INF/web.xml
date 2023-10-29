@@ -68,6 +68,22 @@
         <servlet-name>orderListCustomerCtrl</servlet-name>
         <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OTPCtrl</servlet-name>
+        <servlet-class>Controllers.OTPCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordCtrl</servlet-name>
+        <servlet-class>Controllers.ResetPasswordCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailCtrl</servlet-name>
+        <servlet-class>Controllers.EmailCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuitOTPCtrl</servlet-name>
+        <servlet-class>Controllers.QuitOTPCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -105,10 +121,6 @@
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>OTPCtrl</servlet-name>
-        <url-pattern>/Otp</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DistributorCtrl</servlet-name>
         <url-pattern>/DistributorCtrl</url-pattern>
     </servlet-mapping>
@@ -135,6 +147,22 @@
     <servlet-mapping>
         <servlet-name>orderListCustomerCtrl</servlet-name>
         <url-pattern>/orderListCustomerCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OTPCtrl</servlet-name>
+        <url-pattern>/otp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordCtrl</servlet-name>
+        <url-pattern>/Reset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailCtrl</servlet-name>
+        <url-pattern>/email</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuitOTPCtrl</servlet-name>
+        <url-pattern>/Quit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
