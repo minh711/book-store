@@ -1,3 +1,13 @@
+$(document).ready(function() {
+  // Prevent form submit on enter
+  $(window).keydown(function(event){
+    if(event.keyCode === 13) { // 13 is Enter key code
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
 $("#submit").submit(function(e){
     e.preventDefault();
 

@@ -99,6 +99,34 @@ public class BookCreateCtrl extends HttpServlet {
             response.getWriter().write(json);
         }
         
+        // Add new Author
+        if (request.getParameter("addNewAuthor") != null && request.getParameter("addNewAuthor").equals("true")) {
+            String newAuthor = request.getParameter("newAuthor");
+            AuthorDAO authorDAO = new AuthorDAO();
+            authorDAO.addNew(newAuthor);
+        }
+        
+        // Add new Genre
+        if (request.getParameter("addNewGenre") != null && request.getParameter("addNewGenre").equals("true")) {
+            String newGenre = request.getParameter("newGenre");
+            GenreDAO genreDAO = new GenreDAO();
+            genreDAO.addNew(newGenre);
+        }
+        
+        // Add new Publisher
+        if (request.getParameter("addNewPublisher") != null && request.getParameter("addNewPublisher").equals("true")) {
+            String newPublisher = request.getParameter("newPublisher");
+            PublisherDAO publisherDAO = new PublisherDAO();
+            publisherDAO.addNew(newPublisher);
+        }
+        
+        // Add new Language
+        if (request.getParameter("addNewLanguage") != null && request.getParameter("addNewLanguage").equals("true")) {
+            String newLanguage = request.getParameter("newLanguage");
+            LanguageDAO languageDAO = new LanguageDAO();
+            languageDAO.addNew(newLanguage);
+        }
+        
         // Submit
         if (request.getParameter("submit") != null && request.getParameter("submit").equals("Thêm Sách mới")) {
             int bookId = 0;

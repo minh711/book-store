@@ -12,6 +12,8 @@ $(document).ready(function() {
 
 selectPublisherSelectBtn.addEventListener("click", () => {
     selectPublisherContainer.classList.toggle("active");
+    selectPublisherSearchInp.value = null;
+    searchPublisher();
 });
 
 document.addEventListener('click', function(event) {
@@ -40,6 +42,7 @@ function loadPublishers() {
 }
 
 function addPublisher() {
+    $(selectPublisherOptions).empty();
     publishers.forEach(publisher => {
         let li = '<li onclick="selectPublisher(this);" data-id="' + publisher.id + '">' + publisher.publisher + '</li>';
         selectPublisherOptions.insertAdjacentHTML("beforeend", li);
@@ -53,10 +56,47 @@ function selectPublisher(selectedLi) {
 }
 
 selectPublisherSearchInp.addEventListener("keyup", () => {
-    let arr = []; 
-    let searchedVal = selectPublisherSearchInp.value;
-    arr = publishers.filter(data => {
-        return data.publisher.toLowerCase().includes(searchedVal.toLowerCase());
-    }).map(data => `<li onclick="selectPublisher(this);" data-id=${data.id}">${data.publisher}</li>`).join("");
-    selectPublisherOptions.innerHTML = arr;
+    searchPublisher();
 });
+
+function searchPublisher() {
+    let arr = []; 
+    let searchedVal = selectPublisherSearchInp.value.trim();
+    arr = publishers
+        .filter(data => {
+            return data.publisher.toLowerCase().includes(searchedVal.toLowerCase());
+        })
+        .map(data => `<li onclick="selectPublisher(this);" data-id=${data.id}">${data.publisher}</li>`)
+        .join("");
+
+    let isUnique = true;
+    for (const item of publishers) {
+        if (item.publisher.toLowerCase() === searchedVal.toLowerCase().trim()) {
+            isUnique = false;
+            break; 
+        }
+    }
+    if (isUnique && searchedVal !== "") {
+        selectPublisherOptions.innerHTML = ""; 
+        selectPublisherOptions.innerHTML = arr;
+        selectPublisherOptions.insertAdjacentHTML('afterbegin', `<li onclick="addNewPublisher('${searchedVal}');">Thêm nhà xuất bản mới <span class="fw-bold mx-2">${searchedVal}</span></li>`);
+    } else {
+        selectPublisherOptions.innerHTML = "";
+        selectPublisherOptions.innerHTML = arr;
+    }
+}
+
+function addNewPublisher(newPublisher) {
+    $.ajax({
+        url: "/BookCreateCtrl",
+        type: "post",
+        data: {addNewPublisher: "true", newPublisher},
+        success: function () {
+            loadPublishers();
+            selectPublisherSearchInp.value = newPublisher;
+            searchPublisher();
+        },
+        error: function (xhr) {
+        }
+    });
+}

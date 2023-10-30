@@ -52,4 +52,21 @@ public class GenreDAO {
         ls.toArray(arr);
         return arr;
     }
+    
+    public int addNew(String genre) {
+        int result = 0;
+        String sql
+                = "INSERT INTO [Genre] "
+                + "(genre, isAvailable) "
+                + "VALUES"
+                + "(?, 1)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setNString(1, genre);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GenreDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

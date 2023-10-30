@@ -52,4 +52,21 @@ public class PublisherDAO {
         ls.toArray(arr);
         return arr;
     }
+    
+    public int addNew(String publisher) {
+        int result = 0;
+        String sql
+                = "INSERT INTO [Publisher] "
+                + "(publisher, isAvailable) "
+                + "VALUES"
+                + "(?, 1)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setNString(1, publisher);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PublisherDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

@@ -43,9 +43,12 @@ function loadGenres() {
 }
 
 function addGenres() {
+    $(selectGenreOptions).empty();
     genres.forEach(genre => {
-        let li = '<li onclick="selectGenre(this);" data-id="' + genre.id + '">' + genre.genre + '</li>';
-        selectGenreOptions.insertAdjacentHTML("beforeend", li);
+        if (!selectedGenreIds.includes(genre.id)) {
+            let li = '<li onclick="selectGenre(this);" data-id="' + genre.id + '">' + genre.genre + '</li>';
+            selectGenreOptions.insertAdjacentHTML("beforeend", li);
+        }
     });
 }
 
@@ -53,7 +56,6 @@ function selectGenre(selectedLi) {
     if (!selectedGenreIds.includes($(selectedLi).data("id"))) {
         selectedGenreIds.push($(selectedLi).data("id"));
     }
-    console.log(selectedGenreIds);
     selectGenreContainer.classList.toggle("active");
     addGenres();
     loadSelectedGenres();
@@ -65,7 +67,8 @@ selectGenreSearchInp.addEventListener("keyup", () => {
 
 function searchGenre() {
     let arr = [];
-    let searchedVal = selectGenreSearchInp.value;
+    let searchedVal = selectGenreSearchInp.value.trim();
+
     arr = genres
         .filter(data => {
             return data.genre.toLowerCase().includes(searchedVal.toLowerCase()) && !selectedGenreIds.includes(data.id);
@@ -73,9 +76,19 @@ function searchGenre() {
         .map(data => `<li onclick="selectGenre(this);" data-id="${data.id}">${data.genre}</li>`)
         .join("");
 
-    if (arr.length === 0 && searchedVal.trim() !== '') {
-        selectGenreOptions.innerHTML = '<li>Thêm mới</li>';
+    let isUnique = true;
+    for (const item of genres) {
+        if (item.genre.toLowerCase() === searchedVal.toLowerCase().trim()) {
+            isUnique = false;
+            break; 
+        }
+    }
+    if (isUnique && searchedVal !== "") {
+        selectGenreOptions.innerHTML = ""; 
+        selectGenreOptions.innerHTML = arr;
+        selectGenreOptions.insertAdjacentHTML('afterbegin', `<li onclick="addNewGenre('${searchedVal}');">Thêm thể loại mới <span class="fw-bold mx-2">${searchedVal}</span></li>`);
     } else {
+        selectGenreOptions.innerHTML = "";
         selectGenreOptions.innerHTML = arr;
     }
 }
@@ -91,4 +104,19 @@ function loadSelectedGenres() {
 function removeGenre(id) {
     selectedGenreIds.splice(selectedGenreIds.indexOf(id), 1);
     loadSelectedGenres();
+}
+
+function addNewGenre(newGenre) {
+    $.ajax({
+        url: "/BookCreateCtrl",
+        type: "post",
+        data: {addNewGenre: "true", newGenre},
+        success: function () {
+            loadGenres();
+            selectGenreSearchInp.value = newGenre;
+            searchGenre();
+        },
+        error: function (xhr) {
+        }
+    });
 }

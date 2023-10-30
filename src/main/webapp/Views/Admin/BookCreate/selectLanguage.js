@@ -12,6 +12,8 @@ $(document).ready(function() {
 
 selectLanguageSelectBtn.addEventListener("click", () => {
     selectLanguageContainer.classList.toggle("active");
+    selectLanguageSearchInp.value = null;
+    searchLanguage();
 });
 
 document.addEventListener('click', function(event) {
@@ -40,6 +42,7 @@ function loadLanguages() {
 }
 
 function addLanguages() {
+    $(selectLanguageOptions).empty();
     languages.forEach(language => {
         let li = '<li onclick="selectLanguage(this);" data-id="' + language.id + '">' + language.language + '</li>';
         selectLanguageOptions.insertAdjacentHTML("beforeend", li);
@@ -53,10 +56,48 @@ function selectLanguage(selectedLi) {
 }
 
 selectLanguageSearchInp.addEventListener("keyup", () => {
-    let arr = []; 
-    let searchedVal = selectLanguageSearchInp.value;
-    arr = languages.filter(data => {
-        return data.language.toLowerCase().includes(searchedVal.toLowerCase());
-    }).map(data => `<li onclick="selectLanguage(this);" data-id=${data.id}">${data.language}</li>`).join("");
-    selectLanguageOptions.innerHTML = arr;
+    searchLanguage();
 });
+
+function searchLanguage() {
+    let arr = []; 
+    let searchedVal = selectLanguageSearchInp.value.trim();
+    
+    arr = languages
+        .filter(data => {
+            return data.language.toLowerCase().includes(searchedVal.toLowerCase());
+        })
+        .map(data => `<li onclick="selectLanguage(this);" data-id=${data.id}">${data.language}</li>`)
+        .join("");
+
+    let isUnique = true;
+    for (const item of languages) {
+        if (item.language.toLowerCase() === searchedVal.toLowerCase().trim()) {
+            isUnique = false;
+            break; 
+        }
+    }
+    if (isUnique && searchedVal !== "") {
+        selectLanguageOptions.innerHTML = ""; 
+        selectLanguageOptions.innerHTML = arr;
+        selectLanguageOptions.insertAdjacentHTML('afterbegin', `<li onclick="addNewLanguage('${searchedVal}');">Thêm ngôn ngữ mới <span class="fw-bold mx-2">${searchedVal}</span></li>`);
+    } else {
+        selectLanguageOptions.innerHTML = "";
+        selectLanguageOptions.innerHTML = arr;
+    }
+}
+
+function addNewLanguage(newLanguage) {
+    $.ajax({
+        url: "/BookCreateCtrl",
+        type: "post",
+        data: {addNewLanguage: "true", newLanguage},
+        success: function () {
+            loadLanguages();
+            selectLanguageSearchInp.value = newLanguage;
+            searchLanguage();
+        },
+        error: function (xhr) {
+        }
+    });
+}

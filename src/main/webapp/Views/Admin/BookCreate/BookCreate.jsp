@@ -120,8 +120,8 @@
                     <div class="upload-thumbnail mx-2 my-3">
                         <!-- Image here -->
                     </div>
-                    <div class="upload-thumbnail-area">
-                            <div class="btn btn-primary">Tải ảnh lên</div>
+                    <div class="upload-thumbnail-area btn btn-primary">
+                        Tải ảnh lên
                     </div>
 
                 </div>
@@ -136,8 +136,8 @@
                                 <!-- Image here !-->
                             </div>
                             <div class="upload-area">
-                                <div class="upload-areq-img">
-                                    <div class="btn btn-primary">Tải ảnh lên</div>
+                                <div class="upload-areq-img btn btn-primary">
+                                    Tải ảnh lên
                                 </div>
                             </div>
                         </div>

@@ -56,7 +56,6 @@ function selectAuthor(selectedLi) {
     if (!selectedAuthorIds.includes($(selectedLi).data("id"))) {
         selectedAuthorIds.push($(selectedLi).data("id"));
     }
-    console.log(selectedAuthorIds);
     selectAuthorContainer.classList.toggle("active");
     addAuthors();
     loadSelectedAuthors();
@@ -68,7 +67,8 @@ selectAuthorSearchInp.addEventListener("keyup", () => {
 
 function searchAuthor() {
     let arr = [];
-    let searchedVal = selectAuthorSearchInp.value;
+    let searchedVal = selectAuthorSearchInp.value.trim();
+
     arr = authors
         .filter(data => {
             return data.author.toLowerCase().includes(searchedVal.toLowerCase()) && !selectedAuthorIds.includes(data.id);
@@ -76,9 +76,19 @@ function searchAuthor() {
         .map(data => `<li onclick="selectAuthor(this);" data-id="${data.id}">${data.author}</li>`)
         .join("");
 
-    if (arr.length === 0 && searchedVal.trim() !== '') {
-        selectAuthorOptions.innerHTML = '<li>Thêm mới</li>';
+    let isUnique = true;
+    for (const item of authors) {
+        if (item.author.toLowerCase() === searchedVal.toLowerCase().trim()) {
+            isUnique = false;
+            break; 
+        }
+    }
+    if (isUnique && searchedVal !== "") {
+        selectAuthorOptions.innerHTML = ""; 
+        selectAuthorOptions.innerHTML = arr;
+        selectAuthorOptions.insertAdjacentHTML('afterbegin', `<li onclick="addNewAuthor('${searchedVal}');">Thêm tác giả mới <span class="fw-bold mx-2">${searchedVal}</span></li>`);
     } else {
+        selectAuthorOptions.innerHTML = "";
         selectAuthorOptions.innerHTML = arr;
     }
 }
@@ -94,4 +104,19 @@ function loadSelectedAuthors() {
 function removeAuthor(id) {
     selectedAuthorIds.splice(selectedAuthorIds.indexOf(id), 1);
     loadSelectedAuthors();
+}
+
+function addNewAuthor(newAuthor) {
+    $.ajax({
+        url: "/BookCreateCtrl",
+        type: "post",
+        data: {addNewAuthor: "true", newAuthor},
+        success: function () {
+            loadAuthors();
+            selectAuthorSearchInp.value = newAuthor;
+            searchAuthor();
+        },
+        error: function (xhr) {
+        }
+    });
 }
