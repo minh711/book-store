@@ -84,6 +84,10 @@
         <servlet-name>BookSearch</servlet-name>
         <servlet-class>Controllers.BookSearch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookSelectType</servlet-name>
+        <servlet-class>Controllers.BookSelectType</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>BookSearch</servlet-name>
         <url-pattern>/BookSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookSelectType</servlet-name>
+        <url-pattern>/BookSelectType</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

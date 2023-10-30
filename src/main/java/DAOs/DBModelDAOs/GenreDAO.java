@@ -52,4 +52,5 @@ public class GenreDAO {
         ls.toArray(arr);
         return arr;
     }
+
 }
