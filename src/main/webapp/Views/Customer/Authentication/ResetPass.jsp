@@ -39,13 +39,18 @@
                              
                              
                              
-                            <input type="password" class="form-control mb-3" name="Repass" placeholder="Mật khẩu">
-                            <input type="password" class="form-control mb-3" name="Cepass" placeholder="Nhập lại mật khẩu">
+                             <input type="password" class="form-control mb-3" name="Repass" placeholder="Mật khẩu" required="">
+                             <input type="password" class="form-control mb-3" name="Cepass" placeholder="Nhập lại mật khẩu" required="">
                             <button class="btn btn-primary w-100" type="submit">Xác nhận</button>
                         </form>
-                        <form action="${pageContext.request.contextPath}/Quit" method="post">
-                            <button  type="button">Quit</button>
+                             
+                             
+                             
+                        <form action="${pageContext.request.contextPath}/Cancel" method="post">
+                               <button id="cancel" name="cancel" >Cancel</button>
                         </form>
+                            
+                            
                     </div>
                 </div>
             </div>

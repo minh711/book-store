@@ -41,7 +41,8 @@
                            
                         </form>
                          
-                                 <a href="${pageContext.request.contextPath}/Views/Customer/Authentication/Login.jsp" >Quit</a>
+                               <a href="${pageContext.request.contextPath}/Views/Customer/Authentication/Login.jsp" ><button type="button">Cancel</button></a>
+                                  
                     </div>
                 </div>
             </div>

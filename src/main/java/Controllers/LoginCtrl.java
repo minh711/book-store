@@ -34,9 +34,11 @@ public class LoginCtrl extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
             String user = request.getParameter("name");
             String pass = request.getParameter("pass");
             String rem = request.getParameter("rem");
+            String email = (String) session.getAttribute("email");
             AccountDAO dao = new AccountDAO();
 
             Account ifAccountExist = dao.checkUserByName(user);
@@ -73,7 +75,6 @@ public class LoginCtrl extends HttpServlet {
                     response.addCookie(cu);
                     response.addCookie(cr);
                     response.addCookie(cp);
-                    HttpSession session = request.getSession();
 
                     session.setAttribute("accountId", ifAccountExist.getId());
                     session.setAttribute("role", ifAccountExist.getRoleId());
@@ -89,14 +90,12 @@ public class LoginCtrl extends HttpServlet {
                     Cookie usn = new Cookie("username", ifAccountExist.getUsername());
                     crd.setMaxAge(3 * 24 * 60 * 60);
                     response.addCookie(usn);
-                    
+
                     Cookie psw = new Cookie("password", ifAccountExist.getPassword());
                     crd.setMaxAge(3 * 24 * 60 * 60);
                     response.addCookie(psw);
-                    
-                    
-
-// COOKIE USER NAME /PASS
+                    dao.deleteOTP(email);
+          
                     response.sendRedirect("Views/Customer/Home/Home.jsp");
                 }
             }

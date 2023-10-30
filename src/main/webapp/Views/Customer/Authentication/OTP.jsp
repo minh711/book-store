@@ -37,7 +37,7 @@
                             <p class="error-message text-danger">${mess}</p>
 
                             <div class="d-flex justify-content-center mb-3">
-                                <input type="text" id="inputOtp" name="otp" placeholder="Nhập mã xác nhận" autofocus="" >
+                                <input type="text" id="inputOtp" name="otp" placeholder="Nhập mã xác nhận" autofocus="" required="">
                             </div>
 
 
@@ -55,8 +55,8 @@
 
                         </form>     
 
-                        <form action="${pageContext.request.contextPath}/Quit" method="post">
-                            <button  type="button">Quit</button>
+                        <form action="${pageContext.request.contextPath}/Cancel" method="post">
+                            <button id="cancel" name="cancel" >Cancel</button>
                             
                         </form>
                             
@@ -95,7 +95,7 @@
 
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <!--<script src="${pageContext.request.contextPath}/Views/Customer/Authentication/otpValidate.js"></script>--> 
+        <script src="${pageContext.request.contextPath}/Views/Customer/Authentication/otpValidate.js"></script> 
 
 
     </body>
