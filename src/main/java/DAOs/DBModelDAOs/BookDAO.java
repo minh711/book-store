@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOs.DBModelDAOs;
 
 import DBConnection.DbConnection;
@@ -57,7 +53,10 @@ public class BookDAO extends DbConnection {
                         rs.getInt(9),
                         rs.getBoolean(10),
                         rs.getInt(11),
-                        rs.getInt(12)
+                        rs.getInt(12),
+                        rs.getInt(13),
+                        rs.getInt(14),
+                        rs.getFloat(16)
                 ));
             }
         } catch (SQLException ex) {
@@ -113,5 +112,65 @@ public class BookDAO extends DbConnection {
             Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return b;
+    }
+    
+    /**
+     * Add a new book.
+     * @param b New book.
+     * @return True if success, False elsewhere.
+     */
+    public int addNewBook(Book b) {
+        if (b.getTitle() == null) {
+            System.out.println("Title must not be null.");
+            return 0;
+        }
+        
+        if (b.getTitle().length() <= 0 || b.getTitle().length() > 100) {
+            System.out.println("Title length must be from 1 to 100 characters.");
+            return 0;
+        }
+        
+        if (b.getDescription() == null) {
+            System.out.println("Description must not be null.");
+            return 0;
+        }
+
+        if (b.getDescription().length() <= 0 || b.getDescription().length() > 2000) {
+            System.out.println("Description length must be from 1 to 2000 characters.");
+            return 0;
+        }
+        
+        int result = 0;
+        String addBookQuery 
+                = "SET IDENTITY_INSERT [Book] ON;"
+                + "INSERT INTO Book "
+                + "(id, title, description, thumbnail, salePrice, price, discount, "
+                + "quantity, soleTotal, isAvailable, publisherId, languageId, "
+                + "totalRating, totalRatingStar, avgRating) "
+                + "VALUES"
+                + "(?, ?, ?, ?, ?, ?, ?, 0, 0, 1, ?, ?, 0, 0, 0)"
+                + "SET IDENTITY_INSERT [Book] OFF;";
+        try {
+            ps = conn.prepareStatement(addBookQuery);
+            ps.setInt(1, b.getId());
+            ps.setNString(2, b.getTitle());
+            ps.setNString(3, b.getDescription());
+            ps.setString(4, b.getThumbnail());
+            ps.setInt(5, b.getSalePrice());
+            ps.setInt(6, b.getPrice());
+            ps.setInt(7, b.getDiscount());
+            ps.setInt(8, b.getPubisherId());
+            ps.setInt(9, b.getLanguageId());
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Book ID aready exist or Publisher or author ID does not exist.");
+            return -1;
+        }
+        if (result == 0) {
+            return 0;
+        } else {
+            System.out.println("Success.");
+            return 1;
+        }
     }
 }
