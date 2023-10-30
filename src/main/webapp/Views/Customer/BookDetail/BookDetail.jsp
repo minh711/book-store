@@ -1,7 +1,7 @@
 <%-- 
     Document   : BookDetail
     Created on : Oct 6, 2023, 6:03:06 PM
-    Author     : mummykiara
+    Author     : NhuLNT
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,25 +27,22 @@
         <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            .carousel {
+                height: 500px;
+                width: 450px;
+            }
 
+            .carousel-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        </style>
     </head>
 
     <body>
-        <header class="d-flex justify-content-between" style="padding: 10px;">
-            <div class="d-flex align-items-center justify-content-between">
-                <img src="${pageContext.request.contextPath}/Images/logo.jpg" style="height: 40px;">
-            </div>
-            <div class="dropdown">
-                <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Xin chào,<br>Nguyễn Văn A
-                </a>
-                <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item p-2" href="#">Thông tin tài khoản</a></li>
-                    <li><a class="dropdown-item p-2" href="#">Đăng xuất <i class="fa fa-sign-out"></i></a></li>
-                </ul>
-            </div>
-        </header>
+        <jsp:include page="/Views/header.jsp"/>
 
         <div class="container" style="display: flex;justify-content: center;align-items: center;margin-top: 10px;">
             <div class="input-group mb-2 d-flex align-items-center" style="width: 60%;">
@@ -85,26 +82,39 @@
 
                         <div class="row mt-4">
                             <div class="col-sm-6">
-                                
-                                    <div class="rounded bg-white p-4 mb-3">
-                                        <div class="d-flex">
-                                            <div>
-                                                <c:forEach items="${requestScope.BookPicture}" var="bpicture">
-                                                <div style="width: 100px; height: 100px;" class="d-flex align-items-center justify-content-center">
-                                                    <img style="object-fit: contain; height: 80px; width: 80px;"
-                                                         src="${pageContext.request.contextPath}/Images/${bpicture.getPicture()}"
-                                                         class="img-thumbnail img-fluid rounded" alt="Book Picture" />
+
+                                <div class="rounded bg-white p-4 mb-3">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                                                <div class="carousel-indicators">
+                                                    <c:forEach items="${requestScope.BookPicture}" var="picture" varStatus="loop">
+                                                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"
+                                                                aria-current="${loop.first ? 'true' : 'false'}" aria-label="Slide ${loop.index + 1}"></button>
+                                                    </c:forEach>
                                                 </div>
-                                                </c:forEach>
+                                                <div class="carousel-inner">
+                                                    <c:forEach items="${requestScope.BookPicture}" var="picture" varStatus="loop">
+                                                        <div class="carousel-item ${loop.first ? 'active' : ''} img-thumbnail img-fluid rounded" data-bs-interval="10000">
+                                                            <img src="${pageContext.request.contextPath}/Images/${picture.getPicture()}" class="d-block">
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
                                             </div>
-                                            <div>
-                                                <img style="object-fit: contain; height: 500px; width: 500px;"
-                                                     src="${pageContext.request.contextPath}/Images/${bpicture.getPicture()}"
-                                                     class="img-thumbnail img-fluid rounded" alt="Book Picture" />
-                                            </div>
+
                                         </div>
+
                                     </div>
-                                
+                                </div>
+
 
                                 <form id="addToCart" method="post" action="Book">                   
                                     <div class="d-flex align-items-center mb-3 justify-content-center">
@@ -221,163 +231,175 @@
                             <h2>ĐÁNH GIÁ CỦA KHÁCH HÀNG</h2>
                             <div class="d-flex">
                                 <p>
-                                    <strong class="mx-2">4.5</strong>
+                                    <strong class="mx-2">${bookDetail.avgRating}</strong>
+                                    <c:set var="starTotal" value="${bookDetail.avgRating}" />
                                     <span>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star-half-o text-warning" aria-hidden="true"></i>
+                                        <c:forEach var="starIndex" begin="1" end="5">
+                                            <c:choose>
+                                                <c:when test="${starTotal >= starIndex}">
+                                                    <i class="fa fa-star text-warning"></i>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
                                     </span>
                                 </p>
-                                <p class="mx-2 text-black-50">(10 đánh giá)</p>
+                                <p class="mx-2 text-black-50">(${bookDetail.getTotalRating()} đánh giá)</p>
                             </div>
                             <div class="d-flex">
-                                <div class="mx-2 border bg-warning text-light rounded-pill p-2">Tất cả đánh giá</div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border bg-warning text-light rounded-pill p-2" style="cursor: pointer" id="showAllReviews">Tất cả đánh giá</div>
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showFiveStarReviews">
                                     5 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showFourStarReviews">
                                     4 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showThreeStarReviews">
                                     3 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showTwoStarReviews">
                                     2 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showOneStarReviews">
                                     1 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-4 p-4 bg-white text-dark rounded">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <div class="mx-2">Nguyễn Văn A</div>
+                        <c:forEach items="${requestScope.BookRating}" var="Rating">
+                            <div class="mt-4 p-4 bg-white text-dark rounded">
+                                <c:set var="starValue" value="${Rating.getStar()}" />
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <div class="mx-2">${Rating.getName()}</div>
+                                    </div>
+                                    <div class="text-black-50"><fmt:formatDate value="${Rating.getDateRating()}" pattern="dd-MM-yyyy HH:mm" /></div>
                                 </div>
-                                <div class="text-black-50">15/09/2023, 11:11</div>
-                            </div>
-                            <div class="mt-2">
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <div class="mt-2 text-dark">Giao hàng nhanh</div>
-                            </div>
-                        </div>
-                        <div class="mt-4 mb-4 p-4 bg-white text-dark rounded">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <div class="mx-2">Nguyễn Văn B</div>
+                                <input type="hidden" class="userRatingStar" value="${starValue}">
+                                <div class="mt-2">
+                                    <div class="getStarRating">
+                                        <c:forEach var="starIndex" begin="1" end="5">
+                                            <c:choose>
+                                                <c:when test="${starValue >= starIndex}">
+                                                    <i class="fa fa-star text-warning"></i>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="mt-2 text-dark">${Rating.getComment()}</div>
                                 </div>
-                                <div class="text-black-50">15/09/2023, 11:11</div>
                             </div>
-                            <div class="mt-2">
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i><br>
-                                <div class="mt-2 text-dark">tốt</div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
-                </main>
-            </div>
+            </div>       
         </main>
-
-
-
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 p-4">
-                        <img src="${pageContext.request.contextPath}/Images/logo.jpg" alt="" style="height: 40px;">
-                        <div>
-                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-4">
-                        <div class="d-flex">
-                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
-                            <div>
-                                business@oceanbook.com
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 d-flex justify-content-between p-4">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-facebook-messenger"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <script>
-
-            const quantityInput = document.getElementById("cusEditQuantity");
-            const decreaseBtn = document.getElementById("decreaseQuantity");
-            const increaseBtn = document.getElementById("increaseQuantity");
-
-            //Limit the smallest quantity, and the largest
-            const minQuantity = 1;
-            const maxQuantity = ${bookDetail.soleTotal};
-
-            //Check the condition if the Decrease button is pressed
-            decreaseBtn.addEventListener("click", () => {
-                let currentQuantity = parseInt(quantityInput.value);
-                if (!isNaN(currentQuantity) && currentQuantity > minQuantity) {
-                    quantityInput.value = currentQuantity - 1;
-                }
-            });
-
-            //Check the condition if the Increase button is pressed
-            increaseBtn.addEventListener("click", () => {
-                let currentQuantity = parseInt(quantityInput.value);
-                if (!isNaN(currentQuantity) && currentQuantity < maxQuantity) {
-                    quantityInput.value = currentQuantity + 1;
-                }
-            });
-
-            //Check conditions for increasing and decreasing value then update value.
-            quantityInput.addEventListener("input", () => {
-                let currentQuantity = parseInt(quantityInput.value);
-                if (isNaN(currentQuantity) || currentQuantity < minQuantity) {
-                    quantityInput.value = minQuantity;
-                } else if (currentQuantity > maxQuantity) {
-                    quantityInput.value = maxQuantity;
-                }
-
-            });
-
-            const addToCartForm = document.getElementById("addToCart");
-            const cusEditQuantity = document.getElementById("cusEditQuantity");
-            const quantityBook = document.getElementById("quantityBook");
-
-            //Set the value to quantityBook when submitting a form
-            addToCartForm.addEventListener("submit", function (event) {
-
-                const cusEditQuantityValue = cusEditQuantity.value;
-
-                quantityBook.value = cusEditQuantityValue;
-            });
-
-            function showSuccess() {
-                alert("Sản phẩm đã được thêm vào giỏ hàng!");
-            }
-        </script>
     </body>
+    <jsp:include page="/Views/footer.jsp"/>
+
+    <script>
+
+        const quantityInput = document.getElementById("cusEditQuantity");
+        const decreaseBtn = document.getElementById("decreaseQuantity");
+        const increaseBtn = document.getElementById("increaseQuantity");
+
+        //Limit the smallest quantity, and the largest
+        const minQuantity = 1;
+        const maxQuantity = ${bookDetail.soleTotal};
+
+        //Check the condition if the Decrease button is pressed
+        decreaseBtn.addEventListener("click", () => {
+            let currentQuantity = parseInt(quantityInput.value);
+            if (!isNaN(currentQuantity) && currentQuantity > minQuantity) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        });
+
+        //Check the condition if the Increase button is pressed
+        increaseBtn.addEventListener("click", () => {
+            let currentQuantity = parseInt(quantityInput.value);
+            if (!isNaN(currentQuantity) && currentQuantity < maxQuantity) {
+                quantityInput.value = currentQuantity + 1;
+            }
+        });
+
+        //Check conditions for increasing and decreasing value then update value.
+        quantityInput.addEventListener("input", () => {
+            let currentQuantity = parseInt(quantityInput.value);
+            if (isNaN(currentQuantity) || currentQuantity < minQuantity) {
+                quantityInput.value = minQuantity;
+            } else if (currentQuantity > maxQuantity) {
+                quantityInput.value = maxQuantity;
+            }
+
+        });
+
+        const addToCartForm = document.getElementById("addToCart");
+        const cusEditQuantity = document.getElementById("cusEditQuantity");
+        const quantityBook = document.getElementById("quantityBook");
+
+        //Set the value to quantityBook when submitting a form
+        addToCartForm.addEventListener("submit", function (event) {
+
+            const cusEditQuantityValue = cusEditQuantity.value;
+
+            quantityBook.value = cusEditQuantityValue;
+        });
+
+        function showSuccess() {
+            alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+
+        document.getElementById("showAllReviews").addEventListener("click", function () {
+            showAllReviews();
+        });
+
+        document.getElementById("showFiveStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(5);
+        });
+
+        document.getElementById("showFourStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(4);
+        });
+
+        document.getElementById("showThreeStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(3);
+        });
+
+        document.getElementById("showTwoStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(2);
+        });
+
+        document.getElementById("showOneStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(1);
+        });
+
+        function showAllReviews() {
+            const allReviews = document.querySelectorAll(".userRatingStar");
+            allReviews.forEach(function (review) {
+                review.closest(".mt-4").style.display = "block";
+            });
+        }
+
+        function showReviewsByStarRating(starRating) {
+            const allReviews = document.querySelectorAll(".userRatingStar");
+            allReviews.forEach(function (review) {
+                const reviewStarRating = parseInt(review.value);
+                if (reviewStarRating === starRating) {
+                    review.closest(".mt-4").style.display = "block";
+                } else {
+                    review.closest(".mt-4").style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
 </html>

@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import Models.MgrModels.BookAuthorDetail;
 import Models.MgrModels.BookGenreDetail;
+import Models.MgrModels.BookRatingDetail;
 import java.util.ArrayList;
 
 /**
@@ -42,14 +43,14 @@ public class BookDetailCtrl extends HttpServlet {
             List<BookGenreDetail> genrelist = bookgenre.getBookGenreByID(bookDetail.getId());
             List<BookAuthorDetail> authorlist = bookauthor.getBookAuthorByID(bookDetail.getId());
             List<BookPicture> bookpicturelist = bookpicture.getBookPictureById(bookDetail.getId());
-            //List<Rating> bookratinglist = bookrating.getBookRating(bookDetail.getId());
+            List<BookRatingDetail> bookratinglist = bookrating.getBookRatingWithUserName(bookDetail.getId());
 
             if (bookDetail != null) {
                 request.setAttribute("bookDetail", bookDetail);
                 request.setAttribute("BookAuthor", authorlist);
                 request.setAttribute("BookGenre", genrelist);
                 request.setAttribute("BookPicture", bookpicturelist);
-              //  request.setAttribute("BookRating", bookratinglist);
+                request.setAttribute("BookRating", bookratinglist);
                 request.getRequestDispatcher("/Views/Customer/BookDetail/BookDetail.jsp").forward(request, response);
             }
         } catch (IOException | ServletException e) {
