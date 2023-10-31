@@ -9,16 +9,14 @@ public class Rating {
     private int star;
     private String comment;
     private int customerId;
-    private int bookId;
 
     public Rating() {
     }
 
-    public Rating(int id, int star, String comment,int bookId, int customerId) {
+    public Rating(int id, int star, String comment, int customerId) {
         this.id = id;
         this.star = star;
         this.comment = comment;
-        this.bookId = bookId;
         this.customerId = customerId;
     }
     
@@ -54,14 +52,5 @@ public class Rating {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-    
-    public int getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
     // </editor-fold>
-
 }

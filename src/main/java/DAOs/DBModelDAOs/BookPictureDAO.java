@@ -12,19 +12,18 @@ import java.util.logging.Logger;
 
 /**
  * Book picture data access object.
- *
- * @author MinhTD & NhuLNT
+ * @author MinhTD
  */
 public class BookPictureDAO {
-
+    
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
-
+    
     public BookPictureDAO() {
         conn = DBConnection.DbConnection.getConnection();
     }
-
+    
     public BookPicture[] getAllByBookId(int bookId) {
         List<BookPicture> ls = new ArrayList<>();
         String sql
@@ -37,8 +36,8 @@ public class BookPictureDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 ls.add(new BookPicture(
-                        rs.getInt("id"),
-                        rs.getString("picture"),
+                        rs.getInt("id"), 
+                        rs.getString("picture"), 
                         rs.getInt("bookId")));
             }
         } catch (SQLException ex) {
@@ -48,7 +47,7 @@ public class BookPictureDAO {
         ls.toArray(arr);
         return arr;
     }
-
+    
     public int addNew(BookPicture bookPicture) {
         int result = 0;
         String sql
@@ -66,7 +65,7 @@ public class BookPictureDAO {
         }
         return result;
     }
-
+    
     public int delete(int id) {
         int result = 0;
         String sql
@@ -81,7 +80,7 @@ public class BookPictureDAO {
         }
         return result;
     }
-
+    
     public int deleteAllByBookId(int bookId) {
         int result = 0;
         String sql
@@ -95,25 +94,5 @@ public class BookPictureDAO {
             Logger.getLogger(BookPictureDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
-    }
-
-    public ArrayList<BookPicture> getBookPictureById(int bookid) {
-        String sqlquery = "SELECT [id]\n"
-                + "      ,[picture]\n"
-                + "      ,[bookId]\n"
-                + "  FROM [BookPicture]\n"
-                + "  WHERE bookId = ?";
-        ArrayList<BookPicture> pictureList = new ArrayList<>();
-        try {
-            ps = conn.prepareStatement(sqlquery);
-            ps.setInt(1, bookid);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                pictureList.add(new BookPicture(rs.getInt(1), rs.getString(2), rs.getInt(3)));
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(BookPictureDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return pictureList;
     }
 }

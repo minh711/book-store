@@ -48,7 +48,7 @@ public class CartDAO {
     }
 
     public void RemoveUserCartProduct(int customerid, int bookid) {
-        String sqlquery = "DELETE FROM [Cart]\n"
+        String sqlquery = "DELETE FROM [dbo].[Cart]\n"
                 + "      WHERE customerId =  ? and bookId = ?";
         try {
             ps = conn.prepareStatement(sqlquery);
@@ -78,7 +78,6 @@ public class CartDAO {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
     public ArrayList<Cart> GetCartByID(int userid, int bookid) {
         ArrayList<Cart> list = new ArrayList<>();
         String sqlquery = "SELECT [customerId],"
@@ -91,10 +90,10 @@ public class CartDAO {
             ps.setInt(1, bookid);
             ps.setInt(2, userid);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                Cart cart = new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+            while(rs.next()){
+                Cart cart = new Cart(rs.getInt(1),rs.getInt(2),rs.getInt(3));
                 list.add(cart);
-
+                
             }
         } catch (SQLException e) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -110,8 +109,7 @@ public class CartDAO {
                 + "                    Book.salePrice,\n"
                 + "                    Cart.quantity,\n"
                 + "                    Account.id,\n"
-                + "                    Book.id,"
-                + "                    Book.quantity\n"
+                + "                    Book.id\n"
                 + "                FROM\n"
                 + "                    Cart\n"
                 + "				JOIN\n"
@@ -126,7 +124,7 @@ public class CartDAO {
             ps.setInt(1, userid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                UserCartDetail us = new UserCartDetail(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),rs.getInt(7));
+                UserCartDetail us = new UserCartDetail(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6));
                 list.add(us);
             }
         } catch (SQLException e) {
@@ -135,7 +133,6 @@ public class CartDAO {
         }
         return list;
     }
-
     public void UpdateCart(int bookid, int customerid, int quantity) {
         String sqlquery = "UPDATE [Cart]\n"
                 + "   SET [quantity] = ?\n"

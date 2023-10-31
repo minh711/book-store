@@ -4,12 +4,8 @@ package Controllers;
 import DAOs.DBModelDAOs.BookAuthorDAO;
 import DAOs.DBModelDAOs.BookDAO;
 import DAOs.DBModelDAOs.BookGenreDAO;
-import DAOs.DBModelDAOs.BookPictureDAO;
-import DAOs.DBModelDAOs.BookRatingDAO;
 import DAOs.DBModelDAOs.CartDAO;
-import Models.DBModels.BookPicture;
 import Models.DBModels.Cart;
-import Models.DBModels.Rating;
 import Models.MgrModels.BookDetail;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -34,22 +30,16 @@ public class BookDetailCtrl extends HttpServlet {
         BookDAO book = new BookDAO();
         BookGenreDAO bookgenre = new BookGenreDAO();
         BookAuthorDAO bookauthor = new BookAuthorDAO();
-        BookPictureDAO bookpicture = new BookPictureDAO();
-        BookRatingDAO bookrating = new BookRatingDAO();
-        
         try {
             BookDetail bookDetail = book.getBookDetailByID(id);
             List<BookGenreDetail> genrelist = bookgenre.getBookGenreByID(bookDetail.getId());
             List<BookAuthorDetail> authorlist = bookauthor.getBookAuthorByID(bookDetail.getId());
-            List<BookPicture> bookpicturelist = bookpicture.getBookPictureById(bookDetail.getId());
-            //List<Rating> bookratinglist = bookrating.getBookRating(bookDetail.getId());
+            System.out.println(bookDetail.getLanguage() +"\t" + bookDetail.getPublisher());
 
             if (bookDetail != null) {
                 request.setAttribute("bookDetail", bookDetail);
                 request.setAttribute("BookAuthor", authorlist);
                 request.setAttribute("BookGenre", genrelist);
-                request.setAttribute("BookPicture", bookpicturelist);
-              //  request.setAttribute("BookRating", bookratinglist);
                 request.getRequestDispatcher("/Views/Customer/BookDetail/BookDetail.jsp").forward(request, response);
             }
         } catch (IOException | ServletException e) {

@@ -71,39 +71,7 @@ public class AddressDAO {
                 return tem;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    public void addNewAddress(Address newAddress) {
-        String sql = "INSERT INTO [dbo].[Address] ([fullName],[phone] ,[address], [customerId]) VALUES (?,?,?,?)";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, newAddress.getFullName());
-            ps.setString(2, newAddress.getPhone());
-            ps.setString(3, newAddress.getAddress());
-            ps.setInt(4, newAddress.getCustomerId());
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public Address getLatestAddressID(int customerId){
-         String sql = "SELECT TOP(1) * FROM Address WHERE customerId =?  ORDER BY Id DESC";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, customerId);        
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Address tem = new Address(rs.getInt("id"), rs.getString("fullname"),
-                        rs.getString("phone"), rs.getString("address"), rs.getInt("customerId"));
-                return tem;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

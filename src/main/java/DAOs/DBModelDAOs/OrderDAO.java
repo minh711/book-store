@@ -31,30 +31,31 @@ public class OrderDAO {
     /**
      * add data of a new order HienHT
      *
-     * @param order is a Order Object
+     * @param od is a Order Object
      */
-    public void AddNew(Order order) {
+    public void AddNew(Order od) {
         String sql
                 = "INSERT INTO [Order] (saleTotal, total, fullName, phone,"
-                + " [address], isBanking, bankingImage, note, data, customerId)\n"
+                + " [address], isBanking, bankingImage, note, date, customerId)\n"
                 + "VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, order.getSaleTotal());
-            ps.setInt(2, order.getTotal());
-            ps.setString(3, order.getFullName());
-            ps.setString(4, order.getPhone());
-            ps.setString(5, order.getAddress());
-            if (order.isIsBanking() == true) {
+            ps.setInt(1, od.getSaleTotal());
+            ps.setInt(2, od.getTotal());
+            ps.setString(3, od.getFullName());
+            ps.setString(4, od.getPhone());
+            ps.setString(5, od.getAddress());
+            if (od.isIsBanking() == true) {
                 ps.setInt(6, 1);
-                ps.setString(7, order.getBankingImage());
+                ps.setString(7, od.getBankingImage());
             } else {
                 ps.setInt(6, 0);
-                ps.setString(7, order.getBankingImage());
+                ps.setString(7, od.getBankingImage());
             }
-            ps.setString(8, order.getNote());
-            ps.setTimestamp(9, order.getDate());
-            ps.setInt(10, order.getCustomerId());           
+            ps.setString(8, od.getNote());
+            ps.setTimestamp(9, od.getDate());
+            ps.setInt(10, od.getCustomerId());
+            System.out.println(sql);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -181,39 +182,5 @@ public class OrderDAO {
         return item;
     }
     
-     public  ArrayList<Order> getOrderList() {
-
-        String sql = "SELECT * FROM [Order]";
-        ArrayList<Order> orders = new ArrayList<>();
-        try {
-            ps = conn.prepareStatement(sql);          
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                orders.add(new Order(rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getBoolean(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getTimestamp(10),
-                        rs.getInt(11)));
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return orders;
-    }
-     
-     public static void main(String[] args) {
-        OrderDAO dao = new OrderDAO();
-     ArrayList<Order> orders = dao.getOrderList();
-         for (Order order : orders) {
-             System.out.println(order.getId());
-         }
-    }
    
 }

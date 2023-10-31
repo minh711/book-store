@@ -71,7 +71,7 @@
                     <div class="row justify-content-center mb-3">
                         <div class="col-md-12">
                             <table id="example" class="table table-bordered text-center mt-3">
-                                <thead class="table-danger">
+                                <thead>
                                 <th>ID</th>
                                 <th>Họ và tên</th>
                                 <th>Ngày đặt</th>
@@ -83,11 +83,11 @@
                                 <tbody class="align-middle">
                                     <c:forEach items="${requestScope.orders}" var="order">
                                     <tr class="text-success">
-                                          <td>${order.getId()}</td>
-                                        <td>${order.fullName}</td>
-                                        <td class="date">${order.getDate()}</td>
-                                        <td class="totals">${order.getSaleTotal()}</td>
-                                        <td class="status">${orderDAO.getOrderStatusName(order.getId())}</td>
+                                        <td>${order.getId()}</td>
+                                        <td>${order.getFullName()}</td>
+                                        <td>${order.getDate()}</td>
+                                        <td>${order.getSaleTotal()}</td>
+                                        <td>${orderDAO.getOrderStatusName(order.getId())}</td>
                                         <td class="text-primary"> 
                                             <a href="orderDetailCustomerCtrl?id=${order.getId()}">Chi tiết</a></td>
                                     </tr>
@@ -149,37 +149,6 @@
                 });
             });
         </script>
-           <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var cancels = document.querySelectorAll(".status");
-        cancels.forEach(function (subElement) {
-            var statusText = subElement.textContent.trim(); // Trim any leading/trailing spaces
-            if (statusText === 'Đã hủy') {
-                subElement.classList.add("text-danger"); // Use 'classList' instead of 'ClassList'
-            }
-            if (statusText === 'Thành công') {
-                subElement.classList.add("text-success"); // Use 'classList' instead of 'ClassList'
-            }
-        });
-        
-        var totals = document.querySelectorAll('.totals');
-         totals.forEach(function (priceElement) {
-                var price = parseFloat(priceElement.textContent);
-                if (!isNaN(price)) {
-                    var formattedPrice = price.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
-                    var currencySymbol = '₫';
-                    priceElement.textContent = formattedPrice.replace(currencySymbol, '') + 'đ';
-                }
-            });
-       var dates = document.querySelectorAll('.date');
-dates.forEach(function (dateElement) {
-    var dateText = dateElement.textContent;
-    var formattedDate = dateText.replace(/\.\d+/g, ''); // Remove the dot and numbers after it
-    dateElement.textContent = formattedDate;
-});
-
-    });
-</script>
     </body>
 
 </html>

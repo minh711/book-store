@@ -13,7 +13,7 @@
         <title>Blank Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Customer/OrderDetail/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/orderDetailCustomer/style.css">
         <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
@@ -147,20 +147,19 @@
         <c:set var="currentStatus" value="${requestScope.currentStatus}" />
         <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
         <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">
-        <!--        
-                        <input type="hidden" id="currentStatus" name="currentStatus" value="5">
-                        <input type="hidden" id="previousStatus" name="previousStatus" value="3">-->
-        <main class="d-flex">
-
+        
+        <!--        <input type="hidden" id="currentStatus" name="currentStatus" value="5">
+                <input type="hidden" id="previousStatus" name="previousStatus" value="1">-->
+        <main class="bg-light">
             <div class="container">
                 <h1 class="text-center mt-3 mb-3">Thông tin đơn hàng</h1>
                 <form id="form"  method="post" action="orderDetailCustomerCtrl" onsubmit="return validateForm()">
-                    <input type="hidden" id="orderID" name="OrderID" value="${requestScope.OrderID}">
-
+                     <input type="hidden" id="orderID" name="OrderID" value="${requestScope.OrderID}">
+                    
                     <div class="border">
                         <div class="text-success text-center fs-5 mt-3 mb-3" id="currentStatusName">Trạng thái: ${requestScope.currentStatusName}</div>
                         <div class="d-flex justify-content-center">
-                            <button  id="changeStatusButton" class="btn btn-danger mx-4 mb-3"  name="statusButton" value="5">Hủy đơn hàng</button>
+                            <button  id="changeStatusButton" class="btn btn-danger mx-4 mb-3">Hủy đơn hàng</button>
                         </div>
                         <div class="d-flex mb-3 align-items-start" style="height: 200px;">
                             <div class="col-12">
@@ -177,7 +176,7 @@
                                     <li style="width: 25%;" class="fs-1 text-secondary list-unstyled text-center complete">
                                         <i class="fa-regular fa-handshake"></i>
                                     </li>
-                                    <li style="width: 25%;" class="fs-1 text-danger list-unstyled text-center finalStage">
+                                    <li style="width: 25%;" class="fs-1 text-secondary list-unstyled text-center finalStage">
                                         <i class="fa fa-times-circle"></i>
                                     </li>
                                 </ul>
@@ -195,7 +194,7 @@
 
                     <div class="mt-3">
                         <table class="table table-bordered">
-                            <thead class="table-primary">
+                            <thead>
                                 <tr>
                                     <th class="col-4 text-center">Sản phẩm</th>
                                     <th class="col-2 text-center">Đơn giá</th>
@@ -227,8 +226,8 @@
                                 </c:forEach>                        </tbody>
                         </table>
                         <c:set var="order" value="${requestScope.Order}" />
-
-
+                         
+                      
                         <div class="card p-3">
                             <div class="row">
                                 <div class="col-md-7">
@@ -258,12 +257,7 @@
                                                 <div>Số tiền</div>
                                                 <h3 class="text-danger"><strong class="total">${order.getSaleTotal()}</strong></h3>
                                                 <label class="mb-2">Ảnh chụp màn hình chuyển khoản</label><br>
-                                                <div class="card-body">
-                                                   
-                                                        <img id="paymentImage" src="/Images${order.bankingImage}" style="width: 100px; height: 100px; object-fit: contain">
-                                                  
-                                                </div>
-
+                                                <img src="${order.getBankingImage()}" style="width: 100px; height: 100px; object-fit: contain">
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +305,231 @@
                 </div>
             </div>
         </footer>
-        <script src="${pageContext.request.contextPath}/Views/Customer/OrderDetail/scripts.js"></script>                    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                // Get the currentStatus value from your database or JSP scriptlet.
+                const currentStatus = document.getElementById("currentStatus").value;
+                const currentStatusName =document.getElementById("currentStatusName");
+                // Define the progress step elements.
+                const inProcessing = document.querySelector(".inProcessing");
+                const inPackaging = document.querySelector(".inPackaging");
+                const inDelivery = document.querySelector(".inDelivery");
+                const complete = document.querySelector(".complete");
+                const finalStage = document.querySelector(".finalStage");
+                
+                
+                //define the progress step in progress bar
+               const changeStatusButton = document.getElementById("changeStatusButton");
+                const processingStep = document.getElementById("inProcessing");
+                const packagingStep = document.getElementById("inPackaging");
+                const deliveryStep = document.getElementById("inDelivery");
+                const completeStep = document.getElementById("complete");
+                const finalStep = document.getElementById("finalStage");
+                const previousStatus = document.getElementById("previousStatus").value;
+                 const orderID = document.getElementById("orderID").value;
+                console.log("Previous Status: " + previousStatus);
+                console.log("current Status: " + currentStatus);
+                 console.log("current orderID: " + orderID);
+               
+                 
+                // Function to update progress based on currentStatus.
+
+                function cleanStatus() {
+                    inProcessing.style.display = "none";
+                    inPackaging.style.display = "none";
+                    inDelivery.style.display = "none";
+                    complete.style.display = "none";
+                    finalStage.style.display = "none";
+                    processingStep.style.display = "none";
+                    packagingStep.style.display = "none";
+                    deliveryStep.style.display = "none";
+                    completeStep.style.display = "none";
+                    finalStep.style.display = "none";
+                      changeStatusButton.style.display ="none";
+                }
+
+                function updateProgress() {
+
+                    if (currentStatus === "1") {
+                        cleanStatus();
+                          changeStatusButton.style.display ="block";
+                        inProcessing.style.display = "block";
+                        inPackaging.style.display = "block";
+                        inDelivery.style.display = "block";
+                        processingStep.style.display = "block";
+                        packagingStep.style.display = "block";
+                        deliveryStep.style.display = "block";
+                        complete.style.display = "block";
+                        completeStep.style.display = "block";
+                        processingStep.classList.add("active");
+
+                        inProcessing.classList.remove("text-secondary");
+                        inProcessing.classList.add("text-success");
+                    } else if (currentStatus === "2") {
+                        cleanStatus();
+                        inProcessing.style.display = "block";
+                        inPackaging.style.display = "block";
+                        inDelivery.style.display = "block";
+                        processingStep.style.display = "block";
+                        packagingStep.style.display = "block";
+                        deliveryStep.style.display = "block";
+                        complete.style.display = "block";
+                        completeStep.style.display = "block";
+                        processingStep.classList.add("active");
+                        packagingStep.classList.add("active");
+
+                        inProcessing.classList.remove("text-secondary");
+                        inProcessing.classList.add("text-success");
+                        inPackaging.classList.remove("text-secondary");
+                        inPackaging.classList.add("text-success");
+                    } else if (currentStatus === "3") {
+                        cleanStatus();
+                        inProcessing.style.display = "block";
+                        inPackaging.style.display = "block";
+                        inDelivery.style.display = "block";
+                        processingStep.style.display = "block";
+                        packagingStep.style.display = "block";
+                        deliveryStep.style.display = "block";
+                        complete.style.display = "block";
+                        completeStep.style.display = "block";
+                        processingStep.classList.add("active");
+                        packagingStep.classList.add("active");
+                        deliveryStep.classList.add("active");
+
+                        inProcessing.classList.remove("text-secondary");
+                        inProcessing.classList.add("text-success");
+                        inPackaging.classList.remove("text-secondary");
+                        inPackaging.classList.add("text-success");
+                        inDelivery.classList.remove("text-secondary");
+                        inDelivery.classList.add("text-success");
+                    } else if (currentStatus === "4") {
+                        console.log("da toi day");
+                        cleanStatus();
+                        //the below line does not work
+                        inProcessing.style.display = "block";
+                        processingStep.style.display = "block";
+                        processingStep.classList.add("active");
+                        inPackaging.style.display = "block";
+                        packagingStep.style.display = "block";
+                        packagingStep.classList.add("active");
+                        inDelivery.style.display = "block";
+                        deliveryStep.style.display = "block";
+                        deliveryStep.classList.add("active");
+                        complete.style.display = "block";
+                        completeStep.style.display = "block";
+                        completeStep.classList.add("active");
+
+                        inProcessing.classList.remove("text-secondary");
+                        inProcessing.classList.add("text-success");
+                        inPackaging.classList.remove("text-secondary");
+                        inPackaging.classList.add("text-success");
+                        inDelivery.classList.remove("text-secondary");
+                        inDelivery.classList.add("text-success");
+                        complete.classList.remove("text-secondary");
+                        complete.classList.add("text-success");
+
+
+                    } else if (currentStatus === "5") {
+                        currentStatusName.classList.remove("text-success");
+                        currentStatusName.classList.add("text-danger");
+                        if (previousStatus === "1") {
+                            cleanStatus();
+                            inProcessing.style.display = "block";
+                            processingStep.style.display = "block";
+                            processingStep.classList.add("active");
+                            finalStage.style.display = "block";
+                            finalStep.style.display = "block";
+                            finalStep.classList.add("error");
+                            inPackaging.style.display = "block";
+                            packagingStep.style.display = "block";
+                            packagingStep.classList.add("error");
+                            inDelivery.style.display = "block";
+                            deliveryStep.style.display = "block";
+                            deliveryStep.classList.add("error")
+                            inProcessing.classList.remove("text-secondary");
+                            inProcessing.classList.add("text-success");
+                        } else if (previousStatus === "3") {
+                            cleanStatus();
+                            inProcessing.style.display = "block";
+                            processingStep.style.display = "block";
+                            processingStep.classList.add("active");
+                            inPackaging.style.display = "block";
+                            packagingStep.style.display = "block";
+                            packagingStep.classList.add("active");
+                            inDelivery.style.display = "block";
+                            deliveryStep.style.display = "block";
+                            deliveryStep.classList.add("active");
+                            finalStage.style.display = "block";
+                            finalStep.style.display = "block";
+                            finalStep.classList.add("error");
+
+                            inProcessing.classList.remove("text-secondary");
+                            inProcessing.classList.add("text-success");
+                            inPackaging.classList.remove("text-secondary");
+                            inPackaging.classList.add("text-success");
+                            inDelivery.classList.remove("text-secondary");
+                            inDelivery.classList.add("text-success");
+
+                        }
+                    }
+                }
+
+                updateProgress();
+                const priceElements = document.querySelectorAll(".price");
+                const subtotalElements = document.querySelectorAll(".subtotal");
+                const totalElements = document.querySelectorAll(".total");
+                const formatter = new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "VND",
+                });
+                priceElements.forEach(function (element) {
+                    const value = parseFloat(element.textContent);
+                    element.textContent = formatter.format(value);
+                });
+                subtotalElements.forEach(function (element) {
+                    const value = parseFloat(element.textContent);
+                    element.textContent = formatter.format(value);
+                });
+                totalElements.forEach(function (element) {
+                    const value = parseFloat(element.textContent);
+                    element.textContent = formatter.format(value);
+                });
+                // Toggle display based on paymentMethod value
+                const paymentMethod = document.getElementById("paymentMethod");
+                const bankingDetails = document.getElementById("bankingDetails");
+                const CodDetails = document.getElementById("CodDetails");
+                if (paymentMethod.value === "true") {
+                    // Payment via banking (display bankingDetails)
+                    bankingDetails.style.display = "block";
+                    CodDetails.style.display = "none";
+                } else {
+                    // Payment on delivery (display CodDetails)
+                    bankingDetails.style.display = "none";
+                    CodDetails.style.display = "block";
+                }
+            });
+            function validateForm() {
+                var currentStatus = document.getElementById("currentStatus").value;
+
+                if (currentStatus !== "1") {
+                    alert("Đơn hàng của bạn đang trong quá trình gửi. Không thể hủy!");
+                    return false;
+                }
+
+                // If currentStatus is 1, the form will be submitted.
+                if (currentStatus === "1") {
+                    var confirmation = confirm("Bạn có thật sự muốn hủy đơn hàng?");
+                    if (confirmation) {
+                        return true;  // User confirmed, allow form submission.
+                    } else {
+                        return false; // User canceled, prevent form submission.
+                    }
+                }
+            }
+
+
+        </script>                       
     </body>
 
 </html

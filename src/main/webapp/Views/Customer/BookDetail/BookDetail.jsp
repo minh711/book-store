@@ -85,26 +85,22 @@
 
                         <div class="row mt-4">
                             <div class="col-sm-6">
-                                
-                                    <div class="rounded bg-white p-4 mb-3">
-                                        <div class="d-flex">
-                                            <div>
-                                                <c:forEach items="${requestScope.BookPicture}" var="bpicture">
-                                                <div style="width: 100px; height: 100px;" class="d-flex align-items-center justify-content-center">
-                                                    <img style="object-fit: contain; height: 80px; width: 80px;"
-                                                         src="${pageContext.request.contextPath}/Images/${bpicture.getPicture()}"
-                                                         class="img-thumbnail img-fluid rounded" alt="Book Picture" />
-                                                </div>
-                                                </c:forEach>
-                                            </div>
-                                            <div>
-                                                <img style="object-fit: contain; height: 500px; width: 500px;"
-                                                     src="${pageContext.request.contextPath}/Images/${bpicture.getPicture()}"
-                                                     class="img-thumbnail img-fluid rounded" alt="Book Picture" />
+                                <div class="rounded bg-white p-4 mb-3">
+                                    <div class="d-flex">
+                                        <div>
+                                            <div style="width: 100px; height: 100px;" class="d-flex align-items-center justify-content-center">
+                                                <img style="object-fit: contain; height: 80px; width: 80px;"
+                                                     src="${requestScope.BookThumbnail}"
+                                                     class="img-thumbnail img-fluid rounded" alt="Hollywood Sign on The Hill" />
                                             </div>
                                         </div>
+                                        <div>
+                                            <img style="object-fit: contain; height: 500px; width: 500px;"
+                                                 src="https://cdn0.fahasa.com/media/flashmagazine/images/page_images/cay_cam_ngot_cua_toi/2020_12_17_16_50_30_1-390x510.jpg?_gl=1*1j95bdn*_ga*MTk5ODM4NjM0OS4xNjkyODUzNDQ4*_ga_460L9JMC2G*MTY5NDc4ODc4Ny4xMC4xLjE2OTQ3ODkyMTAuMjUuMC4w"
+                                                 class="img-thumbnail img-fluid rounded" alt="Hollywood Sign on The Hill" />
+                                        </div>
                                     </div>
-                                
+                                </div>
 
                                 <form id="addToCart" method="post" action="Book">                   
                                     <div class="d-flex align-items-center mb-3 justify-content-center">
@@ -233,7 +229,7 @@
                                 <p class="mx-2 text-black-50">(10 đánh giá)</p>
                             </div>
                             <div class="d-flex">
-                                <div class="mx-2 border bg-warning text-light rounded-pill p-2">Tất cả đánh giá</div>
+                                <div class="mx-2 border bg-warning text-light rounded-pill p-2">Tất cả đánh giá (10)</div>
                                 <div class="mx-2 border rounded-pill p-2">
                                     5 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>

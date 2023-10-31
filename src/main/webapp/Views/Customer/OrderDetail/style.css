@@ -69,16 +69,9 @@
     
 }
 .progressbar li.error:before {
-    content: '☓';
+    content: '✘';
     border-color: red;
 }
 .progressbar li.error + li:after {
     background-color: red;
 }
-
-
-
-
-
-
-

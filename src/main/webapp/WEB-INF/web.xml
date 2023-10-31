@@ -69,10 +69,6 @@
         <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CartDeleteCtrl</servlet-name>
-        <servlet-class>Controllers.CartDeleteCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AccountDelete</servlet-name>
         <servlet-class>Controllers.AccountDelete</servlet-class>
     </servlet>
@@ -87,18 +83,6 @@
     <servlet>
         <servlet-name>BookSearch</servlet-name>
         <servlet-class>Controllers.BookSearch</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OrderListCtrl</servlet-name>
-        <servlet-class>Controllers.OrderListCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OrderStatusUpdate</servlet-name>
-        <servlet-class>Controllers.OrderStatusUpdateCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OrderAddNewAddressCtrl</servlet-name>
-        <servlet-class>Controllers.OrderAddNewAddressCtrl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
@@ -169,10 +153,6 @@
         <url-pattern>/orderListCustomerCtrl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CartDeleteCtrl</servlet-name>
-        <url-pattern>/Delete/Book</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AccountDelete</servlet-name>
         <url-pattern>/Account/Delete</url-pattern>
     </servlet-mapping>
@@ -187,18 +167,6 @@
     <servlet-mapping>
         <servlet-name>BookSearch</servlet-name>
         <url-pattern>/BookSearch</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderListCtrl</servlet-name>
-        <url-pattern>/OrderList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderStatusUpdate</servlet-name>
-        <url-pattern>/OrderStatusUpdate</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderAddNewAddressCtrl</servlet-name>
-        <url-pattern>/Order/AddNewAddress</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
