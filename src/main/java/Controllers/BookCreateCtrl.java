@@ -138,6 +138,9 @@ public class BookCreateCtrl extends HttpServlet {
             int[] authorIds = null;
             String title = request.getParameter("txtTitle");
             String description = request.getParameter("txtDescription");
+            int price = Integer.valueOf(request.getParameter("txtPrice"));
+            int salePrice = Integer.valueOf(request.getParameter("txtSalePrice"));
+            int discount = (100 - (int) Math.ceil((salePrice * 100.0) / price));
             String[] thumbnail = Utilities.FileMethods.UploadPictures(request, "thumbnail", "");
             String[] pics = Utilities.FileMethods.UploadPictures(request, "pictures", "");
             
@@ -172,9 +175,9 @@ public class BookCreateCtrl extends HttpServlet {
                     title,
                     description,
                     thumbnail[0],
-                    9000,
-                    10000,
-                    10,
+                    salePrice,
+                    price,
+                    discount,
                     0,
                     0,
                     true,

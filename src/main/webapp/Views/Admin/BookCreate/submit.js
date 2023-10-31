@@ -33,6 +33,8 @@ $("#submit").submit(function(e){
         formData.append('txtBookId', $('input[name="txtBookId"]').val());
         formData.append('txtTitle', $('input[name="txtTitle"]').val());
         formData.append('txtDescription', $('textarea[name="txtDescription"]').val());
+        formData.append('txtPrice', $('input[name="txtPrice"]').val()); 
+        formData.append('txtSalePrice', $('input[name="txtSalePrice"]').val()); 
         formData.append('submit', $('input[name="submit"]').val());
 
         let thumbnailInput = document.getElementById('upload-thumbnail-input');

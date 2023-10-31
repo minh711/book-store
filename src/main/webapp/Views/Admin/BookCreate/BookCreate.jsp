@@ -29,18 +29,22 @@
                 <div class="text-danger" id="errId"></div>
                 <input type="text" name="txtBookId" class="form-control mb-3" placeholder="Mã sách">
 
-                <hr>
-
                 <h5>Tên sách</h5>
                 <input type="text" name="txtTitle" class="form-control mb-3" placeholder="Tên sách">
-
-                <hr>
 
                 <h5>Mô tả</h5>
                 <textarea name="txtDescription" class="form-control mb-3" style="resize: none;" rows="8" placeholder="Mô tả"></textarea>
 
-                <hr>
+                <hr> 
+                
+                <h5>Giá giảm</h5>
+                <input type="number" name="txtSalePrice" class="form-control mb-3" placeholder="Giá giảm">
+                
+                <h5>Giá gốc</h5>
+                <input type="number" name="txtPrice" class="form-control mb-3" placeholder="Giá gốc">
 
+                <hr>
+                
                 <h5 class="d-inline-block">Nhà xuất bản</h5>
                 <div class="select-publisher-container mb-3">
                     <div class="select-btn">
@@ -55,8 +59,6 @@
                         <ul class="options"></ul>
                     </div>
                 </div>
-
-                <hr>
 
                 <h5 class="d-inline-block">Tác giả</h5>
                 <div class="select-author-container mb-3">
@@ -76,8 +78,6 @@
                     <div class="d-flex flex-wrap selectedAuthors"></div>
                 </div>
 
-                <hr>
-
                 <h5 class="d-inline-block">Thể loại</h5>
                 <div class="select-genre-container mb-3">
                     <div class="select-btn">
@@ -95,8 +95,6 @@
                 <div class="row">
                     <div class="d-flex flex-wrap selectedGenres"></div>
                 </div>
-
-                <hr>
 
                 <h5 class="d-inline-block">Ngôn ngữ</h5>
                 <div class="select-language-container mb-3">
@@ -123,12 +121,9 @@
                     <div class="upload-thumbnail-area btn btn-primary">
                         Tải ảnh lên
                     </div>
-
                 </div>
 
-                <hr>
-
-                <h5>Ảnh minh họa</h5>                
+                <h5 class="mt-3">Ảnh minh họa</h5>                
                 <div class="wrapper">
                     <div class="upload">
                         <div class="upload-wrapper">

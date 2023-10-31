@@ -120,26 +120,6 @@ public class BookDAO extends DbConnection {
      * @return True if success, False elsewhere.
      */
     public int addNewBook(Book b) {
-//        if (b.getTitle() == null) {
-//            System.out.println("Title must not be null.");
-//            return 0;
-//        }
-//        
-//        if (b.getTitle().length() <= 0 || b.getTitle().length() > 100) {
-//            System.out.println("Title length must be from 1 to 100 characters.");
-//            return 0;
-//        }
-//        
-//        if (b.getDescription() == null) {
-//            System.out.println("Description must not be null.");
-//            return 0;
-//        }
-//
-//        if (b.getDescription().length() <= 0 || b.getDescription().length() > 2000) {
-//            System.out.println("Description length must be from 1 to 2000 characters.");
-//            return 0;
-//        }
-        
         int result = 0;
         String addBookQuery 
                 = "SET IDENTITY_INSERT [Book] ON;"
