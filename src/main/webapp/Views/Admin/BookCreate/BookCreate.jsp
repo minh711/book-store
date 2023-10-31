@@ -27,25 +27,30 @@
             
                 <h5>Mã sách</h5>
                 <div class="text-danger" id="errId"></div>
-                <input type="text" name="txtBookId" class="form-control mb-3" placeholder="Mã sách">
+                <input type="number" name="txtBookId" class="form-control mb-3" placeholder="Mã sách">
 
                 <h5>Tên sách</h5>
+                <div class="text-danger" id="errTitle"></div>
                 <input type="text" name="txtTitle" class="form-control mb-3" placeholder="Tên sách">
 
                 <h5>Mô tả</h5>
+                <div class="text-danger" id="errDescription"></div>
                 <textarea name="txtDescription" class="form-control mb-3" style="resize: none;" rows="8" placeholder="Mô tả"></textarea>
 
                 <hr> 
                 
                 <h5>Giá giảm</h5>
+                <div class="text-danger" id="errSalePrice"></div>
                 <input type="number" name="txtSalePrice" class="form-control mb-3" placeholder="Giá giảm">
                 
                 <h5>Giá gốc</h5>
+                <div class="text-danger" id="errPrice"></div>
                 <input type="number" name="txtPrice" class="form-control mb-3" placeholder="Giá gốc">
 
                 <hr>
                 
                 <h5 class="d-inline-block">Nhà xuất bản</h5>
+                <div class="text-danger" id="errPublisher"></div>
                 <div class="select-publisher-container mb-3">
                     <div class="select-btn">
                         <span>Chọn một nhà xuất bản</span>
@@ -61,6 +66,7 @@
                 </div>
 
                 <h5 class="d-inline-block">Tác giả</h5>
+                <div class="text-danger" id="errAuthor"></div>
                 <div class="select-author-container mb-3">
                     <div class="select-btn">
                         <span>Chọn tác giả</span>
@@ -79,6 +85,7 @@
                 </div>
 
                 <h5 class="d-inline-block">Thể loại</h5>
+                <div class="text-danger" id="errGenre"></div>
                 <div class="select-genre-container mb-3">
                     <div class="select-btn">
                         <span>Chọn thể loại</span>
@@ -97,6 +104,7 @@
                 </div>
 
                 <h5 class="d-inline-block">Ngôn ngữ</h5>
+                <div class="text-danger" id="errLanguage"></div>
                 <div class="select-language-container mb-3">
                     <div class="select-btn">
                         <span>Chọn một ngôn ngữ</span>
@@ -114,6 +122,7 @@
                 <hr>
 
                 <h5>Ảnh thu nhỏ</h5>
+                <div class="text-danger mb-2" id="errThumbnail"></div>
                 <div class="thumbnail-upload">
                     <div class="upload-thumbnail mx-2 my-3">
                         <!-- Image here -->
@@ -123,7 +132,8 @@
                     </div>
                 </div>
 
-                <h5 class="mt-3">Ảnh minh họa</h5>                
+                <h5 class="mt-3">Ảnh minh họa</h5>      
+                <div class="text-danger mb-2" id="errPictures"></div>
                 <div class="wrapper">
                     <div class="upload">
                         <div class="upload-wrapper">
