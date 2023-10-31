@@ -20,6 +20,7 @@ public class SearchBookDAO {
         conn = DBConnection.DbConnection.getConnection();
     }
 
+    //SELECT BOOK
     public ArrayList<Integer> seletctByGenreId(int genreId) {
         ArrayList<Integer> books = new ArrayList<>();
         String sql = "SELECT distinct Book.id FROM Book \n"

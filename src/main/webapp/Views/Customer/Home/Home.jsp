@@ -22,15 +22,10 @@
 
         <main class="bg-light d-flex">
             <form action="/BookSearch" method="post">
-                <input type="text" name="searchKey"/>
+                <input type="text" name="searchKey"/><br>
                 <input type="submit"/>
             </form>
-            <c:forEach var="book" items="${books}">
-                <p>${book.title}</p><br>
-                <p>${book.publisher}</p><br>
-                <p>${book.language}</p><br>
-
-            </c:forEach>
+            
             <br>
             <select id="authorSelect">
                 <option value="">Chọn tác giả</option>
@@ -45,23 +40,21 @@
                 <option value="">Chọn nhà xuất bản</option>
             </select>
             <div id="bookDetails">
+                <c:forEach var="book" items="${books}">
+                <p>${book.title}</p>
+                <p>${book.publisher}</p>
+                <p>${book.language}</p>
 
-            </div> <!-- Thêm một phần tử để hiển thị thông tin sách -->
+            </c:forEach>
+            </div> 
 
         </main>
         <script>
-
+            //get book attributes from BookSearch servlet
             $(document).ready(function () {
-                // Gửi yêu cầu đến Servlet để lấy danh sách tác giả
                 getOptions("author");
-
-                // Gửi yêu cầu đến Servlet để lấy danh sách genre
                 getOptions("genre");
-
-                // Gửi yêu cầu đến Servlet để lấy danh sách language
                 getOptions("language");
-
-                // Gửi yêu cầu đến Servlet để lấy danh sách publisher
                 getOptions("publisher");
             });
 
@@ -76,14 +69,13 @@
                 });
             }
 
-
-
-
+            //send to servlet when user click on a type in list
             $(document).ready(function () {
                 $("#authorSelect").change(function () {
+                    
                     var selectedAuthor = $(this).val();
                     $.ajax({
-                        url: "/BookSelectType", // Điều chỉnh URL của Servlet của bạn
+                        url: "/BookSelectType",
                         type: "POST",
                         data: {author: selectedAuthor},
                         success: function (data) {
@@ -96,7 +88,7 @@
                 $("#genreSelect").change(function () {
                     var selectedGenre = $(this).val();
                     $.ajax({
-                        url: "/BookSelectType", // Điều chỉnh URL của Servlet của bạn
+                        url: "/BookSelectType",
                         type: "POST",
                         data: {genre: selectedGenre},
                         success: function (data) {
@@ -109,7 +101,7 @@
                 $("#languageSelect").change(function () {
                     var selectedLanguage = $(this).val();
                     $.ajax({
-                        url: "/BookSelectType", // Điều chỉnh URL của Servlet của bạn
+                        url: "/BookSelectType",
                         type: "POST",
                         data: {language: selectedLanguage},
                         success: function (data) {
@@ -122,7 +114,7 @@
                 $("#publisherSelect").change(function () {
                     var selectedPublisher = $(this).val();
                     $.ajax({
-                        url: "/BookSelectType", // Điều chỉnh URL của Servlet của bạn
+                        url: "/BookSelectType",
                         type: "POST",
                         data: {publisher: selectedPublisher},
                         success: function (data) {
@@ -131,17 +123,15 @@
                     });
                 });
             });
-            // Hàm để hiển thị danh sách sách
+
+            //show list after processing in servlet
             function displayBooks(data) {
                 var bookDetails = $("#bookDetails");
-                bookDetails.empty(); // Xóa nội dung cũ
-                console.log("hello");
-                // Parse JSON thành mảng đối tượng sách
+                bookDetails.empty();
+
                 var books = JSON.parse(JSON.stringify(data));
 
-                // Hiển thị thông tin sách trong phần tử "bookDetails"
                 $.each(books, function (index, book) {
-
                     var bookInfo = "<p>Title: " + book.title + "</p><p>Publisher: " + book.publisher + "</p><p>Language: " + book.language + "</p>";
                     bookDetails.append("<div class='book-info'>" + bookInfo + "</div>");
                 });

@@ -28,32 +28,6 @@ import java.util.List;
 public class BookSelectType extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BookSelectType</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BookSelectType at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -64,31 +38,21 @@ public class BookSelectType extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //----------------------------------------------
         String optionType = request.getParameter("optionType");
 
         if (optionType != null && !optionType.isEmpty()) {
             String result = "";
-
+            //get Author list
             if (optionType.equals("author")) {
-                // Xử lý yêu cầu để lấy danh sách tác giả
-                // Sử dụng mã của bạn để tạo chuỗi HTML options cho tác giả
                 result = generateAuthorOptions();
-            } else if (optionType.equals("genre")) {
-                // Xử lý yêu cầu để lấy danh sách thể loại (genre)
-                // Tạo chuỗi HTML options cho genre
+            } else if (optionType.equals("genre")) { //get Genre list
                 result = generateGenreOptions();
-            } else if (optionType.equals("language")) {
-                // Xử lý yêu cầu để lấy danh sách ngôn ngữ (language)
-                // Tạo chuỗi HTML options cho language
+            } else if (optionType.equals("language")) { //get Language list
                 result = generateLanguageOptions();
-            } else if (optionType.equals("publisher")) {
-                // Xử lý yêu cầu để lấy danh sách nhà xuất bản (publisher)
-                // Tạo chuỗi HTML options cho publisher
+            } else if (optionType.equals("publisher")) { //get Publisher list
                 result = generatePublisherOptions();
             }
 
-            // Trả kết quả về trang JSP
             response.setContentType("text/html");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
@@ -96,8 +60,9 @@ public class BookSelectType extends HttpServlet {
             out.flush();
         }
     }
+
+    //get Author data from database via SearchBookDAO
     private String generateAuthorOptions() {
-        // Sử dụng mã của bạn để lấy danh sách tác giả từ cơ sở dữ liệu và tạo HTML options
         AuthorDAO authorDAO = new AuthorDAO();
         Author[] authors = authorDAO.getAll();
 
@@ -108,8 +73,9 @@ public class BookSelectType extends HttpServlet {
 
         return authorOptions.toString();
     }
+
+    //get Genre data from database via SearchBookDAO
     private String generateGenreOptions() {
-        // Sử dụng mã của bạn để lấy danh sách tác giả từ cơ sở dữ liệu và tạo HTML options
         GenreDAO genreDAO = new GenreDAO();
         Genre[] genres = genreDAO.getAll();
 
@@ -120,8 +86,9 @@ public class BookSelectType extends HttpServlet {
 
         return genreOptions.toString();
     }
+
+    //get Language data from database via SearchBookDAO
     private String generateLanguageOptions() {
-        // Sử dụng mã của bạn để lấy danh sách tác giả từ cơ sở dữ liệu và tạo HTML options
         LanguageDAO languageDAO = new LanguageDAO();
         Language[] languages = languageDAO.getAll();
 
@@ -133,9 +100,8 @@ public class BookSelectType extends HttpServlet {
         return languageOptions.toString();
     }
 
-    // Các phương thức tạo chuỗi HTML options cho tác giả, genre, language, và publisher
+    //get Publisher data from database via SearchBookDAO
     private String generatePublisherOptions() {
-        // Sử dụng mã của bạn để lấy danh sách tác giả từ cơ sở dữ liệu và tạo HTML options
         PublisherDAO publisherDAO = new PublisherDAO();
         Publisher[] publishers = publisherDAO.getAll();
 
@@ -146,9 +112,7 @@ public class BookSelectType extends HttpServlet {
 
         return publisherOptions.toString();
     }
-    //------------------------------
 
-    // Các phương thức truy vấn cơ sở dữ liệu và chuyển đổi dữ liệu ở đây
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -160,99 +124,89 @@ public class BookSelectType extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Nhận thông tin tác giả đã chọn từ yêu cầu
+        //receive data that selected from client
         String authorString = request.getParameter("author");
         String genreString = request.getParameter("genre");
         String languageString = request.getParameter("language");
         String publisherString = request.getParameter("publisher");
-        
-        if (authorString!=null) {
-            int selectedAuthor = Integer.valueOf(authorString);
 
-        // Xử lý dữ liệu, ví dụ: truy vấn cơ sở dữ liệu để lấy danh sách sách của tác giả
-        // Điều này phụ thuộc vào logic ứng dụng của bạn
-        SearchBookDAO dao = new SearchBookDAO();
-        ArrayList<Integer> list = dao.selectByAuthorId(selectedAuthor);
-        List<BookDetail> books = new ArrayList<>();
-        BookDAO bookDAO = new BookDAO();
-        for (Integer integer : list) {
-            books.add(bookDAO.getBookDetailByID(integer));
+        //get Books of the author that selected
+        if (authorString != null) {
+            int selectedAuthor = Integer.valueOf(authorString);
+            SearchBookDAO dao = new SearchBookDAO();
+            ArrayList<Integer> list = dao.selectByAuthorId(selectedAuthor);
+            List<BookDetail> books = new ArrayList<>();
+            BookDAO bookDAO = new BookDAO();
+            for (Integer integer : list) {
+                books.add(bookDAO.getBookDetailByID(integer));
+            }
+
+            Gson gson = new Gson();
+            String jsonResult = gson.toJson(books);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResult);
         }
 
-        Gson gson = new Gson();
-        String jsonResult = gson.toJson(books);
-
-        // Gửi JSON về phía máy khách
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsonResult);
-    }
-        
-        if (genreString!=null) {
+        //get Books of the genre that selected
+        if (genreString != null) {
             int selectedGenre = Integer.valueOf(genreString);
 
-        // Xử lý dữ liệu, ví dụ: truy vấn cơ sở dữ liệu để lấy danh sách sách của tác giả
-        // Điều này phụ thuộc vào logic ứng dụng của bạn
-        SearchBookDAO dao = new SearchBookDAO();
-        ArrayList<Integer> list = dao.seletctByGenreId(selectedGenre);
-        List<BookDetail> books = new ArrayList<>();
-        BookDAO bookDAO = new BookDAO();
-        for (Integer integer : list) {
-            books.add(bookDAO.getBookDetailByID(integer));
+            SearchBookDAO dao = new SearchBookDAO();
+            ArrayList<Integer> list = dao.seletctByGenreId(selectedGenre);
+            List<BookDetail> books = new ArrayList<>();
+            BookDAO bookDAO = new BookDAO();
+            for (Integer integer : list) {
+                books.add(bookDAO.getBookDetailByID(integer));
+            }
+
+            Gson gson = new Gson();
+            String jsonResult = gson.toJson(books);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResult);
         }
 
-        Gson gson = new Gson();
-        String jsonResult = gson.toJson(books);
-
-        // Gửi JSON về phía máy khách
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsonResult);
-    }
-        if (languageString!=null) {
+        //get Books of the language that selected
+        if (languageString != null) {
             int selectedLanguage = Integer.valueOf(languageString);
 
-        // Xử lý dữ liệu, ví dụ: truy vấn cơ sở dữ liệu để lấy danh sách sách của tác giả
-        // Điều này phụ thuộc vào logic ứng dụng của bạn
-        SearchBookDAO dao = new SearchBookDAO();
-        ArrayList<Integer> list = dao.selectByLanguageId(selectedLanguage);
-        List<BookDetail> books = new ArrayList<>();
-        BookDAO bookDAO = new BookDAO();
-        for (Integer integer : list) {
-            books.add(bookDAO.getBookDetailByID(integer));
+            SearchBookDAO dao = new SearchBookDAO();
+            ArrayList<Integer> list = dao.selectByLanguageId(selectedLanguage);
+            List<BookDetail> books = new ArrayList<>();
+            BookDAO bookDAO = new BookDAO();
+            for (Integer integer : list) {
+                books.add(bookDAO.getBookDetailByID(integer));
+            }
+
+            Gson gson = new Gson();
+            String jsonResult = gson.toJson(books);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResult);
         }
 
-        Gson gson = new Gson();
-        String jsonResult = gson.toJson(books);
-
-        // Gửi JSON về phía máy khách
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsonResult);
-    }
-        if (publisherString!=null) {
+        //get Books of the publisher that selected
+        if (publisherString != null) {
             int selectedPublisher = Integer.valueOf(publisherString);
 
-        // Xử lý dữ liệu, ví dụ: truy vấn cơ sở dữ liệu để lấy danh sách sách của tác giả
-        // Điều này phụ thuộc vào logic ứng dụng của bạn
-        SearchBookDAO dao = new SearchBookDAO();
-        ArrayList<Integer> list = dao.selectByPublisherId(selectedPublisher);
-        List<BookDetail> books = new ArrayList<>();
-        BookDAO bookDAO = new BookDAO();
-        for (Integer integer : list) {
-            books.add(bookDAO.getBookDetailByID(integer));
+            SearchBookDAO dao = new SearchBookDAO();
+            ArrayList<Integer> list = dao.selectByPublisherId(selectedPublisher);
+            List<BookDetail> books = new ArrayList<>();
+            BookDAO bookDAO = new BookDAO();
+            for (Integer integer : list) {
+                books.add(bookDAO.getBookDetailByID(integer));
+            }
+
+            Gson gson = new Gson();
+            String jsonResult = gson.toJson(books);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResult);
         }
-
-        Gson gson = new Gson();
-        String jsonResult = gson.toJson(books);
-
-        // Gửi JSON về phía máy khách
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsonResult);
     }
-        }
-        
-
-    // Các phương thức truy vấn cơ sở dữ liệu và chuyển đổi dữ liệu ở đây
 }
