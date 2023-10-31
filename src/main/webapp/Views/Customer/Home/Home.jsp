@@ -25,125 +25,51 @@
                 <input type="text" name="searchKey"/><br>
                 <input type="submit"/>
             </form>
-            
+
             <br>
-            <select id="authorSelect">
-                <option value="">Chọn tác giả</option>
-            </select>
-            <select id="genreSelect">
-                <option value="">Chọn thể loại</option>
-            </select>
-            <select id="languageSelect">
-                <option value="">Chọn ngôn ngữ</option>
-            </select>
-            <select id="publisherSelect">
-                <option value="">Chọn nhà xuất bản</option>
-            </select>
+            <div>
+                <div>
+                    <select id="authorSelect">
+                        <option value="">Chọn tác giả</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="genreSelect">
+                        <option value="">Chọn thể loại</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="languageSelect">
+                        <option value="">Chọn ngôn ngữ</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="publisherSelect">
+                        <option value="">Chọn nhà xuất bản</option>
+                    </select>
+                </div>
+            </div>
             <div id="bookDetails">
                 <c:forEach var="book" items="${books}">
-                <p>${book.title}</p>
-                <p>${book.publisher}</p>
-                <p>${book.language}</p>
+                    <p>${book.title}</p>
+                    <p>${book.publisher}</p>
+                    <p>${book.language}</p>
 
-            </c:forEach>
+                </c:forEach>
             </div> 
-
+            <div>
+                <div><button id="SortByBestSeller"> Bán chạy nhất</button><br></div>
+                <div><button id="SortByBestSale"> Giảm nhiều nhất</button><br></div>
+                <div><button id="SortByHighestPrice"> Giá từ cao đến thấp</button><br></div>
+                <div><button id="SortByLowestPrice"> Giá từ thấp đến cao</button><br></div>
+            </div>
         </main>
-        <script>
-            //get book attributes from BookSearch servlet
-            $(document).ready(function () {
-                getOptions("author");
-                getOptions("genre");
-                getOptions("language");
-                getOptions("publisher");
-            });
 
-            function getOptions(optionType) {
-                $.ajax({
-                    url: "/BookSelectType",
-                    type: "GET",
-                    data: {optionType: optionType},
-                    success: function (data) {
-                        $("#" + optionType + "Select").append(data);
-                    }
-                });
-            }
-
-            //send to servlet when user click on a type in list
-            $(document).ready(function () {
-                $("#authorSelect").change(function () {
-                    
-                    var selectedAuthor = $(this).val();
-                    $.ajax({
-                        url: "/BookSelectType",
-                        type: "POST",
-                        data: {author: selectedAuthor},
-                        success: function (data) {
-                            displayBooks(data);
-                        }
-                    });
-                });
-            });
-            $(document).ready(function () {
-                $("#genreSelect").change(function () {
-                    var selectedGenre = $(this).val();
-                    $.ajax({
-                        url: "/BookSelectType",
-                        type: "POST",
-                        data: {genre: selectedGenre},
-                        success: function (data) {
-                            displayBooks(data);
-                        }
-                    });
-                });
-            });
-            $(document).ready(function () {
-                $("#languageSelect").change(function () {
-                    var selectedLanguage = $(this).val();
-                    $.ajax({
-                        url: "/BookSelectType",
-                        type: "POST",
-                        data: {language: selectedLanguage},
-                        success: function (data) {
-                            displayBooks(data);
-                        }
-                    });
-                });
-            });
-            $(document).ready(function () {
-                $("#publisherSelect").change(function () {
-                    var selectedPublisher = $(this).val();
-                    $.ajax({
-                        url: "/BookSelectType",
-                        type: "POST",
-                        data: {publisher: selectedPublisher},
-                        success: function (data) {
-                            displayBooks(data);
-                        }
-                    });
-                });
-            });
-
-            //show list after processing in servlet
-            function displayBooks(data) {
-                var bookDetails = $("#bookDetails");
-                bookDetails.empty();
-
-                var books = JSON.parse(JSON.stringify(data));
-
-                $.each(books, function (index, book) {
-                    var bookInfo = "<p>Title: " + book.title + "</p><p>Publisher: " + book.publisher + "</p><p>Language: " + book.language + "</p>";
-                    bookDetails.append("<div class='book-info'>" + bookInfo + "</div>");
-                });
-            }
-        </script>
-    </script>
-
-    <jsp:include page="/Views/footer.jsp"/>
-    <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>             
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="${pageContext.request.contextPath}/Views/Customer/Home/script.js"></script>
-</body>
+        <jsp:include page="/Views/footer.jsp"/>
+        <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>             
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="${pageContext.request.contextPath}/Views/Customer/Home/script.js"></script>
+    </body>
 
 </html
