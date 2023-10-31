@@ -78,7 +78,7 @@ public class RegisterCtrl extends HttpServlet {
 
                         response.sendRedirect("Views/Customer/Home/Home.jsp");
                     } else {
-                        request.setAttribute("mess", "Email này đã được sử dụng");
+                        request.setAttribute("messE", "Email này đã được sử dụng");
                         request.setAttribute("mess2", fullName);
                         request.setAttribute("mess3", phone);
                         request.setAttribute("mess4", email);
@@ -91,7 +91,7 @@ public class RegisterCtrl extends HttpServlet {
                     }
 
                 } else {
-                    request.setAttribute("mess", "Số điện thoại này đã được sử dụng");
+                    request.setAttribute("messP", "Số điện thoại này đã được sử dụng");
                     request.setAttribute("mess2", fullName);
                     request.setAttribute("mess3", phone);
                     request.setAttribute("mess4", email);
@@ -104,7 +104,7 @@ public class RegisterCtrl extends HttpServlet {
                 }
 
             } else {
-                request.setAttribute("mess", "Tên tài khoản đã được sử dụng");
+                request.setAttribute("messU", "Tên tài khoản đã được sử dụng");
                 request.setAttribute("mess2", fullName);
                 request.setAttribute("mess3", phone);
                 request.setAttribute("mess4", email);

@@ -15,9 +15,16 @@ function validateForm() {
 //        }
 //    });
 
-    if (isEmpty(usernameInput) || isEmpty(passwordInput)) {
-        var errorMessage = "Vui lòng điền đầy đủ thông tin và chọn chức vụ.";
+    if (isEmpty(usernameInput) ) {
+        var errorMessage = "Vui lòng điền đầy đủ thông tin tên tài khoản.";
         document.querySelector(".error-message").textContent = errorMessage;
+        return false;
+    }
+
+
+if (  isEmpty(passwordInput)) {
+        var errorMessage = "Vui lòng điền đầy đủ thông tin mật khẩu.";
+        document.querySelector(".error-message2").textContent = errorMessage;
         return false;
     }
 
@@ -34,7 +41,7 @@ function validateForm() {
     if (!isValidPassword(passwordInput.value)) {
 
         var errorMessage = "Mật khẩu phải có 8-32 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.";
-        document.querySelector(".error-message").textContent = errorMessage;
+        document.querySelector(".error-message2").textContent = errorMessage;
 
         return false;
     }

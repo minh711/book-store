@@ -31,18 +31,33 @@
                         <form  onsubmit="return validateFormSignUp()"  action="${pageContext.request.contextPath}/Register" class="form" method="post" >
                             <h1 class="text-center mb-3">Đăng ký</h1>
 
-                            <p class="error-message text-danger">${mess}</p>
+                            <p class="error-message1 text-danger">${mess}</p>
 
-                            <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName" required="" autofocus="" value="${mess2}">
-                            <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone" required="" autofocus="" value="${mess3}">
-                            <input type="email" class="form-control mb-3" placeholder="Địa chỉ Email" name="email" required="" autofocus="" value="${mess4}">
-                            <input type="text" class="form-control mb-3" placeholder="Tên đăng nhập" name="username" required="" autofocus="" value="${mess5}">
-                            <input type="password" class="form-control mb-3" placeholder="Mật khẩu" name="password" required="" autofocus="" value="${mess6}">
-                            <input type="password" class="form-control mb-3" placeholder="Nhập lại mật khẩu" name="resetPWD" required="" autofocus="" value="${mess7}" >
+                            <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName"   autofocus="" value="${mess2}">
 
 
+                            <p class="error-message2 text-danger">${messP}</p>
+                            <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone"   autofocus="" value="${mess3}">
 
 
+                            <p class="error-message3 text-danger">${messE}</p>
+                            <input type="text" class="form-control mb-3" placeholder="Địa chỉ Email" name="email"   autofocus="" value="${mess4}">
+
+
+                            <p class="error-message4 text-danger">${messU}</p>
+                            <input type="text" class="form-control mb-3" placeholder="Tên đăng nhập" name="username"   autofocus="" value="${mess5}">
+
+
+                            <p class="error-message5 text-danger">${mess}</p>
+                            <input type="password" class="form-control mb-3" placeholder="Mật khẩu" name="password"  autofocus="" value="${mess6}">
+
+
+                            <p class="error-message6 text-danger">${mess}</p>
+                            <input type="password" class="form-control mb-3" placeholder="Nhập lại mật khẩu" name="resetPWD"   autofocus="" value="${mess7}" >
+
+
+
+                            <p class="error-message7 text-danger">${mess}</p>
                             <label class="mb-2">Giới tính</label>
                             <div class="d-flex mb-3">
                                 <div class="form-check mx-2">
@@ -61,9 +76,9 @@
 
 
 
-
+                            <p class="error-message8 text-danger">${mess}</p>
                             <label class="mb-2">Ngày sinh</label>
-                            <input type="date" class="form-control mb-3" name="birthday" required="" value="${mess8}" autofocus="">
+                            <input type="date" class="form-control mb-3" name="birthday"   value="${mess8}" autofocus="">
 
 
 
@@ -78,11 +93,11 @@
         </main>
 
         <jsp:include page="/Views/footer.jsp"/>
-        
+
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="${pageContext.request.contextPath}/Views/Customer/Authentication/SignupValidate.js"></script>
+        <script src="${pageContext.request.contextPath}/Views/Customer/Authentication/RegisterValidate.js"></script>
 
     </body>
 </html>

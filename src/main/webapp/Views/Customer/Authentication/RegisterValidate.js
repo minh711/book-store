@@ -13,21 +13,23 @@ function validateFormSignUp() {
     const birthdayInput = document.querySelector('input[name="birthday"]');
 
 
+ 
+        
+        
+        // Kiểm tra từng trường input
+        if (isEmpty(fullNameInput) || isEmpty(phoneInput) || isEmpty(emailInput) || isEmpty(usernameInput) ||
+                isEmpty(passwordInput) || isEmpty(resetPasswordInput) || genderInputs.length === 0 || !birthdayInput.value) {
 
-    // Kiểm tra từng trường input
-    if (isEmpty(fullNameInput) || isEmpty(phoneInput) || isEmpty(emailInput) || isEmpty(usernameInput) ||
-            isEmpty(passwordInput) || isEmpty(resetPasswordInput) || genderInputs.length === 0 || !birthdayInput.value) {
-
-        var errorMessage = "Vui lòng điền đầy đủ thông tin và chọn chức vụ.";
-        document.querySelector(".error-message").textContent = errorMessage;
-        return false;
-    }
+            var errorMessage = "Vui lòng điền đầy đủ thông tin và chọn chức vụ.";
+            document.querySelector(".error-message1").textContent = errorMessage;
+            return false;
+        }
 
     // Kiểm tra xem Full name không vượt quá 100 ký tự
     if (!isNotExceedMaxLength(fullNameInput, 32)) {
 
         var errorMessage = "Full name không được vượt quá 32 ký tự.";
-        document.querySelector(".error-message").textContent = errorMessage;
+        document.querySelector(".error-message1").textContent = errorMessage;
         return false;
     }
 
@@ -35,7 +37,7 @@ function validateFormSignUp() {
     if (!isValidPhoneNumber(phoneInput.value)) {
 
         var errorMessage = "Số điện thoại phải có từ 10 đến 11 chữ số và bắt đầu bằng số 0.";
-        document.querySelector(".error-message").textContent = errorMessage;
+        document.querySelector(".error-message2").textContent = errorMessage;
 
         return false;
     }
@@ -44,7 +46,7 @@ function validateFormSignUp() {
     if (!isValidEmail(emailInput.value)) {
 
         var errorMessage = "Vui lòng nhập một địa chỉ email hợp lệ.";
-        document.querySelector(".error-message").textContent = errorMessage;
+        document.querySelector(".error-message3").textContent = errorMessage;
 
         return false;
     }
@@ -53,28 +55,23 @@ function validateFormSignUp() {
     if (!isNotExceedMaxLength(usernameInput, 32) || !isUsernameValid(usernameInput.value)) {
 
         var errorMessage = "Username không được vượt quá 32 ký tự và chỉ chứa chữ và số.";
-        document.querySelector(".error-message").textContent = errorMessage;
+        document.querySelector(".error-message4").textContent = errorMessage;
 
         return false;
     }
 
     // Kiểm tra xem mật khẩu hợp lệ
     if (!isValidPassword(passwordInput.value)) {
-
-
-
         var errorMessage = "Mật khẩu phải có 8-32 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.";
-        document.querySelector(".error-message").textContent = errorMessage;
+        document.querySelector(".error-message5").textContent = errorMessage;
 
         return false;
     }
 
     // Kiểm tra xem mật khẩu nhập lại hợp lệ
     if (passwordInput.value !== resetPasswordInput.value) {
-
-
         var errorMessage = "Mật khẩu và Nhập lại mật khẩu không khớp nhau.";
-        document.querySelector(".error-message").textContent = errorMessage;
+        document.querySelector(".error-message6").textContent = errorMessage;
 
 
         return false;
@@ -159,6 +156,11 @@ function isUsernameValid(username) {
     const usernamePattern = /^[a-zA-Z0-9]+$/; // Chỉ cho phép chữ và số
     return usernamePattern.test(username);
 }
+
+
+
+
+
 
 
 

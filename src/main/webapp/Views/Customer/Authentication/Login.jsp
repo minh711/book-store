@@ -34,12 +34,15 @@
                         <form class="form" onsubmit="return validateForm();" action="${pageContext.request.contextPath}/Login" method="post"   >
                             <h1 class="text-center mb-3">Đăng nhập</h1>
 
+                            
+                            
+                            
                             <p class="error-message text-danger">${mess}</p>
-
-
 
                             <input type="text" class="form-control mb-3" placeholder="Tên tài khoản"  required="" autofocus="" id="name" name="name" value="${cookie.user.value}${mess2}"  >
 
+                            
+                              <p class="error-message2 text-danger">${mess3_1}</p>
                             <input type="password" class="form-control mb-3" placeholder="Mật khẩu"  required="" autofocus="" id="pass" name="pass" value="${cookie.pass.value}${mess3}"   >
 
 

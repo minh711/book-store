@@ -54,7 +54,7 @@ public class LoginCtrl extends HttpServlet {
                 //nếu user có tồn tại thì nhảy qua kiểm tra mật khẩu
                 boolean ifPasswordCorrect = dao.checkPass(user, pass);
                 if (ifPasswordCorrect == false) {
-                    request.setAttribute("mess", "Sai mật khẩu");
+                    request.setAttribute("mess3_1", "Sai mật khẩu");
                     request.setAttribute("mess2", user);
                     request.setAttribute("mess3", pass);
                     request.getRequestDispatcher("Views/Customer/Authentication/Login.jsp").forward(request, response);
