@@ -66,7 +66,7 @@ function searchPublisher() {
         .filter(data => {
             return data.publisher.toLowerCase().includes(searchedVal.toLowerCase());
         })
-        .map(data => `<li onclick="selectPublisher(this);" data-id=${data.id}">${data.publisher}</li>`)
+        .map(data => `<li onclick="selectPublisher(this);" data-id="${data.id}">${data.publisher}</li>`)
         .join("");
 
     let isUnique = true;

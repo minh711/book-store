@@ -1,16 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controllers;
 
 import DAOs.DBModelDAOs.AuthorDAO;
+import DAOs.DBModelDAOs.BookAuthorDAO;
 import DAOs.DBModelDAOs.BookDAO;
+import DAOs.DBModelDAOs.BookGenreDAO;
+import DAOs.DBModelDAOs.BookPictureDAO;
 import DAOs.DBModelDAOs.GenreDAO;
 import DAOs.DBModelDAOs.LanguageDAO;
 import DAOs.DBModelDAOs.PublisherDAO;
 import Models.DBModels.Author;
 import Models.DBModels.Book;
+import Models.DBModels.BookAuthor;
+import Models.DBModels.BookGenre;
+import Models.DBModels.BookPicture;
 import Models.DBModels.Genre;
 import Models.DBModels.Language;
 import Models.DBModels.Publisher;
@@ -132,8 +134,8 @@ public class BookCreateCtrl extends HttpServlet {
             int bookId = 0;
             int publisherId = 0;
             int languageId = 0;
-            int[] selectedGenreIds;
-            int[] selectedAuthorIds;
+            int[] genreIds = null;
+            int[] authorIds = null;
             String title = request.getParameter("txtTitle");
             String description = request.getParameter("txtDescription");
             String[] thumbnail = Utilities.FileMethods.UploadPictures(request, "thumbnail", "");
@@ -145,41 +147,24 @@ public class BookCreateCtrl extends HttpServlet {
             } catch (Exception e) {
                 System.out.println("Error in book ID.");
             }
-            
-            // For debugging
-//            System.out.println("Book ID: " + bookId);
-//            System.out.println("Title: " + title);
-//            System.out.println("Description: " + description);
-            
+
             try {
                 String[] selectedGenreIdsString = request.getParameterValues("selectedGenreIds");
                 String[] selectedAuthorIdsString = request.getParameterValues("selectedAuthorIds");
-                selectedGenreIds = new int[selectedGenreIdsString.length];
-                selectedAuthorIds = new int[selectedAuthorIdsString.length];
+                genreIds = new int[selectedGenreIdsString.length];
+                authorIds = new int[selectedAuthorIdsString.length];
                 publisherId = Integer.valueOf(request.getParameter("txtPublisherId"));
                 languageId = Integer.valueOf(request.getParameter("txtLanguageId"));
                 
                 for (int i = 0; i < selectedGenreIdsString.length; i++) {
-                    selectedGenreIds[i] = Integer.valueOf(selectedGenreIdsString[i]);
+                    genreIds[i] = Integer.valueOf(selectedGenreIdsString[i]);
                 }
                 for (int i = 0; i < selectedAuthorIdsString.length; i++) {
-                    selectedAuthorIds[i] = Integer.valueOf(selectedAuthorIdsString[i]);
+                    authorIds[i] = Integer.valueOf(selectedAuthorIdsString[i]);
                 }
-                
-                // For debugging
-//                System.out.println("Genres: " + Arrays.toString(selectedGenreIds));
-//                System.out.println("Authors: " + Arrays.toString(selectedAuthorIds));
             } catch (NumberFormatException e) {
                 System.out.println("Error in selecting genres and authors.");
             }
-            
-            // For debugging
-//            try {
-//                System.out.println("Thumbnail : " + thumbnail[0]);
-//                System.out.println("Pictures: " + Arrays.toString(pics));
-//            } catch (Exception e) {
-//                System.out.println("Error in picture uploading.");
-//            }
             // </editor-fold>
             
             Book book = new Book(
@@ -202,13 +187,31 @@ public class BookCreateCtrl extends HttpServlet {
             
             BookDAO bookDAO = new BookDAO();
             int addBookResult = bookDAO.addNewBook(book);
-            
             if (addBookResult == -1) {
                 String errMessage = "duplicateId";
                 String json = new Gson().toJson(errMessage);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(json);
+            }
+            
+            BookGenreDAO bookGenreDAO = new BookGenreDAO();
+            BookAuthorDAO bookAuthorDAO = new BookAuthorDAO();
+            BookPictureDAO bookPictureDAO = new BookPictureDAO();
+            
+            for (int genreId : genreIds) {
+                BookGenre bg = new BookGenre(bookId, genreId);
+                bookGenreDAO.addNew(bg);
+            }
+            
+            for (int authorId : authorIds) {
+                BookAuthor ba = new BookAuthor(bookId, authorId);
+                bookAuthorDAO.addNew(ba);
+            }
+            
+            for (String pic : pics) {
+                BookPicture bookPicture = new BookPicture(0, pic, bookId);
+                bookPictureDAO.addNew(bookPicture);
             }
         }
     }

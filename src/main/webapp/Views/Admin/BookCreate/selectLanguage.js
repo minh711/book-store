@@ -67,7 +67,7 @@ function searchLanguage() {
         .filter(data => {
             return data.language.toLowerCase().includes(searchedVal.toLowerCase());
         })
-        .map(data => `<li onclick="selectLanguage(this);" data-id=${data.id}">${data.language}</li>`)
+        .map(data => `<li onclick="selectLanguage(this);" data-id="${data.id}">${data.language}</li>`)
         .join("");
 
     let isUnique = true;

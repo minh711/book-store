@@ -67,6 +67,7 @@ public class BookGenreDAO extends DbConnection{
         int result = 0;
         String sql
                 = "INSERT INTO BookGenre "
+                + "(bookId, genreId) "
                 + "VALUES "
                 + "(?, ?)";
         try {

@@ -66,12 +66,13 @@ public class BookAuthorDAO extends DbConnection{
         int result = 0;
         String sql
                 = "INSERT INTO BookAuthor "
+                + "(bookId, authorId) "
                 + "VALUES "
                 + "(?, ?)";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, ba.getBookId());
-            ps.setInt(2, ba.getBookId());
+            ps.setInt(2, ba.getAuthorId());
             result = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BookAuthorDAO.class.getName()).log(Level.SEVERE, null, ex);
