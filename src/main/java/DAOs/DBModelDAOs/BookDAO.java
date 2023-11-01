@@ -68,6 +68,45 @@ public class BookDAO extends DbConnection {
     }
     
     /**
+     * Get numbers of available Books.
+     *
+     * @return Book object array.
+     * @author MinhTD
+     */
+    public Book[] getTop() {
+        List<Book> ls = new ArrayList<>();
+        String sql = "SELECT TOP 8 * FROM Book WHERE isAvailable = 1";
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new Book(
+                        rs.getInt(1),
+                        rs.getNString(2),
+                        rs.getNString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getBoolean(10),
+                        rs.getInt(11),
+                        rs.getInt(12),
+                        rs.getInt(13),
+                        rs.getInt(14),
+                        rs.getFloat(15)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Book[] arr = new Book[ls.size()];
+        ls.toArray(arr);
+        return arr;
+    }
+    
+    /**
      * Get top sellers Books.
      * 
      * @return Book object array.

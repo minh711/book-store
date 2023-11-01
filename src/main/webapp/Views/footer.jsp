@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 p-4">
-                <img src="${pageContext.request.contextPath}/Images/logo.jpg" alt="" style="height: 40px;">
+                <img src="${pageContext.request.contextPath}/Images/logo.png" alt="" style="height: 40px;">
                 <div>
                     <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
                 </div>
