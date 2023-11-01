@@ -1,7 +1,7 @@
 <%-- 
     Document   : BookDetail
     Created on : Oct 6, 2023, 6:03:06 PM
-    Author     : mummykiara
+    Author     : NhuLNT
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,7 +27,18 @@
         <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            .carousel {
+                height: 500px;
+                width: 450px;
+            }
 
+            .carousel-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        </style>
     </head>
 
     <body>
@@ -85,26 +96,39 @@
 
                         <div class="row mt-4">
                             <div class="col-sm-6">
-                                
-                                    <div class="rounded bg-white p-4 mb-3">
-                                        <div class="d-flex">
-                                            <div>
-                                                <c:forEach items="${requestScope.BookPicture}" var="bpicture">
-                                                <div style="width: 100px; height: 100px;" class="d-flex align-items-center justify-content-center">
-                                                    <img style="object-fit: contain; height: 80px; width: 80px;"
-                                                         src="${pageContext.request.contextPath}/Images/${bpicture.getPicture()}"
-                                                         class="img-thumbnail img-fluid rounded" alt="Book Picture" />
+
+                                <div class="rounded bg-white p-4 mb-3">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                                                <div class="carousel-indicators">
+                                                    <c:forEach items="${requestScope.BookPicture}" var="picture" varStatus="loop">
+                                                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"
+                                                                aria-current="${loop.first ? 'true' : 'false'}" aria-label="Slide ${loop.index + 1}"></button>
+                                                    </c:forEach>
                                                 </div>
-                                                </c:forEach>
+                                                <div class="carousel-inner">
+                                                    <c:forEach items="${requestScope.BookPicture}" var="picture" varStatus="loop">
+                                                        <div class="carousel-item ${loop.first ? 'active' : ''} img-thumbnail img-fluid rounded" data-bs-interval="10000">
+                                                            <img src="${pageContext.request.contextPath}/Images/${picture.getPicture()}" class="d-block">
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
                                             </div>
-                                            <div>
-                                                <img style="object-fit: contain; height: 500px; width: 500px;"
-                                                     src="${pageContext.request.contextPath}/Images/${bpicture.getPicture()}"
-                                                     class="img-thumbnail img-fluid rounded" alt="Book Picture" />
-                                            </div>
+
                                         </div>
+
                                     </div>
-                                
+                                </div>
+
 
                                 <form id="addToCart" method="post" action="Book">                   
                                     <div class="d-flex align-items-center mb-3 justify-content-center">
@@ -221,7 +245,7 @@
                             <h2>ĐÁNH GIÁ CỦA KHÁCH HÀNG</h2>
                             <div class="d-flex">
                                 <p>
-                                    <strong class="mx-2">4.5</strong>
+                                    <strong class="mx-2">${bookDetail.avgRating}</strong>
                                     <span>
                                         <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                         <i class="fa fa-star text-warning" aria-hidden="true"></i>
@@ -233,40 +257,41 @@
                                 <p class="mx-2 text-black-50">(10 đánh giá)</p>
                             </div>
                             <div class="d-flex">
-                                <div class="mx-2 border bg-warning text-light rounded-pill p-2">Tất cả đánh giá</div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border bg-warning text-light rounded-pill p-2" style="cursor: pointer">Tất cả đánh giá</div>
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
                                     5 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                     (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
                                     4 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                     (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
                                     3 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                     (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
                                     2 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                     (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
                                     1 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                     (2)
                                 </div>
                             </div>
                         </div>
+                        <c:forEach items="${requestScope.BookRating}" var="Rating">
                         <div class="mt-4 p-4 bg-white text-dark rounded">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex">
                                     <div class="mx-2">Nguyễn Văn A</div>
                                 </div>
-                                <div class="text-black-50">15/09/2023, 11:11</div>
+                                <div class="text-black-50">${Rating.getDateRating()}</div>
                             </div>
                             <div class="mt-2">
                                 <i class="fa fa-star text-warning" aria-hidden="true"></i>
@@ -274,24 +299,10 @@
                                 <i class="fa fa-star text-secondary" aria-hidden="true"></i>
                                 <i class="fa fa-star text-secondary" aria-hidden="true"></i>
                                 <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <div class="mt-2 text-dark">Giao hàng nhanh</div>
+                                <div class="mt-2 text-dark">${Rating.getComment()}</div>
                             </div>
                         </div>
-                        <div class="mt-4 mb-4 p-4 bg-white text-dark rounded">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <div class="mx-2">Nguyễn Văn B</div>
-                                </div>
-                                <div class="text-black-50">15/09/2023, 11:11</div>
-                            </div>
-                            <div class="mt-2">
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i><br>
-                                <div class="mt-2 text-dark">tốt</div>
-                            </div>
+                        </c:forEach>
                         </div>
                     </div>
                 </main>
