@@ -69,6 +69,10 @@
         <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>BookCreateCtrl</servlet-name>
+        <servlet-class>Controllers.BookCreateCtrl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CartDeleteCtrl</servlet-name>
         <servlet-class>Controllers.CartDeleteCtrl</servlet-class>
     </servlet>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>orderListCustomerCtrl</servlet-name>
         <url-pattern>/orderListCustomerCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookCreateCtrl</servlet-name>
+        <url-pattern>/BookCreateCtrl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CartDeleteCtrl</servlet-name>

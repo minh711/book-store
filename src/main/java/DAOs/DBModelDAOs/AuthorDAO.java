@@ -56,4 +56,21 @@ public class AuthorDAO {
         ls.toArray(arr);
         return arr;
     }
+
+    public int addNew(String author) {
+        int result = 0;
+        String sql
+                = "INSERT INTO [Author] "
+                + "(author, isAvailable) "
+                + "VALUES"
+                + "(?, 1)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setNString(1, author);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

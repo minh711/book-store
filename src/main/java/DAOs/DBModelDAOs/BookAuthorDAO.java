@@ -5,6 +5,7 @@
 package DAOs.DBModelDAOs;
 
 import DBConnection.DbConnection;
+import Models.DBModels.BookAuthor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,4 +57,26 @@ public class BookAuthorDAO extends DbConnection{
         return list;
     }
     
+    /**
+     * Add new book genre while creating or updating book.
+     * @param ba Book author.
+     * @return Number of rows effected.
+     */
+    public int addNew(BookAuthor ba) {
+        int result = 0;
+        String sql
+                = "INSERT INTO BookAuthor "
+                + "(bookId, authorId) "
+                + "VALUES "
+                + "(?, ?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ba.getBookId());
+            ps.setInt(2, ba.getAuthorId());
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookAuthorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

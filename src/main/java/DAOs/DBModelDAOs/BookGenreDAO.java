@@ -57,4 +57,28 @@ public class BookGenreDAO extends DbConnection{
         return list;
         
     }
+    
+    /**
+     * Add new book genre while creating or updating book.
+     * @param bg Book genre.
+     * @return Number of rows effected.
+     */
+    public int addNew(BookGenre bg) {
+        int result = 0;
+        String sql
+                = "INSERT INTO BookGenre "
+                + "(bookId, genreId) "
+                + "VALUES "
+                + "(?, ?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            int i = 1;
+            ps.setInt(1, bg.getBookId());
+            ps.setInt(2, bg.getGenreId());
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookGenreDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOs.DBModelDAOs;
 
 import DBConnection.DbConnection;
@@ -59,9 +55,8 @@ public class BookDAO extends DbConnection {
                         rs.getInt(11),
                         rs.getInt(12),
                         rs.getInt(13),
-                         rs.getInt(14),
-                         rs.getInt(15)
-                       
+                        rs.getInt(14),
+                        rs.getInt(15)             
                 ));
             }
         } catch (SQLException ex) {
@@ -116,5 +111,46 @@ public class BookDAO extends DbConnection {
             Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return b;
+    }
+    
+    /**
+     * Add a new book.
+     * @param b New book.
+     * @return True if success, False elsewhere.
+     */
+    public int addNewBook(Book b) {
+        int result = 0;
+        String addBookQuery 
+                = "SET IDENTITY_INSERT [Book] ON;"
+                + "INSERT INTO Book "
+                + "(id, title, description, thumbnail, salePrice, price, discount, "
+                + "quantity, soleTotal, isAvailable, publisherId, languageId, "
+                + "totalRating, totalRatingStar, avgRating) "
+                + "VALUES"
+                + "(?, ?, ?, ?, ?, ?, ?, 0, 0, 1, ?, ?, 0, 0, 0)"
+                + "SET IDENTITY_INSERT [Book] OFF;";
+        try {
+            ps = conn.prepareStatement(addBookQuery);
+            ps.setInt(1, b.getId());
+            ps.setNString(2, b.getTitle());
+            ps.setNString(3, b.getDescription());
+            ps.setString(4, b.getThumbnail());
+            ps.setInt(5, b.getSalePrice());
+            ps.setInt(6, b.getPrice());
+            ps.setInt(7, b.getDiscount());
+            ps.setInt(8, b.getPubisherId());
+            ps.setInt(9, b.getLanguageId());
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Book ID aready exist or Publisher or author ID does not exist.");
+            return -1;
+        }
+        if (result == 0) {
+            return 0;
+        } else {
+            System.out.println("Success.");
+            return 1;
+        }
     }
 }

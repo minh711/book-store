@@ -19,14 +19,13 @@ public class Book {
     private int languageId;
     private int totalRating;
     private int totalRatingStar;
-    private int avgRating;
+    private float avgRating;
+
 
     public Book() {
     }
 
-    public Book(int id, String title, String description, String thumbnail, int salePrice, int price,
-            int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,
-            int totalRating, int totalRatingStar, int avgRating) {
+    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId, int totalRating, int totalRatingStar, float avgRating) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -39,14 +38,10 @@ public class Book {
         this.isAvailable = isAvailable;
         this.pubisherId = pubisherId;
         this.languageId = languageId;
-        this.totalRating=totalRating;
-        this.totalRatingStar=totalRatingStar;
-        this.avgRating=avgRating;
+        this.totalRating = totalRating;
+        this.totalRatingStar = totalRatingStar;
+        this.avgRating = avgRating;
     }
-    
-    
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public int getId() {
@@ -144,12 +139,31 @@ public class Book {
     public void setLanguageId(int languageId) {
         this.languageId = languageId;
     }
-    
-    
-    
-    
+
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public int getTotalRatingStar() {
+        return totalRatingStar;
+    }
+
+    public void setTotalRatingStar(int totalRatingStar) {
+        this.totalRatingStar = totalRatingStar;
+    }
+
+    public float getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(float avgRating) {
+        this.avgRating = avgRating;
+    }
     // </editor-fold>
-    
 }
 
     
