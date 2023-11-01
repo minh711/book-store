@@ -306,7 +306,7 @@
                     var customerId = tr.find('.DeleteProduct').data('customerid');
                     var bQuantity = tr.find('.BookQuantity').val();
                     var bookquantity = parseInt(bQuantity);
-                    selectedItems.push({customerId: customerId, bookQuantity: bookquantity, bookId: bookId});
+                    selectedItems.push({bookId: bookId, quantity: bookquantity, customerId: customerId});
                 });
 
                 var jsonData = JSON.stringify(selectedItems);

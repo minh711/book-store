@@ -5,33 +5,20 @@ package Models.DBModels;
  * @author MinhTD
  */
 public class Cart {
-    private int id;
     private int quantity;
     private int bookId;
+    private int customerId;
 
     public Cart() {
     }
 
-    public Cart(  int id, int quantity, int bookId) {
-        this.id = id;
+    public Cart(int quantity, int bookId, int customerId) {
         this.quantity = quantity;
         this.bookId = bookId;
-    }
-
-    @Override
-    public String toString() {
-        return "Cart{" + "id=" + id + ", quantity=" + quantity + ", bookId=" + bookId + '}';
+        this.customerId = customerId;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -46,6 +33,14 @@ public class Cart {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
     // </editor-fold>
 }

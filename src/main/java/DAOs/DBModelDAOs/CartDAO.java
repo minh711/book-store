@@ -72,7 +72,7 @@ public class CartDAO {
             ps = conn.prepareStatement(sqlquery);
             ps.setInt(1, cart.getQuantity());
             ps.setInt(2, cart.getBookId());
-            ps.setInt(3, cart.getId());
+            ps.setInt(3, cart.getCustomerId());
             ps.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);

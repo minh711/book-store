@@ -39,10 +39,7 @@ public class CartDataCtrl extends HttpServlet {
         Cart[] cartItems = objectMapper.readValue(cItems, Cart[].class);
 
         for (Cart item : cartItems) {
-            System.out.println(item.toString());
+            cart.UpdateCart(item.getQuantity(), item.getCustomerId(), item.getBookId());
         }
-
-        response.getWriter().write("Data received and processed successfully.");
     }
-
 }
