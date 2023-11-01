@@ -76,7 +76,7 @@ public class RegisterCtrl extends HttpServlet {
                         crd.setMaxAge(3 * 24 * 60 * 60);
                         response.addCookie(psw);
 
-                        response.sendRedirect("Views/Customer/Home/Home.jsp");
+                        response.sendRedirect("/Home");
                     } else {
                         request.setAttribute("messE", "Email này đã được sử dụng");
                         request.setAttribute("mess2", fullName);

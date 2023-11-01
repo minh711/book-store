@@ -33,7 +33,7 @@ public class BookController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BookDAO bookDAO = new BookDAO();
-        Book[] books = bookDAO.getALl();
+        Book[] books = bookDAO.getAll();
         String json = new Gson().toJson(books);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
