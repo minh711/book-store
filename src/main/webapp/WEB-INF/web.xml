@@ -198,7 +198,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>
-        <url-pattern>/Order/AddNewAddress</url-pattern>
+        <url-pattern>/Order/AddAddress</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

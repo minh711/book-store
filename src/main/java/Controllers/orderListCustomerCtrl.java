@@ -34,7 +34,7 @@ public class orderListCustomerCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // suppose customerID is retrieve from session
-        int customerID = 3;
+        int customerID = 2;
         OrderDAO orderDAO = new OrderDAO();
         ArrayList<Order> orders = orderDAO.getCustomerOrderList(customerID);
         request.setAttribute("orders", orders);

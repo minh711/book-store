@@ -229,10 +229,10 @@
 
                                         <td>
                                             <div class="d-flex p-2">
-                                                <img
-                                                    src="${item.getThumbnail()}"
+                                                <img                                                 
+                                                      src="${pageContext.request.contextPath}/Images/${item.getThumbnail()}"
                                                     class="rounded" alt="..." style="width: 100px; height: 100px; object-fit: contain;">
-                                                <input type="hidden" name="thumbnailPath" value="${item.getThumbnail()}">
+                                               
                                                 <div class="fs-5 mx-2 d-flex align-items-start">
                                                     ${item.getTittle()}
                                                 </div>
@@ -280,7 +280,7 @@
                                                 <label class="mb-2">Ảnh chụp màn hình chuyển khoản</label><br>
                                                 <div class="card-body">
 
-                                                    <img id="paymentImage" src="/Images${order.bankingImage}" onclick="showOverlay(this)" style="width: 100px; height: 100px; object-fit: contain">
+                                                    <img id="paymentImage" src="${pageContext.request.contextPath}/Images${order.bankingImage}" onclick="showOverlay(this)" style="width: 100px; height: 100px; object-fit: contain">
 
                                                 </div>
 

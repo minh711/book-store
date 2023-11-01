@@ -142,7 +142,7 @@
                                         <td>
                                             <div class="d-flex p-2">
                                                 <img
-                                                    src="${item.getThumbnail()}"
+                                                    src="${pageContext.request.contextPath}/Images/${item.getThumbnail()}"
                                                     class="rounded" alt="..." style="width: 100px; height: 100px; object-fit: contain;">
                                                 <input type="hidden" name="thumbnailPath" value="${item.getThumbnail()}">
                                                 <div class="fs-5 mx-2 d-flex align-items-start">
@@ -191,7 +191,7 @@
                                                 <h3 class="text-danger"><strong class="total">${order.getSaleTotal()}</strong></h3>
                                                 <label class="mb-2">Ảnh chụp màn hình chuyển khoản</label><br>
                                                 <div>
-                                                    <img src="/Images${order.bankingImage}" onclick="showOverlay(this)" style="width: 100px; height: 100px; object-fit: contain">
+                                                    <img src="${pageContext.request.contextPath}/Images${order.bankingImage}" onclick="showOverlay(this)" style="width: 100px; height: 100px; object-fit: contain">
                                                 </div>
 
                                             </div>

@@ -72,7 +72,7 @@ public class OrderDAO {
      * @return orderID
      */
     public int getLatestOrderID(int customerID) {
-        String sql = "SELECT TOP(1) id FROM [Order] WHERE customerId = ? ORDER BY [data] Desc";
+        String sql = "SELECT TOP(1) id FROM [Order] WHERE customerId = ? ORDER BY [date] Desc";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, customerID);

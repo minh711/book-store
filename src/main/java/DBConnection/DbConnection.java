@@ -25,7 +25,7 @@ public class DbConnection {
             // Rename to match your database here
             String server = "TAYTAY\\DSF";
             String port = "1433";
-            String database = "SWP";
+            String database = "SWPProject";
             String user = "sa";
             String password = "123";
           
