@@ -15,14 +15,16 @@ public class UserCartDetail {
     private int bookquantity;
     private int accountid;
     private int bookid;
+    private int bookQuantityRemain;
 
-    public UserCartDetail(String bookTitle, String bookThumbnail, int bookprice, int bookquantity, int accountid, int bookid) {
+    public UserCartDetail(String bookTitle, String bookThumbnail, int bookprice, int bookquantity, int accountid, int bookid,int bookQuantityRemain) {
         this.bookTitle = bookTitle;
         this.bookThumbnail = bookThumbnail;
         this.bookprice = bookprice;
         this.bookquantity = bookquantity;
         this.accountid = accountid;
         this.bookid = bookid;
+        this.bookQuantityRemain = bookQuantityRemain;
     }
 
     public String getBookTitle() {
@@ -71,6 +73,14 @@ public class UserCartDetail {
 
     public void setBookid(int bookid) {
         this.bookid = bookid;
+    }
+
+    public int getBookQuantityRemain() {
+        return bookQuantityRemain;
+    }
+
+    public void setBookQuantityRemain(int bookQuantityRemain) {
+        this.bookQuantityRemain = bookQuantityRemain;
     }
     
     

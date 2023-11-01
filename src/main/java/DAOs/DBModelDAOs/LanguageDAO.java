@@ -56,7 +56,7 @@ public class LanguageDAO {
         ls.toArray(arr);
         return arr;
     }
-    
+
     public int addNew(String language) {
         int result = 0;
         String sql

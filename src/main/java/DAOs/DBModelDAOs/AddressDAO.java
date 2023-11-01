@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOs.DBModelDAOs;
 
 import DAOs.MgrModelDAOs.OrderItemDAO;
@@ -75,9 +71,75 @@ public class AddressDAO {
                 return tem;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void addNewAddress(Address newAddress) {
+        String sql = "INSERT INTO [dbo].[Address] ([fullName],[phone] ,[address], [customerId]) VALUES (?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, newAddress.getFullName());
+            ps.setString(2, newAddress.getPhone());
+            ps.setString(3, newAddress.getAddress());
+            ps.setInt(4, newAddress.getCustomerId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Address getLatestAddressID(int customerId){
+         String sql = "SELECT TOP(1) * FROM Address WHERE customerId =?  ORDER BY Id DESC";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, customerId);        
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Address tem = new Address(rs.getInt("id"), rs.getString("fullname"),
+                        rs.getString("phone"), rs.getString("address"), rs.getInt("customerId"));
+                return tem;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    //DuyenLTM
+    /*
+    This method is for deleting an address of a customer
+     */
+    public int deleteAddress(int addressID) {
+        int result = 0;
+        String sql = "delete [Address]\n"
+                + "where id=?;";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, addressID);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public int addAddress(String fullName, String phone, String address, int customerId) {
+        int result = 0;
+        String sql = "insert into [Address] values (?,?,?,?);";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, fullName);
+            ps.setString(2, phone);
+            ps.setString(3, address);
+            ps.setInt(4, customerId);
+            result=ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
 }
