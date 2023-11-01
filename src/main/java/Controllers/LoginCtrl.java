@@ -96,7 +96,7 @@ public class LoginCtrl extends HttpServlet {
                     response.addCookie(psw);
                     dao.deleteOTP(email);
           
-                    response.sendRedirect("Views/Customer/Home/Home.jsp");
+                    response.sendRedirect("/Home");
                 }
             }
         } catch (Exception ex) {
