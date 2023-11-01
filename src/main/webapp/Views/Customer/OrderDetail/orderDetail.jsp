@@ -19,17 +19,37 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
-            .bankingDetails {
+            #overlay {
+                position: fixed;
                 display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+                cursor: pointer;
             }
-            .CodDetails {
+
+            #overlay img {
                 display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 90%;
+                max-height: 90%;
             }
 
         </style>
     </head>
 
     <body>
+        <div id="overlay" onclick="off()">
+            <img id="overlay-image" src="" alt="Clicked Image">
+        </div>
         <header class="d-flex justify-content-between" style="padding: 10px;">
             <div class="d-flex align-items-center justify-content-between" style="width: 30%;">
                 <div class="d-flex">
@@ -231,22 +251,22 @@
 
                         <div class="card p-3">
                             <div class="row">
-                                <div class="col-md-7">
+                                 <div class="col-md-7">
                                     <div class="row mt-3">
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" placeholder="Họ và tên" value="${order.getFullName()}" readonly>
+                                        <div class="col-6 ">
+                                            <input type="text" class="form-control bg-white" placeholder="Họ và tên" value="${order.getFullName()}" disabled>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" class="form-control" placeholder="Số điện thoại" value="${order.getPhone()}" readonly>
+                                            <input type="text" class="form-control bg-white" placeholder="Số điện thoại" value="${order.getPhone()}" disabled>
                                         </div>
                                     </div>
-                                    <div class="mt-3 d-flex bg-light rounded p-3 justify-content-between">
+                                    <div class="mt-3 d-flex bg-white rounded p-3 justify-content-between border">
                                         <div>
                                             <div>${order.getAddress()}</div>
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <textarea class="form-control" style="resize: none;" rows="3" readonly>${order.getNote()}</textarea>
+                                        <textarea class="form-control bg-white" style="resize: none;" rows="3" disabled>${order.getNote()}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -259,9 +279,9 @@
                                                 <h3 class="text-danger"><strong class="total">${order.getSaleTotal()}</strong></h3>
                                                 <label class="mb-2">Ảnh chụp màn hình chuyển khoản</label><br>
                                                 <div class="card-body">
-                                                   
-                                                        <img id="paymentImage" src="/Images${order.bankingImage}" style="width: 100px; height: 100px; object-fit: contain">
-                                                  
+
+                                                    <img id="paymentImage" src="/Images${order.bankingImage}" onclick="showOverlay(this)" style="width: 100px; height: 100px; object-fit: contain">
+
                                                 </div>
 
                                             </div>
@@ -311,6 +331,20 @@
                 </div>
             </div>
         </footer>
+        <script>
+            function showOverlay(img) {
+                const overlay = document.getElementById("overlay");
+                const overlayImage = document.getElementById("overlay-image");
+
+                overlayImage.src = img.src;
+                overlayImage.alt = img.alt;
+                overlay.style.display = "block";
+            }
+
+            function off() {
+                document.getElementById("overlay").style.display = "none";
+            }
+        </script>                                        
         <script src="${pageContext.request.contextPath}/Views/Customer/OrderDetail/scripts.js"></script>                    
     </body>
 

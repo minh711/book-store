@@ -20,15 +20,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
 import java.sql.Timestamp;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -192,16 +186,7 @@ public class CreateOrderCtrl extends HttpServlet {
 //        for (int i : id) {
 //            cartDAO.RemoveOrderItem(i);
 //        }
-        PrintWriter out = response.getWriter();
-        out.println("Address Select: " + selectedAddress);
-        out.println("Address Select: " + selectedAddress);
-        out.println("Payment Method: " + paymentMethod);
-        out.println("Total: " + total);
-        out.println("Sale total: " + saleTotal);
-        out.println("note: " + request.getParameter("note"));
-        out.println("Address: " + address.getAddress());
-        out.println("hinh:" + picPath);
-
+     response.sendRedirect("orderDetailCustomerCtrl?id=" + LatestID);
     }
 
     /**

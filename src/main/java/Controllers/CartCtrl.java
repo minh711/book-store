@@ -10,6 +10,7 @@ import DAOs.DBModelDAOs.CartDAO;
 import Models.MgrModels.BookDetail;
 import Models.MgrModels.OrderItem;
 import Models.MgrModels.UserCartDetail;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import jakarta.servlet.ServletException;
@@ -75,9 +76,14 @@ public class CartCtrl extends HttpServlet {
                 orderlist.add(new OrderItem(b.getId(), b.getTitle(), b.getPrice(), b.getSalePrice(), bookQuantity, b.getThumbnail()));
 
             }
-            request.setAttribute("addresses", addressDao.getAll(customerID));
-            request.setAttribute("orderList", orderlist);
-            request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
+            
+             ObjectMapper objectMapper = new ObjectMapper();
+                String jsonList = objectMapper.writeValueAsString(orderlist);              
+                System.out.println(jsonList);
+                request.setAttribute("jsonList", jsonList.replace("\"", "'"));
+                request.setAttribute("OrderItems", orderlist);
+                request.setAttribute("addresses", addressDao.getAll(customerID));
+                request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
 
