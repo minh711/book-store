@@ -10,6 +10,7 @@ import DAOs.DBModelDAOs.CartDAO;
 import Models.MgrModels.BookDetail;
 import Models.MgrModels.OrderItem;
 import Models.MgrModels.UserCartDetail;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import jakarta.servlet.ServletException;
@@ -60,7 +61,7 @@ public class CartCtrl extends HttpServlet {
         String[] customerIds = request.getParameterValues("customerIds");
         String[] quantities = request.getParameterValues("quantities");
         
-        int customerID = Integer.parseInt(customerIds[0]);
+        int customerID = 2;
         AddressDAO addressDao = new AddressDAO();
 
         try {
@@ -74,10 +75,15 @@ public class CartCtrl extends HttpServlet {
                 b = book.getBookDetailByID(bookID);
                 orderlist.add(new OrderItem(b.getId(), b.getTitle(), b.getPrice(), b.getSalePrice(), bookQuantity, b.getThumbnail()));
 
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonList = objectMapper.writeValueAsString(orderlist);              
+                request.setAttribute("jsonList", jsonList.replace("\"", "'"));
+                request.setAttribute("OrderItems", orderlist);
+                request.setAttribute("addresses", addressDao.getAll(customerID));
+                request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
             }
-            request.setAttribute("addresses", addressDao.getAll(customerID));
-            request.setAttribute("orderList", orderlist);
-            request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
+            
+             
 
         } catch (NumberFormatException e) {
 

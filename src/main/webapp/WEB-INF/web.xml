@@ -69,7 +69,6 @@
         <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>BookCreateCtrl</servlet-name>
         <servlet-class>Controllers.BookCreateCtrl</servlet-class>
     </servlet>
@@ -108,7 +107,8 @@
     <servlet>
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>
         <servlet-class>Controllers.OrderAddNewAddressCtrl</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>OTPCtrl</servlet-name>
         <servlet-class>Controllers.OTPCtrl</servlet-class>
     </servlet>
@@ -123,7 +123,22 @@
     <servlet>
         <servlet-name>CancelOTPCtrl</servlet-name>
         <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
->>>>>>> ite3-resetpassword
+    </servlet>
+    <servlet>
+        <servlet-name>OTPCtrl</servlet-name>
+        <servlet-class>Controllers.OTPCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordCtrl</servlet-name>
+        <servlet-class>Controllers.ResetPasswordCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailCtrl</servlet-name>
+        <servlet-class>Controllers.EmailCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOTPCtrl</servlet-name>
+        <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
@@ -190,7 +205,6 @@
         <url-pattern>/orderListCustomerCtrl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>BookCreateCtrl</servlet-name>
         <url-pattern>/BookCreateCtrl</url-pattern>
     </servlet-mapping>
@@ -228,8 +242,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>
+        <url-pattern>/Order/AddAddress</url-pattern>
         <url-pattern>/Order/AddNewAddress</url-pattern>
-=======
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>OTPCtrl</servlet-name>
         <url-pattern>/otp</url-pattern>
     </servlet-mapping>
@@ -244,7 +260,6 @@
     <servlet-mapping>
         <servlet-name>CancelOTPCtrl</servlet-name>
         <url-pattern>/Cancel</url-pattern>
->>>>>>> ite3-resetpassword
     </servlet-mapping>
     <session-config>
         <session-timeout>

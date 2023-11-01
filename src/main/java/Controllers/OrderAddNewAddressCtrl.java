@@ -45,7 +45,7 @@ public class OrderAddNewAddressCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int customerId = 3;
+        int customerId = 2;
         // Retrieve data sent in the POST request
         String fullName = request.getParameter("fullName");
         String phoneNumber = request.getParameter("phoneNumber");

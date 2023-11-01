@@ -19,7 +19,28 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
 
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <style>
+            .waitting{
+                background-color: #fdf5dd;
+                color: #cfa00c;
+                border-radius: 10px;
+                padding: 5px;
+            }
+            .finish{
+                background-color: #cff6dd;
+                color: #1fa750;
+                border-radius: 10px;
+                padding: 5px;
+            }
+            .terminate{
+                background-color:#FFDADA;
+                color: #EF4848;
+                border-radius: 10px;
+                padding: 5px;
+            }
+          
 
+        </style>
     </head>
 
     <body>
@@ -78,8 +99,8 @@
                                             <i class="fa fa-scroll text-light" style="font-size: 1.8em;"></i>
                                         </li>
                                     </div>
-                                    <div>
-                                        <h2><strong id="countOrder">0</strong></h2>
+                                    <div class="text-end">
+                                        <h2 ><strong id="countOrder">0</strong></h2>
                                         <h6>Đơn Hàng</h6>
                                     </div>
                                 </div>
@@ -94,7 +115,7 @@
                                             <i class="fas fa-handshake text-light" style="font-size: 1.8em;"></i>
                                         </li>
                                     </div>
-                                    <div>
+                                    <div class="text-end">
                                         <h2><strong id="countSuccess">0</strong></h2>
                                         <h6>Thành Công</h6>
                                     </div>
@@ -110,7 +131,7 @@
                                             <i class="far fa-clock text-light" style="font-size: 1.8em;"></i>
                                         </li>
                                     </div>
-                                    <div>
+                                    <div class="text-end">
                                         <h2><strong id="countProcessing">0</strong></h2>
                                         <h6>Đang Thực Hiện</h6>
                                     </div>
@@ -126,7 +147,7 @@
                                             <i class="far fa-times-circle text-light" style="font-size: 1.8em;"></i>
                                         </li>
                                     </div>
-                                    <div>
+                                    <div class="text-end">
                                         <h2><strong id="countCancel">0</strong></h2>
                                         <h6>Đã Hủy</h6>
                                     </div>
@@ -137,7 +158,7 @@
                     </div>
                     <div class="row justify-content-center mb-3">
                         <div class="col-md-12">
-                            <table id="example" class="table table-bordered text-center mt-3 table-striped pt-2 ">
+                            <table id="example" class="table table-bordered  strip text-center mt-3  pt-2 ">
                                 <thead class="table-primary">
                                 <th>ID</th>
                                 <th>ID khách hàng</th>
@@ -149,12 +170,12 @@
                                 <c:set var="orderDAO" value="${requestScope.orderDAO}" />
                                 <tbody class="align-middle">
                                     <c:forEach items="${requestScope.orders}" var="order">
-                                        <tr class="text-success">
+                                        <tr class="text-success ">
                                             <td>${order.getId()}</td>
                                             <td>${order.getCustomerId()}</td>
                                             <td class="date">${order.getDate()}</td>
                                             <td class="totals">${order.getSaleTotal()}</td>
-                                            <td class="status">${orderDAO.getOrderStatusName(order.getId())}</td>
+                                            <td > <span class=" status"> ${orderDAO.getOrderStatusName(order.getId())} </span></td>
                                             <td class="text-primary"> 
                                                 <a href="OrderStatusUpdate?id=${order.getId()}">Chi tiết</a></td>
                                         </tr>
@@ -226,14 +247,15 @@
                 var cancels = document.querySelectorAll(".status");
                 cancels.forEach(function (subElement) {
                     OrderValue++;
-                    var statusText = subElement.textContent.trim(); // Trim any leading/trailing spaces
+                    var statusText = subElement.textContent.trim();
                     if (statusText === 'Đã hủy') {
                         CancelValue++;
-                        subElement.classList.add("text-danger"); // Use 'classList' instead of 'ClassList'
+                        subElement.classList.add("terminate");
                     } else if (statusText === 'Thành công') {
                         SuccessValue++;
-                        subElement.classList.add("text-success"); // Use 'classList' instead of 'ClassList'
+                        subElement.classList.add("finish");
                     } else {
+                        subElement.classList.add("waitting");
                         ProcessValue++;
                     }
 

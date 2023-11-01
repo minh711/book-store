@@ -20,15 +20,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
 import java.sql.Timestamp;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -64,29 +58,7 @@ public class CreateOrderCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        OrderItem item1 = new OrderItem(4, "あの花見", 40520, 38990, 21, "hehe.png");
-        OrderItem item2 = new OrderItem(5, "ドラえもん ", 33000, 24000, 2, "hehe.png");
-        int customerID = 3;
-        AddressDAO addressDao = new AddressDAO();
-        ArrayList<OrderItem> listItem = new ArrayList<>();
-        listItem.add(item1);
-        listItem.add(item2);
-
-        try {
-            if (listItem.isEmpty() == false) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                String jsonList = objectMapper.writeValueAsString(listItem);              
-                System.out.println(jsonList);
-                request.setAttribute("jsonList", jsonList.replace("\"", "'"));
-                request.setAttribute("OrderItems", listItem);
-                request.setAttribute("addresses", addressDao.getAll(customerID));
-                request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+      
 
     }
 
@@ -114,7 +86,7 @@ public class CreateOrderCtrl extends HttpServlet {
         
         
         //Assume customerID and item list retrieve from session 
-        int customerID = 3;
+        int customerID = 2;
         // Retrieve data from the form
         long currentTimeMillis = System.currentTimeMillis();
         // get data from JSP to create Order object
@@ -192,16 +164,8 @@ public class CreateOrderCtrl extends HttpServlet {
 //        for (int i : id) {
 //            cartDAO.RemoveOrderItem(i);
 //        }
-        PrintWriter out = response.getWriter();
-        out.println("Address Select: " + selectedAddress);
-        out.println("Address Select: " + selectedAddress);
-        out.println("Payment Method: " + paymentMethod);
-        out.println("Total: " + total);
-        out.println("Sale total: " + saleTotal);
-        out.println("note: " + request.getParameter("note"));
-        out.println("Address: " + address.getAddress());
-        out.println("hinh:" + picPath);
 
+     response.sendRedirect("orderDetailCustomerCtrl?id=" + LatestID);
     }
 
     /**

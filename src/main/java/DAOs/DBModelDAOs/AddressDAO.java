@@ -142,4 +142,9 @@ public class AddressDAO {
         return result;
     }
 
+    public static void main(String[] args) {
+        
+        AddressDAO ua = new AddressDAO();
+        ua.addNewAddress(new Address(0, "ua ta", "0123456789", "meo meo", 3));
+    }
 }

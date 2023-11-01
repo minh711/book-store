@@ -75,7 +75,7 @@ public class orderDetailCustomerCtrl extends HttpServlet {
                 request.setAttribute("previousStatus", previousStatus);
                 request.setAttribute("currentStatusName", currentStatusName);
                  request.setAttribute("OrderID", OrderID);
-                request.getRequestDispatcher("Views/Customer/OrderDetail/OrderDetail.jsp").forward(request, response);
+                request.getRequestDispatcher("Views/Customer/OrderDetail/orderDetail.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.out.println(e);

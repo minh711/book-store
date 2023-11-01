@@ -19,7 +19,28 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
 
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <style>
+            .waitting{
+                background-color: #fdf5dd;
+                color: #cfa00c;
+                border-radius: 10px;
+                padding: 5px;
+            }
+            .finish{
+                background-color: #cff6dd;
+                color: #1fa750;
+                border-radius: 10px;
+                padding: 5px;
+            }
+            .terminate{
+                background-color:#FFDADA;
+                color: #EF4848;
+                border-radius: 10px;
+                padding: 5px;
+            }
+          
 
+        </style>
     </head>
 
     <body>
@@ -87,7 +108,7 @@
                                         <td>${order.fullName}</td>
                                         <td class="date">${order.getDate()}</td>
                                         <td class="totals">${order.getSaleTotal()}</td>
-                                        <td class="status">${orderDAO.getOrderStatusName(order.getId())}</td>
+                                        <td > <span class=" status"> ${orderDAO.getOrderStatusName(order.getId())} </span></td>
                                         <td class="text-primary"> 
                                             <a href="orderDetailCustomerCtrl?id=${order.getId()}">Chi tiết</a></td>
                                     </tr>
@@ -153,12 +174,15 @@
     document.addEventListener("DOMContentLoaded", function () {
         var cancels = document.querySelectorAll(".status");
         cancels.forEach(function (subElement) {
-            var statusText = subElement.textContent.trim(); // Trim any leading/trailing spaces
+            var statusText = subElement.textContent.trim(); 
             if (statusText === 'Đã hủy') {
-                subElement.classList.add("text-danger"); // Use 'classList' instead of 'ClassList'
+                subElement.classList.add("terminate");
             }
             if (statusText === 'Thành công') {
-                subElement.classList.add("text-success"); // Use 'classList' instead of 'ClassList'
+                subElement.classList.add("finish"); 
+            }
+            else{
+               subElement.classList.add("waitting");   
             }
         });
         

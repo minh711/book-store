@@ -17,17 +17,46 @@
         <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            #overlay {
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+                cursor: pointer;
+            }
+
+            #overlay img {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 90%;
+                max-height: 90%;
+            }
+
+            
+        </style>
     </head>
 
     <body>
-
+        <div id="overlay" onclick="off()">
+            <img id="overlay-image" src="" alt="Clicked Image">
+        </div>
         <c:set var="currentStatus" value="${requestScope.currentStatus}" />
         <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
         <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">
 
-           
-<!--                        <input type="hidden" id="currentStatus" name="currentStatus" value="1">
-                        <input type="hidden" id="previousStatus" name="previousStatus" value="1">-->
+
+        <!--                        <input type="hidden" id="currentStatus" name="currentStatus" value="1">
+                                <input type="hidden" id="previousStatus" name="previousStatus" value="1">-->
         <main class="d-flex">
             <!-- Sidebar -->
             <aside>
@@ -113,7 +142,7 @@
                                         <td>
                                             <div class="d-flex p-2">
                                                 <img
-                                                    src="${item.getThumbnail()}"
+                                                    src="${pageContext.request.contextPath}/Images/${item.getThumbnail()}"
                                                     class="rounded" alt="..." style="width: 100px; height: 100px; object-fit: contain;">
                                                 <input type="hidden" name="thumbnailPath" value="${item.getThumbnail()}">
                                                 <div class="fs-5 mx-2 d-flex align-items-start">
@@ -134,22 +163,22 @@
 
                         <div class="card p-3">
                             <div class="row">
-                                <div class="col-md-7">
+                               <div class="col-md-7">
                                     <div class="row mt-3">
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" placeholder="Họ và tên" value="${order.getFullName()}" readonly>
+                                        <div class="col-6 ">
+                                            <input type="text" class="form-control bg-white" placeholder="Họ và tên" value="${order.getFullName()}" disabled>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" class="form-control" placeholder="Số điện thoại" value="${order.getPhone()}" readonly>
+                                            <input type="text" class="form-control bg-white" placeholder="Số điện thoại" value="${order.getPhone()}" disabled>
                                         </div>
                                     </div>
-                                    <div class="mt-3 d-flex bg-light rounded p-3 justify-content-between">
+                                    <div class="mt-3 d-flex bg-white rounded p-3 justify-content-between border">
                                         <div>
                                             <div>${order.getAddress()}</div>
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <textarea class="form-control" style="resize: none;" rows="3" readonly>${order.getNote()}</textarea>
+                                        <textarea class="form-control bg-white" style="resize: none;" rows="3" disabled>${order.getNote()}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -161,7 +190,10 @@
                                                 <div>Số tiền</div>
                                                 <h3 class="text-danger"><strong class="total">${order.getSaleTotal()}</strong></h3>
                                                 <label class="mb-2">Ảnh chụp màn hình chuyển khoản</label><br>
-                                                <img src="/Images${order.bankingImage}" style="width: 100px; height: 100px; object-fit: contain">
+                                                <div>
+                                                    <img src="${pageContext.request.contextPath}/Images${order.bankingImage}" onclick="showOverlay(this)" style="width: 100px; height: 100px; object-fit: contain">
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +215,20 @@
                 </form>
             </div>
         </main>
+        <script>
+            function showOverlay(img) {
+                const overlay = document.getElementById("overlay");
+                const overlayImage = document.getElementById("overlay-image");
 
+                overlayImage.src = img.src;
+                overlayImage.alt = img.alt;
+                overlay.style.display = "block";
+            }
+
+            function off() {
+                document.getElementById("overlay").style.display = "none";
+            }
+        </script>
         <script src="${pageContext.request.contextPath}/Views/Admin/OrderList/scripts.js"></script>                                     
     </body>
 
