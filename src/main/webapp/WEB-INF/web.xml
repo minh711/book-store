@@ -144,6 +144,10 @@
         <servlet-name>BookSelectType</servlet-name>
         <servlet-class>Controllers.BookSelectType</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartDataCtrl</servlet-name>
+        <servlet-class>Controllers.CartDataCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -268,6 +272,10 @@
     <servlet-mapping>
         <servlet-name>BookSelectType</servlet-name>
         <url-pattern>/BookSelectType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartDataCtrl</servlet-name>
+        <url-pattern>/Cart/Data</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

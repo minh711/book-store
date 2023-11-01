@@ -2,7 +2,7 @@ package Models.DBModels;
 
 /**
  * Write later
- * @author MinhTD
+ * @author MinhTD & NhuLNT
  */
 public class Book {
     private int id;
@@ -20,12 +20,12 @@ public class Book {
     private int totalRating;
     private int totalRatingStar;
     private float avgRating;
-
+    
 
     public Book() {
     }
 
-    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId, int totalRating, int totalRatingStar, float avgRating) {
+    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,int totalRating,int totalRatingStar,float avgRating) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -164,6 +164,7 @@ public class Book {
         this.avgRating = avgRating;
     }
     // </editor-fold>
+    
 }
 
     
