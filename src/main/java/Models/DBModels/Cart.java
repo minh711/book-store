@@ -12,15 +12,10 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(  int id, int quantity, int bookId) {
+    public Cart(int id, int quantity, int bookId) {
         this.id = id;
         this.quantity = quantity;
         this.bookId = bookId;
-    }
-
-    @Override
-    public String toString() {
-        return "Cart{" + "id=" + id + ", quantity=" + quantity + ", bookId=" + bookId + '}';
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">

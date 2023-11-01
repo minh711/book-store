@@ -126,7 +126,7 @@ public class CartDAO {
             ps.setInt(1, userid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                UserCartDetail us = new UserCartDetail(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7));
+                UserCartDetail us = new UserCartDetail(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),rs.getInt(7));
                 list.add(us);
             }
         } catch (SQLException e) {
@@ -136,30 +136,18 @@ public class CartDAO {
         return list;
     }
 
-    public int UpdateCart(int quantity, int customerid, int bookid) {
+    public void UpdateCart(int bookid, int customerid, int quantity) {
         String sqlquery = "UPDATE [Cart]\n"
                 + "   SET [quantity] = ?\n"
-                + "      ,[bookId] = ?\n"
-                + "      ,[customerId] = ?\n"
                 + " WHERE bookId = ? and customerId = ?";
-        int p = 0;
         try {
             ps = conn.prepareStatement(sqlquery);
             ps.setInt(1, quantity);
             ps.setInt(2, bookid);
             ps.setInt(3, customerid);
-            ps.setInt(4, bookid);
-            ps.setInt(5, customerid);
-            p = ps.executeUpdate();
+            ps.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);
         }
-        return p;
-    }
-    
-    public static void main(String[] args) {
-        CartDAO c = new CartDAO();
-        int a= c.UpdateCart(5, 1, 1);
-        System.out.println(a);
     }
 }

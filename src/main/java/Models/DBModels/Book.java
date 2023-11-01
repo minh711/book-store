@@ -2,7 +2,7 @@ package Models.DBModels;
 
 /**
  * Write later
- * @author MinhTD & NhuLNT
+ * @author MinhTD
  */
 public class Book {
     private int id;
@@ -17,15 +17,11 @@ public class Book {
     private boolean isAvailable;
     private int pubisherId;
     private int languageId;
-    private int totalRating;
-    private int totalRatingStar;
-    private float avgRating;
-    
 
     public Book() {
     }
 
-    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,int totalRating,int totalRatingStar,float avgRating) {
+    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -38,9 +34,6 @@ public class Book {
         this.isAvailable = isAvailable;
         this.pubisherId = pubisherId;
         this.languageId = languageId;
-        this.avgRating = avgRating;
-        this.totalRating = totalRating;
-        this.totalRatingStar = totalRatingStar;
     }
     
     
@@ -148,30 +141,6 @@ public class Book {
     
     
     // </editor-fold>
-
-    public int getTotalRating() {
-        return totalRating;
-    }
-
-    public void setTotalRating(int totalRating) {
-        this.totalRating = totalRating;
-    }
-
-    public int getTotalRatingStar() {
-        return totalRatingStar;
-    }
-
-    public void setTotalRatingStar(int totalRatingStar) {
-        this.totalRatingStar = totalRatingStar;
-    }
-
-    public float getAvgRating() {
-        return avgRating;
-    }
-
-    public void setAvgRating(float avgRating) {
-        this.avgRating = avgRating;
-    }
     
 }
 

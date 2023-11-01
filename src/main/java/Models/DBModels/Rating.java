@@ -1,8 +1,5 @@
 package Models.DBModels;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 /**
  * Write later
  * @author MinhTD
@@ -13,18 +10,16 @@ public class Rating {
     private String comment;
     private int customerId;
     private int bookId;
-    private Timestamp dateRating;
 
     public Rating() {
     }
 
-    public Rating(int id, int star, String comment,int bookId, int customerId,Timestamp dateRating) {
+    public Rating(int id, int star, String comment,int bookId, int customerId) {
         this.id = id;
         this.star = star;
         this.comment = comment;
         this.bookId = bookId;
         this.customerId = customerId;
-        this.dateRating = dateRating;
     }
     
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
@@ -68,18 +63,5 @@ public class Rating {
         this.bookId = bookId;
     }
     // </editor-fold>
-
-    public Timestamp getDateRating() {
-        return dateRating;
-    }
-
-    public void setDateRating(Timestamp dateRating) {
-        this.dateRating = dateRating;
-    }
-
-    @Override
-    public String toString() {
-        return "Rating{" + "id=" + id + ", star=" + star + ", comment=" + comment + ", customerId=" + customerId + ", bookId=" + bookId + ", dateRating=" + dateRating + '}';
-    }
 
 }

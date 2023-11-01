@@ -25,9 +25,8 @@
 
     <body>
         <jsp:include page="/Views/header.jsp"/>
-        <button><a href="${pageContext.request.contextPath}/Views/Customer/Home/Home.jsp" id="Homepage">Doi trang</a></button>
-        <div id="customAlertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050"></div>
 
+        <div id="customAlertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050"></div>
 
         <main class="bg-light">
             <div class="container">
@@ -88,8 +87,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-
-
                 <form id="checkoutForm" method="post" action="${pageContext.request.contextPath}/Cart">
                     <div class="bg-light p-4 mt-3 mb-3 d-flex justify-content-between align-items-center">
                         <div class="d-flex">
@@ -140,14 +137,11 @@
             $(document).ready(function () {
                 calculateTotalForProduct();
                 calculateTotalCart();
-
                 //When the number of products changes, the value will be recalculated.
                 $('.BookQuantity').on('input', function () {
                     calculateTotalCart();
                     calculateTotalForProduct();
-                    sendCartDataToServlet();
                 });
-
                 $('.SelectBook').on("change", function () {
                     calculateTotalCart();
                 });
@@ -159,7 +153,6 @@
                     calculateTotalForProduct();
                     calculateTotalCart();
                 });
-
             });
             //Function to decrease quantity of book in Cart
             $('.decreaseQuantity').on('click', function () {
@@ -171,7 +164,6 @@
                     calculateTotalForProduct();
                     calculateTotalCart();
                     updateQuantity($(this).closest('tr'));
-                    sendCartDataToServlet();
                 }
             });
             //Function to increase quantity of book in Cart
@@ -184,7 +176,6 @@
                     calculateTotalForProduct();
                     calculateTotalCart();
                     updateQuantity($(this).closest('tr'));
-                    sendCartDataToServlet();
                 }
             });
             function validateBookQuantity(inputElement) {
@@ -226,6 +217,7 @@
                     calculateTotalForProduct();
                     calculateTotalCart();
                     $.ajax({
+
                         type: "POST",
                         url: "${pageContext.request.contextPath}/Delete/Book",
                         data: {
@@ -242,84 +234,93 @@
                             setTimeout(function () {
                                 alertMessage.alert('close');
                             }, 1500); // Adjust the time as needed
+                        },
+                        error: function (response) {
+                            console.log(response);
+                            const alertMessage = $('<div class="alert alert-success alert-dismissible fade show" role="alert"></div>');
+                            alertMessage.html('<strong>Success:</strong> Đã xảy ra lỗi khi xóa sản phẩm.' +
+                                    '</button>');
+                            $('#customAlertContainer').append(alertMessage);
+                            // Hide the alert after 10 seconds
+                            setTimeout(function () {
+                                alertMessage.alert('close');
+                            }, 1500); // Adjust the time as needed
                         }
                     });
                 }
             });
 
-            function updateQuantity(tableRow) {
-                var inputQuantity = $(tableRow).find('.BookQuantity');
-                var currentQuantity = parseInt(inputQuantity.val());
-            }
-
-
             document.getElementById('checkoutForm').addEventListener('submit', function (event) {
                 //Prevent default form submission
                 event.preventDefault();
+
                 var selectedCheckboxes = document.querySelectorAll('.SelectBook:checked');
                 if (selectedCheckboxes.length === 0) {
                     window.alert("Hãy chọn ít nhất 1 sản phẩm để thanh toán!");
                 }
                 if (selectedCheckboxes.length !== 0) {
                     for (var i = 0; i < selectedCheckboxes.length; i++) {
+
                         var checkbox = selectedCheckboxes[i];
                         var tr = checkbox.closest('tr');
+
                         //Get the values from the corresponding row
                         var bookId = tr.querySelector('.DeleteProduct').getAttribute('data-bookid');
                         var customerId = tr.querySelector('.DeleteProduct').getAttribute('data-customerid');
                         var bookQuantity = tr.querySelector('.BookQuantity').value;
+
                         //Create hidden fields and add them to forms
                         var bookIdInput = document.createElement('input');
                         bookIdInput.type = 'hidden';
                         bookIdInput.name = 'bookIds'; // Đặt tên trường trong biểu mẫu
                         bookIdInput.value = bookId;
+
                         var customerIdInput = document.createElement('input');
                         customerIdInput.type = 'hidden';
                         customerIdInput.name = 'customerIds'; // Đặt tên trường trong biểu mẫu
                         customerIdInput.value = customerId;
+
                         var quantityInput = document.createElement('input');
                         quantityInput.type = 'hidden';
                         quantityInput.name = 'quantities'; // Đặt tên trường trong biểu mẫu
                         quantityInput.value = bookQuantity;
+
                         //Add hidden fields to form
                         document.getElementById('checkoutForm').appendChild(bookIdInput);
                         document.getElementById('checkoutForm').appendChild(customerIdInput);
                         document.getElementById('checkoutForm').appendChild(quantityInput);
+
+
                         //Submit form
                         this.submit();
                     }
                 }
             });
 
-            window.addEventListener('beforeunload', function (e) {
-                event.preventDefault();
-                sendCartDataToServlet();
+            //Declare a variable to track whether data has changed
+            var dataChanged = false;
+            var navigateAway = false;
 
-                e.returnValue = 'Bạn có chắc chắn muốn rời khỏi trang này?';
+            //Check the data of the form if it changed
+            document.getElementById('checkoutForm').addEventListener('change', function () {
+                dataChanged = true;
             });
 
-            function sendCartDataToServlet() {
-                var selectedItems = [];
-                $('.SelectBook').each(function () {
-                    var tr = $(this).closest('tr');
-                    var bookId = tr.find('.DeleteProduct').data('bookid');
-                    var customerId = tr.find('.DeleteProduct').data('customerid');
-                    var bQuantity = tr.find('.BookQuantity').val();
-                    var bookquantity = parseInt(bQuantity);
-                    selectedItems.push({customerId: customerId, bookQuantity: bookquantity, bookId: bookId});
-                });
+            //Assign value if order button is clicked
+            document.getElementById('btnOrder').addEventListener('click', function () {
+                navigateAway = true;
+            });
 
-                var jsonData = JSON.stringify(selectedItems);
-                console.log("Data sent to server:", jsonData);
+            //Assign the beforeunload event to check before leaving the page
+            window.addEventListener('beforeunload', function (event) {
+                if (dataChanged && !navigateAway) {
+                    var confirmationMessage = 'Dữ liệu đã thay đổi. Bạn có muốn lưu lại trước khi rời trang?';
+                    (event || window.event).returnValue = confirmationMessage;
+                    return confirmationMessage;
+                }
+            });
 
-                $.ajax({
-                    type: "POST",
-                    url: "${pageContext.request.contextPath}/Cart/Data",
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
-            }
+
         </script>
     </body>
 </html>
