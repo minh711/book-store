@@ -1,5 +1,4 @@
 var authors = [];
-var selectedAuthorIds = [];
 const selectAuthorContainer = document.querySelector(".select-author-container");
 const selectAuthorSelectBtn = selectAuthorContainer.querySelector(".select-btn");
 const selectAuthorSearchInp = selectAuthorContainer.querySelector("input");
@@ -8,8 +7,6 @@ const selectAuthorContent = selectAuthorContainer.querySelector(".content");
 const selectedAuthors = document.querySelector(".selectedAuthors");
 
 $(document).ready(function() {
-    loadAuthors(); 
-    loadSelectedAuthors();
 });
 
 selectAuthorSelectBtn.addEventListener("click", () => {
@@ -30,13 +27,14 @@ document.addEventListener('click', function(event) {
 
 function loadAuthors() {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/BookUpdateCtrl",
         type: "post",
         data: {loadAuthors: "true"},
         dataType: "json",
         success: function (data) {
             authors = data;
             addAuthors();
+            loadSelectedAuthors();
         },
         error: function (xhr) {
         }
@@ -54,8 +52,19 @@ function addAuthors() {
 }
 
 function selectAuthor(selectedLi) {
-    if (!selectedAuthorIds.includes($(selectedLi).data("id"))) {
-        selectedAuthorIds.push($(selectedLi).data("id"));
+    let selectedAuthorId = $(selectedLi).data("id");
+    if (!selectedAuthorIds.includes(selectedAuthorId)) {
+        selectedAuthorIds.push(selectedAuthorId);
+        $.ajax({
+            url: "/BookUpdateCtrl",
+            type: "post",
+            data: {addNewBookAuthor: selectedAuthorId, bookId: bookId},
+            dataType: "json",
+            success: function () {
+            },
+            error: function (xhr) {
+            }
+        });
     }
     selectAuthorContainer.classList.toggle("active");
     addAuthors();
@@ -104,12 +113,22 @@ function loadSelectedAuthors() {
 
 function removeAuthor(id) {
     selectedAuthorIds.splice(selectedAuthorIds.indexOf(id), 1);
+    $.ajax({
+        url: "/BookUpdateCtrl",
+        type: "post",
+        data: {deleteBookAuthor: id, bookId: bookId},
+        dataType: "json",
+        success: function () {
+        },
+        error: function (xhr) {
+        }
+    });
     loadSelectedAuthors();
 }
 
 function addNewAuthor(newAuthor) {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/BookUpdateCtrl",
         type: "post",
         data: {addNewAuthor: "true", newAuthor},
         success: function () {

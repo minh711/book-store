@@ -72,6 +72,10 @@
         <servlet-name>BookCreateCtrl</servlet-name>
         <servlet-class>Controllers.BookCreateCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookUpdateCtrl</servlet-name>
+        <servlet-class>Controllers.BookUpdateCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>BookCreateCtrl</servlet-name>
         <url-pattern>/BookCreateCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookUpdateCtrl</servlet-name>
+        <url-pattern>/BookUpdateCtrl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

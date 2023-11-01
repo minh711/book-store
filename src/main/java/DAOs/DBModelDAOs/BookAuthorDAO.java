@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Models.MgrModels.BookAuthorDetail;
+import java.util.List;
 
 /**
  *
@@ -58,6 +59,36 @@ public class BookAuthorDAO extends DbConnection{
     }
     
     /**
+     * Get integer array of Book's Author ID.
+     * @param bookId Book's ID.
+     * @return BookAuthor's ID integer array.
+     * @author MinhTD
+     */
+    public int[] getBookAuthorByBookId(int bookId) {
+        List<Integer> ls = new ArrayList<>();
+        String sql
+                = "SELECT BookAuthor.authorId "
+                + "FROM BookAuthor "
+                + "JOIN Author ON BookAuthor.authorId = Author.id "
+                + "WHERE BookAuthor.bookId = ? AND isAvailable = 1";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bookId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(rs.getInt("authorId"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookAuthorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int[] arr = new int[ls.size()];
+        for (int i = 0; i < ls.size(); i++) {
+            arr[i] = ls.get(i);
+        }
+        return arr;
+    }
+    
+    /**
      * Add new book genre while creating or updating book.
      * @param ba Book author.
      * @return Number of rows effected.
@@ -69,6 +100,28 @@ public class BookAuthorDAO extends DbConnection{
                 + "(bookId, authorId) "
                 + "VALUES "
                 + "(?, ?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ba.getBookId());
+            ps.setInt(2, ba.getAuthorId());
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookAuthorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    /**
+     * Delete Book Author.
+     * @param ba Book author.
+     * @return Number of rows effected.
+     * @author MinhTD
+     */
+    public int delete(BookAuthor ba) {
+        int result = 0;
+        String sql
+                = "DELETE FROM BookAuthor "
+                + "WHERE bookId = ? and authorId = ?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, ba.getBookId());

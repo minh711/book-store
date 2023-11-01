@@ -42,21 +42,21 @@ public class BookDAO extends DbConnection {
             rs  = ps.executeQuery();
             while (rs.next()) {
                 ls.add(new Book(
-                        rs.getInt(1),
-                        rs.getNString(2),
-                        rs.getNString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getInt(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getBoolean(10),
-                        rs.getInt(11),
-                        rs.getInt(12),
-                        rs.getInt(13),
-                        rs.getInt(14),
-                        rs.getFloat(16)
+                    rs.getInt(1),
+                    rs.getNString(2),
+                    rs.getNString(3),
+                    rs.getString(4),
+                    rs.getInt(5),
+                    rs.getInt(6),
+                    rs.getInt(7),
+                    rs.getInt(8),
+                    rs.getInt(9),
+                    rs.getBoolean(10),
+                    rs.getInt(11),
+                    rs.getInt(12),
+                    rs.getInt(13),
+                    rs.getInt(14),
+                    rs.getFloat(15)
                 ));
             }
         } catch (SQLException ex) {
@@ -153,5 +153,43 @@ public class BookDAO extends DbConnection {
             System.out.println("Success.");
             return 1;
         }
+    }
+    
+    /**
+     * Get a Book by its ID.
+     * @param id Book's ID.
+     * @return Book object.
+     * @author MinhTD
+     */
+    public Book getBook(int id) {
+        Book book = null;
+        String sql = "SELECT * FROM Book WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                book = new Book(
+                        rs.getInt(1),
+                        rs.getNString(2),
+                        rs.getNString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getBoolean(10),
+                        rs.getInt(11),
+                        rs.getInt(12),
+                        rs.getInt(13),
+                        rs.getInt(14),
+                        rs.getFloat(15)
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return book;
     }
 }
