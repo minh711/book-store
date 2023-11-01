@@ -56,7 +56,7 @@ public class BookDAO extends DbConnection {
                         rs.getInt(12),
                         rs.getInt(13),
                         rs.getInt(14),
-                        rs.getFloat(16)
+                        rs.getInt(15)             
                 ));
             }
         } catch (SQLException ex) {
@@ -101,7 +101,6 @@ public class BookDAO extends DbConnection {
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, bookid);
-            System.out.println(query);
             rs = ps.executeQuery();
             while (rs.next()) {
                 b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8),rs.getInt(9), rs.getString(10), rs.getString(11));

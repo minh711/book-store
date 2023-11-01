@@ -4,22 +4,20 @@
  */
 package Controllers;
 
-import DAOs.DBModelDAOs.OrderDAO;
-import Models.DBModels.Order;
+import DAOs.DBModelDAOs.AddressDAO;
+import Models.DBModels.Address;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 /**
  *
- * @author HienHT
+ * @author PC
  */
-public class orderListCustomerCtrl extends HttpServlet {
+public class OrderAddNewAddressCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -33,13 +31,7 @@ public class orderListCustomerCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // suppose customerID is retrieve from session
-        int customerID = 3;
-        OrderDAO orderDAO = new OrderDAO();
-        ArrayList<Order> orders = orderDAO.getCustomerOrderList(customerID);
-        request.setAttribute("orders", orders);
-        request.setAttribute("orderDAO", orderDAO);
-        request.getRequestDispatcher("Views/Customer/OrderDetail/OrderHistory.jsp").forward(request, response);
+
     }
 
     /**
@@ -53,7 +45,18 @@ public class orderListCustomerCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int customerId = 3;
+        // Retrieve data sent in the POST request
+        String fullName = request.getParameter("fullName");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String address = request.getParameter("address");
 
+        AddressDAO addressDAO = new AddressDAO();
+        addressDAO.addNewAddress(new Address(0, fullName, phoneNumber, address, customerId));
+
+        int addressId = addressDAO.getLatestAddressID(customerId).getId();
+        // Send a response back to the client if needed
+        response.setContentType("text/plain");
+        response.getWriter().write(Integer.toString(addressId));
     }
-
 }

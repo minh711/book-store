@@ -52,7 +52,7 @@ public class PublisherDAO {
         ls.toArray(arr);
         return arr;
     }
-    
+
     public int addNew(String publisher) {
         int result = 0;
         String sql

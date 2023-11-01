@@ -21,6 +21,7 @@ public class Book {
     private int totalRatingStar;
     private float avgRating;
 
+
     public Book() {
     }
 

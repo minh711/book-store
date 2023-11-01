@@ -1,7 +1,7 @@
 loadBookPictures();
 
 $(document).ready(function () {
-    $('#pics').val(''); // clear the input
+//    $('#pics').val(''); // clear the input
 
     $('#pics').change(function () {
         if (pictureValidate()) {

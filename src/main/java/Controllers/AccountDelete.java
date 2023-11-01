@@ -1,25 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controllers;
 
-import DAOs.DBModelDAOs.OrderDAO;
-import Models.DBModels.Order;
+import DAOs.DBModelDAOs.AccountDAO;
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 /**
  *
- * @author HienHT
+ * @author DuyenLTM
  */
-public class orderListCustomerCtrl extends HttpServlet {
+public class AccountDelete extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -33,13 +25,12 @@ public class orderListCustomerCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // suppose customerID is retrieve from session
-        int customerID = 3;
-        OrderDAO orderDAO = new OrderDAO();
-        ArrayList<Order> orders = orderDAO.getCustomerOrderList(customerID);
-        request.setAttribute("orders", orders);
-        request.setAttribute("orderDAO", orderDAO);
-        request.getRequestDispatcher("Views/Customer/OrderDetail/OrderHistory.jsp").forward(request, response);
+        int id = Integer.valueOf(request.getParameter("id"));
+        request.setAttribute("id", id);
+        AccountDAO accountDAO = new AccountDAO();
+        int kq = accountDAO.deleteAccount(id);
+        request.setAttribute("accountList", accountDAO.getAccounts());
+        request.getRequestDispatcher("/Views/Admin/Account/AccountList.jsp").forward(request, response);
     }
 
     /**
@@ -55,5 +46,4 @@ public class orderListCustomerCtrl extends HttpServlet {
             throws ServletException, IOException {
 
     }
-
 }

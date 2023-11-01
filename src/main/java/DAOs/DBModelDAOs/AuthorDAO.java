@@ -56,7 +56,7 @@ public class AuthorDAO {
         ls.toArray(arr);
         return arr;
     }
-    
+
     public int addNew(String author) {
         int result = 0;
         String sql

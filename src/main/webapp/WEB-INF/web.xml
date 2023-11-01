@@ -21,8 +21,8 @@
         <servlet-class>Controllers.BookDetailCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AccountCtrl</servlet-name>
-        <servlet-class>Controllers.AccountCtrl</servlet-class>
+        <servlet-name>AccountCreateCtrl</servlet-name>
+        <servlet-class>Controllers.AccountCreateCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Cart</servlet-name>
@@ -72,6 +72,38 @@
         <servlet-name>BookCreateCtrl</servlet-name>
         <servlet-class>Controllers.BookCreateCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartDeleteCtrl</servlet-name>
+        <servlet-class>Controllers.CartDeleteCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountDelete</servlet-name>
+        <servlet-class>Controllers.AccountDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileUpdate</servlet-name>
+        <servlet-class>Controllers.ProfileUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddressCtrl</servlet-name>
+        <servlet-class>Controllers.AddressCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookSearch</servlet-name>
+        <servlet-class>Controllers.BookSearch</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderListCtrl</servlet-name>
+        <servlet-class>Controllers.OrderListCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderStatusUpdate</servlet-name>
+        <servlet-class>Controllers.OrderStatusUpdateCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderAddNewAddressCtrl</servlet-name>
+        <servlet-class>Controllers.OrderAddNewAddressCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -85,8 +117,8 @@
         <url-pattern>/CreateOrder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AccountCtrl</servlet-name>
-        <url-pattern>/Account</url-pattern>
+        <servlet-name>AccountCreateCtrl</servlet-name>
+        <url-pattern>/Account/Create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookDetailCtrl</servlet-name>
@@ -143,6 +175,38 @@
     <servlet-mapping>
         <servlet-name>BookCreateCtrl</servlet-name>
         <url-pattern>/BookCreateCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartDeleteCtrl</servlet-name>
+        <url-pattern>/Delete/Book</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountDelete</servlet-name>
+        <url-pattern>/Account/Delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileUpdate</servlet-name>
+        <url-pattern>/Profile/Update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddressCtrl</servlet-name>
+        <url-pattern>/Address</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookSearch</servlet-name>
+        <url-pattern>/BookSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderListCtrl</servlet-name>
+        <url-pattern>/OrderList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderStatusUpdate</servlet-name>
+        <url-pattern>/OrderStatusUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderAddNewAddressCtrl</servlet-name>
+        <url-pattern>/Order/AddNewAddress</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
