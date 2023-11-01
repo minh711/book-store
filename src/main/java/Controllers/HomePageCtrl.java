@@ -31,7 +31,7 @@ public class HomePageCtrl extends HttpServlet {
         Book[] topSellers = bookDAO.getTopSellers();
         Book[] hotOffers = bookDAO.getHotOffers();
         Book[] topRatings = bookDAO.getTopRatings();
-        Book[] books = bookDAO.getAll();
+        Book[] books = bookDAO.getTop();
         
         request.setAttribute("topSellers", topSellers);
         request.setAttribute("hotOffers", hotOffers);
