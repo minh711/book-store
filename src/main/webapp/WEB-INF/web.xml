@@ -140,6 +140,10 @@
         <servlet-name>CancelOTPCtrl</servlet-name>
         <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookSelectType</servlet-name>
+        <servlet-class>Controllers.BookSelectType</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -260,6 +264,10 @@
     <servlet-mapping>
         <servlet-name>CancelOTPCtrl</servlet-name>
         <url-pattern>/Cancel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookSelectType</servlet-name>
+        <url-pattern>/BookSelectType</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
