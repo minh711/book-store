@@ -31,6 +31,7 @@ public class AccountDAO extends DbConnection {
     public int addAccount(String fullName, String phone, String email, String gender, Date birthday, String username, String password, int roleId) {
         int ketqua = 0;
         String sql = "INSERT INTO Account (fullName,phone, email, gender,birthday,username,[password],otp, isAvailable,roleId) VALUES (?,?,?,?,?,?,?,null,1,?)";
+        password = Utilities.StringMethods.MD5Hash(password);
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, fullName);
@@ -50,12 +51,11 @@ public class AccountDAO extends DbConnection {
     }
 
 //==========================================================================================
-    
 //Login
 //kiểm tra password có đúng hay ko
     public boolean checkPass(String user, String pass) throws SQLException {
         String sql = "SELECT * FROM [dbo].[Account] WHERE username=? AND password=?";
-//        pass = Utilities.MD5Hash.MD5Hash(pass);
+        pass = Utilities.StringMethods.MD5Hash(pass);
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, user);
@@ -71,12 +71,12 @@ public class AccountDAO extends DbConnection {
 
         }
 
-       return false;
+        return false;
 
     }
 
 //kiểm tra tài khoản có tồn taih hay ko
-     public boolean checkUserName(String user) throws SQLException {
+    public boolean checkUserName(String user) throws SQLException {
         String sql = "SELECT * FROM [dbo].[Account] WHERE username=? ";
 
         try {
@@ -86,7 +86,7 @@ public class AccountDAO extends DbConnection {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-               return true;
+                return true;
             }
 
         } catch (SQLException ex) {
@@ -96,18 +96,13 @@ public class AccountDAO extends DbConnection {
 
         return false;
     }
-     
-     
-     
 
 //================================================================================================
-   
-     //Signup
-     
-     public void addAccountC(String fullName, String phone, String email, String gender, Date birthday, String username, String password) throws SQLException {
+    //Signup
+    public void addAccountC(String fullName, String phone, String email, String gender, Date birthday, String username, String password) throws SQLException {
 
         String sql = "INSERT INTO Account (fullName,phone, email, gender,birthday,username,[password],otp, isAvailable,roleId) VALUES (?,?,?,?,?,?,?,null,1,1)";
-        //        pass = Utilities.MD5Hash.MD5Hash(password);
+        password = Utilities.StringMethods.MD5Hash(password);
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, fullName);
@@ -126,12 +121,12 @@ public class AccountDAO extends DbConnection {
 
     }
 
-    public boolean checkExistUserName(String username) throws SQLException {
-        String sql = "SELECT * FROM [dbo].[Account] WHERE username=? ";
+    public boolean checkExistUserSDT(String phone) throws SQLException {
+        String sql = "SELECT * FROM [dbo].[Account] WHERE phone=? ";
 
         try {
             ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
+            ps.setString(1, phone);
 
             rs = ps.executeQuery();
 
@@ -147,29 +142,8 @@ public class AccountDAO extends DbConnection {
         return false;
     }
 
-    public boolean checkExistUserSDT(String phone) throws SQLException {
-        String sql = "SELECT * FROM [dbo].[Account] WHERE phone=? ";
-
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, phone);
-
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-               return true;
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-
-        return false;
-    }
-
     public boolean checkExistEmail(String email) throws SQLException {
-       String sql = "SELECT * FROM [dbo].[Account] WHERE email=? ";
+        String sql = "SELECT * FROM [dbo].[Account] WHERE email=? ";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -187,6 +161,133 @@ public class AccountDAO extends DbConnection {
         }
 
         return false;
+    }
+
+    public Account checkUserByName(String user) {
+        String sql = "SELECT * FROM [dbo].[Account] WHERE username=? ";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, user);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getBoolean(10), rs.getInt(11));
+            }
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    //==========================================================================
+    //thấy đổi pass
+    public void updatePass(String pass, String email) throws SQLException {
+
+        String sql = "UPDATE [dbo].[Account]\n"
+                + "   SET \n"
+                + "      [password]=?\n"
+                + "      \n"
+                + " WHERE email=?";
+        pass = Utilities.StringMethods.MD5Hash(pass);
+        try {
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, pass);
+            ps.setString(2, email);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    //kiểm tra password có đúng hay ko
+    public boolean checkNewPass(String email, String pass) throws SQLException {
+        String sql = "SELECT * FROM [dbo].[Account] WHERE email=? AND password=?";
+        pass = Utilities.StringMethods.MD5Hash(pass);
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, pass);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return false;
+
+    }
+
+    public boolean checkOTPExist(String otp, String email) throws SQLException {
+        String sql = "SELECT * FROM [dbo].[Account] WHERE otp=? AND email=?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, otp);
+            ps.setString(2, email);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return false;
+
+    }
+
+    public void updateOTP(String otp, String email) throws SQLException {
+
+        String sql = "UPDATE [dbo].[Account]\n"
+                + "   SET \n"
+                + "      [otp]=?\n"
+                + "      \n"
+                + " WHERE email=?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, otp);
+            ps.setString(2, email);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void deleteOTP(String email) throws SQLException {
+
+        String sql = "UPDATE [dbo].[Account]\n"
+                + "   SET \n"
+                + "      otp=null\n"
+                + "      \n"
+                + " WHERE email=?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, email);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

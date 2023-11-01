@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-             
+
 
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,20 +31,22 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card p-4">
-                        <form class="form" onsubmit="return validateForm();" action="${pageContext.request.contextPath}/login" method="post"   >
+                        <form class="form" onsubmit="return validateForm();" action="${pageContext.request.contextPath}/Login" method="post"   >
                             <h1 class="text-center mb-3">Đăng nhập</h1>
 
-                            <p class=" text-danger">${mess}</p>
+                            
+                            
+                            
+                            <p class="error-message text-danger">${mess}</p>
 
-                            <input type="text" class="form-control mb-3" placeholder="Tên tài khoản"  required="" id="name" name="name" value="${cookie.user.value}"  >
-                            <p class=" text-danger" id ="messName" ></p>
+                            <input type="text" class="form-control mb-3" placeholder="Tên tài khoản"  required="" autofocus="" id="name" name="name" value="${cookie.user.value}${mess2}"  >
 
-                            <input type="password" class="form-control mb-3" placeholder="Mật khẩu"  required="" id="pass" name="pass" value="${cookie.pass.value}"   >
-                            <p class=" text-danger" id ="messPass" ></p>
+                            
+                              <p class="error-message2 text-danger">${mess3_1}</p>
+                            <input type="password" class="form-control mb-3" placeholder="Mật khẩu"  required="" autofocus="" id="pass" name="pass" value="${cookie.pass.value}${mess3}"   >
+
 
                             <input type="checkbox" ${(cookie.rem.value eq 'ON')?"checked":""} name="rem" value="ON" /> Ghi nhớ mật khẩu<br><br> 
-
-
 
 
 
@@ -52,13 +54,13 @@
 
 
 
-                            <a href="#">Quên mật khẩu?</a>
+                            <a href="${pageContext.request.contextPath}/Views/Customer/Authentication/MailOtp.jsp">Quên mật khẩu?</a>
                             <hr>
                             <button onclick="window.location.href = 'SignupBookStore.jsp';"  class="btn btn-primary btn-block w-100"  type="button"> <i class="fa fa-user-plus"></i> Tạo tài khoản mới</button><br>
 
 
 
-                            <a href="${pageContext.request.contextPath}/Views/sample.jsp" >Back</a>
+                            <a href="${pageContext.request.contextPath}/Views/Customer/Home/Home.jsp" >Back</a>
                         </form>
                     </div>
                 </div>
@@ -66,7 +68,12 @@
         </main>
 
         <jsp:include page="/Views/footer.jsp"/>
-        
+
+
+
+        <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>             
+
+
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

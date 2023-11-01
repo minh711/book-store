@@ -2,58 +2,78 @@
 console.log('a')
 // Hàm validate toàn bộ form khi người dùng nhấn nút gửi (submit)
 function validateFormSignUp() {
-   // Lấy ra các trường input
-const fullNameInput = document.querySelector('input[name="fullName"]');
-const phoneInput = document.querySelector('input[name="phone"]');
-const emailInput = document.querySelector('input[name="email"]');
-const usernameInput = document.querySelector('input[name="username"]');
-const passwordInput = document.querySelector('input[name="password"]');
-const resetPasswordInput = document.querySelector('input[name="resetPWD"]');
-const genderInputs = document.querySelectorAll('input[name="gender"]');
-const birthdayInput = document.querySelector('input[name="birthday"]');
+    // Lấy ra các trường input
+    const fullNameInput = document.querySelector('input[name="fullName"]');
+    const phoneInput = document.querySelector('input[name="phone"]');
+    const emailInput = document.querySelector('input[name="email"]');
+    const usernameInput = document.querySelector('input[name="username"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const resetPasswordInput = document.querySelector('input[name="resetPWD"]');
+    const genderInputs = document.querySelectorAll('input[name="gender"]');
+    const birthdayInput = document.querySelector('input[name="birthday"]');
 
 
+ 
+        
+        
+        // Kiểm tra từng trường input
+        if (isEmpty(fullNameInput) || isEmpty(phoneInput) || isEmpty(emailInput) || isEmpty(usernameInput) ||
+                isEmpty(passwordInput) || isEmpty(resetPasswordInput) || genderInputs.length === 0 || !birthdayInput.value) {
 
-    // Kiểm tra từng trường input
-    if (isEmpty(fullNameInput) || isEmpty(phoneInput) || isEmpty(emailInput) || isEmpty(usernameInput) ||
-            isEmpty(passwordInput) || isEmpty(resetPasswordInput) || genderInputs.length === 0 || !birthdayInput.value) {
-        alert('Vui lòng điền đầy đủ thông tin và chọn chức vụ.');
-        return false;
-    }
+            var errorMessage = "Vui lòng điền đầy đủ thông tin và chọn chức vụ.";
+            document.querySelector(".error-message1").textContent = errorMessage;
+            return false;
+        }
 
     // Kiểm tra xem Full name không vượt quá 100 ký tự
     if (!isNotExceedMaxLength(fullNameInput, 32)) {
-        alert('Full name không được vượt quá 32 ký tự.');
+
+        var errorMessage = "Full name không được vượt quá 32 ký tự.";
+        document.querySelector(".error-message1").textContent = errorMessage;
         return false;
     }
 
     // Kiểm tra số điện thoại hợp lệ
     if (!isValidPhoneNumber(phoneInput.value)) {
-        alert('Số điện thoại phải có từ 10 đến 11 chữ số và bắt đầu bằng số 0.');
+
+        var errorMessage = "Số điện thoại phải có từ 10 đến 11 chữ số và bắt đầu bằng số 0.";
+        document.querySelector(".error-message2").textContent = errorMessage;
+
         return false;
     }
 
     // Kiểm tra email hợp lệ
     if (!isValidEmail(emailInput.value)) {
-        alert('Vui lòng nhập một địa chỉ email hợp lệ.');
+
+        var errorMessage = "Vui lòng nhập một địa chỉ email hợp lệ.";
+        document.querySelector(".error-message3").textContent = errorMessage;
+
         return false;
     }
 
     // Kiểm tra xem Username không vượt quá 100 ký tự và không chứa các ký tự đặc biệt hoặc khoảng trắng
     if (!isNotExceedMaxLength(usernameInput, 32) || !isUsernameValid(usernameInput.value)) {
-        alert('Username không được vượt quá 32 ký tự và chỉ chứa chữ và số.');
+
+        var errorMessage = "Username không được vượt quá 32 ký tự và chỉ chứa chữ và số.";
+        document.querySelector(".error-message4").textContent = errorMessage;
+
         return false;
     }
 
     // Kiểm tra xem mật khẩu hợp lệ
     if (!isValidPassword(passwordInput.value)) {
-        alert('Mật khẩu phải có 8-32 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.');
+        var errorMessage = "Mật khẩu phải có 8-32 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.";
+        document.querySelector(".error-message5").textContent = errorMessage;
+
         return false;
     }
 
     // Kiểm tra xem mật khẩu nhập lại hợp lệ
     if (passwordInput.value !== resetPasswordInput.value) {
-        alert('Mật khẩu và Nhập lại mật khẩu không khớp nhau.');
+        var errorMessage = "Mật khẩu và Nhập lại mật khẩu không khớp nhau.";
+        document.querySelector(".error-message6").textContent = errorMessage;
+
+
         return false;
     }
 
@@ -136,6 +156,11 @@ function isUsernameValid(username) {
     const usernamePattern = /^[a-zA-Z0-9]+$/; // Chỉ cho phép chữ và số
     return usernamePattern.test(username);
 }
+
+
+
+
+
 
 
 

@@ -2,31 +2,57 @@
 function validateForm() {
     const usernameInput = document.querySelector('input[name="name"]');
     const passwordInput = document.querySelector('input[name="pass"]');
-    
-    
 
-    if (isEmpty(usernameInput) || isEmpty(passwordInput)) {
-        alert('Vui lòng điền đầy đủ thông tin và chọn chức vụ.');
+//    $.ajax({
+//        url: "/LoginCtrl",
+//        type: "post", //send it through get method
+//        //dataType: "json",
+//        success: function (json) {
+//              alert(json);
+//        },
+//        error: function (xhr) {
+//
+//        }
+//    });
+
+    if (isEmpty(usernameInput) ) {
+        var errorMessage = "Vui lòng điền đầy đủ thông tin tên tài khoản.";
+        document.querySelector(".error-message").textContent = errorMessage;
         return false;
     }
 
-    
+
+if (  isEmpty(passwordInput)) {
+        var errorMessage = "Vui lòng điền đầy đủ thông tin mật khẩu.";
+        document.querySelector(".error-message2").textContent = errorMessage;
+        return false;
+    }
+
+
     // Kiểm tra xem Username không vượt quá 100 ký tự và không chứa các ký tự đặc biệt hoặc khoảng trắng
     if (!isNotExceedMaxLength(usernameInput, 32) || !isUsernameValid(usernameInput.value)) {
-        alert('Username không được vượt quá 32 ký tự và chỉ chứa chữ và số.');
+        var errorMessage = "Username không được vượt quá 32 ký tự và chỉ chứa chữ và số.";
+        document.querySelector(".error-message").textContent = errorMessage;
         return false;
+
     }
 
     // Kiểm tra xem mật khẩu hợp lệ
     if (!isValidPassword(passwordInput.value)) {
-        alert('Mật khẩu phải có 8-32 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.');
+
+        var errorMessage = "Mật khẩu phải có 8-32 ký tự, chứa ít nhất một chữ cái in hoa, một chữ cái thường, một số và một ký tự đặc biệt.";
+        document.querySelector(".error-message2").textContent = errorMessage;
+
         return false;
     }
 
-    
+
     return true;
-    
+
 }
+
+
+
 
 
 function isEmpty(input) {

@@ -69,6 +69,7 @@
         <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>BookCreateCtrl</servlet-name>
         <servlet-class>Controllers.BookCreateCtrl</servlet-class>
     </servlet>
@@ -107,6 +108,22 @@
     <servlet>
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>
         <servlet-class>Controllers.OrderAddNewAddressCtrl</servlet-class>
+=======
+        <servlet-name>OTPCtrl</servlet-name>
+        <servlet-class>Controllers.OTPCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordCtrl</servlet-name>
+        <servlet-class>Controllers.ResetPasswordCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailCtrl</servlet-name>
+        <servlet-class>Controllers.EmailCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOTPCtrl</servlet-name>
+        <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
+>>>>>>> ite3-resetpassword
     </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
@@ -145,10 +162,6 @@
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>OTPCtrl</servlet-name>
-        <url-pattern>/Otp</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DistributorCtrl</servlet-name>
         <url-pattern>/DistributorCtrl</url-pattern>
     </servlet-mapping>
@@ -177,6 +190,7 @@
         <url-pattern>/orderListCustomerCtrl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>BookCreateCtrl</servlet-name>
         <url-pattern>/BookCreateCtrl</url-pattern>
     </servlet-mapping>
@@ -215,6 +229,22 @@
     <servlet-mapping>
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>
         <url-pattern>/Order/AddNewAddress</url-pattern>
+=======
+        <servlet-name>OTPCtrl</servlet-name>
+        <url-pattern>/otp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordCtrl</servlet-name>
+        <url-pattern>/Reset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailCtrl</servlet-name>
+        <url-pattern>/email</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOTPCtrl</servlet-name>
+        <url-pattern>/Cancel</url-pattern>
+>>>>>>> ite3-resetpassword
     </servlet-mapping>
     <session-config>
         <session-timeout>
