@@ -118,6 +118,7 @@ public class BookDAO extends DbConnection {
      * Add a new book.
      * @param b New book.
      * @return True if success, False elsewhere.
+     * @author MinhTD
      */
     public int addNewBook(Book b) {
         int result = 0;
@@ -153,6 +154,46 @@ public class BookDAO extends DbConnection {
             System.out.println("Success.");
             return 1;
         }
+    }
+    
+    /**
+     * Add a new book.
+     *
+     * @param b New book.
+     * @return True if success, False elsewhere.
+     * @author MinhTD
+     */
+    public int update(Book b) {
+        int result = 0;
+        String sql
+                = "SET IDENTITY_INSERT [Book] ON;"
+                + "UPDATE Book "
+                + "SET "
+                + "title = ?, "
+                + "description = ?, "
+                + "thumbnail = ?, "
+                + "salePrice = ?, "
+                + "price = ?, "
+                + "discount = ?, "
+                + "publisherId = ?, "
+                + "languageId = ? "
+                + "WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setNString(1, b.getTitle());
+            ps.setNString(2, b.getDescription());
+            ps.setString(3, b.getThumbnail());
+            ps.setInt(4, b.getSalePrice());
+            ps.setInt(5, b.getPrice());
+            ps.setInt(6, b.getDiscount());
+            ps.setInt(7, b.getPubisherId());
+            ps.setInt(8, b.getLanguageId());
+            ps.setInt(9, b.getId());
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
     
     /**

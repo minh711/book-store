@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  
+$(window).bind('beforeunload', function(){
+  return 'Are you sure you want to leave?';
 });
 
 $('input').keypress(function(e) {
@@ -9,10 +9,11 @@ $('input').keypress(function(e) {
 });
 
 var formattedDescription = "";
+var isUpdateThumbnail = true;
 
 $("#submit").submit(function(e){
     e.preventDefault();
-
+        
     let form = $("#submit");
 
     // Form validation
@@ -26,17 +27,22 @@ $("#submit").submit(function(e){
         
         formData.append('txtBookId', $('input[name="txtBookId"]').val());
         formData.append('txtTitle', $('input[name="txtTitle"]').val());
-        formData.append('txtDescription', $('textarea[name="txtDescription"]').val());
+        formData.append('txtDescription', $('textarea[name="txtDescription"]').val().replace(/\r\n|\r|\n/g, "<br/>"));
         formData.append('txtDescription', formattedDescription);
         formData.append('txtPrice', $('input[name="txtPrice"]').val()); 
         formData.append('txtSalePrice', $('input[name="txtSalePrice"]').val()); 
         formData.append('submit', $('input[name="submit"]').val());
 
         let thumbnailInput = document.getElementById('upload-thumbnail-input');
-
-        if (thumbnailInput.files.length > 0) {
-            formData.append('thumbnail', thumbnailInput.files[0]);
+        
+        if (isUpdateThumbnail) {
+            if (thumbnailInput.files.length > 0) {
+                formData.append('thumbnail', thumbnailInput.files[0]);
+            }
+        } else {
+            formData.append('thumbnail', thumbnailURL);
         }
+        
         
         $.ajax({
             type: "post",
@@ -46,10 +52,7 @@ $("#submit").submit(function(e){
             traditional: true,
             processData: false,
             contentType: false,
-            success: function (data) {
-                if (data === "duplicateId") {
-                    $("#errId").text("Đã xảy ra lỗi. Mã sách này đã tồn tại.");
-                }
+            success: function () {
             }
         });
     }
@@ -175,8 +178,7 @@ function validateSubmitBook() {
     
     // Thumbnail validation
     if (thumbnailInput.length === 0) {
-        errThumbnail.text("Vui lòng chọn ảnh thu nhỏ.");
-        isInvalid = true;
+        isUpdateThumbnail = false;
     } else {
         let thumbnailFileName = thumbnailInput[0].name;
         if (!hasExtension(thumbnailFileName, ['.jpg', '.jpeg', '.png', '.jfif'])) {

@@ -158,9 +158,9 @@
 
                 <hr>
                 <input type="file" id="upload-thumbnail-input" name="thumbnail" class="visually-hidden" >
-                <input type="file" id="upload-input" name="pictures" class="visually-hidden" multiple>
-                <input type="submit" class="form-control btn btn-danger" name="submit" value="Thêm Sách mới">
+                <input type="submit" class="form-control btn btn-danger" name="submit" value="Lưu thay đổi">
             </form>
+            <input type="file" id="upload-input" name="pictures" class="visually-hidden" multiple>
         </div>
     </main>
     

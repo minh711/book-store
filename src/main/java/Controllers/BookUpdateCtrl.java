@@ -234,19 +234,29 @@ public class BookUpdateCtrl extends HttpServlet {
         // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="Submit">
-        if (request.getParameter("submit") != null && request.getParameter("submit").equals("Thêm Sách mới")) {
+        if (request.getParameter("submit") != null && request.getParameter("submit").equals("Lưu thay đổi")) {
             int bookId = 0;
             int publisherId = 0;
             int languageId = 0;
-            int[] genreIds = null;
-            int[] authorIds = null;
+
             String title = request.getParameter("txtTitle");
             String description = request.getParameter("txtDescription");
             int price = Integer.valueOf(request.getParameter("txtPrice"));
             int salePrice = Integer.valueOf(request.getParameter("txtSalePrice"));
             int discount = (100 - (int) Math.ceil((salePrice * 100.0) / price));
-            String[] thumbnail = Utilities.FileMethods.UploadPictures(request, "thumbnail", "");
-            String[] pics = Utilities.FileMethods.UploadPictures(request, "pictures", "");
+            String[] thumbnailGetter;
+            String thumbnail = "";
+            
+            try {
+                thumbnailGetter = Utilities.FileMethods.UploadPictures(request, "thumbnail", "");
+                if (thumbnailGetter != null && !thumbnailGetter.equals("")) {
+                    thumbnail = thumbnailGetter[0];
+                } else {
+                    thumbnail = request.getParameter("thumbnail");
+                }
+            } catch (Exception e) {
+                thumbnail = request.getParameter("thumbnail");
+            }
 
             // <editor-fold defaultstate="collapsed" desc="Retrive parameters">
             try {
@@ -256,21 +266,10 @@ public class BookUpdateCtrl extends HttpServlet {
             }
 
             try {
-                String[] selectedGenreIdsString = request.getParameterValues("selectedGenreIds");
-                String[] selectedAuthorIdsString = request.getParameterValues("selectedAuthorIds");
-                genreIds = new int[selectedGenreIdsString.length];
-                authorIds = new int[selectedAuthorIdsString.length];
                 publisherId = Integer.valueOf(request.getParameter("txtPublisherId"));
                 languageId = Integer.valueOf(request.getParameter("txtLanguageId"));
-
-                for (int i = 0; i < selectedGenreIdsString.length; i++) {
-                    genreIds[i] = Integer.valueOf(selectedGenreIdsString[i]);
-                }
-                for (int i = 0; i < selectedAuthorIdsString.length; i++) {
-                    authorIds[i] = Integer.valueOf(selectedAuthorIdsString[i]);
-                }
             } catch (NumberFormatException e) {
-                System.out.println("Error in selecting genres and authors.");
+                System.out.println("Error in selecting publisher and language.");
             }
             // </editor-fold>
 
@@ -278,7 +277,7 @@ public class BookUpdateCtrl extends HttpServlet {
                     bookId,
                     title,
                     description,
-                    thumbnail[0],
+                    thumbnail,
                     salePrice,
                     price,
                     discount,
@@ -293,33 +292,7 @@ public class BookUpdateCtrl extends HttpServlet {
             );
 
             BookDAO bookDAO = new BookDAO();
-            int addBookResult = bookDAO.addNewBook(book);
-            if (addBookResult == -1) {
-                String errMessage = "duplicateId";
-                String json = new Gson().toJson(errMessage);
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(json);
-            }
-
-            BookGenreDAO bookGenreDAO = new BookGenreDAO();
-            BookAuthorDAO bookAuthorDAO = new BookAuthorDAO();
-            BookPictureDAO bookPictureDAO = new BookPictureDAO();
-
-            for (int genreId : genreIds) {
-                BookGenre bg = new BookGenre(bookId, genreId);
-                bookGenreDAO.addNew(bg);
-            }
-
-            for (int authorId : authorIds) {
-                BookAuthor ba = new BookAuthor(bookId, authorId);
-                bookAuthorDAO.addNew(ba);
-            }
-
-            for (String pic : pics) {
-                BookPicture bookPicture = new BookPicture(0, pic, bookId);
-                bookPictureDAO.addNew(bookPicture);
-            }
+            bookDAO.update(book);
         }
         // </editor-fold>
     }
