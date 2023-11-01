@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 /**
  *
  * @author DuyenLTM
@@ -27,7 +28,7 @@ public class BookSearch extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
@@ -67,8 +68,11 @@ public class BookSearch extends HttpServlet {
                 books.add(bookDAO.getBookDetailByID(integer));
             }
             request.setAttribute("books", books);
-            request.getRequestDispatcher("Views/Customer/Home/Home.jsp").forward(request, response);
-        } else{
+            request.getRequestDispatcher("Views/Customer/Home/SearchBook.jsp").forward(request, response);
+
+            
+
+        } else {
             request.getRequestDispatcher("Views/Customer/Home/Home.jsp").forward(request, response);
         }
     }

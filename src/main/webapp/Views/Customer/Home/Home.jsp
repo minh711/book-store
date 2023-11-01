@@ -23,7 +23,7 @@
         <main class="bg-light d-flex">
             <form action="/BookSearch" method="post">
                 <input type="text" name="searchKey"/><br>
-                <input type="submit"/>
+                <input  type="submit"/>
             </form>
 
             <br>
@@ -71,5 +71,9 @@
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="${pageContext.request.contextPath}/Views/Customer/Home/script.js"></script>
     </body>
+    <script>
+        
+    </script>
+
 
 </html
