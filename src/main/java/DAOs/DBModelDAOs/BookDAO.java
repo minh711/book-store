@@ -32,7 +32,7 @@ public class BookDAO extends DbConnection {
      * @return Book object array.
      * @author MinhTD
      */
-    public Book[] getALl() {
+    public Book[] getAll() {
         List<Book> ls = new ArrayList<>();
         String sql 
                 = "SELECT * FROM Book "
@@ -57,6 +57,132 @@ public class BookDAO extends DbConnection {
                     rs.getInt(13),
                     rs.getInt(14),
                     rs.getFloat(15)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Book[] arr = new Book[ls.size()];
+        ls.toArray(arr);
+        return arr;
+    }
+    
+    /**
+     * Get top sellers Books.
+     * 
+     * @return Book object array.
+     * @author MinhTD
+     */
+    public Book[] getTopSellers() {
+        List<Book> ls = new ArrayList<>();
+        String sql 
+                = "SELECT TOP 8 * FROM Book "
+                + "WHERE isAvailable = 1 "
+                + "ORDER BY soleTotal DESC";
+        try {
+            ps = conn.prepareStatement(sql);
+            rs  = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new Book(
+                    rs.getInt(1),
+                    rs.getNString(2),
+                    rs.getNString(3),
+                    rs.getString(4),
+                    rs.getInt(5),
+                    rs.getInt(6),
+                    rs.getInt(7),
+                    rs.getInt(8),
+                    rs.getInt(9),
+                    rs.getBoolean(10),
+                    rs.getInt(11),
+                    rs.getInt(12),
+                    rs.getInt(13),
+                    rs.getInt(14),
+                    rs.getFloat(15)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Book[] arr = new Book[ls.size()];
+        ls.toArray(arr);
+        return arr;
+    }
+    
+    /**
+     * Get top high discount Books.
+     * 
+     * @return Book object array.
+     * @author MinhTD
+     */
+    public Book[] getHotOffers() {
+        List<Book> ls = new ArrayList<>();
+        String sql 
+                = "SELECT TOP 8 * FROM Book "
+                + "WHERE isAvailable = 1 "
+                + "ORDER BY discount DESC";
+        try {
+            ps = conn.prepareStatement(sql);
+            rs  = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new Book(
+                    rs.getInt(1),
+                    rs.getNString(2),
+                    rs.getNString(3),
+                    rs.getString(4),
+                    rs.getInt(5),
+                    rs.getInt(6),
+                    rs.getInt(7),
+                    rs.getInt(8),
+                    rs.getInt(9),
+                    rs.getBoolean(10),
+                    rs.getInt(11),
+                    rs.getInt(12),
+                    rs.getInt(13),
+                    rs.getInt(14),
+                    rs.getFloat(15)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Book[] arr = new Book[ls.size()];
+        ls.toArray(arr);
+        return arr;
+    }
+    
+    /**
+     * Get top high rating Books.
+     *
+     * @return Book object array.
+     * @author MinhTD
+     */
+    public Book[] getTopRatings() {
+        List<Book> ls = new ArrayList<>();
+        String sql
+                = "SELECT TOP 8 * FROM Book "
+                + "WHERE isAvailable = 1 "
+                + "ORDER BY avgRating DESC";
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ls.add(new Book(
+                        rs.getInt(1),
+                        rs.getNString(2),
+                        rs.getNString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getBoolean(10),
+                        rs.getInt(11),
+                        rs.getInt(12),
+                        rs.getInt(13),
+                        rs.getInt(14),
+                        rs.getFloat(15)
                 ));
             }
         } catch (SQLException ex) {

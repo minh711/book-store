@@ -108,6 +108,10 @@
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>
         <servlet-class>Controllers.OrderAddNewAddressCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomePageCtrl</servlet-name>
+        <servlet-class>Controllers.HomePageCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>
         <url-pattern>/Order/AddNewAddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomePageCtrl</servlet-name>
+        <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
