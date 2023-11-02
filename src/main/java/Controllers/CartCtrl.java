@@ -28,7 +28,7 @@ public class CartCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = 1;
+        int id = 50;
         CartDAO cart = new CartDAO();
         BookDAO book = new BookDAO();
         BookDetail b;
@@ -61,7 +61,7 @@ public class CartCtrl extends HttpServlet {
         String[] customerIds = request.getParameterValues("customerIds");
         String[] quantities = request.getParameterValues("quantities");
         
-        int customerID = 2;
+        int customerID = 50;
         AddressDAO addressDao = new AddressDAO();
 
         try {
@@ -75,15 +75,15 @@ public class CartCtrl extends HttpServlet {
                 b = book.getBookDetailByID(bookID);
                 orderlist.add(new OrderItem(b.getId(), b.getTitle(), b.getPrice(), b.getSalePrice(), bookQuantity, b.getThumbnail()));
 
-                ObjectMapper objectMapper = new ObjectMapper();
+               
+            }
+            
+              ObjectMapper objectMapper = new ObjectMapper();
                 String jsonList = objectMapper.writeValueAsString(orderlist);              
                 request.setAttribute("jsonList", jsonList.replace("\"", "'"));
                 request.setAttribute("OrderItems", orderlist);
                 request.setAttribute("addresses", addressDao.getAll(customerID));
                 request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
-            }
-            
-             
 
         } catch (NumberFormatException e) {
 

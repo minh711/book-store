@@ -86,7 +86,7 @@ public class CreateOrderCtrl extends HttpServlet {
         
         
         //Assume customerID and item list retrieve from session 
-        int customerID = 2;
+        int customerID = 50;
         // Retrieve data from the form
         long currentTimeMillis = System.currentTimeMillis();
         // get data from JSP to create Order object
