@@ -27,7 +27,7 @@ document.addEventListener('click', function(event) {
 
 function loadGenres() {
     $.ajax({
-        url: "/BookUpdateCtrl",
+        url: "/Manager/Book/Update",
         type: "post",
         data: {loadGenres: "true"},
         dataType: "json",
@@ -56,7 +56,7 @@ function selectGenre(selectedLi) {
     if (!selectedGenreIds.includes(selectedGenreId)) {
         selectedGenreIds.push(selectedGenreId);
         $.ajax({
-            url: "/BookUpdateCtrl",
+            url: "/Manager/Book/Update",
             type: "post",
             data: {addNewBookGenre: selectedGenreId, bookId: bookId},
             dataType: "json",
@@ -114,7 +114,7 @@ function loadSelectedGenres() {
 function removeGenre(id) {
     selectedGenreIds.splice(selectedGenreIds.indexOf(id), 1);
     $.ajax({
-        url: "/BookUpdateCtrl",
+        url: "/Manager/Book/Update",
         type: "post",
         data: {deleteBookGenre: id, bookId: bookId},
         dataType: "json",
@@ -128,7 +128,7 @@ function removeGenre(id) {
 
 function addNewGenre(newGenre) {
     $.ajax({
-        url: "/BookUpdateCtrl",
+        url: "/Manager/Book/Update",
         type: "post",
         data: {addNewGenre: "true", newGenre},
         success: function () {

@@ -27,7 +27,7 @@ document.addEventListener('click', function(event) {
 
 function loadAuthors() {
     $.ajax({
-        url: "/BookUpdateCtrl",
+        url: "/Manager/Book/Update",
         type: "post",
         data: {loadAuthors: "true"},
         dataType: "json",
@@ -56,7 +56,7 @@ function selectAuthor(selectedLi) {
     if (!selectedAuthorIds.includes(selectedAuthorId)) {
         selectedAuthorIds.push(selectedAuthorId);
         $.ajax({
-            url: "/BookUpdateCtrl",
+            url: "/Manager/Book/Update",
             type: "post",
             data: {addNewBookAuthor: selectedAuthorId, bookId: bookId},
             dataType: "json",
@@ -114,7 +114,7 @@ function loadSelectedAuthors() {
 function removeAuthor(id) {
     selectedAuthorIds.splice(selectedAuthorIds.indexOf(id), 1);
     $.ajax({
-        url: "/BookUpdateCtrl",
+        url: "/Manager/Book/Update",
         type: "post",
         data: {deleteBookAuthor: id, bookId: bookId},
         dataType: "json",
@@ -128,7 +128,7 @@ function removeAuthor(id) {
 
 function addNewAuthor(newAuthor) {
     $.ajax({
-        url: "/BookUpdateCtrl",
+        url: "/Manager/Book/Update",
         type: "post",
         data: {addNewAuthor: "true", newAuthor},
         success: function () {

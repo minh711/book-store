@@ -7,7 +7,7 @@ var thumbnailURL = "";
 
 $(document).ready(function() {
     $.ajax({
-        url: "/BookUpdateCtrl",
+        url: "/Manager/Book/Update",
         type: "post",
         data: {loadBook: bookId},
         dataType: "json",

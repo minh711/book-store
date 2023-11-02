@@ -47,7 +47,7 @@ $("#submit").submit(function(e){
         $.ajax({
             type: "post",
             enctype: "multipart/form-data",
-            url: "/BookUpdateCtrl",
+            url: "/Manager/Book/Update",
             data: formData,
             traditional: true,
             processData: false,

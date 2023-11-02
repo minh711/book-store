@@ -206,7 +206,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookUpdateCtrl</servlet-name>
-        <url-pattern>/BookUpdateCtrl</url-pattern>
+        <url-pattern>/Manager/Book/Update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CartDeleteCtrl</servlet-name>
