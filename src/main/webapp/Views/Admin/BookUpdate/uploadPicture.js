@@ -28,10 +28,11 @@ $(document).ready(function() {
             for (let i = 0; i < files.length; i++) {
                 fileContent.append("files", files[i]);
             }
+            fileContent.append('isUploadPictures', true);
             $.ajax({
                 type: "POST",
                 enctype: "multipart/form-data",
-                url: "/BookPictureUploadCtrl",
+                url: "/BookUpdateCtrl",
                 data: fileContent,
                 traditional: true,
                 processData: false,
@@ -70,8 +71,9 @@ $(document).on('change', '.delete-pic-checkbox', function () {
 
 function loadBookPictures() {
     $.ajax({
-        url: "/BookPictureCtrl",
-        type: "get",
+        url: "/BookUpdateCtrl",
+        type: "post",
+        data: {isLoadPictures: bookId},
         success: function (data) {
             let bookPicturesContainer = $("#bookPictures");
             bookPicturesContainer.empty();
@@ -153,7 +155,7 @@ function deleteBookPicture(button) {
     
     if (confirm('Xác nhận xóa hình ảnh?')) {
         $.ajax({
-            url: "/BookPictureCtrl",
+            url: "/BookUpdateCtrl",
             type: "post",
             data: {deletePic: bookPictureId},
             success: function () {
@@ -173,7 +175,7 @@ function deleteSelected() {
 
     if (confirm('Xác nhận xóa các hình ảnh đã chọn?')) {
         $.ajax({
-            url: "/BookPictureCtrl",
+            url: "/BookUpdateCtrl",
             type: "post", 
             data: {deleteSelected: selectedIds},
             traditional: true,

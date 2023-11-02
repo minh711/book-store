@@ -1,9 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="d-flex justify-content-between" style="padding: 10px;">
-    <div class="d-flex align-items-center justify-content-between">
+    <a href="/Home" class="d-flex align-items-center justify-content-between">
         <img src="${pageContext.request.contextPath}/Images/logo.png" style="height: 40px;">
-    </div>
+    </a>
     
     <% 
         // Test until the have session
@@ -19,8 +19,8 @@
     </c:if>
     
     <c:if test="${isLogin}">
-        <div>
+<!--        <div>
             <a href="#" class="btn btn-success mx-2"><i class="fa fa-shopping-cart mx-2"></i></a>
-        </div>
+        </div>-->
     </c:if>
 </header>

@@ -72,7 +72,7 @@ public class OrderStatusUpdateCtrl extends HttpServlet {
         
         
         // suppose the OrderID is retrieve from the request
-        int OrderID = Integer.parseInt(request.getParameter("id"));
+        int OrderID = Integer.valueOf(request.getParameter("id"));
          request.setAttribute("OrderID", OrderID);
          
          

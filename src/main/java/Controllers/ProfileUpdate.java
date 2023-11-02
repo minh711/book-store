@@ -34,9 +34,9 @@ public class ProfileUpdate extends HttpServlet {
         // ở trang nào đó khi nhấn nút muốn chỉnh profile sẽ gửi qua 1 id của account hiện tại
         AccountDAO accountDAO = new AccountDAO();
         AddressDAO accAddressDAO = new AddressDAO();
-        request.setAttribute("customerId", 55);
-        request.setAttribute("profileDetail", accountDAO.getAccountDetails(55));
-        request.setAttribute("profileAddress", accAddressDAO.getAll(55));
+        request.setAttribute("customerId", 1);
+        request.setAttribute("profileDetail", accountDAO.getAccountDetails(1));
+        request.setAttribute("profileAddress", accAddressDAO.getAll(1));
         request.getRequestDispatcher("/Views/Customer/ProfileUpdate/ProfileUpdate.jsp").forward(request, response);
 
     }

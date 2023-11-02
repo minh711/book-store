@@ -138,4 +138,6 @@ const fullNameInput = document.querySelector('input[name="fullName"]');
 
             // Gắn sự kiện validateForm vào sự kiện submit của form
             const form = document.querySelector('form');
-            form.addEventListener('submit', validateForm);
+            if (form !== null) {
+                form.addEventListener('submit', validateForm);
+            }

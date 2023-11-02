@@ -5,14 +5,6 @@
         <servlet-class>Controllers.LoginCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BookPictureUploadCtrl</servlet-name>
-        <servlet-class>Controllers.BookPictureUploadCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BookPictureCtrl</servlet-name>
-        <servlet-class>Controllers.BookPictureCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CreateOrderCtrl</servlet-name>
         <servlet-class>Controllers.CreateOrderCtrl</servlet-class>
     </servlet>
@@ -153,14 +145,6 @@
         <servlet-class>Controllers.HomePageCtrl</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>BookPictureUploadCtrl</servlet-name>
-        <url-pattern>/BookPictureUploadCtrl</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BookPictureCtrl</servlet-name>
-        <url-pattern>/BookPictureCtrl</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreateOrderCtrl</servlet-name>
         <url-pattern>/CreateOrder</url-pattern>
     </servlet-mapping>
@@ -246,7 +230,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderListCtrl</servlet-name>
-        <url-pattern>/OrderList</url-pattern>
+        <url-pattern>/Order/List</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderStatusUpdate</servlet-name>
@@ -290,4 +274,7 @@
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>Home</welcome-file>
+    </welcome-file-list>
 </web-app>

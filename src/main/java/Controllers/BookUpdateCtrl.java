@@ -86,6 +86,39 @@ public class BookUpdateCtrl extends HttpServlet {
             response.getWriter().write(json);
         }
         // </editor-fold>
+        if (request.getParameter("isLoadPictures") != null && !request.getParameter("isLoadPictures").equals("")) {
+            int bookId = Integer.valueOf(request.getParameter("isLoadPictures"));
+            BookPictureDAO bookPictureDAO = new BookPictureDAO();
+            BookPicture bookPictures[] = bookPictureDAO.getAllByBookId(bookId);
+
+            PrintWriter out = response.getWriter();
+
+            for (BookPicture bp : bookPictures) {
+                out.println("<div class=\"mx-2 my-2 book-picture\" style=\"width: 120px; position: relative;\">\n"
+                        + "                    <img \n"
+                        + "                        style=\"width: 120px; height: 160px; object-fit: contain;\" \n"
+                        + "                        src=\"" + request.getContextPath() + "/Images/" + bp.getPicture() + "\"\n"
+                        + "                    >\n"
+                        + "                    \n"
+                        + "                    <div \n"
+                        + "                        style=\"position: absolute; top: 0; width: 100%; height: 100%;\" \n"
+                        + "                    >\n"
+                        + "                        <div class=\"d-flex justify-content-between align-items-center p-1\">\n"
+                        + "                            <input type=\"checkbox\" class=\"mx-2 delete-pic-checkbox\" data-id=\"" + bp.getId() + "\">\n"
+                        + "                            <div \n"
+                        + "                                onclick=\"return deleteBookPicture(this)\" \n"
+                        + "                                class=\"mx-2 delete-pic-button\" \n"
+                        + "                                data-id=\"" + bp.getId() + "\"\n"
+                        + "                            ><i class=\"fa-solid fa-trash\"></i></div>\n"
+                        + "                        </div>\n"
+                        + "                    </div>\n"
+                        + "                    \n"
+                        + "                </div>");
+            }
+        }
+        // <editor-fold>
+        
+        // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="Load Publishers">
         if (request.getParameter("loadPublishers") != null && request.getParameter("loadPublishers").equals("true")) {
@@ -230,6 +263,46 @@ public class BookUpdateCtrl extends HttpServlet {
             int bookId = Integer.valueOf(request.getParameter("bookId"));
             BookAuthorDAO bookAuthorDAO = new BookAuthorDAO();
             bookAuthorDAO.delete(new BookAuthor(bookId, authorId));
+        }
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Delete Picture">
+        if (request.getParameter("deletePic") != null && !request.getParameter("deletePic").equals("")) {
+            BookPictureDAO bookPictureDAO = new BookPictureDAO();
+            int picId = Integer.valueOf(request.getParameter("deletePic"));
+            bookPictureDAO.delete(picId);
+        }
+        
+        // Delete multiple pictures
+        String[] selectedIds = request.getParameterValues("deleteSelected");
+        if (selectedIds != null) {
+            BookPictureDAO bookPictureDAO = new BookPictureDAO();
+            for (String id : selectedIds) {
+                int bookPictureId = Integer.parseInt(id);
+                bookPictureDAO.delete(bookPictureId);
+            }
+        }
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Upload Pictures">
+        if (request.getParameter("isUploadPictures") != null && request.getParameter("isUploadPictures").equals("true")) {
+            String[] pics = Utilities.FileMethods.UploadPictures(request, "files", "");
+        
+            /* Test for resizing picture, will use to get the book thumbnail.
+             * Not been used yet.
+             */
+            // pics[0] = Utilities.FileMethods.resizePicture(request, pics[0], "", 100, 100);
+
+            int length = pics.length;
+
+            BookPictureDAO bookPictureDAO = new BookPictureDAO();
+
+            int bookId = 1;
+
+            for (int i = 0; i < length; i++) {
+                BookPicture bookPicture = new BookPicture(0, pics[i], bookId);
+                bookPictureDAO.addNew(bookPicture);
+            }
         }
         // </editor-fold>
         

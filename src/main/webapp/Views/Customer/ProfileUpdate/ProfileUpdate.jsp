@@ -189,7 +189,9 @@
 //
 //            // Gắn sự kiện validateForm vào sự kiện submit của form
                                     const AddButton = document.getElementById('AddButton');
-                                    AddButton.addEventListener('click', validateAddress);
+                                    if (AddButton !== null) {
+                                        AddButton.addEventListener('click', validateAddress);
+                                    }
 
 //-------------------------------------------------------------------------------------------
                                     function AddAddress() {

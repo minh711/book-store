@@ -15,7 +15,7 @@
         <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
-        <script src="${pageContext.request.contextPath}/Assets/js/popper.min.js"></script>
+        <script src="${pageContext.request.contextPath}/Assets/popper/popper.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>

@@ -64,7 +64,7 @@ public class OrderListCtrl extends HttpServlet {
         ArrayList<Order> orders = orderDAO.getOrderList();
         request.setAttribute("orders", orders);
         request.setAttribute("orderDAO", orderDAO);
-        request.getRequestDispatcher("Views/Admin/OrderList/OrderList.jsp").forward(request, response);
+        request.getRequestDispatcher("/Views/Admin/OrderList/OrderList.jsp").forward(request, response);
     }
 
     /**

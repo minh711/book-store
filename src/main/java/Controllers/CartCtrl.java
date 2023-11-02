@@ -61,7 +61,7 @@ public class CartCtrl extends HttpServlet {
         String[] customerIds = request.getParameterValues("customerIds");
         String[] quantities = request.getParameterValues("quantities");
         
-        int customerID = 2;
+        int customerID = 1;
         AddressDAO addressDao = new AddressDAO();
 
         try {

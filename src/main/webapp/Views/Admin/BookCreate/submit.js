@@ -1,14 +1,11 @@
-$(document).ready(function() {
-  
-});
+var formatedDescription = "";
 
+// Prevent submit form on enter
 $('input').keypress(function(e) {
     if (e.which === 13) {
         return false;
     }
 });
-
-var formatedDescription = "";
 
 $("#submit").submit(function(e){
     e.preventDefault();
@@ -34,7 +31,6 @@ $("#submit").submit(function(e){
         
         formData.append('txtBookId', $('input[name="txtBookId"]').val());
         formData.append('txtTitle', $('input[name="txtTitle"]').val());
-//        formData.append('txtDescription', $('textarea[name="txtDescription"]').val());
         formData.append('txtDescription', formatedDescription);
         formData.append('txtPrice', $('input[name="txtPrice"]').val()); 
         formData.append('txtSalePrice', $('input[name="txtSalePrice"]').val()); 
@@ -135,7 +131,6 @@ function validateSubmitBook() {
     
     // Description validation 
     formatedDescription = description.trim().replace(/\r\n|\r|\n/g, "<br/>");
-    // $('textarea[name="txtDescription"]').val(newDescription.replace(/<br\s?\/?>/g,"\n"));
     if (formatedDescription.length <= 0 || formatedDescription.length > 2000) {
         if (formatedDescription.length === 0) {
             errDescription.text("Vui lòng nhập mô tả.");
@@ -163,8 +158,6 @@ function validateSubmitBook() {
         errPrice.text("Giá tiền phải là số nguyên dương.");
         isInvalid = true;
     }
-    
-    
     
     // Publisher validation
     if (selectedPublisherId === 0) {
