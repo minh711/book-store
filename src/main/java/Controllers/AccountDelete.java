@@ -44,6 +44,13 @@ public class AccountDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String idString=request.getParameter("id");
+        int id=Integer.valueOf(idString);
+        
+        AccountDAO accountDAO = new AccountDAO();
+        int kq = accountDAO.recoverAccount(id);
+        request.setAttribute("accountList", accountDAO.getAccounts());
+        request.getRequestDispatcher("/Views/Admin/Account/AccountList.jsp").forward(request, response);
+        
     }
 }

@@ -2,7 +2,6 @@ package Controllers;
 
 import DAOs.DBModelDAOs.AccountDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,8 +25,10 @@ public class AccountDetailCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.valueOf(request.getParameter("id"));
+        String isAvailString=request.getParameter("isAvailString");
         request.setAttribute("id", id);
         AccountDAO accountDAO = new AccountDAO();
+        request.setAttribute("isAvailString", isAvailString);
         request.setAttribute("accountDetail", accountDAO.getAccountDetails(id));
         request.getRequestDispatcher("/Views/Admin/Account/AccountDetail.jsp").forward(request, response);
     }

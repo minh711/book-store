@@ -26,10 +26,22 @@
             <div class="container d-flex justify-content-center align-items-center" style="">
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
+                        <c:choose>
+                            <c:when test = "${isAvailString=='Đã xóa'}">
+                                <div class="form-container">
+                                    <form action="/Account/Delete?id=${id}" method="post">
+                                        <button onclick="return confirm('Bạn chắc chắc muốn khôi phục tài khoản này?');" class="btn btn-danger mb-3" style="width: 180px;">Khôi phục tài khoản</button>
+                                    </form>
+                                </div>
+                            </c:when>
+
+                            <c:when test = "${isAvailString=='Hoạt động'}">
+                                <a href="/Account/Delete?id=${id}" onclick="return confirm('Bạn chắc chắc muốn xóa tài khoản này?');" class="btn btn-danger mb-3" style="width: 180px;">Xóa tài khoản</a>
+                            </c:when>
+                        </c:choose>
                         <form action="/Account/Update" method="POST">
-                            <a href="/Account/Update?id=${id}" class="btn btn-primary mb-3" ${accountDetail.roleName=='Khách hàng'?'disable':''}>Chỉnh sửa tài khoản</a>
+                            <a href="/Account/Update?id=${id}" style="width: 180px;" class="btn btn-primary mb-3" ${accountDetail.roleName=='Khách hàng'?'disable':''}>Chỉnh sửa tài khoản</a>
                             <br>
-                            <a href="/Account/Delete?id=${id}" onclick="return confirm('Bạn chắc chắc muốn xóa tài khoản này?');" class="btn btn-danger mb-3" style="width: 165px;">Xóa tài khoản</a>
                             <h1 class="text-center mb-3">Thông tin tài khoản</h1>
                             <label class="mb-2 text-primary text-opacity-50" >Họ và tên</label>
                             <input type="text" class="form-control mb-3" readonly="" value=" ${accountDetail.fullName}" name="fullName">
@@ -73,7 +85,7 @@
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
-                                new DataTable('#example');
+                                    new DataTable('#example');
         </script>
     </body>
 
