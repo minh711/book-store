@@ -88,6 +88,10 @@
         <servlet-name>BookSelectType</servlet-name>
         <servlet-class>Controllers.BookSelectType</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookAttribute</servlet-name>
+        <servlet-class>Controllers.BookAttribute</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>BookSelectType</servlet-name>
         <url-pattern>/BookSelectType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookAttribute</servlet-name>
+        <url-pattern>/BookAttribute</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

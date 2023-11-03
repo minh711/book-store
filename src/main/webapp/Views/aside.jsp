@@ -37,6 +37,11 @@
                     Tạo đơn hàng mới
                 </a>
             </li>
+            <li class="mb-1">
+                <a href="/BookAttribute" class="text-dark nav-link">
+                    Danh mục sách
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
