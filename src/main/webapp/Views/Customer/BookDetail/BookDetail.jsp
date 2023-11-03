@@ -1,7 +1,7 @@
 <%-- 
     Document   : BookDetail
     Created on : Oct 6, 2023, 6:03:06 PM
-    Author     : mummykiara
+    Author     : NhuLNT
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

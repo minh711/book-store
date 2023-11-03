@@ -93,5 +93,4 @@ public class BookDetailCtrl extends HttpServlet {
             System.out.println(e);
         }
     }
-
 }

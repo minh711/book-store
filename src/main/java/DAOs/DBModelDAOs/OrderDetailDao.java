@@ -9,12 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author HienHT
+ * @author HienHT & NhuLNT
  */
 public class OrderDetailDao {
 
@@ -28,6 +29,7 @@ public class OrderDetailDao {
 
     /**
      * add order data to OrderDetail table
+     *
      * @author HienHT
      * @param tem is an OrderDetail object
      */
@@ -47,6 +49,28 @@ public class OrderDetailDao {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   
+
+    public ArrayList<OrderDetail> GetOrderDetailByOrderId(int orderid) {
+        ArrayList<OrderDetail> list = new ArrayList<>();
+        
+        String sqlquery = "SELECT [orderId]\n"
+                + "      ,[bookId]\n"
+                + "      ,[quantity]\n"
+                + "      ,[salePrice]\n"
+                + "      ,[price]\n"
+                + "  FROM [OrderDetail]\n"
+                + "  WHERE [orderId] = ?;";
+        try {
+            ps = conn.prepareStatement(sqlquery);
+            ps.setInt(1,orderid);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new OrderDetail(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5)));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
 }

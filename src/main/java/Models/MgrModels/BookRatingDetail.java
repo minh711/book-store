@@ -1,47 +1,48 @@
-package Models.DBModels;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Models.MgrModels;
 
 import java.sql.Timestamp;
 
 /**
- * Write later
- * @author MinhTD
+ *
+ * @author mummykiara
  */
-public class Rating {
+public class BookRatingDetail {
     private int id;
+    private String Name;
     private int star;
     private String comment;
     private int customerId;
     private int bookId;
     private Timestamp dateRating;
 
-    public Rating() {
+    public BookRatingDetail(int id, String Name, int star, String comment, int customerId, int bookId, Timestamp dateRating) {
+        this.id = id;
+        this.Name = Name;
+        this.star = star;
+        this.comment = comment;
+        this.customerId = customerId;
+        this.bookId = bookId;
+        this.dateRating = dateRating;
     }
 
-    public Rating(int id, int star, String comment,int bookId, int customerId,Timestamp dateRating) {
-        this.id = id;
-        this.star = star;
-        this.comment = comment;
-        this.bookId = bookId;
-        this.customerId = customerId;
-        this.dateRating = dateRating;
-    }
-    
-    public Rating(int star, String comment,int bookId, int customerId,Timestamp dateRating) {
-        this.id = id;
-        this.star = star;
-        this.comment = comment;
-        this.bookId = bookId;
-        this.customerId = customerId;
-        this.dateRating = dateRating;
-    }
-    
-    // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public int getStar() {
@@ -67,7 +68,7 @@ public class Rating {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-    
+
     public int getBookId() {
         return bookId;
     }
@@ -75,8 +76,6 @@ public class Rating {
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
-    
-    // </editor-fold>
 
     public Timestamp getDateRating() {
         return dateRating;
@@ -85,4 +84,6 @@ public class Rating {
     public void setDateRating(Timestamp dateRating) {
         this.dateRating = dateRating;
     }
+    
+    
 }
