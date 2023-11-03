@@ -21,10 +21,13 @@ public class Book {
     private int totalRatingStar;
     private float avgRating;
     
+    private float avgRating;
+    
 
     public Book() {
     }
 
+    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,int totalRating,int totalRatingStar,float avgRating) {
     public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,int totalRating,int totalRatingStar,float avgRating) {
         this.id = id;
         this.title = title;
@@ -164,6 +167,30 @@ public class Book {
         this.avgRating = avgRating;
     }
     // </editor-fold>
+
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public int getTotalRatingStar() {
+        return totalRatingStar;
+    }
+
+    public void setTotalRatingStar(int totalRatingStar) {
+        this.totalRatingStar = totalRatingStar;
+    }
+
+    public float getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(float avgRating) {
+        this.avgRating = avgRating;
+    }
     
 }
 

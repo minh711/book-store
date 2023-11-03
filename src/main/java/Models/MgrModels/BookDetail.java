@@ -21,15 +21,15 @@ public class BookDetail {
     private int soleTotal;
     private String publisher;
     private String language;
-    private float avgRating;
     private int totalRating;
+    private float avgRating;
 
     //contructor for BookDetail
     public BookDetail() {
 
     }
 
-    public BookDetail(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, String publisher, String language, float avgRating, int totalRating) {
+    public BookDetail(int id, String title, String publisher, String language, int salePrice, int discount, int price, int soleTotal, int quantity, String description, String thumbnail,int totalRating,float avgRating) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -41,8 +41,8 @@ public class BookDetail {
         this.soleTotal = soleTotal;
         this.publisher = publisher;
         this.language = language;
-        this.avgRating = avgRating;
         this.totalRating = totalRating;
+        this.avgRating = avgRating;
     }
 
     public int getId() {
@@ -148,6 +148,7 @@ public class BookDetail {
     public void setTotalRating(int totalRating) {
         this.totalRating = totalRating;
     }
-
+    
+    
     
 }

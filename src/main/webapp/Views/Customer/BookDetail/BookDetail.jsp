@@ -201,123 +201,173 @@
                             <div class="d-flex">
                                 <p>
                                     <strong class="mx-2">${bookDetail.avgRating}</strong>
+                                    <c:set var="starTotal" value="${bookDetail.avgRating}" />
                                     <span>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                        <i class="fa fa-star-half-o text-warning" aria-hidden="true"></i>
+                                        <c:forEach var="starIndex" begin="1" end="5">
+                                            <c:choose>
+                                                <c:when test="${starTotal >= starIndex}">
+                                                    <i class="fa fa-star text-warning"></i>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
                                     </span>
                                 </p>
-                                <p class="mx-2 text-black-50">(10 đánh giá)</p>
+                                <p class="mx-2 text-black-50">(${bookDetail.getTotalRating()} đánh giá)</p>
                             </div>
                             <div class="d-flex">
-                                <div class="mx-2 border bg-warning text-light rounded-pill p-2" style="cursor: pointer">Tất cả đánh giá</div>
-                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
+                                <div class="mx-2 border bg-warning text-light rounded-pill p-2" style="cursor: pointer" id="showAllReviews">Tất cả đánh giá</div>
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showFiveStarReviews">
                                     5 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showFourStarReviews">
                                     4 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showThreeStarReviews">
                                     3 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showTwoStarReviews">
                                     2 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
-                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer">
+                                <div class="mx-2 border rounded-pill p-2" style="cursor: pointer" id="showOneStarReviews">
                                     1 
                                     <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                    (2)
                                 </div>
                             </div>
                         </div>
                         <c:forEach items="${requestScope.BookRating}" var="Rating">
-                        <div class="mt-4 p-4 bg-white text-dark rounded">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <div class="mx-2">Nguyễn Văn A</div>
+                            <div class="mt-4 p-4 bg-white text-dark rounded">
+                                <c:set var="starValue" value="${Rating.getStar()}" />
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <div class="mx-2">${Rating.getName()}</div>
+                                    </div>
+                                    <div class="text-black-50"><fmt:formatDate value="${Rating.getDateRating()}" pattern="dd-MM-yyyy HH:mm" /></div>
                                 </div>
-                                <div class="text-black-50">${Rating.getDateRating()}</div>
+                                <input type="hidden" class="userRatingStar" value="${starValue}">
+                                <div class="mt-2">
+                                    <div class="getStarRating">
+                                        <c:forEach var="starIndex" begin="1" end="5">
+                                            <c:choose>
+                                                <c:when test="${starValue >= starIndex}">
+                                                    <i class="fa fa-star text-warning"></i>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="mt-2 text-dark">${Rating.getComment()}</div>
+                                </div>
                             </div>
-                            <div class="mt-2">
-                                <i class="fa fa-star text-warning" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <i class="fa fa-star text-secondary" aria-hidden="true"></i>
-                                <div class="mt-2 text-dark">${Rating.getComment()}</div>
-                            </div>
-                        </div>
                         </c:forEach>
-                        </div>
                     </div>
-                </main>
-            </div>
+            </div>       
         </main>
+    <jsp:include page="/Views/footer.jsp"/>
 
-        <jsp:include page="/Views/footer.jsp"/>
+    <script>
 
-        <script>
+        const quantityInput = document.getElementById("cusEditQuantity");
+        const decreaseBtn = document.getElementById("decreaseQuantity");
+        const increaseBtn = document.getElementById("increaseQuantity");
 
-            const quantityInput = document.getElementById("cusEditQuantity");
-            const decreaseBtn = document.getElementById("decreaseQuantity");
-            const increaseBtn = document.getElementById("increaseQuantity");
+        //Limit the smallest quantity, and the largest
+        const minQuantity = 1;
+        const maxQuantity = ${bookDetail.soleTotal};
 
-            //Limit the smallest quantity, and the largest
-            const minQuantity = 1;
-            const maxQuantity = ${bookDetail.soleTotal};
-
-            //Check the condition if the Decrease button is pressed
-            decreaseBtn.addEventListener("click", () => {
-                let currentQuantity = parseInt(quantityInput.value);
-                if (!isNaN(currentQuantity) && currentQuantity > minQuantity) {
-                    quantityInput.value = currentQuantity - 1;
-                }
-            });
-
-            //Check the condition if the Increase button is pressed
-            increaseBtn.addEventListener("click", () => {
-                let currentQuantity = parseInt(quantityInput.value);
-                if (!isNaN(currentQuantity) && currentQuantity < maxQuantity) {
-                    quantityInput.value = currentQuantity + 1;
-                }
-            });
-
-            //Check conditions for increasing and decreasing value then update value.
-            quantityInput.addEventListener("input", () => {
-                let currentQuantity = parseInt(quantityInput.value);
-                if (isNaN(currentQuantity) || currentQuantity < minQuantity) {
-                    quantityInput.value = minQuantity;
-                } else if (currentQuantity > maxQuantity) {
-                    quantityInput.value = maxQuantity;
-                }
-
-            });
-
-            const addToCartForm = document.getElementById("addToCart");
-            const cusEditQuantity = document.getElementById("cusEditQuantity");
-            const quantityBook = document.getElementById("quantityBook");
-
-            //Set the value to quantityBook when submitting a form
-            addToCartForm.addEventListener("submit", function (event) {
-
-                const cusEditQuantityValue = cusEditQuantity.value;
-
-                quantityBook.value = cusEditQuantityValue;
-            });
-
-            function showSuccess() {
-                alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        //Check the condition if the Decrease button is pressed
+        decreaseBtn.addEventListener("click", () => {
+            let currentQuantity = parseInt(quantityInput.value);
+            if (!isNaN(currentQuantity) && currentQuantity > minQuantity) {
+                quantityInput.value = currentQuantity - 1;
             }
-        </script>
-    </body>
+        });
+
+        //Check the condition if the Increase button is pressed
+        increaseBtn.addEventListener("click", () => {
+            let currentQuantity = parseInt(quantityInput.value);
+            if (!isNaN(currentQuantity) && currentQuantity < maxQuantity) {
+                quantityInput.value = currentQuantity + 1;
+            }
+        });
+
+        //Check conditions for increasing and decreasing value then update value.
+        quantityInput.addEventListener("input", () => {
+            let currentQuantity = parseInt(quantityInput.value);
+            if (isNaN(currentQuantity) || currentQuantity < minQuantity) {
+                quantityInput.value = minQuantity;
+            } else if (currentQuantity > maxQuantity) {
+                quantityInput.value = maxQuantity;
+            }
+
+        });
+
+        const addToCartForm = document.getElementById("addToCart");
+        const cusEditQuantity = document.getElementById("cusEditQuantity");
+        const quantityBook = document.getElementById("quantityBook");
+
+        //Set the value to quantityBook when submitting a form
+        addToCartForm.addEventListener("submit", function (event) {
+
+            const cusEditQuantityValue = cusEditQuantity.value;
+
+            quantityBook.value = cusEditQuantityValue;
+        });
+
+        function showSuccess() {
+            alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+
+        document.getElementById("showAllReviews").addEventListener("click", function () {
+            showAllReviews();
+        });
+
+        document.getElementById("showFiveStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(5);
+        });
+
+        document.getElementById("showFourStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(4);
+        });
+
+        document.getElementById("showThreeStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(3);
+        });
+
+        document.getElementById("showTwoStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(2);
+        });
+
+        document.getElementById("showOneStarReviews").addEventListener("click", function () {
+            showReviewsByStarRating(1);
+        });
+
+        function showAllReviews() {
+            const allReviews = document.querySelectorAll(".userRatingStar");
+            allReviews.forEach(function (review) {
+                review.closest(".mt-4").style.display = "block";
+            });
+        }
+
+        function showReviewsByStarRating(starRating) {
+            const allReviews = document.querySelectorAll(".userRatingStar");
+            allReviews.forEach(function (review) {
+                const reviewStarRating = parseInt(review.value);
+                if (reviewStarRating === starRating) {
+                    review.closest(".mt-4").style.display = "block";
+                } else {
+                    review.closest(".mt-4").style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
 </html>

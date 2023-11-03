@@ -67,6 +67,7 @@ public class Rating {
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
+    
     // </editor-fold>
 
     public Timestamp getDateRating() {
@@ -76,10 +77,4 @@ public class Rating {
     public void setDateRating(Timestamp dateRating) {
         this.dateRating = dateRating;
     }
-
-    @Override
-    public String toString() {
-        return "Rating{" + "id=" + id + ", star=" + star + ", comment=" + comment + ", customerId=" + customerId + ", bookId=" + bookId + ", dateRating=" + dateRating + '}';
-    }
-
 }
