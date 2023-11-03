@@ -148,6 +148,14 @@
         <servlet-name>CartDataCtrl</servlet-name>
         <servlet-class>Controllers.CartDataCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookList</servlet-name>
+        <servlet-class>Controllers.BookList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountAnalysis</servlet-name>
+        <servlet-class>Controllers.AccountAnalysis</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BookPictureUploadCtrl</servlet-name>
         <url-pattern>/BookPictureUploadCtrl</url-pattern>
@@ -276,6 +284,14 @@
     <servlet-mapping>
         <servlet-name>CartDataCtrl</servlet-name>
         <url-pattern>/Cart/Data</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookList</servlet-name>
+        <url-pattern>/Book/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountAnalysis</servlet-name>
+        <url-pattern>/Account/Analysis</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

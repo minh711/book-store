@@ -3,6 +3,7 @@ package DAOs.DBModelDAOs;
 import DBConnection.DbConnection;
 import Models.DBModels.Book;
 import Models.MgrModels.BookDetail;
+import Models.MgrModels.BookList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,18 +29,18 @@ public class BookDAO extends DbConnection {
 
     /**
      * Get all available Books.
-     * 
+     *
      * @return Book object array.
      * @author MinhTD
      */
     public Book[] getALl() {
         List<Book> ls = new ArrayList<>();
-        String sql 
+        String sql
                 = "SELECT * FROM Book "
                 + "WHERE isAvailable = 1";
         try {
             ps = conn.prepareStatement(sql);
-            rs  = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 ls.add(new Book(
                         rs.getInt(1),
@@ -66,46 +67,46 @@ public class BookDAO extends DbConnection {
         ls.toArray(arr);
         return arr;
     }
-    
+
     public BookDetail getBookDetailByID(int bookid) {
-        String query = "SELECT\n" +
-"                	Book.id,\n" +
-"                       Book.title,\n" +
-"                       Publisher.publisher,\n" +
-"                       [Language].language,\n" +
-"                	Book.salePrice,\n" +
-"                	Book.discount,\n" +
-"                	Book.price,\n" +
-"                       Book.soleTotal,\n" +
-"                	Book.quantity,\n" +
-"                	Book.description,\n" +
-"                	Book.thumbnail,\n" +
-"			Book.avgRating\n" +
-"                FROM\n" +
-"                    Book\n" +
-"                JOIN\n" +
-"                    Publisher ON Book.publisherId = Publisher.id\n" +
-"                JOIN\n" +
-"                    [Language] ON Book.languageId = [Language].id\n" +
-"                LEFT JOIN\n" +
-"                    BookAuthor ON Book.id = BookAuthor.bookId\n" +
-"                LEFT JOIN\n" +
-"                    Author ON BookAuthor.authorId = Author.id\n" +
-"                LEFT JOIN\n" +
-"                    BookGenre ON Book.id = BookGenre.bookId\n" +
-"                LEFT JOIN\n" +
-"                    Genre ON BookGenre.genreId = Genre.id\n" +
-"                WHERE\n" +
-"                    Book.id = ? and Book.isAvailable = 1";
-       BookDetail b =null;
+        String query = "SELECT\n"
+                + "                	Book.id,\n"
+                + "                       Book.title,\n"
+                + "                       Publisher.publisher,\n"
+                + "                       [Language].language,\n"
+                + "                	Book.salePrice,\n"
+                + "                	Book.discount,\n"
+                + "                	Book.price,\n"
+                + "                       Book.soleTotal,\n"
+                + "                	Book.quantity,\n"
+                + "                	Book.description,\n"
+                + "                	Book.thumbnail,\n"
+                + "			Book.avgRating\n"
+                + "                FROM\n"
+                + "                    Book\n"
+                + "                JOIN\n"
+                + "                    Publisher ON Book.publisherId = Publisher.id\n"
+                + "                JOIN\n"
+                + "                    [Language] ON Book.languageId = [Language].id\n"
+                + "                LEFT JOIN\n"
+                + "                    BookAuthor ON Book.id = BookAuthor.bookId\n"
+                + "                LEFT JOIN\n"
+                + "                    Author ON BookAuthor.authorId = Author.id\n"
+                + "                LEFT JOIN\n"
+                + "                    BookGenre ON Book.id = BookGenre.bookId\n"
+                + "                LEFT JOIN\n"
+                + "                    Genre ON BookGenre.genreId = Genre.id\n"
+                + "                WHERE\n"
+                + "                    Book.id = ? and Book.isAvailable = 1";
+        BookDetail b = null;
         try {
-            
+
             ps = conn.prepareStatement(query);
             ps.setInt(1, bookid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8),rs.getInt(9), rs.getString(10), rs.getString(11),rs.getFloat(12));
-                
+                b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getFloat(12));
+
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -113,16 +114,17 @@ public class BookDAO extends DbConnection {
         }
         return b;
     }
-    
+
     /**
      * Add a new book.
+     *
      * @param b New book.
      * @return True if success, False elsewhere.
      * @author MinhTD
      */
     public int addNewBook(Book b) {
         int result = 0;
-        String addBookQuery 
+        String addBookQuery
                 = "SET IDENTITY_INSERT [Book] ON;"
                 + "INSERT INTO Book "
                 + "(id, title, description, thumbnail, salePrice, price, discount, "
@@ -155,7 +157,7 @@ public class BookDAO extends DbConnection {
             return 1;
         }
     }
-    
+
     /**
      * Add a new book.
      *
@@ -195,9 +197,10 @@ public class BookDAO extends DbConnection {
         }
         return result;
     }
-    
+
     /**
      * Get a Book by its ID.
+     *
      * @param id Book's ID.
      * @return Book object.
      * @author MinhTD
@@ -233,4 +236,40 @@ public class BookDAO extends DbConnection {
         }
         return book;
     }
+
+    public ArrayList<BookList> getBook2() {
+        ArrayList<BookList> book = new ArrayList<>();
+        String sql = "SELECT [id]\n" +
+"      ,[title]\n" +
+"      \n" +
+"      ,[thumbnail]\n" +
+"      \n" +
+"      ,[price]\n" +
+"      \n" +
+"      ,[quantity]\n" +
+"      \n" +
+"      ,[isAvailable]\n" +
+"     \n" +
+"     \n" +
+"  FROM [dbo].[Book]";
+        try {
+            ps = conn.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String a = "";
+                if (rs.getBoolean(6)) {
+                    a = "Ðang bán";
+                } else {
+                    a = "Ngừng bán";
+                }
+                book.add(new BookList(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), a));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return book;
+    }
+
 }
