@@ -314,14 +314,14 @@
 
                 if (!paymentMethodSelected && valid === true) {
                     valid = false;
-                    alert('Please select a payment method before submitting.');
+                    alert('Vui lòng chọn một phương thức thanh toán.');
                 }
                 if (selectedPayment && selectedPayment.value === "true") {
                     // Check if a file is uploaded
                     var fileInput = document.querySelector('input[type="file"]');
                     if (!fileInput || !fileInput.files.length) {
                         e.preventDefault();
-                        alert("Please upload a file for banking payment.");
+                        alert("Vui lòng tải 1 tệp ảnh lên.");
                     }
                 }
 

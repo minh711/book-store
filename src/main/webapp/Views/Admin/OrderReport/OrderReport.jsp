@@ -73,6 +73,21 @@
             .tach{
                 margin-left: 3px;
             }
+            #chartButton{
+                padding: 5px;
+                border-radius: 15px;
+                color: white;
+                font-weight: bold;
+                font-size: 1.1em;
+                background-image: linear-gradient(to right,#FEB82C, #EF7C57);
+                border: 2px solid #EF7C57;
+            }
+            #chartButton:hover{
+                background-image: linear-gradient(to right,#EC4585, #B555A3);
+                font-weight: bold;
+                font-size: 1.1em;
+                border: 2px solid #B555A3;
+            }
         </style>
     </head>
 
@@ -244,7 +259,7 @@
                         </div>
                     </div>
                     <hr class="hr">
-                    <div class="row mt-2 pt-3 d-flex justify-content-around">
+                    <div class="row mt-2 pt-3 pb-3 d-flex justify-content-around">
                         <div class="col-md-7 rounded-1" >
                             <div class="shadow  rounded" style=" background-image: linear-gradient(to right,#49C6F1, #668CD4);">
                                 <div class="p-3 text-white terminateTitle" style="text-align: center;" >Các đơn hàng lâu chưa được xử lý</div>
@@ -278,12 +293,16 @@
                         </div>
 
                         <div class="col-md-5 p-2 bg-white shadow rounded-1" >
-                            <canvas id="myChart" style="display: block; box-sizing: border-box;"></canvas>
+                            <button id="chartButton" class="btn">Change</button>
+                            <canvas id="userChart" style="display: block; box-sizing: border-box;"></canvas>
+                            <canvas id="myChart" style="display: none; box-sizing: border-box;"></canvas>
+
+
                         </div>
                     </div>
                 </div>
 
-                 
+
             </div>
         </main>
 
@@ -370,8 +389,9 @@
 
 
         <script>
-            const xValues = ["Đã hoàn thành", "Đang thực hiện", "Đã hủy"];
+            const xValues = ["Đã thành công", "Đang thực hiện", "Đã hủy"];
             const yValues = [${requestScope.finishPie}, ${requestScope.waittingPie}, ${requestScope.terminatePie}];
+            const yUserValues = [${requestScope.finishChart}, ${requestScope.waittingChart}, ${requestScope.terminateChart}];
             const barColors = [
                 "#B555A3",
                 "#668CD4",
@@ -397,20 +417,37 @@
                 }
             });
 
+            new Chart("userChart", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                            backgroundColor: barColors,
+                            data: yUserValues
+                        }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Đơn hàng từ ${(requestScope.UserStartDate != null) ? requestScope.UserStartDate : StartWeek} đến ${(requestScope.UserEndDate != null) ? requestScope.UserEndDate : EndWeel} ",
+                        fontSize: 24
+                    }
+
+                }
+            });
+
             function validateDateRange() {
                 var dateStart = document.getElementById('dateStart').value;
                 var dateEnd = document.getElementById('dateEnd').value;
 
                 if (dateStart >= dateEnd) {
-                    alert("Please select a valid date range. 'dateStart' must be less than 'dateEnd'.");
+                    alert("Vui lòng chọn ngày kết thúc lớn hơn ngày bắt đầu.");
                     return false;
                 }
 
                 return true;
             }
 
-        </script>
-        <script>
             document.addEventListener("DOMContentLoaded", function () {
                 var cancels = document.querySelectorAll(".status");
                 cancels.forEach(function (subElement) {
@@ -436,6 +473,24 @@
                     var formattedDate = dateText.replace(/\.\d+/g, ''); // Remove the dot and numbers after it
                     dateElement.textContent = formattedDate;
                 });
+
+                var button = document.getElementById("chartButton");
+                var userCanvas = document.getElementById("userChart");
+                var myCanvas = document.getElementById("myChart");
+
+                // Add a click event listener to the button
+                button.addEventListener("click", function () {
+                    if (userCanvas.style.display === "none") {
+                        // Switch to userChart
+                        userCanvas.style.display = "block";
+                        myCanvas.style.display = "none";
+                    } else {
+                        // Switch to myChart
+                        userCanvas.style.display = "none";
+                        myCanvas.style.display = "block";
+                    }
+                });
+
             });
 
             var rows = document.querySelectorAll("table tbody tr");
