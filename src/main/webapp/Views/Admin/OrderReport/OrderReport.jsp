@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,10 +20,64 @@
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>     
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <style>
+            .waittingTitle{
+                font-size: 1.1em;
+                font-weight: bold;
+                text-align: center;
+            }
+            .finishTitle{
+                font-size: 1.8em;
+                font-weight: bold;
+                text-align: center;
+            }
+            .terminateTitle{
+                font-size: 1.3em;
+                font-weight: bold;
+            }
+            .boxTitle{
+                color: black;
+                font-weight: bold;
+                background-color: white;
+                width: 32%;
+                border-bottom-right-radius:10px;
+                border-top-left-radius: 5px;
+
+            }
+
+            .waitting{
+                background-color: #fdf5dd;
+                color: #cfa00c;
+                border-radius: 10px;
+                padding: 5px;
+            }
+            .finish{
+                background-color: white;
+                color: black;
+                font-weight: bold;
+                border-radius: 10px;
+                padding: 3px;
+                border: 2px solid #668CD4;
+            }
+            .terminate{
+                background-color:#FFDADA;
+                color: #EF4848;
+                border-radius: 10px;
+                padding: 5px;
+            }
+
+            tbody tr {
+                cursor: pointer;
+
+            }
+            .tach{
+                margin-left: 3px;
+            }
+        </style>
     </head>
 
     <body>
-      
+
 
         <header class="d-flex justify-content-between" style="padding: 10px;">
             <div class="d-flex align-items-center justify-content-between">
@@ -82,136 +137,153 @@
             </aside>
             <div class="container">
                 <div class="mt-2">
-                    <h5>Thống kê thu nhập?</h5>
-                    <div class="row d-flex justify-content-between">
-                    <div class="col-md-4 p-2 ">
-                        <div class="shadow p-2 rounded" style=" background-image: linear-gradient(to right,#EC4585, #B555A3);">  
-                            <div>Tuần này</div>
-                            <div class="d-flex justify-content-around">
-                                <div class="card p-2 m-2">
-                                    <div>Đơn đã đặt</div>
-                                    <div>${requestScope.waittingCounnt}</div>
-                                </div>
-                                <div class="card p-2 m-2">
-                                    <div>Đơn thành công</div>
-                                   <div>${requestScope.finishCounnt}</div>
-                                </div>
-                                <div class="card p-2 m-2">
-                                    <div>Đơn đã hủy</div>
-                                  <div>${requestScope.terminateCounnt}</div>
-                                </div>
-                            </div>   
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-2">
-                          <div class="shadow p-2 rounded" style=" background-image: linear-gradient(to right,#49C6F1, #668CD4);">  
-                            <div>Tháng này</div>
-                            <div class="d-flex justify-content-around">
-                                <div class="card p-2 m-2">
-                                    <div>Đơn đã đặt</div>
-                                    <div>${requestScope.waittingMonth}</div>
-                                </div>
-                                <div class="card p-2 m-2">
-                                    <div>Đơn thành công</div>
-                                   <div>${requestScope.finishMonth}</div>
-                                </div>
-                                <div class="card p-2 m-2">
-                                    <div>Đơn đã hủy</div>
-                                    <div>${requestScope.terminateMonth}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-2">
-                         <div class="shadow p-2 rounded" style=" background-image: linear-gradient(to right,#FEB82C, #EF7C57);">  
-                            <div>Tổng đơn hàng</div>
-                            <div class="d-flex justify-content-around">
-                                <div class="card p-2 m-2">
-                                    <div>Đơn đã đặt</div>
-                                   <div>${requestScope.waittingAll}</div>
-                                </div>
-                                <div class="card p-2 m-2">
-                                    <div>Đơn thành công</div>
-                                   <div>${requestScope.finishAll}</div>
-                                </div>
-                                <div class="card p-2 m-2">
-                                    <div>Đơn đã hủy</div>
-                                <div>${requestScope.terminateAll}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <div class="mt-2">
-                        <h5 class="pt-3">Chọn khoản thống kê</h5>
-                        <form action="/OrderReport" method="post" onsubmit="return validateDateRange();">
-                        <div class="d-flex">
-                            <div class="d-flex align-items-center m-2">
-                                <label class="text-nowrap m-2">Từ ngày</label>
-                               <input type="date" class="form-control" value="${(requestScope.UserStartDate != null) ? requestScope.UserStartDate : StartWeek}" name="dateStart" id="dateStart">
 
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-md-4 p-2 ">
+                            <div class="shadow pb-2 pr-2 rounded" style=" background-image: linear-gradient(to right,#EC4585, #B555A3);">  
+                                <div class="boxTitle p-1" style=" border: 2px solid #B555A3;" >Tuần này</div>
+                                <div class="d-flex justify-content-around">
+                                    <div class="p-2 m-2 text-white">
+                                        <div class="waittingTitle">Đơn đã đặt</div>
+                                        <div class="finishTitle">${requestScope.waittingCounnt}</div>
+                                    </div>
+                                    <div class=" p-2 m-2 text-white">
+                                        <div class="waittingTitle" >Đơn thành công</div>
+                                        <div class="finishTitle">${requestScope.finishCounnt}</div>
+                                    </div>
+                                    <div class="p-2 m-2 text-white">
+                                        <div  class="waittingTitle"> Đơn đã hủy</div>
+                                        <div class="finishTitle">${requestScope.terminateCounnt}</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex align-items-center m-2">
-                                <div class="text-nowrap m-2">đến ngày</div>
-                                <input type="date" class="form-control" value="${(requestScope.UserEndDate != null) ? requestScope.UserEndDate : EndWeel}" name="dateEnd" id="dateEnd">
-                            </div>
-                            <button type="submit" class="btn btn-primary m-2">Xác nhận</button>
                         </div>
-                        </form>
+                        <div class="col-md-4 p-2">
+                            <div class="shadow pb-2 pr-2  rounded" style=" background-image: linear-gradient(to right,#49C6F1, #668CD4);">  
+                                <div class="boxTitle p-1" style=" border: 2px solid #668CD4;">Tháng này</div>
+                                <div class="d-flex justify-content-around">
+                                    <div class="p-2 m-2 text-white">
+                                        <div  class="waittingTitle">Đơn đã đặt</div>
+                                        <div class="finishTitle">${requestScope.waittingMonth}</div>
+                                    </div>
+                                    <div class=" p-2 m-2 text-white">
+                                        <div  class="waittingTitle" >Đơn thành công</div>
+                                        <div class="finishTitle">${requestScope.finishMonth}</div>
+                                    </div>
+                                    <div class="p-2 m-2 text-white">
+                                        <div  class="waittingTitle"> Đơn đã hủy</div>
+                                        <div class="finishTitle">${requestScope.terminateMonth}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 p-2">
+                            <div class="shadow pb-2 pr-2 rounded" style=" background-image: linear-gradient(to right,#FEB82C, #EF7C57);">  
+                                <div class="boxTitle p-1" style=" border: 2px solid #EF7C57;">Tổng đơn hàng</div>
+                                <div class="d-flex justify-content-around">
+                                    <div class="p-2 m-2 text-white">
+                                        <div  class="waittingTitle">Đơn đã đặt</div>
+                                        <div class="finishTitle">${requestScope.waittingAll}</div>
+                                    </div>
+                                    <div class=" p-2 m-2 text-white">
+                                        <div  class="waittingTitle">Đơn thành công</div>
+                                        <div class="finishTitle">${requestScope.finishAll}</div>
+                                    </div>
+                                    <div class="p-2 m-2 text-white">
+                                        <div  class="waittingTitle"> Đơn đã hủy</div>
+                                        <div class="finishTitle">${requestScope.terminateAll}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                             
-                    <div class="row mt-2">
+
+
+                    <div class="row mt-2 bg-white p-3 shadow rounded-3">
+                        <div class="col-md-12">
+                            <h5 class="pt-3">Chọn khoảng thống kê</h5>
+                            <form action="/OrderReport" method="post" onsubmit="return validateDateRange();">
+                                <div class="d-flex">
+                                    <div class="d-flex align-items-center m-2">
+                                        <label class="text-nowrap m-2">Từ ngày</label>
+                                        <input type="date" class="form-control" value="${(requestScope.UserStartDate != null) ? requestScope.UserStartDate : StartWeek}" name="dateStart" id="dateStart">
+
+                                    </div>
+                                    <div class="d-flex align-items-center m-2">
+                                        <div class="text-nowrap m-2">đến ngày</div>
+                                        <input type="date" class="form-control" value="${(requestScope.UserEndDate != null) ? requestScope.UserEndDate : EndWeel}" name="dateEnd" id="dateEnd">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary m-2">Xác nhận</button>
+                                </div>
+                            </form>
+                        </div>
                         <div class="col-md-10" id="chart"></div>
-                        <div class="col-md-2 d-flex justify-content-start card p-2 align-items-end">
-                        <div>
-                            <div>${(requestScope.UserStartDate != null) ? requestScope.UserStartDate : StartWeek} đến ${(requestScope.UserEndDate != null) ? requestScope.UserEndDate : EndWeel}</div>
-                            <div>
-                                <div class="card p-2 m-3">
-                                    <div>Đơn đã đặt</div>
-                                    <div>${requestScope.waittingChart}</div>
+                        <div class="col-md-2 d-flex justify-content-start card p-2 align-items-center"style=" background-image: linear-gradient(to bottom,#49C6F1, #668CD4);">
+                            <div class="d-flex justify-content-around">
+                                <div class="finish ">${(requestScope.UserStartDate != null) ? requestScope.UserStartDate : StartWeek}</div>
+                                <div class="finish tach">${(requestScope.UserEndDate != null) ? requestScope.UserEndDate : EndWeel}</div>
+                            </div>
+                            <div class="">
+                                <div class=" p-2">
+                                    <div class="waittingTitle text-white" >Đơn đã đặt</div>
+                                    <div class="finishTitle text-white">${requestScope.waittingChart}</div>
+                                    <hr>
                                 </div>
-                                <div class="card p-2 m-3">
-                                    <div>Đơn thành công</div>
-                                   <div>${requestScope.finishChart}</div>
+                                <div class=" p-2">
+                                    <div  class="waittingTitle text-white">Đơn thành công</div>
+                                    <div class="finishTitle text-white">${requestScope.finishChart}</div>
+                                    <hr>
                                 </div>
-                                <div class="card p-2 m-3">
-                                    <div>Đơn đã hủy</div>
-                                     <div>${requestScope.terminateChart}</div>
+                                <div class="p-2">
+                                    <div  class="waittingTitle text-white">Đơn đã hủy</div>
+                                    <div class="finishTitle text-white">${requestScope.terminateChart}</div>
+                                    <hr>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                    </div>
-                    
-                    <div class="row mt-2 pt-3 d-flex justify-content-between">
-                         <div class="col-md-2 d-flex justify-content-start card p-2 align-items-end">
-                        <div>
-                            <div>01-09-2023 đến 30-09-2023</div>
-                            <div>
-                                <div class="card p-2 m-3">
-                                    <div>Đơn đã đặt</div>
-                                    <div>99,999</div>
-                                </div>
-                                <div class="card p-2 m-3">
-                                    <div>Đơn thành công</div>
-                                    <div>99,999</div>
-                                </div>
-                                <div class="card p-2 m-3">
-                                    <div>Đơn đã hủy</div>
-                                    <div>99,999</div>
+                    <hr class="hr">
+                    <div class="row mt-2 pt-3 d-flex justify-content-around">
+                        <div class="col-md-7 rounded-1" >
+                            <div class="shadow  rounded" style=" background-image: linear-gradient(to right,#49C6F1, #668CD4);">
+                                <div class="p-3 text-white terminateTitle" style="text-align: center;" >Các đơn hàng lâu chưa được xử lý</div>
+                                <div style="height: 280px; overflow-y: auto; background-color: white">
+                                    <table class="table p-2 table-responsive-sm table-hover">
+                                        <thead class="p-2">
+                                            <tr data-link="">
+                                                <th scope="col">ID đơn hàng</th>
+                                                <th scope="col">khách hàng</th>
+                                                <th scope="col">Ngày đặt</th>
+                                                <th scope="col">Trạng thái</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <c:set var="orderDAO" value="${requestScope.orderDAO}" />
+                                        <tbody>
+                                            <c:forEach items="${requestScope.orders}" var="order">
+                                                <tr data-link="OrderStatusUpdate?id=${order.getId()}" >
+                                                    <th scope="row">${order.getId()}</th>
+                                                    <td>${order.getCustomerId()}</td>
+                                                    <td class="date">${order.getDate()}</td>
+                                                    <td> <span class="status"> ${orderDAO.getOrderStatusName(order.getId())} </span></td>
+                                                </tr>
+                                            </c:forEach>  
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+
                         </div>
-                             
-                    </div>
-                        
-                         <div class="col-md-6  card p-2">
+
+                        <div class="col-md-5 p-2 bg-white shadow rounded-1" >
                             <canvas id="myChart" style="display: block; box-sizing: border-box;"></canvas>
                         </div>
                     </div>
                 </div>
-                <hr class="hr">
 
+                 
             </div>
         </main>
 
@@ -240,7 +312,7 @@
                 </div>
             </div>
         </footer>
- 
+
         <script>
             var options = {
                 series: [{
@@ -254,7 +326,7 @@
                         data: [${requestScope.TerForChart}]
                     }],
                 chart: {
-                    height: 350,
+                    height: 370,
                     type: 'area'
                 },
                 dataLabels: {
@@ -294,49 +366,93 @@
 
 
         </script>
-      
-      
-    
+
+
+
         <script>
-const xValues = ["Đã hoàn thành", "Đang thực hiện", "Đã hủy"];
-const yValues = [${requestScope.finishPie}, ${requestScope.waittingPie}, ${requestScope.terminatePie}];
-const barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797"
-];
+            const xValues = ["Đã hoàn thành", "Đang thực hiện", "Đã hủy"];
+            const yValues = [${requestScope.finishPie}, ${requestScope.waittingPie}, ${requestScope.terminatePie}];
+            const barColors = [
+                "#B555A3",
+                "#668CD4",
+                "#EF7C57"
+            ];
 
-new Chart("myChart", {
-  type: "doughnut",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "Đơn hàng trong 3 tháng gần nhất"
-    }
-    
-  }
-});
+            new Chart("myChart", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                            backgroundColor: barColors,
+                            data: yValues
+                        }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Đơn hàng trong 3 tháng gần nhất",
+                        fontSize: 24
+                    }
 
-  function validateDateRange() {
-        var dateStart = document.getElementById('dateStart').value;
-        var dateEnd = document.getElementById('dateEnd').value;
+                }
+            });
 
-        if (dateStart >= dateEnd) {
-            alert("Please select a valid date range. 'dateStart' must be less than 'dateEnd'.");
-            return false;
-        }
+            function validateDateRange() {
+                var dateStart = document.getElementById('dateStart').value;
+                var dateEnd = document.getElementById('dateEnd').value;
 
-        return true;
-    }
+                if (dateStart >= dateEnd) {
+                    alert("Please select a valid date range. 'dateStart' must be less than 'dateEnd'.");
+                    return false;
+                }
 
-</script>
+                return true;
+            }
+
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var cancels = document.querySelectorAll(".status");
+                cancels.forEach(function (subElement) {
+
+                    var statusText = subElement.textContent.trim();
+                    if (statusText === 'Đã hủy') {
+
+                        subElement.classList.add("terminate");
+                    } else if (statusText === 'Thành công') {
+
+                        subElement.classList.add("finish");
+                    } else {
+                        subElement.classList.add("waitting");
+
+                    }
+
+
+                });
+
+                var dates = document.querySelectorAll('.date');
+                dates.forEach(function (dateElement) {
+                    var dateText = dateElement.textContent;
+                    var formattedDate = dateText.replace(/\.\d+/g, ''); // Remove the dot and numbers after it
+                    dateElement.textContent = formattedDate;
+                });
+            });
+
+            var rows = document.querySelectorAll("table tbody tr");
+
+            // Add a click event listener to each row
+            rows.forEach(function (row) {
+                row.addEventListener("click", function () {
+                    // Extract the link from the data-link attribute
+                    var link = row.getAttribute("data-link");
+
+                    // Navigate to the link
+                    if (link) {
+                        window.location.href = link;
+                    }
+                });
+            });
+        </script>
     </body>
 
 </html>

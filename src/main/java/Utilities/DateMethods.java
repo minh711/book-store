@@ -97,4 +97,23 @@ public class DateMethods {
 
         return result.toString();
     }
+          
+        public static boolean isGreaterThanSixDays(Timestamp dateNow, Timestamp dateCompare) {
+        long millisecondsPerDay = 24 * 60 * 60 * 1000;
+        long dateNowMillis = dateNow.getTime();
+        long dateCompareMillis = dateCompare.getTime();
+        long differenceInMillis = dateNowMillis - dateCompareMillis;
+        int differenceInDays = (int) (differenceInMillis / millisecondsPerDay);
+
+        return differenceInDays > 6;
+    }
+        
+        public static void main(String[] args) {
+    // Example usage
+        Timestamp dateNow = new Timestamp(System.currentTimeMillis()); // Current timestamp
+        Timestamp dateCompare = Timestamp.valueOf("2023-11-14 00:00:00"); // Example comparison date
+
+        boolean result = isGreaterThanSixDays(dateNow, dateCompare);
+        System.out.println("Is the difference greater than 6 days? " + result);
+    }
 }

@@ -23,30 +23,30 @@
             .CodDetails {
                 display: block;
             }
-            
-            #overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-  cursor: pointer;
-}
 
-#overlay img {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 90%;
-  max-height: 90%;
-}
+            #overlay {
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+                cursor: pointer;
+            }
+
+            #overlay img {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 90%;
+                max-height: 90%;
+            }
 
         </style>
     </head>
@@ -180,14 +180,14 @@
                                         </div>
                                         <div class="col-6">
                                             <input type="text" class="form-control"id="phoneNumber" placeholder="Số điện thoại">
-                                              <small class="text-danger d-none" id="errorPhone">10 chữ số, bắt đầu bằng 0</small>
+                                            <small class="text-danger d-none" id="errorPhone">10 chữ số, bắt đầu bằng 0</small>
                                         </div>
                                     </div>
                                     <div>
-                                         <input type="text" class="mt-3 form-control" id="homeAddress" placeholder="Số nhà, tên đường">
-                                         <small class="text-danger d-none" id="errorHome">Không được để trống</small>
+                                        <input type="text" class="mt-3 form-control" id="homeAddress" placeholder="Số nhà, tên đường">
+                                        <small class="text-danger d-none" id="errorHome">Không được để trống</small>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -217,7 +217,7 @@
                 var imageFile = document.getElementById("imageFile");
                 console.log(total1ValueInput);
                 // Format as currency
-                 var currencySymbol = '₫';
+                var currencySymbol = '₫';
                 var total1Element = document.getElementById("total1");
                 total1Element.textContent = total.toLocaleString('en-US', {style: 'currency', currency: 'VND'}).replace(currencySymbol, '') + 'đ';
                 var total2Element = document.getElementById("total2");
@@ -372,9 +372,9 @@
             const saveButton = document.getElementById('SaveButton');
 
             const errorName = document.getElementById('errorName');
-             const errorHome = document.getElementById('errorHome');
-              const errorPhone = document.getElementById('errorPhone');
-             
+            const errorHome = document.getElementById('errorHome');
+            const errorPhone = document.getElementById('errorPhone');
+
             const modal = document.getElementById('exampleModalCenter');
             modal.addEventListener('show.bs.modal', function () {
                 // Clear the input fields
@@ -385,30 +385,29 @@
                 phoneNumberInput.classList.remove('is-invalid');
                 homeInput.classList.remove('is-invalid');
                 errorName.classList.add('d-none');
-                 errorHome.classList.add('d-none');  
-                   errorPhone.classList.add('d-none');
+                errorHome.classList.add('d-none');
+                errorPhone.classList.add('d-none');
             });
 
 
             saveButton.addEventListener('click', function () {
-                
+
                 if (validateAddress()) {
                     sendDataToServlet();
                 }
             });
 
-              function validateAddress() {
+            function validateAddress() {
 
                 let valid = true;
-                
+
                 if (fullNameInput.value.trim() === '') {
                     valid = false;
                     fullNameInput.classList.add('is-invalid');
 //                    errorName.classList.add('d-block');
                     errorName.classList.remove('d-none');
-                }
-                else{
-                     fullNameInput.classList.remove('is-invalid');
+                } else {
+                    fullNameInput.classList.remove('is-invalid');
 //                    errorName.classList.remove('d-block');
                     errorName.classList.add('d-none');
                 }
@@ -416,12 +415,11 @@
                 if (homeInput.value.trim() === '') {
                     valid = false;
                     homeInput.classList.add('is-invalid');
-                    
-                     errorHome.classList.remove('d-none');  
-                }
-                else{
-                     homeInput.classList.remove('is-invalid');
-                   errorHome.classList.add('d-none');  
+
+                    errorHome.classList.remove('d-none');
+                } else {
+                    homeInput.classList.remove('is-invalid');
+                    errorHome.classList.add('d-none');
                 }
 
                 // Validate phone number (assuming it should be a valid numeric input)
@@ -429,10 +427,9 @@
                 if (!phoneNumberPattern.test(phoneNumberInput.value.trim())) {
                     valid = false;
                     phoneNumberInput.classList.add('is-invalid');
-                   errorPhone.classList.remove('d-none');  
-                }
-                else{
-                     phoneNumberInput.classList.remove('is-invalid');
+                    errorPhone.classList.remove('d-none');
+                } else {
+                    phoneNumberInput.classList.remove('is-invalid');
                     errorPhone.classList.add('d-none');
                 }
 

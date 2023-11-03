@@ -70,6 +70,7 @@ public class OrderReportCtrl extends HttpServlet {
         List<Order> MonthOrders = dao.getOrderListByMonth(Utilities.DateMethods.getCurrentMonth());
         List<Order> ChartOrders = new ArrayList<>();
         List<Order> PieOrders = new ArrayList<>();
+        List<Order> ProcrastOrders = new ArrayList<>();
         ArrayList<String> listDate = new ArrayList<>();
         ArrayList<String> listFinish = new ArrayList<>();
         ArrayList<String> listWait = new ArrayList<>();
@@ -105,13 +106,19 @@ public class OrderReportCtrl extends HttpServlet {
             if (order.getDate().compareTo(threeMonthsAgo) >= 0 && order.getDate().compareTo(currentTimestamp) <= 0) {
                 PieOrders.add(order);
             }
+            
             if (dao.getOrderStatusName(order.getId()).equals("Thành công")) {
                 finishAll++;
             } else if (dao.getOrderStatusName(order.getId()).equals("Đã hủy")) {
                 terminateAll++;
+            }else{
+               if(Utilities.DateMethods.isGreaterThanSixDays(currentTimestamp, order.getDate())== true){
+                   ProcrastOrders.add(order);
+               }
             }
 
         }
+        
 
         int finish = 0;
         int terminate = 0;
@@ -243,6 +250,9 @@ public class OrderReportCtrl extends HttpServlet {
 
         request.setAttribute("StartWeek", StartWeek);
         request.setAttribute("EndWeel", EndWeel);
+        
+         request.setAttribute("orders", ProcrastOrders.subList(0, 5));
+        request.setAttribute("orderDAO", dao);
 
         request.getRequestDispatcher("Views/Admin/OrderReport/OrderReport.jsp").forward(request, response);
     }
@@ -271,6 +281,7 @@ public class OrderReportCtrl extends HttpServlet {
         ArrayList<String> listFinish = new ArrayList<>();
         ArrayList<String> listWait = new ArrayList<>();
         ArrayList<String> listTer = new ArrayList<>();
+         List<Order> ProcrastOrders = new ArrayList<>();
         // Get the current timestamp
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         Calendar calendar = Calendar.getInstance();
@@ -307,6 +318,10 @@ public class OrderReportCtrl extends HttpServlet {
                 finishAll++;
             } else if (dao.getOrderStatusName(order.getId()).equals("Đã hủy")) {
                 terminateAll++;
+            }else{
+               if(Utilities.DateMethods.isGreaterThanSixDays(currentTimestamp, order.getDate())== true){
+                   ProcrastOrders.add(order);
+               }
             }
 
         }
@@ -412,7 +427,10 @@ public class OrderReportCtrl extends HttpServlet {
 
         }
 
-
+        
+        
+        
+       
         request.setAttribute("finishCounnt", finish);
         request.setAttribute("terminateCounnt", terminate);
         request.setAttribute("waittingCounnt", waitting);
@@ -443,6 +461,9 @@ public class OrderReportCtrl extends HttpServlet {
 
         request.setAttribute("UserStartDate", UserStartDate);
         request.setAttribute("UserEndDate", UserEndDate);
+        
+       request.setAttribute("orders", ProcrastOrders.subList(0, 5));
+        request.setAttribute("orderDAO", dao);
 
         request.getRequestDispatcher("Views/Admin/OrderReport/OrderReport.jsp").forward(request, response);
     }
