@@ -51,7 +51,7 @@
                     </c:forEach>
 
                     <h5>Thể loại</h5>
-                    
+
                     <c:forEach var="genre" items="${genres}">
                         <form action="/BookAttribute?genreId=${genre.id}" method="post">
                             <div class="input-group mt-3 mb-3">
@@ -143,6 +143,9 @@
                 if (confirmation) {
                     const form = deleteButton.closest('form');
                     form.submit();
+                } else {
+                    // Prevent the form from being submitted
+                    event.preventDefault();
                 }
             }
 
