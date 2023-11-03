@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author MinhTD
  */
-public class BookController extends HttpServlet {
+public class BookAdminCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -32,12 +32,7 @@ public class BookController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BookDAO bookDAO = new BookDAO();
-        Book[] books = bookDAO.getAll();
-        String json = new Gson().toJson(books);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        
     }
 
     /**
@@ -51,5 +46,13 @@ public class BookController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("isLoadBooks") != null && request.getParameter("isLoadBooks").equals("true")) {
+            BookDAO bookDAO = new BookDAO();
+            Book[] books = bookDAO.getAll();
+            String json = new Gson().toJson(books);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
     }
 }

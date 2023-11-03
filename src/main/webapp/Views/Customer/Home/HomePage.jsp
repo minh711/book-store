@@ -8,7 +8,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
@@ -252,8 +251,7 @@
         <jsp:include page="/Views/footer.jsp"/>
 
         <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>             
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/Views/Customer/Home/script.js"></script>
         <script>
             // Format the number from 1000 to 1.000 form (for VND)
@@ -271,7 +269,7 @@
             });
             
             function goToBookDetail(bookId) {
-                window.location.href = "${pageContext.request.contextPath}/Book?ID=" + bookId;
+                window.location.href = "${pageContext.request.contextPath}/Book/Detail?ID=" + bookId;
             }
         </script>
     </body>

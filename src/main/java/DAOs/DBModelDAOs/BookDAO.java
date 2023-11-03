@@ -233,35 +233,29 @@ public class BookDAO extends DbConnection {
     }
     
     public BookDetail getBookDetailByID(int bookid) {
-        String query = "SELECT\n" +
-"                	Book.id,\n" +
-"                       Book.title,\n" +
-"                       Publisher.publisher,\n" +
-"                       [Language].language,\n" +
-"                	Book.salePrice,\n" +
-"                	Book.discount,\n" +
-"                	Book.price,\n" +
-"                       Book.soleTotal,\n" +
-"                	Book.quantity,\n" +
-"                	Book.description,\n" +
-"                	Book.thumbnail,\n" +
-"			Book.avgRating\n" +
-"                FROM\n" +
-"                    Book\n" +
-"                JOIN\n" +
-"                    Publisher ON Book.publisherId = Publisher.id\n" +
-"                JOIN\n" +
-"                    [Language] ON Book.languageId = [Language].id\n" +
-"                LEFT JOIN\n" +
-"                    BookAuthor ON Book.id = BookAuthor.bookId\n" +
-"                LEFT JOIN\n" +
-"                    Author ON BookAuthor.authorId = Author.id\n" +
-"                LEFT JOIN\n" +
-"                    BookGenre ON Book.id = BookGenre.bookId\n" +
-"                LEFT JOIN\n" +
-"                    Genre ON BookGenre.genreId = Genre.id\n" +
-"                WHERE\n" +
-"                    Book.id = ? and Book.isAvailable = 1";
+        String query 
+                = "SELECT "
+                + "    Book.id, "
+                + "    Book.title, "
+                + "    Publisher.publisher, "
+                + "    [Language].language, "
+                + "    Book.salePrice, "
+                + "    Book.discount, "
+                + "    Book.price, "
+                + "    Book.soleTotal, "
+                + "    Book.quantity, "
+                + "    Book.description, "
+                + "    Book.thumbnail, "
+                + "    Book.avgRating, "
+                + "    Book.totalRating "
+                + "FROM Book"
+                + "   JOIN Publisher ON Book.publisherId = Publisher.id "
+                + "   JOIN [Language] ON Book.languageId = [Language].id "
+                + "   LEFT JOIN BookAuthor ON Book.id = BookAuthor.bookId "
+                + "   LEFT JOIN Author ON BookAuthor.authorId = Author.id "
+                + "   LEFT JOIN BookGenre ON Book.id = BookGenre.bookId "
+                + "   LEFT JOIN Genre ON BookGenre.genreId = Genre.id "
+                + "WHERE Book.id = ? and Book.isAvailable = 1";
        BookDetail b =null;
         try {
             
@@ -269,7 +263,7 @@ public class BookDAO extends DbConnection {
             ps.setInt(1, bookid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8),rs.getInt(9), rs.getString(10), rs.getString(11),rs.getFloat(12));
+                b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8),rs.getInt(9), rs.getString(10), rs.getString(11),rs.getFloat(12), rs.getInt(13));
                 
             }
         } catch (SQLException e) {

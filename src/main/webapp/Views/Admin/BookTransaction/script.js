@@ -80,8 +80,9 @@ const selectBookContent = selectBookContainer.querySelector(".content");
 
 function loadBooks() {
     $.ajax({
-        url: "/BookController",
-        type: "get",
+        url: "/Manager/Book",
+        type: "post",
+        data: {isLoadBooks: true},
         dataType: "json",
         success: function (data) {
             books = data;

@@ -86,6 +86,8 @@ public class BookUpdateCtrl extends HttpServlet {
             response.getWriter().write(json);
         }
         // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Load Book Pictures">
         if (request.getParameter("isLoadPictures") != null && !request.getParameter("isLoadPictures").equals("")) {
             int bookId = Integer.valueOf(request.getParameter("isLoadPictures"));
             BookPictureDAO bookPictureDAO = new BookPictureDAO();
@@ -116,8 +118,6 @@ public class BookUpdateCtrl extends HttpServlet {
                         + "                </div>");
             }
         }
-        // <editor-fold>
-        
         // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="Load Publishers">

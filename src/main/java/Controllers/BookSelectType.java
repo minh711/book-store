@@ -68,7 +68,8 @@ public class BookSelectType extends HttpServlet {
 
         StringBuilder authorOptions = new StringBuilder();
         for (Author author : authors) {
-            authorOptions.append("<option value=\"").append(author.getId()).append("\">").append(author.getAuthor()).append("</option>");
+//            authorOptions.append("<option value=\"").append(author.getId()).append("\">").append(author.getAuthor()).append("</option>");
+            authorOptions.append("<li><a href=\"/Book?AuthorID=").append(author.getId()).append("\">").append(author.getAuthor()).append("</a></li>");
         }
 
         return authorOptions.toString();
@@ -81,7 +82,8 @@ public class BookSelectType extends HttpServlet {
 
         StringBuilder genreOptions = new StringBuilder();
         for (Genre genre : genres) {
-            genreOptions.append("<option value=\"").append(genre.getId()).append("\">").append(genre.getGenre()).append("</option>");
+//            genreOptions.append("<option value=\"").append(genre.getId()).append("\">").append(genre.getGenre()).append("</option>");
+            genreOptions.append("<li><a href=\"/Book?GenreID=").append(genre.getId()).append("\">").append(genre.getGenre()).append("</a></li>");
         }
 
         return genreOptions.toString();
@@ -94,7 +96,8 @@ public class BookSelectType extends HttpServlet {
 
         StringBuilder languageOptions = new StringBuilder();
         for (Language language : languages) {
-            languageOptions.append("<option value=\"").append(language.getId()).append("\">").append(language.getLanguage()).append("</option>");
+//            languageOptions.append("<option value=\"").append(language.getId()).append("\">").append(language.getLanguage()).append("</option>");
+            languageOptions.append("<li><a href=\"/Book?LanguageID=").append(language.getId()).append("\">").append(language.getLanguage()).append("</a></li>");
         }
 
         return languageOptions.toString();
@@ -107,7 +110,8 @@ public class BookSelectType extends HttpServlet {
 
         StringBuilder publisherOptions = new StringBuilder();
         for (Publisher publisher : publishers) {
-            publisherOptions.append("<option value=\"").append(publisher.getId()).append("\">").append(publisher.getPublisher()).append("</option>");
+//            publisherOptions.append("<option value=\"").append(publisher.getId()).append("\">").append(publisher.getPublisher()).append("</option>");
+            publisherOptions.append("<li><a href=\"/Book?PublisherID=").append(publisher.getId()).append("\">").append(publisher.getPublisher()).append("</a></li>");
         }
 
         return publisherOptions.toString();
