@@ -1,8 +1,3 @@
-<%-- 
-    Document   : OrderList
-    Created on : Oct 21, 2023, 5:45:27 PM
-    Author     : PC
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,13 +5,8 @@
 
     <head>
         <title>Blank Page</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <jsp:include page="/Views/head.jsp"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Customer/OrderDetail/style.css">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
             #overlay {
                 position: fixed;
@@ -41,8 +31,6 @@
                 max-width: 90%;
                 max-height: 90%;
             }
-
-            
         </style>
     </head>
 
@@ -50,7 +38,7 @@
         <div id="overlay" onclick="off()">
             <img id="overlay-image" src="" alt="Clicked Image">
         </div>
-        <c:set var="currentStatus" value="${requestScope.currentStatus}" />
+        <c:set var="currentStatus" value="${requestScope.currentStatus}"/>
         <input type="hidden" id="currentStatus" name="currentStatus" value="${requestScope.currentStatus}">
         <input type="hidden" id="previousStatus" name="previousStatus" value="${requestScope.previousStatus}">
 
@@ -156,10 +144,10 @@
 
 
                                     </tr>
-                                </c:forEach>                        </tbody>
+                                </c:forEach>                        
+                            </tbody>
                         </table>
-                        <c:set var="order" value="${requestScope.Order}" />
-
+                        <c:set var="order" value="${requestScope.Order}"/>
 
                         <div class="card p-3">
                             <div class="row">
@@ -215,6 +203,8 @@
                 </form>
             </div>
         </main>
+                                                
+        <jsp:include page="/Views/footer.jsp"/>
         <script>
             function showOverlay(img) {
                 const overlay = document.getElementById("overlay");
@@ -229,7 +219,7 @@
                 document.getElementById("overlay").style.display = "none";
             }
         </script>
-        <script src="${pageContext.request.contextPath}/Views/Admin/OrderList/scripts.js"></script>                                     
+        <script src="/Views/Admin/OrderList/scripts.js"></script>                                     
     </body>
 
 </html

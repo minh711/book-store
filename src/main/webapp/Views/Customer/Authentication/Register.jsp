@@ -1,24 +1,9 @@
-<%-- 
-    Document   : SignupBookStore
-    Created on : Oct 8, 2023, 3:45:03 PM
-    Author     : DatNTT
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <title>Register</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-
-
-
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <jsp:include page="/Views/head.jsp"/>
     </head>
 
     <body>
@@ -55,8 +40,6 @@
                             <p class="error-message6 text-danger">${mess}</p>
                             <input type="password" class="form-control mb-3" placeholder="Nhập lại mật khẩu" name="resetPWD"   autofocus="" value="${mess7}" >
 
-
-
                             <p class="error-message7 text-danger">${mess}</p>
                             <label class="mb-2">Giới tính</label>
                             <div class="d-flex mb-3">
@@ -74,13 +57,9 @@
                                 </div>                  
                             </div>
 
-
-
                             <p class="error-message8 text-danger">${mess}</p>
                             <label class="mb-2">Ngày sinh</label>
                             <input type="date" class="form-control mb-3" name="birthday"   value="${mess8}" autofocus="">
-
-
 
                             <br>
                             <button class="btn btn-primary w-100 mb-2"  type="submit"><i class="fa fa-user-plus"></i> Đăng ký</button>
@@ -94,10 +73,7 @@
 
         <jsp:include page="/Views/footer.jsp"/>
 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <jsp:include page="/Views/foot.jsp"/>
         <script src="${pageContext.request.contextPath}/Views/Customer/Authentication/RegisterValidate.js"></script>
-
     </body>
 </html>

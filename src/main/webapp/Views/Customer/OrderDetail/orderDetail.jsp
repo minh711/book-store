@@ -11,13 +11,8 @@
 
     <head>
         <title>Blank Page</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Customer/OrderDetail/style.css">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <jsp:include page="/Views/head.jsp"/>
+        <link rel="stylesheet" href="/Views/Customer/OrderDetail/style.css">
         <style>
             #overlay {
                 position: fixed;
@@ -42,7 +37,6 @@
                 max-width: 90%;
                 max-height: 90%;
             }
-
         </style>
     </head>
 
@@ -248,7 +242,6 @@
                         </table>
                         <c:set var="order" value="${requestScope.Order}" />
 
-
                         <div class="card p-3">
                             <div class="row">
                                  <div class="col-md-7">
@@ -306,31 +299,8 @@
             </div>
         </main>
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 p-4">
-                        <img src="/image/logo.png" alt="" style="height: 40px;">
-                        <div>
-                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-4">
-                        <div class="d-flex">
-                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
-                            <div>
-                                business@oceanbook.com
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 d-flex justify-content-between p-4">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-facebook-messenger"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <jsp:include page="/Views/footer.jsp"/>
+        <jsp:include page="/Views/foot.jsp"/>
         <script>
             function showOverlay(img) {
                 const overlay = document.getElementById("overlay");
@@ -345,7 +315,7 @@
                 document.getElementById("overlay").style.display = "none";
             }
         </script>                                        
-        <script src="${pageContext.request.contextPath}/Views/Customer/OrderDetail/scripts.js"></script>                    
+        <script src="/Views/Customer/OrderDetail/scripts.js"></script>                    
     </body>
 
 </html

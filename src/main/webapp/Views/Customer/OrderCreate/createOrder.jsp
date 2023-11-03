@@ -1,21 +1,10 @@
-<%-- 
-    Document   : createOrder
-    Created on : Oct 5, 2023, 12:57:15 PM
-    Author     : PC
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <title>Bootstrap Example</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
+        <jsp:include page="/Views/head.jsp"/>
         <style>
             .bankingDetails {
                 display: none;
@@ -25,36 +14,35 @@
             }
             
             #overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-  cursor: pointer;
-}
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+                cursor: pointer;
+            }
 
-#overlay img {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 90%;
-  max-height: 90%;
-}
-
+            #overlay img {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 90%;
+                max-height: 90%;
+            }
         </style>
     </head>
 
     <body>
         <jsp:include page="/Views/header.jsp"/>
+        
         <div id="customAlertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050"></div>
-
 
         <main class="bg-light">
             <div class="container">
@@ -202,8 +190,9 @@
 
         <jsp:include page="/Views/footer.jsp"/>
 
+        <jsp:include page="/Views/foot.jsp"/>
         <script>
-//            var isAddAddressVisible = false;
+            // var isAddAddressVisible = false;
             document.addEventListener("DOMContentLoaded", function () {
                 var paymentRadios = document.querySelectorAll(".payment-radio");
                 var bankingDetails = document.querySelector(".bankingDetails");
@@ -238,13 +227,11 @@
                     });
                 }
 
-
                 // Select the "Thêm địa chỉ mới" link by its id
                 var newAddressLink = document.getElementById("newAddressLink");
 
                 // Select the .addNewAddressDetails section
                 var addNewAddressDetails = document.querySelector(".addNewAddressDetails");
-
 
                 // Select the textarea element by its id
                 var noteTextarea = document.getElementById("noteTextarea");
@@ -276,8 +263,6 @@
                 }
             });
 
-
-
             subtotalElements.forEach(function (subtotalElement) {
                 var subtotal = parseFloat(subtotalElement.textContent);
                 if (!isNaN(subtotal)) {
@@ -286,21 +271,13 @@
                     subtotalElement.textContent = formattedSubtotal.replace(currencySymbol, '') + 'đ';
                 }
             });
-
-
             // end format currency   //
 
-
-
-
-
             // validate input fields
-
             const form = document.getElementById('myForm');
 
             const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
             form.addEventListener('submit', function (e) {
-
                 let valid = true;
                 var selectedPayment = document.querySelector('input[name="payment-method"]:checked');
 
@@ -332,7 +309,6 @@
                 }
             });
 
-
             // Function to calculate the total
             function calculateTotal() {
                 var subtotalElements = document.querySelectorAll(".subtotal");
@@ -361,10 +337,7 @@
 
                 return total;
             }
-
-
         </script>
-        <script src="${pageContext.request.contextPath}/Assets/jquery-3.7.1/jquery-3.7.1.min.js"></script>  
         <script>
             const fullNameInput = document.getElementById('fullName');
             const phoneNumberInput = document.getElementById('phoneNumber');
@@ -372,8 +345,8 @@
             const saveButton = document.getElementById('SaveButton');
 
             const errorName = document.getElementById('errorName');
-             const errorHome = document.getElementById('errorHome');
-              const errorPhone = document.getElementById('errorPhone');
+            const errorHome = document.getElementById('errorHome');
+            const errorPhone = document.getElementById('errorPhone');
              
             const modal = document.getElementById('exampleModalCenter');
             modal.addEventListener('show.bs.modal', function () {
@@ -385,20 +358,17 @@
                 phoneNumberInput.classList.remove('is-invalid');
                 homeInput.classList.remove('is-invalid');
                 errorName.classList.add('d-none');
-                 errorHome.classList.add('d-none');  
-                   errorPhone.classList.add('d-none');
+                errorHome.classList.add('d-none');  
+                errorPhone.classList.add('d-none');
             });
 
-
             saveButton.addEventListener('click', function () {
-                
                 if (validateAddress()) {
                     sendDataToServlet();
                 }
             });
 
-              function validateAddress() {
-
+            function validateAddress() {
                 let valid = true;
                 
                 if (fullNameInput.value.trim() === '') {
@@ -438,7 +408,6 @@
 
                 return valid;
             }
-
 
             function sendDataToServlet() {
                 const fullName = fullNameInput.value;
@@ -483,5 +452,4 @@
             }
         </script>
     </body>
-
 </html>

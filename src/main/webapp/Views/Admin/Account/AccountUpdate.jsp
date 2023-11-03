@@ -11,11 +11,7 @@
 
     <head>
         <title>Blank Page</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
+        <jsp:include page="/Views/head.jsp"/>
     </head>
 
     <body>
@@ -76,12 +72,7 @@
 
         <jsp:include page="/Views/footer.jsp"/>
 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script>
-                                new DataTable('#example');
-        </script>
+        <jsp:include page="/Views/foot.jsp"/>
         <script>
             const fullNameInput = document.querySelector('input[name="fullName"]');
             const phoneInput = document.querySelector('input[name="phone"]');
@@ -226,8 +217,5 @@
             const form = document.querySelector('form');
             form.addEventListener('submit', validateForm);
         </script>
-        </script>
-
     </body>
-
 </html>

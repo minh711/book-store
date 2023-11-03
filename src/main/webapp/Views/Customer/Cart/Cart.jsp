@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Cart
-    Created on : Oct 13, 2023, 7:18:06 PM
-    Author     : mummykiara
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -12,22 +6,14 @@
 <html>
     <head>
         <title>Ocean Book</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/Assets/popper.min.js"></script>
-        <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+        <jsp:include page="/Views/head.jsp"/>
     </head>
 
     <body>
         <jsp:include page="/Views/header.jsp"/>
+        
         <button><a href="${pageContext.request.contextPath}/Views/Customer/Home/Home.jsp" id="Homepage">Doi trang</a></button>
         <div id="customAlertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050"></div>
-
 
         <main class="bg-light">
             <div class="container">
@@ -104,8 +90,10 @@
                 </form>
             </div>
         </main>
+                    
         <jsp:include page="/Views/footer.jsp"/>
 
+        <jsp:include page="/Views/foot.jsp"/>
         <script>
             //Function calculates values and updates totals for each product
             function calculateTotalForProduct() {

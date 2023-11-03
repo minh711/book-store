@@ -1,9 +1,3 @@
-<%-- 
-    Document   : BookDetail
-    Created on : Oct 6, 2023, 6:03:06 PM
-    Author     : NhuLNT
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Locale" %>
 <%@page import="java.text.NumberFormat"%>
@@ -13,20 +7,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <%  NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());%>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Ocean Book</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/Assets/popper.min.js"></script>
-        <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <jsp:include page="/Views/head.jsp"/>
         <style>
             .carousel {
                 height: 500px;
@@ -271,103 +257,104 @@
                     </div>
             </div>       
         </main>
-    <jsp:include page="/Views/footer.jsp"/>
+                            
+        <jsp:include page="/Views/footer.jsp"/>
 
-    <script>
+        <jsp:include page="/Views/foot.jsp"/>
+        <script>
+            const quantityInput = document.getElementById("cusEditQuantity");
+            const decreaseBtn = document.getElementById("decreaseQuantity");
+            const increaseBtn = document.getElementById("increaseQuantity");
 
-        const quantityInput = document.getElementById("cusEditQuantity");
-        const decreaseBtn = document.getElementById("decreaseQuantity");
-        const increaseBtn = document.getElementById("increaseQuantity");
+            //Limit the smallest quantity, and the largest
+            const minQuantity = 1;
+            const maxQuantity = ${bookDetail.soleTotal};
 
-        //Limit the smallest quantity, and the largest
-        const minQuantity = 1;
-        const maxQuantity = ${bookDetail.soleTotal};
-
-        //Check the condition if the Decrease button is pressed
-        decreaseBtn.addEventListener("click", () => {
-            let currentQuantity = parseInt(quantityInput.value);
-            if (!isNaN(currentQuantity) && currentQuantity > minQuantity) {
-                quantityInput.value = currentQuantity - 1;
-            }
-        });
-
-        //Check the condition if the Increase button is pressed
-        increaseBtn.addEventListener("click", () => {
-            let currentQuantity = parseInt(quantityInput.value);
-            if (!isNaN(currentQuantity) && currentQuantity < maxQuantity) {
-                quantityInput.value = currentQuantity + 1;
-            }
-        });
-
-        //Check conditions for increasing and decreasing value then update value.
-        quantityInput.addEventListener("input", () => {
-            let currentQuantity = parseInt(quantityInput.value);
-            if (isNaN(currentQuantity) || currentQuantity < minQuantity) {
-                quantityInput.value = minQuantity;
-            } else if (currentQuantity > maxQuantity) {
-                quantityInput.value = maxQuantity;
-            }
-
-        });
-
-        const addToCartForm = document.getElementById("addToCart");
-        const cusEditQuantity = document.getElementById("cusEditQuantity");
-        const quantityBook = document.getElementById("quantityBook");
-
-        //Set the value to quantityBook when submitting a form
-        addToCartForm.addEventListener("submit", function (event) {
-
-            const cusEditQuantityValue = cusEditQuantity.value;
-
-            quantityBook.value = cusEditQuantityValue;
-        });
-
-        function showSuccess() {
-            alert("Sản phẩm đã được thêm vào giỏ hàng!");
-        }
-
-        document.getElementById("showAllReviews").addEventListener("click", function () {
-            showAllReviews();
-        });
-
-        document.getElementById("showFiveStarReviews").addEventListener("click", function () {
-            showReviewsByStarRating(5);
-        });
-
-        document.getElementById("showFourStarReviews").addEventListener("click", function () {
-            showReviewsByStarRating(4);
-        });
-
-        document.getElementById("showThreeStarReviews").addEventListener("click", function () {
-            showReviewsByStarRating(3);
-        });
-
-        document.getElementById("showTwoStarReviews").addEventListener("click", function () {
-            showReviewsByStarRating(2);
-        });
-
-        document.getElementById("showOneStarReviews").addEventListener("click", function () {
-            showReviewsByStarRating(1);
-        });
-
-        function showAllReviews() {
-            const allReviews = document.querySelectorAll(".userRatingStar");
-            allReviews.forEach(function (review) {
-                review.closest(".mt-4").style.display = "block";
-            });
-        }
-
-        function showReviewsByStarRating(starRating) {
-            const allReviews = document.querySelectorAll(".userRatingStar");
-            allReviews.forEach(function (review) {
-                const reviewStarRating = parseInt(review.value);
-                if (reviewStarRating === starRating) {
-                    review.closest(".mt-4").style.display = "block";
-                } else {
-                    review.closest(".mt-4").style.display = "none";
+            //Check the condition if the Decrease button is pressed
+            decreaseBtn.addEventListener("click", () => {
+                let currentQuantity = parseInt(quantityInput.value);
+                if (!isNaN(currentQuantity) && currentQuantity > minQuantity) {
+                    quantityInput.value = currentQuantity - 1;
                 }
             });
-        }
-    </script>
-</body>
+
+            //Check the condition if the Increase button is pressed
+            increaseBtn.addEventListener("click", () => {
+                let currentQuantity = parseInt(quantityInput.value);
+                if (!isNaN(currentQuantity) && currentQuantity < maxQuantity) {
+                    quantityInput.value = currentQuantity + 1;
+                }
+            });
+
+            //Check conditions for increasing and decreasing value then update value.
+            quantityInput.addEventListener("input", () => {
+                let currentQuantity = parseInt(quantityInput.value);
+                if (isNaN(currentQuantity) || currentQuantity < minQuantity) {
+                    quantityInput.value = minQuantity;
+                } else if (currentQuantity > maxQuantity) {
+                    quantityInput.value = maxQuantity;
+                }
+
+            });
+
+            const addToCartForm = document.getElementById("addToCart");
+            const cusEditQuantity = document.getElementById("cusEditQuantity");
+            const quantityBook = document.getElementById("quantityBook");
+
+            //Set the value to quantityBook when submitting a form
+            addToCartForm.addEventListener("submit", function (event) {
+
+                const cusEditQuantityValue = cusEditQuantity.value;
+
+                quantityBook.value = cusEditQuantityValue;
+            });
+
+            function showSuccess() {
+                alert("Sản phẩm đã được thêm vào giỏ hàng!");
+            }
+
+            document.getElementById("showAllReviews").addEventListener("click", function () {
+                showAllReviews();
+            });
+
+            document.getElementById("showFiveStarReviews").addEventListener("click", function () {
+                showReviewsByStarRating(5);
+            });
+
+            document.getElementById("showFourStarReviews").addEventListener("click", function () {
+                showReviewsByStarRating(4);
+            });
+
+            document.getElementById("showThreeStarReviews").addEventListener("click", function () {
+                showReviewsByStarRating(3);
+            });
+
+            document.getElementById("showTwoStarReviews").addEventListener("click", function () {
+                showReviewsByStarRating(2);
+            });
+
+            document.getElementById("showOneStarReviews").addEventListener("click", function () {
+                showReviewsByStarRating(1);
+            });
+
+            function showAllReviews() {
+                const allReviews = document.querySelectorAll(".userRatingStar");
+                allReviews.forEach(function (review) {
+                    review.closest(".mt-4").style.display = "block";
+                });
+            }
+
+            function showReviewsByStarRating(starRating) {
+                const allReviews = document.querySelectorAll(".userRatingStar");
+                allReviews.forEach(function (review) {
+                    const reviewStarRating = parseInt(review.value);
+                    if (reviewStarRating === starRating) {
+                        review.closest(".mt-4").style.display = "block";
+                    } else {
+                        review.closest(".mt-4").style.display = "none";
+                    }
+                });
+            }
+        </script>
+    </body>
 </html>
