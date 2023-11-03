@@ -9,7 +9,6 @@ import DAOs.DBModelDAOs.BookRatingDAO;
 import DAOs.DBModelDAOs.CartDAO;
 import Models.DBModels.BookPicture;
 import Models.DBModels.Cart;
-import Models.DBModels.Rating;
 import Models.MgrModels.BookDetail;
 import java.io.IOException;
 import jakarta.servlet.ServletException;

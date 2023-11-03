@@ -15,19 +15,15 @@ public class Book {
     private int quantity;
     private int soleTotal;
     private boolean isAvailable;
-    private int pubisherId;
+    private int publisherId;
     private int languageId;
     private int totalRating;
     private int totalRatingStar;
     private float avgRating;
     
-    private float avgRating;
-    
-
     public Book() {
     }
 
-    public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,int totalRating,int totalRatingStar,float avgRating) {
     public Book(int id, String title, String description, String thumbnail, int salePrice, int price, int discount, int quantity, int soleTotal, boolean isAvailable, int pubisherId, int languageId,int totalRating,int totalRatingStar,float avgRating) {
         this.id = id;
         this.title = title;
@@ -39,7 +35,7 @@ public class Book {
         this.quantity = quantity;
         this.soleTotal = soleTotal;
         this.isAvailable = isAvailable;
-        this.pubisherId = pubisherId;
+        this.publisherId = pubisherId;
         this.languageId = languageId;
         this.totalRating = totalRating;
         this.totalRatingStar = totalRatingStar;
@@ -127,12 +123,12 @@ public class Book {
         this.isAvailable = isAvailable;
     }
 
-    public int getPubisherId() {
-        return pubisherId;
+    public int getPublisherId() {
+        return publisherId;
     }
 
-    public void setPubisherId(int pubisherId) {
-        this.pubisherId = pubisherId;
+    public void setPublisherId(int publisherId) {
+        this.publisherId = publisherId;
     }
 
     public int getLanguageId() {
@@ -167,31 +163,6 @@ public class Book {
         this.avgRating = avgRating;
     }
     // </editor-fold>
-
-    public int getTotalRating() {
-        return totalRating;
-    }
-
-    public void setTotalRating(int totalRating) {
-        this.totalRating = totalRating;
-    }
-
-    public int getTotalRatingStar() {
-        return totalRatingStar;
-    }
-
-    public void setTotalRatingStar(int totalRatingStar) {
-        this.totalRatingStar = totalRatingStar;
-    }
-
-    public float getAvgRating() {
-        return avgRating;
-    }
-
-    public void setAvgRating(float avgRating) {
-        this.avgRating = avgRating;
-    }
-    
 }
 
     
