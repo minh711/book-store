@@ -390,8 +390,8 @@
 
         <script>
             const xValues = ["Đã thành công", "Đang thực hiện", "Đã hủy"];
-            const yValues = [${requestScope.finishPie}, ${requestScope.waittingPie}, ${requestScope.terminatePie}];
-            const yUserValues = [${requestScope.finishChart}, ${requestScope.waittingChart}, ${requestScope.terminateChart}];
+            const yValues = [${requestScope.finishPie}, ${(requestScope.waittingPie)-(requestScope.finishPie)-(requestScope.finishPie)}, ${requestScope.terminatePie}];
+            const yUserValues = [${requestScope.finishChart}, ${(requestScope.waittingChart)-(requestScope.finishChart)-(requestScope.terminateChart)}, ${requestScope.terminateChart}];
             const barColors = [
                 "#B555A3",
                 "#668CD4",
