@@ -117,16 +117,12 @@
         <servlet-class>Controllers.BookBrowseCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BookList</servlet-name>
-        <servlet-class>Controllers.BookList</servlet-class>
+        <servlet-name>BookListCtrl</servlet-name>
+        <servlet-class>Controllers.BookListCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AccountAnalysis</servlet-name>
         <servlet-class>Controllers.AccountAnalysis</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BookList</servlet-name>
-        <servlet-class>Controllers.BookList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AccountAnalysis</servlet-name>
@@ -221,16 +217,8 @@
         <url-pattern>/Book</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BookList</servlet-name>
-        <url-pattern>/Book/list</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AccountAnalysis</servlet-name>
-        <url-pattern>/Account/Analysis</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BookList</servlet-name>
-        <url-pattern>/Book/list</url-pattern>
+        <servlet-name>BookListCtrl</servlet-name>
+        <url-pattern>/Manager/Book/list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountAnalysis</servlet-name>

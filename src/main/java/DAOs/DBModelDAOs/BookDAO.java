@@ -37,7 +37,6 @@ public class BookDAO extends DbConnection {
     public Book[] getAll() {
         List<Book> ls = new ArrayList<>();
         String sql
-        String sql
                 = "SELECT * FROM Book "
                 + "WHERE isAvailable = 1";
         try {
