@@ -6,9 +6,11 @@ package Controllers;
 
 import DAOs.DBModelDAOs.BookDAO;
 import DAOs.DBModelDAOs.BookTransactionDAO;
+import DAOs.DBModelDAOs.DistributorDAO;
 import DAOs.MgrModelDAOs.BookTransactionMgrDAO;
 import Models.DBModels.Book;
 import Models.DBModels.BookTransaction;
+import Models.DBModels.Distributor;
 import Models.MgrModels.BookTransactionMgr;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -56,6 +58,16 @@ public class BookTransactionCtrl extends HttpServlet {
             BookDAO bookDAO = new BookDAO();
             Book[] books = bookDAO.getAll();
             String json = new Gson().toJson(books);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+        
+        //Load Distributors
+        if (request.getParameter("isLoadDistributors") != null && request.getParameter("isLoadDistributors").equals("true")) {
+            DistributorDAO distributorDAO = new DistributorDAO();
+            Distributor[] distributors = distributorDAO.getAll();
+            String json = new Gson().toJson(distributors);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);

@@ -30,8 +30,9 @@ $(document).ready(function () {
 
 function loadDistributors() {
     $.ajax({
-        url: "/DistributorCtrl",
-        type: "get",
+        url: "/Manager/Book/Transaction",
+        type: "post",
+        data: {isLoadDistributors: true},
         dataType: "json",
         success: function (data) {
             distributors = data;
