@@ -210,7 +210,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookListCtrl</servlet-name>
-        <url-pattern>/Manager/Book/list</url-pattern>
+        <url-pattern>/Manager/Book/List</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountAnalysis</servlet-name>

@@ -166,7 +166,4 @@ public class BookDetail {
     public void setTotalRating(int totalRating) {
         this.totalRating = totalRating;
     }
-    
-    
-    
 }

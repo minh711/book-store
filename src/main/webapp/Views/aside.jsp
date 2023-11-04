@@ -25,7 +25,7 @@
                 </a>
                 <div class="mt-3 mx-3 collapse hide" id="book-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/Manager/Book/list" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Sách</a></li>
+                        <li><a href="/Manager/Book/List" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Sách</a></li>
                         <li><a href="/Manager/Book/Attribute" class="mt-2 link-dark d-inline-flex text-decoration-none rounded">Danh mục Sách</a></li>
                     </ul>
                 </div>

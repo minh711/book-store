@@ -79,7 +79,7 @@
                         </c:forEach>
                         
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-link" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                         </c:forEach>
 
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-link" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                         </c:forEach>
 
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-link" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
                         </c:forEach>
 
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-link" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>

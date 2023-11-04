@@ -31,7 +31,7 @@ public class BookDetailCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-        int id = Integer.valueOf(request.getParameter("id"));
+        int id = Integer.valueOf(request.getParameter("ID"));
         request.setAttribute("id", id);
         BookDAO book = new BookDAO();
         BookGenreDAO bookgenre = new BookGenreDAO();
@@ -95,5 +95,4 @@ public class BookDetailCtrl extends HttpServlet {
             System.out.println(e);
         }
     }
-
 }
