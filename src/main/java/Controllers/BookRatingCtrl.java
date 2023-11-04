@@ -3,6 +3,7 @@ package Controllers;
 import DAOs.DBModelDAOs.BookDAO;
 import DAOs.DBModelDAOs.BookRatingDAO;
 import DAOs.DBModelDAOs.OrderDetailDao;
+import Models.DBModels.Book;
 import Models.DBModels.OrderDetail;
 import Models.DBModels.Rating;
 import Models.MgrModels.BookDetail;
@@ -49,10 +50,16 @@ public class BookRatingCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        BookDAO bookDao = new BookDAO();
+        Book bookinfo = new Book();
+        Book bookupdate = new Book();
         BookRatingDAO rating = new BookRatingDAO();
         Date currentDate = new Date();
         Timestamp currentTime = new Timestamp(currentDate.getTime());
-
+        float avgRating = 0.0f;
+        int totalRatingStar = 0;
+        int totalRating = 0;
+        
         String comments = request.getParameter("Comment");
         String userId = request.getParameter("UserId");
         String bookId = request.getParameter("BookId");
@@ -62,15 +69,20 @@ public class BookRatingCtrl extends HttpServlet {
         int bookID = Integer.parseInt(bookId);
         int customerID = Integer.parseInt(userId);
         
+        bookinfo = bookDao.getBookByID(bookID);
         
-        System.out.println(bookstar + "\t" + bookID +"\t" + customerID);
+        totalRatingStar = bookinfo.getTotalRatingStar() + bookstar;
+        totalRating = bookinfo.getTotalRating() + 1;
+        avgRating = (float)totalRatingStar / totalRating;
         
-
+        bookupdate = new Book(bookinfo.getId(),bookinfo.getTitle(),bookinfo.getDescription(),bookinfo.getThumbnail(),bookinfo.getSalePrice(),bookinfo.getPrice(),bookinfo.getDiscount(),bookinfo.getQuantity(),bookinfo.getSoleTotal(),bookinfo.isIsAvailable(),bookinfo.getPubisherId(),bookinfo.getLanguageId(),totalRating,totalRatingStar,avgRating);
+        
         Rating bookrating = new Rating(bookstar,comments,bookID,customerID,currentTime);
         
         try {
             rating.addRating(bookrating);
-            response.sendRedirect("/Home");
+            rating.UpdateBookDetailRating(bookupdate);
+            request.getRequestDispatcher("/Views/Customer/Home/Home.jsp").forward(request, response);
         } catch (IOException e) {
             System.out.println(e);
         }

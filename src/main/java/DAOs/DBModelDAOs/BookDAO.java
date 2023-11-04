@@ -109,7 +109,7 @@ public class BookDAO extends DbConnection {
             ps.setInt(1, bookid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12),rs.getFloat(13));
+                b = new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getFloat(13));
 
             }
         } catch (SQLException e) {
@@ -118,5 +118,37 @@ public class BookDAO extends DbConnection {
         }
         return b;
     }
-    
+
+    public Book getBookByID(int bookid) {
+        String sql = "SELECT [id]\n"
+                + "      ,[title]\n"
+                + "      ,[description]\n"
+                + "      ,[thumbnail]\n"
+                + "      ,[salePrice]\n"
+                + "      ,[price]\n"
+                + "      ,[discount]\n"
+                + "      ,[quantity]\n"
+                + "      ,[soleTotal]\n"
+                + "      ,[isAvailable]\n"
+                + "      ,[publisherId]\n"
+                + "      ,[languageId]\n"
+                + "      ,[totalRating]\n"
+                + "      ,[totalRatingStar]\n"
+                + "      ,[avgRating]\n"
+                + "  FROM [dbo].[Book]\n"
+                + "  Where id = ?";
+        Book b = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bookid);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                b = new Book (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getBoolean(10),rs.getInt(11),rs.getInt(12),rs.getInt(13),rs.getInt(14),rs.getFloat(15));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return b;
+    }
+
 }
