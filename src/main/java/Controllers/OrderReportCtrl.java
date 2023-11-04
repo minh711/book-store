@@ -305,7 +305,6 @@ public class OrderReportCtrl extends HttpServlet {
                     }   
                     break;
             }
-
         }
 
         int finish = 0;
