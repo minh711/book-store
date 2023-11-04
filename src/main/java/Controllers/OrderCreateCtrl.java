@@ -58,6 +58,24 @@ public class OrderCreateCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Add new Address
+        if (request.getParameter("isAddNewAddress") != null && !request.getParameter("isAddNewAddress").equals("")) {
+            int customerId = 2;
+            // Retrieve data sent in the POST request
+            String fullName = request.getParameter("fullName");
+            String phoneNumber = request.getParameter("phoneNumber");
+            String address = request.getParameter("address");
+
+            AddressDAO addressDAO = new AddressDAO();
+            addressDAO.addNewAddress(new Address(0, fullName, phoneNumber, address, customerId));
+
+            int addressId = addressDAO.getLatestAddressID(customerId).getId();
+            // Send a response back to the client if needed
+            response.setContentType("text/plain");
+            response.getWriter().write(Integer.toString(addressId));
+            return;
+        }
+        
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         

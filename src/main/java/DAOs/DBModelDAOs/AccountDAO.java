@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 public class AccountDAO {
 
     private Connection conn = null;
+    private PreparedStatement ps;
+    private ResultSet rs;
 
     public AccountDAO() {
         conn = DBConnection.DbConnection.getConnection();
@@ -182,4 +184,35 @@ public class AccountDAO {
         return result;
     }
 
+    public Account loginCookie(int id, String password) {
+        Account account = null;
+        String sql 
+                = "SELECT * FROM [dbo].[Account] "
+                + "WHERE id = ? AND password = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                account = new Account(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getDate(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getString(9),
+                    rs.getBoolean(10),
+                    rs.getInt(11)
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return account;
+    }   
 }

@@ -36,9 +36,17 @@
         <main class="bg-light">
             <div class="container p-3">
                 <div class="bg-white shadow rounded mt-4 p-4">
-                    <h3>Kết quả tìm kiếm</h3>
                     
-                    <div class="d-flex align-items-center">
+                    <c:if test="${isAll eq 'true'}">
+                        <h3 class="text-center">Tất cả sản phẩm</h3>
+                    </c:if>
+                    
+                    <c:if test="${isAll != 'true'}">
+                        <h3>Kết quả tìm kiếm cho ${searchKey == null ? "" : "từ khóa "}${searchKey}${AuthorID == null ? "" : "Tác giả "}${PublisherID == null ? "" : "Nhà xuất bản "}${GenreID == null ? "" : "Thể loại "}${LanguageID == null ? "" : "Ngôn ngữ "}${Name}</h3>
+                    </c:if>
+                    
+                    
+                    <div class="mt-4 d-flex align-items-center">
                         <div class="mx-2">Sắp xếp theo</div>
                         <a class="sort-btn mx-2" id="SortByBestSellerS"> Bán chạy nhất</a>
                         <a class="sort-btn mx-2" id="SortByBestSaleS"> Giảm nhiều nhất</a>
@@ -101,7 +109,7 @@
             formatNumberElements();
 
             function goToBookDetail(bookId) {
-                window.location.href = "/Manager/Book/Detail?ID=" + bookId;
+                window.location.href = "/Book/Detail?ID=" + bookId;
             }
         </script>
         <%

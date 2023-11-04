@@ -416,8 +416,9 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '${pageContext.request.contextPath}/Order/AddAddress',
+                    url: '/Order/Create',
                     data: {
+                        isAddNewAddress: true,
                         fullName: fullName,
                         phoneNumber: phoneNumber,
                         address: address

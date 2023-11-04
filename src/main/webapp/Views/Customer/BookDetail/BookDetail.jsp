@@ -77,13 +77,13 @@
                                         <input type="hidden" name="bookid" value ="${bookDetail.id}">
                                         <input type="hidden" id="quantityBook" name="quantityBook" value="">
                                         <div class="mx-2">
-                                            <button class="btn btn-outline-secondary" type="submit" onclick="showSuccess()">
+                                            <button onclick="return authentication();" class="btn btn-outline-secondary" type="submit" onclick="showSuccess()">
                                                 <i class="fa fa-shopping-cart text-dark mx-2" aria-hidden="true""></i>
                                                 Thêm vào giỏ hàng
                                             </button>
                                         </div>
                                         <div class="mx-2">
-                                            <button class="btn btn-danger" style="width: 200px">Mua ngay</button>
+                                            <button onclick="return authentication();" class="btn btn-danger" style="width: 200px">Mua ngay</button>
                                         </div>
                                     </div>
                                 </form>
@@ -354,6 +354,11 @@
                         review.closest(".mt-4").style.display = "none";
                     }
                 });
+            }
+            
+            function authentication() {
+                alert("Bạn cần đăng nhập để thực hiện tính năng này");
+                return false;
             }
         </script>
     </body>

@@ -7,6 +7,7 @@ import DAOs.DBModelDAOs.LanguageDAO;
 import DAOs.DBModelDAOs.PublisherDAO;
 import DAOs.MgrModelDAOs.SearchBookDAO;
 import Models.DBModels.Author;
+import Models.DBModels.Book;
 import Models.DBModels.Genre;
 import Models.DBModels.Language;
 import Models.DBModels.Publisher;
@@ -45,7 +46,9 @@ public class BookBrowseCtrl extends HttpServlet {
         String publisherString = request.getParameter("PublisherID");
         String key = request.getParameter("searchKey");
         request.setAttribute("searchKey", key);
-
+        
+        boolean isSet = false;
+        
         if (key != null && !key.equals("")) {
             HashSet<Integer> hashSet = new HashSet<>();
             SearchBookDAO dao = new SearchBookDAO();
@@ -71,6 +74,7 @@ public class BookBrowseCtrl extends HttpServlet {
                 books.add(bookDAO.getBookDetailByID(integer));
             }
             request.setAttribute("books", books);
+            isSet = true;
         } 
         
         //get Books of the author that selected
@@ -91,7 +95,9 @@ public class BookBrowseCtrl extends HttpServlet {
 //            response.setCharacterEncoding("UTF-8");
 //            response.getWriter().write(jsonResult);
 
+            request.setAttribute("AuthorID", authorString);
             request.setAttribute("books", books);
+            isSet = true;
         }
 
         //get Books of the genre that selected
@@ -113,7 +119,9 @@ public class BookBrowseCtrl extends HttpServlet {
 //            response.setCharacterEncoding("UTF-8");
 //            response.getWriter().write(jsonResult);
 
+            request.setAttribute("GenreID", genreString);
             request.setAttribute("books", books);
+            isSet = true;
         }
 
         //get Books of the language that selected
@@ -135,7 +143,9 @@ public class BookBrowseCtrl extends HttpServlet {
 //            response.setCharacterEncoding("UTF-8");
 //            response.getWriter().write(jsonResult);
 
+            request.setAttribute("LanguageID", languageString);
             request.setAttribute("books", books);
+            isSet = true;
         }
 
         //get Books of the publisher that selected
@@ -156,9 +166,20 @@ public class BookBrowseCtrl extends HttpServlet {
 //            response.setContentType("application/json");
 //            response.setCharacterEncoding("UTF-8");
 //            response.getWriter().write(jsonResult);
-
+            
+            request.setAttribute("PublisherID", publisherString);
+            request.setAttribute("books", books);
+            isSet = true;
+        }
+        
+        if (!isSet) {
+            BookDAO bookDAO = new BookDAO();
+            Book[] books = bookDAO.getAll();
+            request.setAttribute("isAll", "true");
             request.setAttribute("books", books);
         }
+        
+        request.setAttribute("Name", request.getParameter("Name"));
         
         request.getRequestDispatcher("Views/Customer/Book/Book.jsp").forward(request, response);
     }
@@ -211,7 +232,7 @@ public class BookBrowseCtrl extends HttpServlet {
         StringBuilder authorOptions = new StringBuilder();
         for (Author author : authors) {
             // authorOptions.append("<option value=\"").append(author.getId()).append("\">").append(author.getAuthor()).append("</option>");
-            authorOptions.append("<li><a href=\"/Book?AuthorID=").append(author.getId()).append("\">").append(author.getAuthor()).append("</a></li>");
+            authorOptions.append("<li><a href=\"/Book?AuthorID=").append(author.getId()).append("&Name=").append(author.getAuthor()).append("\">").append(author.getAuthor()).append("</a></li>");
         }
 
         return authorOptions.toString();
@@ -229,7 +250,7 @@ public class BookBrowseCtrl extends HttpServlet {
         StringBuilder genreOptions = new StringBuilder();
         for (Genre genre : genres) {
             // genreOptions.append("<option value=\"").append(genre.getId()).append("\">").append(genre.getGenre()).append("</option>");
-            genreOptions.append("<li><a href=\"/Book?GenreID=").append(genre.getId()).append("\">").append(genre.getGenre()).append("</a></li>");
+            genreOptions.append("<li><a href=\"/Book?GenreID=").append(genre.getId()).append("&Name=").append(genre.getGenre()).append("\">").append(genre.getGenre()).append("</a></li>");
         }
 
         return genreOptions.toString();
@@ -247,7 +268,7 @@ public class BookBrowseCtrl extends HttpServlet {
         StringBuilder languageOptions = new StringBuilder();
         for (Language language : languages) {
             // languageOptions.append("<option value=\"").append(language.getId()).append("\">").append(language.getLanguage()).append("</option>");
-            languageOptions.append("<li><a href=\"/Book?LanguageID=").append(language.getId()).append("\">").append(language.getLanguage()).append("</a></li>");
+            languageOptions.append("<li><a href=\"/Book?LanguageID=").append(language.getId()).append("&Name=").append(language.getLanguage()).append("\">").append(language.getLanguage()).append("</a></li>");
         }
 
         return languageOptions.toString();
@@ -265,7 +286,7 @@ public class BookBrowseCtrl extends HttpServlet {
         StringBuilder publisherOptions = new StringBuilder();
         for (Publisher publisher : publishers) {
             //  publisherOptions.append("<option value=\"").append(publisher.getId()).append("\">").append(publisher.getPublisher()).append("</option>");
-            publisherOptions.append("<li><a href=\"/Book?PublisherID=").append(publisher.getId()).append("\">").append(publisher.getPublisher()).append("</a></li>");
+            publisherOptions.append("<li><a href=\"/Book?PublisherID=").append(publisher.getId()).append("&Name=").append(publisher.getPublisher()).append("\">").append(publisher.getPublisher()).append("</a></li>");
         }
 
         return publisherOptions.toString();

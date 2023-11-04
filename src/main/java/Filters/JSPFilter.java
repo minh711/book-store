@@ -1,8 +1,5 @@
 package Filters;
 
-import DAOs.DBModelDAOs.AccountDAO;
-import Models.DBModels.Account;
-import Utilities.CookieMethods;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -13,12 +10,11 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class Authentication implements Filter {
+public class JSPFilter implements Filter {
 
     // <editor-fold defaultstate="collapsed" desc="Click on the + sign on the left to edit the code.">
     private static final boolean debug = true;
@@ -28,7 +24,7 @@ public class Authentication implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public Authentication() {
+    public JSPFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
@@ -75,24 +71,12 @@ public class Authentication implements Filter {
         
         try {
             HttpSession session = request.getSession();
-            
-            if (session.getAttribute("accountId") == null) {
-                Cookie[] cookies = request.getCookies();
-                try {
-                    int accountId = Integer.valueOf(CookieMethods.GetCookie(cookies, "accountId").getValue());
-                    String password = CookieMethods.GetCookie(cookies, "password").getValue();
-                    AccountDAO accountDAO = new AccountDAO();
-                    Account account = accountDAO.loginCookie(accountId, password);
-                    if (account != null) {
-                        session.setAttribute("accountId", account.getId());
-                        session.setAttribute("username", account.getUsername());
-                        session.setAttribute("role", account.getRoleId());
-                    }
-                } catch (NumberFormatException | NullPointerException e) {
-                }
+
+            try {
+                response.sendRedirect("/Home");
+            } catch (Exception e) {
             }
-            chain.doFilter(request, response);
-        } catch (ServletException | IOException t) {
+        } catch (Throwable t) {
             // <editor-fold defaultstate="collapsed" desc="Click on the + sign on the left to edit the code.">
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then

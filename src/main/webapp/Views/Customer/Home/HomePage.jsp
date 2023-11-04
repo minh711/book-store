@@ -34,7 +34,7 @@
                 </div>
                 
                 <div class="bg-white shadow rounded mt-4 p-4">
-                    <h3>Top Bán chạy</h3>
+                    <h3>Đã bán nhiều nhất</h3>
                     <div class="row">
                         <c:forEach var="book" items="${topSellers}" >
                             <div onclick="goToBookDetail(${book.id});" class="book-item col-lg-3 col-md-4 col-sm-6 p-4">
@@ -79,7 +79,7 @@
                         </c:forEach>
                         
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                         </c:forEach>
 
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                         </c:forEach>
 
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
                         </c:forEach>
 
                         <div class="mt-3 d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
+                            <a href="/Book" class="btn btn-primary" style="width: 200px;">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
             });
             
             function goToBookDetail(bookId) {
-                window.location.href = "/Manager/Book/Detail?ID=" + bookId;
+                window.location.href = "/Book/Detail?ID=" + bookId;
             }
         </script>
     </body>

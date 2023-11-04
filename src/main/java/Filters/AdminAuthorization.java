@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class Authentication implements Filter {
+public class AdminAuthorization implements Filter {
 
     // <editor-fold defaultstate="collapsed" desc="Click on the + sign on the left to edit the code.">
     private static final boolean debug = true;
@@ -28,7 +28,7 @@ public class Authentication implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public Authentication() {
+    public AdminAuthorization() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
@@ -75,23 +75,18 @@ public class Authentication implements Filter {
         
         try {
             HttpSession session = request.getSession();
-            
-            if (session.getAttribute("accountId") == null) {
-                Cookie[] cookies = request.getCookies();
-                try {
-                    int accountId = Integer.valueOf(CookieMethods.GetCookie(cookies, "accountId").getValue());
-                    String password = CookieMethods.GetCookie(cookies, "password").getValue();
-                    AccountDAO accountDAO = new AccountDAO();
-                    Account account = accountDAO.loginCookie(accountId, password);
-                    if (account != null) {
-                        session.setAttribute("accountId", account.getId());
-                        session.setAttribute("username", account.getUsername());
-                        session.setAttribute("role", account.getRoleId());
-                    }
-                } catch (NumberFormatException | NullPointerException e) {
+                        
+            String pathInfo  = request.getServletPath();
+            System.out.println(pathInfo);
+            if (pathInfo.startsWith("/Manager")) {
+                if (session.getAttribute("role") != null && session.getAttribute("role").equals("4")) { // 4 is Admin's Role ID
+                    chain.doFilter(request, response);
+                } else {
+                    response.sendRedirect("/Home");
                 }
+            } else {
+                chain.doFilter(request, response);
             }
-            chain.doFilter(request, response);
         } catch (ServletException | IOException t) {
             // <editor-fold defaultstate="collapsed" desc="Click on the + sign on the left to edit the code.">
             // If an exception is thrown somewhere down the filter chain,

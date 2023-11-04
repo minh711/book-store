@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,25 +60,26 @@ public class LoginCtrl extends HttpServlet {
                     request.setAttribute("mess3", pass);
                     request.getRequestDispatcher("Views/Customer/Authentication/Login.jsp").forward(request, response);
                 } else {
-                    Cookie cu = new Cookie("user", user);
-                    Cookie cp = new Cookie("pass", pass);
-                    Cookie cr = new Cookie("rem", rem);
-                    if (rem == null) {
-                        cu.setMaxAge(0);
-                        cr.setMaxAge(0);
-                        cp.setMaxAge(0);
-                    } else {
-                        cu.setMaxAge(3 * 24 * 60 * 60);
-                        cr.setMaxAge(3 * 24 * 60 * 60);
-                        cp.setMaxAge(3 * 24 * 60 * 60);
-                        //3 ngày * 24 gio * 60 phut * 60 giay
-                    }
-                    response.addCookie(cu);
-                    response.addCookie(cr);
-                    response.addCookie(cp);
+//                    Cookie cu = new Cookie("user", user);
+//                    Cookie cp = new Cookie("pass", pass);
+//                    Cookie cr = new Cookie("rem", rem);
+//                    if (rem == null) {
+//                        cu.setMaxAge(0);
+//                        cr.setMaxAge(0);
+//                        cp.setMaxAge(0);
+//                    } else {
+//                        cu.setMaxAge(3 * 24 * 60 * 60);
+//                        cr.setMaxAge(3 * 24 * 60 * 60);
+//                        cp.setMaxAge(3 * 24 * 60 * 60);
+//                        //3 ngày * 24 gio * 60 phut * 60 giay
+//                    }
+//                    response.addCookie(cu);
+//                    response.addCookie(cr);
+//                    response.addCookie(cp);
 
                     session.setAttribute("accountId", ifAccountExist.getId());
                     session.setAttribute("role", ifAccountExist.getRoleId());
+                    session.setAttribute("username", ifAccountExist.getUsername());
 
                     Cookie cId = new Cookie("accountId", ifAccountExist.getId() + "");
                     cId.setMaxAge(3 * 24 * 60 * 60);
@@ -99,9 +101,8 @@ public class LoginCtrl extends HttpServlet {
                     response.sendRedirect("/Home");
                 }
             }
-        } catch (Exception ex) {
+        } catch (ServletException | IOException | SQLException ex) {
             Logger.getLogger(LoginCtrl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
