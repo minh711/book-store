@@ -209,7 +209,7 @@
                                                 <p class="mx-2 text-black-50">(10 đánh giá)</p>
                                             </div>
 
-                                            <div class="text-danger mb-3">Số lượng còn lại: ${bookDetail.soleTotal}</div>
+                                            <div class="text-danger mb-3">Số lượng còn lại: ${bookDetail.getSoldTotal()}</div>
                                             <div class="d-flex">
                                                 <div class="text-nowrap mx-2 d-flex align-items-center">Số lượng</div>
                                                 <div class="input-group d-flex justify-content-start align-items-center">
