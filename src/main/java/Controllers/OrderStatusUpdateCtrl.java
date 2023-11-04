@@ -60,7 +60,7 @@ public class OrderStatusUpdateCtrl extends HttpServlet {
                 request.setAttribute("previousStatus", previousStatus);
                 request.setAttribute("currentStatusName", currentStatusName);
                 request.setAttribute("OrderID", OrderID);
-                request.getRequestDispatcher("Views/Admin/OrderList/OrderStatusUpdate.jsp").forward(request, response);
+                request.getRequestDispatcher("/Views/Admin/OrderList/OrderStatusUpdate.jsp").forward(request, response);
             }
         } catch (ServletException | IOException e) {
             System.out.println(e);

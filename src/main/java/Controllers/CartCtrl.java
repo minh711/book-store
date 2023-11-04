@@ -29,7 +29,7 @@ public class CartCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = 1;
+        int id = 50;
         CartDAO cart = new CartDAO();
         BookDAO book = new BookDAO();
         BookDetail b;

@@ -6,7 +6,7 @@
     <head>
         <title>Blank Page</title>
         <jsp:include page="/Views/head.jsp"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Customer/OrderDetail/style.css">
+        <link rel="stylesheet" href="/Views/Customer/OrderDetail/style.css">
         <style>
             #overlay {
                 position: fixed;
@@ -46,23 +46,8 @@
         <!--                        <input type="hidden" id="currentStatus" name="currentStatus" value="1">
                                 <input type="hidden" id="previousStatus" name="previousStatus" value="1">-->
         <main class="d-flex">
-            <!-- Sidebar -->
-            <aside>
-                <div class="flex-shrink-0 p-3" style="width: 280px;">
-                    <a href="#"
-                       class="text-dark d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                        Bộ phận Quản lý Đơn hàng
-                    </a>
-                    <ul class="list-unstyled ps-0">
-                        <li class="mb-1">
-                            <a href="OrderList" class="text-dark nav-link">Danh sách đơn hàng</a>
-                        </li>
-                        <li class="mb-1 bg-primary rounded p-2">
-                            <a href="#" class="text-light nav-link">Thông tin đơn hàng</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            <jsp:include page="/Views/aside.jsp"/>
+            
             <div class="container">
                 <h1 class="text-center mt-3 mb-3">Thông tin đơn hàng</h1>
                 <form id="form"  method="post" action="OrderStatusUpdate" onsubmit="return validateForm()">
@@ -205,6 +190,8 @@
         </main>
                                                 
         <jsp:include page="/Views/footer.jsp"/>
+        
+        <jsp:include page="/Views/foot.jsp"/>
         <script>
             function showOverlay(img) {
                 const overlay = document.getElementById("overlay");

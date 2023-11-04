@@ -10,7 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,7 +58,7 @@ public class OrderDAO {
             }
             ps.setString(8, order.getNote());
             ps.setTimestamp(9, order.getDate());
-            ps.setInt(10, order.getCustomerId());           
+            ps.setInt(10, order.getCustomerId());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -93,7 +97,6 @@ public class OrderDAO {
      * @param ID
      * @return an Order object
      */
-
     public Order getOrderByID(int ID) {
 
         String sql = "SELECT * FROM [Order] WHERE id =?";
@@ -124,10 +127,11 @@ public class OrderDAO {
 
     /**
      * get order list of a curtain customer by ID
+     *
      * @param ID
      * @return ArrayList with Order object
      */
-    public  ArrayList<Order> getCustomerOrderList(int ID) {
+    public ArrayList<Order> getCustomerOrderList(int ID) {
 
         String sql = "SELECT * FROM [Order] WHERE customerId =?";
         ArrayList<Order> orders = new ArrayList<>();
@@ -154,9 +158,10 @@ public class OrderDAO {
         }
         return orders;
     }
-    
+
     /**
      * get a status name of an order
+     *
      * @param ID
      * @return String name of a status
      */
@@ -172,7 +177,7 @@ public class OrderDAO {
             ps.setInt(1, ID);
             rs = ps.executeQuery();
             if (rs.next()) {
-               item = rs.getString(1);
+                item = rs.getString(1);
 
             }
         } catch (SQLException ex) {
@@ -180,13 +185,13 @@ public class OrderDAO {
         }
         return item;
     }
-    
-     public  ArrayList<Order> getOrderList() {
+
+    public ArrayList<Order> getOrderList() {
 
         String sql = "SELECT * FROM [Order]";
         ArrayList<Order> orders = new ArrayList<>();
         try {
-            ps = conn.prepareStatement(sql);          
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 orders.add(new Order(rs.getInt(1),
@@ -207,13 +212,64 @@ public class OrderDAO {
         }
         return orders;
     }
-     
-     public static void main(String[] args) {
-        OrderDAO dao = new OrderDAO();
-     ArrayList<Order> orders = dao.getOrderList();
-         for (Order order : orders) {
-             System.out.println(order.getId());
-         }
+   public ArrayList<Order> getOrderListDateASC() {
+
+        String sql = "SELECT * FROM [dbo].[Order] ORDER BY [date] ASC";
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orders.add(new Order(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getTimestamp(10),
+                        rs.getInt(11)));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orders;
     }
-   
+      public ArrayList<Order> getOrderListByMonth(int month) {
+
+        String sql = "SELECT * FROM [dbo].[Order] WHERE MONTH([date]) = ?";
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orders.add(new Order(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getTimestamp(10),
+                        rs.getInt(11)));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orders;
+    }
+    public static void main(String[] args) {
+         OrderDAO dao = new OrderDAO();
+        ArrayList<Order> orders = dao.getOrderListDateASC();
+        for (Order order : orders) {
+            System.out.println(order.getDate());
+        }
+    }
 }
