@@ -64,7 +64,7 @@
                             <br>
                             <button class="btn btn-primary w-100 mb-2"  type="submit"><i class="fa fa-user-plus"></i> Đăng ký</button>
                             <br>
-                            <a href="LoginBookStore.jsp" ><i class="fa fa-angle-left mx-2"></i>Quay lại</a>
+                            <a href="${pageContext.request.contextPath}/Views/Customer/Authentication/Login.jsp" ><i class="fa fa-angle-left mx-2"></i>Quay lại</a>
                         </form>
                     </div>
                 </div>

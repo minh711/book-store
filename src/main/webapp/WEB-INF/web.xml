@@ -116,6 +116,22 @@
         <servlet-name>BookBrowseCtrl</servlet-name>
         <servlet-class>Controllers.BookBrowseCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookList</servlet-name>
+        <servlet-class>Controllers.BookList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountAnalysis</servlet-name>
+        <servlet-class>Controllers.AccountAnalysis</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookList</servlet-name>
+        <servlet-class>Controllers.BookList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountAnalysis</servlet-name>
+        <servlet-class>Controllers.AccountAnalysis</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountCreateCtrl</servlet-name>
         <url-pattern>/Manager/Account/Create</url-pattern>
@@ -203,6 +219,22 @@
     <servlet-mapping>
         <servlet-name>BookBrowseCtrl</servlet-name>
         <url-pattern>/Book</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookList</servlet-name>
+        <url-pattern>/Book/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountAnalysis</servlet-name>
+        <url-pattern>/Account/Analysis</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookList</servlet-name>
+        <url-pattern>/Book/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountAnalysis</servlet-name>
+        <url-pattern>/Account/Analysis</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

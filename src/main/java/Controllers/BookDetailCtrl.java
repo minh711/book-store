@@ -30,7 +30,9 @@ public class BookDetailCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.valueOf(request.getParameter("ID"));
+      
+        int id = Integer.valueOf(request.getParameter("id"));
+        request.setAttribute("id", id);
         BookDAO book = new BookDAO();
         BookGenreDAO bookgenre = new BookGenreDAO();
         BookAuthorDAO bookauthor = new BookAuthorDAO();

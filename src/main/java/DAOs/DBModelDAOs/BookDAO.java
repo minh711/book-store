@@ -3,6 +3,7 @@ package DAOs.DBModelDAOs;
 import DBConnection.DbConnection;
 import Models.DBModels.Book;
 import Models.MgrModels.BookDetail;
+import Models.MgrModels.BookList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,11 +30,13 @@ public class BookDAO extends DbConnection {
     /**
      * Get all available Books.
      *
+     *
      * @return Book object array.
      * @author MinhTD
      */
     public Book[] getAll() {
         List<Book> ls = new ArrayList<>();
+        String sql
         String sql
                 = "SELECT * FROM Book "
                 + "WHERE isAvailable = 1";
@@ -232,6 +235,7 @@ public class BookDAO extends DbConnection {
         return arr;
     }
 
+
     public BookDetail getBookDetailByID(int bookid) {
         String query 
                 = "SELECT "
@@ -259,6 +263,7 @@ public class BookDAO extends DbConnection {
        BookDetail b =null;
         try {
 
+
             ps = conn.prepareStatement(query);
             ps.setInt(1, bookid);
             rs = ps.executeQuery();
@@ -272,16 +277,17 @@ public class BookDAO extends DbConnection {
         }
         return b;
     }
-    
+
     /**
      * Add a new book.
+     *
      * @param b New book.
      * @return True if success, False elsewhere.
      * @author MinhTD
      */
     public int addNewBook(Book b) {
         int result = 0;
-        String addBookQuery 
+        String addBookQuery
                 = "SET IDENTITY_INSERT [Book] ON;"
                 + "INSERT INTO Book "
                 + "(id, title, description, thumbnail, salePrice, price, discount, "
@@ -314,7 +320,7 @@ public class BookDAO extends DbConnection {
             return 1;
         }
     }
-    
+
     /**
      * Add a new book.
      *
@@ -354,9 +360,10 @@ public class BookDAO extends DbConnection {
         }
         return result;
     }
-    
+
     /**
      * Get a Book by its ID.
+     *
      * @param id Book's ID.
      * @return Book object.
      * @author MinhTD
@@ -392,6 +399,42 @@ public class BookDAO extends DbConnection {
         }
         return book;
     }
+
+    public ArrayList<BookList> getBook2() {
+        ArrayList<BookList> book = new ArrayList<>();
+        String sql = "SELECT [id]\n" +
+"      ,[title]\n" +
+"      \n" +
+"      ,[thumbnail]\n" +
+"      \n" +
+"      ,[price]\n" +
+"      \n" +
+"      ,[quantity]\n" +
+"      \n" +
+"      ,[isAvailable]\n" +
+"     \n" +
+"     \n" +
+"  FROM [dbo].[Book]";
+        try {
+            ps = conn.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String a = "";
+                if (rs.getBoolean(6)) {
+                    a = "Ðang bán";
+                } else {
+                    a = "Ngừng bán";
+                }
+                book.add(new BookList(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), a));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return book;
+    }
+
     
     public int updateQuantity(int bookId, int quantity) {
         int result = 0;
