@@ -76,7 +76,7 @@ public class AccountCreateCtrl extends HttpServlet {
                 request.getRequestDispatcher("Views/Admin/Account/AccountCreate.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountCtrl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountCreateCtrl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

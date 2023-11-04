@@ -4,18 +4,23 @@ import DBConnection.DbConnection;
 import Models.DBModels.Book;
 import Models.MgrModels.BookDetail;
 import Models.MgrModels.BookList;
+import Models.MgrModels.BookQuantityAnalysis;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author mummykiara
+ * @author NhuLNT
  */
 public class BookDAO extends DbConnection {
 
@@ -277,8 +282,61 @@ public class BookDAO extends DbConnection {
         return b;
     }
 
+    public ArrayList<BookDetail> getBookDetailForAnalysis() {
+        ArrayList<BookDetail> list = new ArrayList<>();
+        String query = "SELECT\n"
+                + "    Book.id,\n"
+                + "    Book.title,\n"
+                + "    Publisher.publisher,\n"
+                + "    [Language].language,\n"
+                + "    Book.salePrice,\n"
+                + "    Book.discount,\n"
+                + "    Book.price,\n"
+                + "    Book.soleTotal,\n"
+                + "    Book.quantity,\n"
+                + "    Book.description,\n"
+                + "    Book.thumbnail,\n"
+                + "    Book.avgRating,\n"
+                + "    Book.isAvailable\n"
+                + "FROM\n"
+                + "    Book\n"
+                + "JOIN\n"
+                + "    Publisher ON Book.publisherId = Publisher.id\n"
+                + "JOIN\n"
+                + "    [Language] ON Book.languageId = [Language].id\n"
+                + "LEFT JOIN\n"
+                + "    BookAuthor ON Book.id = BookAuthor.bookId\n"
+                + "LEFT JOIN\n"
+                + "    Author ON BookAuthor.authorId = Author.id\n"
+                + "LEFT JOIN\n"
+                + "    BookGenre ON Book.id = BookGenre.bookId\n"
+                + "LEFT JOIN\n"
+                + "    Genre ON BookGenre.genreId = Genre.id\n"
+                + "\n"
+                + "	GROUP BY\n"
+                + "    Book.id,\n"
+                + "    Book.title, Publisher.publisher, [Language].language,\n"
+                + "    Book.salePrice, Book.discount, Book.price, Book.soleTotal,\n"
+                + "    Book.quantity, Book.description, Book.thumbnail, Book.avgRating, Book.isAvailable";
+
+        try {
+
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new BookDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getFloat(12), rs.getBoolean(13)));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
     /**
      * Add a new book.
+     *
      *
      * @param b New book.
      * @return True if success, False elsewhere.
@@ -450,5 +508,135 @@ public class BookDAO extends DbConnection {
             Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    public ArrayList<Integer> getTopBookSoldByTime(Date startdate, Date enddate) {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        String sql = "SELECT TOP 10 b.id\n"
+                + "FROM [Order] o\n"
+                + "JOIN OrderStatusDetail osd ON o.id = osd.orderId\n"
+                + "JOIN OrderDetail od ON o.id = od.orderId\n"
+                + "JOIN Book b ON od.bookId = b.id\n"
+                + "WHERE osd.date >= ? AND osd.date <= ?\n"
+                + "GROUP BY b.id\n"
+                + "ORDER BY COUNT(od.bookId) DESC;";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setTimestamp(1, new Timestamp(startdate.getTime()));
+            ps.setTimestamp(2, new Timestamp(enddate.getTime()));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
+    public int getBookAvailable() {
+        int quantity = 0;
+        ArrayList<Book> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "                FROM Book\n"
+                + "                WHERE Book.isAvailable = 1 and Book.quantity > 0;";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getNString(2),
+                        rs.getNString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getBoolean(10),
+                        rs.getInt(11),
+                        rs.getInt(12),
+                        rs.getInt(13),
+                        rs.getInt(14),
+                        rs.getFloat(15)));
+            }
+            quantity = list.size();
+        } catch (SQLException e) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return quantity;
+    }
+
+    public int getBookNotAvailable() {
+        int quantity = 0;
+        ArrayList<Book> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "                FROM Book\n"
+                + "                WHERE Book.isAvailable = 0;";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getNString(2),
+                        rs.getNString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getBoolean(10),
+                        rs.getInt(11),
+                        rs.getInt(12),
+                        rs.getInt(13),
+                        rs.getInt(14),
+                        rs.getFloat(15)));
+            }
+            quantity = list.size();
+        } catch (SQLException e) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return quantity;
+    }
+
+    public int getBookOutStock() {
+        int quantity = 0;
+        ArrayList<Book> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "                FROM Book\n"
+                + "                WHERE Book.isAvailable = 1 and Book.quantity = 0;";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getNString(2),
+                        rs.getNString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getBoolean(10),
+                        rs.getInt(11),
+                        rs.getInt(12),
+                        rs.getInt(13),
+                        rs.getInt(14),
+                        rs.getFloat(15)));
+            }
+            quantity = list.size();
+        } catch (SQLException e) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return quantity;
     }
 }

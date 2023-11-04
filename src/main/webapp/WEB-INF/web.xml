@@ -117,8 +117,12 @@
         <servlet-class>Controllers.OrderReportCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BookAttribute</servlet-name>
-        <servlet-class>Controllers.BookAttribute</servlet-class>
+        <servlet-name>BookAttributeCtrl</servlet-name>
+        <servlet-class>Controllers.BookAttributeCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookAnalysisCtrl</servlet-name>
+        <servlet-class>Controllers.BookAnalysisCtrl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountCreateCtrl</servlet-name>
@@ -217,8 +221,12 @@
         <url-pattern>/Manager/Order/Report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BookAttribute</servlet-name>
-        <url-pattern>/BookAttribute</url-pattern>
+        <servlet-name>BookAttributeCtrl</servlet-name>
+        <url-pattern>/Manager/Book/Attribute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookAnalysisCtrl</servlet-name>
+        <url-pattern>/Book/Analysis</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

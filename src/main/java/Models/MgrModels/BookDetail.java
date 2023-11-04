@@ -6,7 +6,7 @@ package Models.MgrModels;
 
 /**
  *
- * @author mummykiara
+ * @author NhuLNT
  */
 public class BookDetail {
 
@@ -23,6 +23,8 @@ public class BookDetail {
     private String language;
     private int totalRating;
     private float avgRating;
+    
+    private boolean isAvailable;
 
     //contructor for BookDetail
     public BookDetail() {
@@ -43,6 +45,22 @@ public class BookDetail {
         this.language = language;
         this.totalRating = totalRating;
         this.avgRating = avgRating;
+    }
+    
+    public BookDetail(int id, String title, String publisher, String language, int salePrice, int discount, int price, int soleTotal, int quantity, String description, String thumbnail,float avgRating,boolean isAvailable) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.thumbnail = thumbnail;
+        this.salePrice = salePrice;
+        this.price = price;
+        this.soleTotal = soleTotal;
+        this.discount = discount;
+        this.quantity = quantity;
+        this.publisher = publisher;
+        this.language = language;
+        this.avgRating = avgRating;
+        this.isAvailable = isAvailable;
     }
 
     public int getId() {

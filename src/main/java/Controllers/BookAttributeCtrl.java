@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DuyenLTM
  */
-public class BookAttribute extends HttpServlet {
+public class BookAttributeCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -51,7 +51,6 @@ public class BookAttribute extends HttpServlet {
         request.setAttribute("publishers", publishers);
 
         request.getRequestDispatcher("/Views/Admin/BookAttribute/BookAttribute.jsp").forward(request, response);
-
     }
 
     /**
@@ -146,6 +145,5 @@ public class BookAttribute extends HttpServlet {
         request.setAttribute("publishers", publishers);
 
         request.getRequestDispatcher("/Views/Admin/BookAttribute/BookAttribute.jsp").forward(request, response);
-
     }
 }
