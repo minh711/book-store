@@ -45,6 +45,6 @@
         <jsp:include page="/Views/footer.jsp"/>
                         
         <jsp:include page="/Views/foot.jsp"/>
-        <script src="${pageContext.request.contextPath}/Views/Customer/Authentication/otpValidate.js"></script> 
+        <script src="/Views/Customer/Authentication/otpValidate.js"></script> 
     </body>
 </html>

@@ -11,7 +11,6 @@
     <head>
         <title>Blank Page</title>
         <jsp:include page="/Views/head.jsp"/>
-        <link rel="stylesheet" href="/Assets/DataTables-1.13.6/css/jquery.dataTables.min.css">
     </head>
 
     <body>
@@ -61,7 +60,6 @@
         <jsp:include page="/Views/footer.jsp"/>
 
         <jsp:include page="/Views/foot.jsp"/>
-        <script src="/Assets/DataTables-1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function () {
                 $('#example').DataTable({

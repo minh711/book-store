@@ -36,7 +36,7 @@ public class ResetPasswordCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.getRequestDispatcher("Views/Customer/Authentication/MailOtp.jsp").forward(request, response);
     }
 
     /**
@@ -92,7 +92,7 @@ public class ResetPasswordCtrl extends HttpServlet {
 
                 dao.deleteOTP(sessionEmail);
 
-                response.sendRedirect("Views/Customer/Authentication/Login.jsp");
+                response.sendRedirect("Login");
             } catch (SQLException ex) {
                 Logger.getLogger(ResetPasswordCtrl.class.getName()).log(Level.SEVERE, null, ex);
             }

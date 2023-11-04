@@ -24,7 +24,7 @@
                             <button class="btn btn-primary w-100" type="submit">Gửi mã xác nhận</button>
                         </form>
                          
-                        <a href="${pageContext.request.contextPath}/Views/Customer/Authentication/Login.jsp" ><button type="button">Cancel</button></a>
+                        <a href="/Login" ><button type="button">Cancel</button></a>
                     </div>
                 </div>
             </div>

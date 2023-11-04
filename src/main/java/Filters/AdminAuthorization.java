@@ -77,15 +77,18 @@ public class AdminAuthorization implements Filter {
             HttpSession session = request.getSession();
                         
             String pathInfo  = request.getServletPath();
-            System.out.println(pathInfo);
             if (pathInfo.startsWith("/Manager")) {
-                if (session.getAttribute("role") != null && session.getAttribute("role").equals("4")) { // 4 is Admin's Role ID
+                if (session.getAttribute("role") != null && (int) session.getAttribute("role") == 4) { // 4 is Admin's Role ID
                     chain.doFilter(request, response);
                 } else {
                     response.sendRedirect("/Home");
                 }
             } else {
-                chain.doFilter(request, response);
+                if (session.getAttribute("role") != null && (int) session.getAttribute("role") == 4) { // 4 is Admin's Role ID
+                    response.sendRedirect("/Manager/Account/List");
+                } else {
+                    chain.doFilter(request, response);
+                }
             }
         } catch (ServletException | IOException t) {
             // <editor-fold defaultstate="collapsed" desc="Click on the + sign on the left to edit the code.">

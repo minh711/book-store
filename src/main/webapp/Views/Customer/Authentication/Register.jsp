@@ -13,7 +13,7 @@
             <div class="container d-flex justify-content-center align-items-center" style="height: 800px;">
                 <div class="col-md-5 ">
                     <div class="card p-4" >
-                        <form  onsubmit="return validateFormSignUp()"  action="${pageContext.request.contextPath}/Register" class="form" method="post" >
+                        <form  onsubmit="return validateFormSignUp()"  action="/Register" class="form" method="post" >
                             <h1 class="text-center mb-3">Đăng ký</h1>
 
                             <p class="error-message1 text-danger">${mess}</p>
@@ -74,6 +74,6 @@
         <jsp:include page="/Views/footer.jsp"/>
 
         <jsp:include page="/Views/foot.jsp"/>
-        <script src="${pageContext.request.contextPath}/Views/Customer/Authentication/RegisterValidate.js"></script>
+        <script src="}/Views/Customer/Authentication/RegisterValidate.js"></script>
     </body>
 </html>

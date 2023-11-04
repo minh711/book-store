@@ -46,7 +46,7 @@
 
 
 
-                            <a href="${pageContext.request.contextPath}/Views/Customer/Authentication/MailOtp.jsp">Quên mật khẩu?</a>
+                            <a href="/ResetPassword">Quên mật khẩu?</a>
                             <hr>
                             <button onclick="window.location.href = 'SignupBookStore.jsp';"  class="btn btn-primary btn-block w-100"  type="button"> <i class="fa fa-user-plus"></i> Tạo tài khoản mới</button><br>
 

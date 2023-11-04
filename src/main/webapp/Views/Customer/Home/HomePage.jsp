@@ -242,7 +242,6 @@
         <jsp:include page="/Views/footer.jsp"/>
 
         <jsp:include page="/Views/foot.jsp"/>
-        <script src="${pageContext.request.contextPath}/Views/Customer/Home/script.js"></script>
         <script>
             // Format the number from 1000 to 1.000 form (for VND)
             const formatNumberElements = document.getElementsByClassName('format-number');

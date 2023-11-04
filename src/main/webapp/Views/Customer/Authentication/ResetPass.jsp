@@ -13,7 +13,7 @@
             <div class="container d-flex justify-content-center align-items-center" style="height: 600px;">
                 <div class="col-md-6">
                     <div class="card p-4" >
-                        <form onsubmit="return validateFormRePass()" action="${pageContext.request.contextPath}/Reset" method="post">
+                        <form onsubmit="return validateFormRePass()" action="/ResetPassword" method="post">
                             <h1 class="text-center mb-3">Thiết đặt lại mật khẩu</h1>
                             <p>Nhập mật khẩu mới của bạn</p>
                             
@@ -26,8 +26,9 @@
                             <button class="btn btn-primary w-100" type="submit">Xác nhận</button>
                         </form>
                              
-                        <form action="${pageContext.request.contextPath}/Cancel" method="post">
-                               <button id="cancel" name="cancel" >Cancel</button>
+                        <form action="/ResetPassword" method="post">
+                            <input type="hidden" name="btnCancel" value="Cancel">
+                            <button id="cancel" name="cancel" >Cancel</button>
                         </form>
                             
                     </div>
@@ -38,6 +39,6 @@
         <jsp:include page="/Views/footer.jsp"/>
         
         <jsp:include page="/Views/foot.jsp"/>
-        <script src="${pageContext.request.contextPath}/Views/Customer/Authentication/RePassValidate.js"></script> 
+        <script src="/Views/Customer/Authentication/RePassValidate.js"></script> 
     </body>
 </html>

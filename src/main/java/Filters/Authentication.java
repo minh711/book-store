@@ -76,7 +76,7 @@ public class Authentication implements Filter {
         try {
             HttpSession session = request.getSession();
             
-            if (session.getAttribute("accountId") == null) {
+            if (session.getAttribute("accountId") == null || session.getAttribute("accountId").equals("")) {
                 Cookie[] cookies = request.getCookies();
                 try {
                     int accountId = Integer.valueOf(CookieMethods.GetCookie(cookies, "accountId").getValue());

@@ -39,9 +39,9 @@
     
     <div class="d-flex justify-content-between" style="width: 30%">
         <a href="/Home" class="d-flex align-items-center justify-content-between">
-            <img src="${pageContext.request.contextPath}/Images/logo.png" style="height: 40px;">
+            <img src="/Images/logo.png" style="height: 40px;">
         </a>
-
+        <c:if test="${(role == null) or (role == 1)}">
         <div class="d-flex align-items-center nav-item dropdown-center mx-3">
 <!--            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-list fa-xl"></i>
@@ -98,8 +98,10 @@
                 </li>
             </ul>
         </div>
+        </c:if>
     </div>
         
+    <c:if test="${(role == null) or (role == 1)}">
     <div class="" style="width: 40%;">
         <form action="/Book" method="get">
             <div class="input-group d-flex align-items-center">
@@ -115,18 +117,18 @@
             </div>
         </form>
     </div>
+    </c:if>
     
-
-    <c:if test = "${!isLogin}">
+    <c:if test="${accountId == null}">
         <div class="d-flex justify-content-end" style="width: 30%">
             <a href="/Login" class="btn btn-success mx-2">Đăng nhập</a>
             <a href="/Register" class="btn btn-primary">Đăng ký</a>
         </div>
     </c:if>
 
-    <c:if test="${isLogin}">
+    <c:if test="${accountId != null}">
         <div class="d-flex justify-content-end" style="width: 30%;">
-            <a href="#" class="btn btn-success mx-2"><i class="fa fa-shopping-cart mx-2"></i></a>
+            <a href="/Cart" class="btn border-0 mx-2"><i class="fa fa-shopping-cart fa-xl mx-2"></i></a>
         </div>
     </c:if>
        
