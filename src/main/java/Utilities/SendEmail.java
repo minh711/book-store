@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controllers;
+package Utilities;
 
+import Controllers.LoginCtrl;
 import DAOs.MgrModelDAOs.AccountDAO;
 import Models.DBModels.Account;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
@@ -28,11 +29,11 @@ import javax.mail.internet.MimeMessage;
  *
  * @author DatNTT
  */
-public class RePass {
+public class SendEmail {
 
     private final String email;
 
-    RePass(String email) {
+    public SendEmail(String email) {
         this.email = email;
     }
 
@@ -43,8 +44,9 @@ public class RePass {
 
         String toEmail = email;
 
-        final String fromEmail = "tandatngotran@gmail.com";//email gửi {đừng dùng mail trường}
-        final String passEmail = "nujj orty kgpe glhm";// mật khẩu cửa hàng --> vào xác nhận 2 lớp của gmail để tạo
+//        final String fromEmail = "Website"; 
+        final String fromEmail = "oceanbook.business@gmail.com"; 
+        final String passEmail = "twuf fscx bxbx amif"; 
 
         String otp = String.valueOf(otpvalue);
         AccountDAO dao = new AccountDAO();

@@ -37,10 +37,6 @@
         <servlet-class>Controllers.RegisterCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>OTPCtrl</servlet-name>
-        <servlet-class>Controllers.OTPCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BookTransactionCtrl</servlet-name>
         <servlet-class>Controllers.BookTransactionCtrl</servlet-class>
     </servlet>
@@ -93,36 +89,12 @@
         <servlet-class>Controllers.OrderAddNewAddressCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>OTPCtrl</servlet-name>
-        <servlet-class>Controllers.OTPCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ResetPasswordCtrl</servlet-name>
         <servlet-class>Controllers.ResetPasswordCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EmailCtrl</servlet-name>
-        <servlet-class>Controllers.EmailCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CancelOTPCtrl</servlet-name>
-        <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OTPCtrl</servlet-name>
-        <servlet-class>Controllers.OTPCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ResetPasswordCtrl</servlet-name>
         <servlet-class>Controllers.ResetPasswordCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EmailCtrl</servlet-name>
-        <servlet-class>Controllers.EmailCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CancelOTPCtrl</servlet-name>
-        <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomePageCtrl</servlet-name>
@@ -214,20 +186,8 @@
         <url-pattern>/Order/AddNewAddress</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>OTPCtrl</servlet-name>
-        <url-pattern>/otp</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ResetPasswordCtrl</servlet-name>
-        <url-pattern>/Reset</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EmailCtrl</servlet-name>
-        <url-pattern>/email</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CancelOTPCtrl</servlet-name>
-        <url-pattern>/Cancel</url-pattern>
+        <url-pattern>/ResetPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomePageCtrl</servlet-name>

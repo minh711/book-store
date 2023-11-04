@@ -12,7 +12,7 @@
                 <div class="d-flex">
                     <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
                     <div>
-                        business@oceanbook.com
+                        oceanbook.business@gmail.com
                     </div>
                 </div>
             </div>

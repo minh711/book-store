@@ -12,7 +12,7 @@
             <div class="container d-flex justify-content-center align-items-center" style="height: 600px;">
                 <div class="col-md-6">
                     <div class="card p-4" >
-                        <form onsubmit="return OTPCheck()"   action="${pageContext.request.contextPath}/otp" method="post" >
+                        <form onsubmit="return OTPCheck()" action="/ResetPassword" method="post" >
                             <h1 class="text-center mb-3">Thiết đặt lại mật khẩu</h1>
                             <p>Một mã xác nhận gồm 6 chữ số vừa được gửi đến Email của bạn.</p>
                              
@@ -28,11 +28,12 @@
                             <p>Trong trường hợp không nhận được mã xác nhận, vui lòng kiểm tra mục Thư rác hoặc Spam.</p>
 
                         </form>
-                        <form action="${pageContext.request.contextPath}/otp" method="post" >
-                            <button id="reSend"  name="action" value="resendOTP" class="btn btn-secondary w-100"  type="submit"  >Gửi lại mã xác nhận <span id="time"></span> </button>
+                        <form action="/ResetPassword" method="post" >
+                            <button id="reSend"  name="action" value="resendOTP" class="btn btn-secondary w-100"  type="submit">Gửi lại mã xác nhận <span id="time"></span> </button>
                         </form>     
 
-                        <form action="${pageContext.request.contextPath}/Cancel" method="post">
+                        <form action="/ResetPassword" method="post">
+                            <input type="hidden" name="btnCancel" value="Cancel">
                             <button id="cancel" name="cancel" >Cancel</button>
                         </form>
                             
