@@ -24,10 +24,12 @@
             <jsp:include page="/Views/aside.jsp"/>
 
             <div class="container d-flex justify-content-center align-items-center" style="">
-                <div class="col-md-12">
+                <div class="
+                     col-md-12">
                     <div class="bg-white rounded p-4" >
                         <form action="/Account" method="POST">
                             <h1 class="text-center mb-3">Tạo tài khoản</h1>
+                            <p class=" text-danger">${error}</p>
                             <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName">
                             <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone">
                             <input type="email" class="form-control mb-3" placeholder="Địa chỉ Email" name="email">
@@ -197,7 +199,7 @@
                 }
                 // Sử dụng phương thức submit() để gửi form đến controller
                 form.submit();
-                alert('Thêm tài khoản thành công');
+               
             }
 
             // Gắn sự kiện validateForm vào sự kiện submit của form

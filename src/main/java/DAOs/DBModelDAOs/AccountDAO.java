@@ -158,7 +158,7 @@ public class AccountDAO {
         }
         return result;
     }
-    
+
     public int recoverAccount(int id) {
         int result = 0;
         String sql = "update Account\n"
@@ -174,4 +174,33 @@ public class AccountDAO {
         return result;
     }
 
+    public boolean checkExistedPhone(String phone) throws SQLException {
+        String sql = "SELECT * FROM Account WHERE phone=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean checkExistedEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM Account WHERE email=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }
