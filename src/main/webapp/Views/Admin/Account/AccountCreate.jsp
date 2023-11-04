@@ -22,7 +22,7 @@
             <div class="container d-flex justify-content-center align-items-center" style="">
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
-                        <form action="/Account" method="POST">
+                        <form action="/Manager/Account/Create" method="POST">
                             <h1 class="text-center mb-3">Tạo tài khoản</h1>
                             <input type="text" class="form-control mb-3" placeholder="Họ và tên" name="fullName">
                             <input type="text" class="form-control mb-3" placeholder="Số điện thoại" name="phone">

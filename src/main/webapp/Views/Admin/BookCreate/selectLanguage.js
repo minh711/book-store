@@ -28,7 +28,7 @@ document.addEventListener('click', function(event) {
 
 function loadLanguages() {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {loadLanguages: "true"},
         dataType: "json",
@@ -89,7 +89,7 @@ function searchLanguage() {
 
 function addNewLanguage(newLanguage) {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {addNewLanguage: "true", newLanguage},
         success: function () {

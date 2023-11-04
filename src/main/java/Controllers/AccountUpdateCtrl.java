@@ -61,7 +61,7 @@ public class AccountUpdateCtrl extends HttpServlet {
         if (ketqua == 0) {
             response.sendRedirect("/Views/Admin/Account/AccountUpdate.jsp");
         } else {
-            response.sendRedirect("/Account/List");
+            response.sendRedirect("/Manager/Account/List");
         }
     }
 

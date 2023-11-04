@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -42,7 +43,36 @@ public class BookBrowseCtrl extends HttpServlet {
         String genreString = request.getParameter("GenreID");
         String languageString = request.getParameter("LanguageID");
         String publisherString = request.getParameter("PublisherID");
+        String key = request.getParameter("searchKey");
+        request.setAttribute("searchKey", key);
 
+        if (key != null && !key.equals("")) {
+            HashSet<Integer> hashSet = new HashSet<>();
+            SearchBookDAO dao = new SearchBookDAO();
+            ArrayList<Integer> list1 = dao.searchByAuthorId(key);
+            ArrayList<Integer> list2 = dao.searchByBookId(key);
+            ArrayList<Integer> list3 = dao.searchByGenreId(key);
+            ArrayList<Integer> list4 = dao.searchByLanguageId(key);
+            ArrayList<Integer> list5 = dao.searchByPublisherId(key);
+
+            ArrayList<Integer> list = new ArrayList<>();
+            list.addAll(list1);
+            list.addAll(list2);
+            list.addAll(list3);
+            list.addAll(list4);
+            list.addAll(list5);
+
+            for (Integer i : list) {
+                hashSet.add(i);
+            }
+            BookDAO bookDAO = new BookDAO();
+            ArrayList<BookDetail> books = new ArrayList<>();
+            for (Integer integer : hashSet) {
+                books.add(bookDAO.getBookDetailByID(integer));
+            }
+            request.setAttribute("books", books);
+        } 
+        
         //get Books of the author that selected
         if (authorString != null) {
             int selectedAuthor = Integer.valueOf(authorString);

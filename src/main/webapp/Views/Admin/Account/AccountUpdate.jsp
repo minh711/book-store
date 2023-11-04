@@ -23,7 +23,7 @@
             <div class="container d-flex justify-content-center align-items-center" style="">
                 <div class="col-md-12">
                     <div class="bg-white rounded p-4" >
-                        <form action="/Account/Update?id=${id}" method="post">
+                        <form action="/Manager/Account/Update?id=${id}" method="post">
                             <h1 class="text-center mb-3">Thông tin tài khoản</h1>
                             <label class="mb-2 text-primary text-opacity-50" >Họ và tên</label>
                             <input type="text" class="form-control mb-3"  value="${accountDetail.fullName}" name="fullName">

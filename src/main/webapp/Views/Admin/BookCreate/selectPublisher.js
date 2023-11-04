@@ -28,7 +28,7 @@ document.addEventListener('click', function(event) {
 
 function loadPublishers() {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {loadPublishers: "true"},
         dataType: "json",
@@ -88,7 +88,7 @@ function searchPublisher() {
 
 function addNewPublisher(newPublisher) {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {addNewPublisher: "true", newPublisher},
         success: function () {

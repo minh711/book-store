@@ -259,7 +259,7 @@
             });
             
             function goToBookDetail(bookId) {
-                window.location.href = "${pageContext.request.contextPath}/Book/Detail?ID=" + bookId;
+                window.location.href = "/Manager/Book/Detail?ID=" + bookId;
             }
         </script>
     </body>

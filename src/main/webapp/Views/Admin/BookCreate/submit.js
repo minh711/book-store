@@ -52,7 +52,7 @@ $("#submit").submit(function(e){
         $.ajax({
             type: "post",
             enctype: "multipart/form-data",
-            url: "/BookCreateCtrl",
+            url: "/Manager/Book/Create",
             data: formData,
             traditional: true,
             processData: false,

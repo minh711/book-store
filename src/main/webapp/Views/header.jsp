@@ -99,13 +99,23 @@
             </ul>
         </div>
     </div>
-
-    <div class="input-group d-flex align-items-center" style="width: 40%;">
-        <input id="search-input" type="search" id="form1" class="form-control" placeholder="Tìm kiếm..." style="height: 40px;"/>
-        <button id="search-button" type="button" class="btn btn-primary" style="height: 40px;">
-            <i class="fa fa-search"></i>
-        </button>
+        
+    <div class="" style="width: 40%;">
+        <form action="/Book" method="get">
+            <div class="input-group d-flex align-items-center">
+                <input 
+                    class="form-control" id="search-input" 
+                    type="search" name="searchKey" 
+                    placeholder="Tìm kiếm theo tên sách, tác giả, thể loại,..." 
+                    value="${searchKey}" 
+                    style="height: 40px;"/>
+                <button id="search-button" type="button" class="btn btn-primary" style="height: 40px;">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
     </div>
+    
 
     <c:if test = "${!isLogin}">
         <div class="d-flex justify-content-end" style="width: 30%">
@@ -119,7 +129,7 @@
             <a href="#" class="btn btn-success mx-2"><i class="fa fa-shopping-cart mx-2"></i></a>
         </div>
     </c:if>
-    
+       
     <script>
         //get book attributes from BookSearch servlet                                                                                                                                                                                                    // @author DuyenLTM                                                                                                   
         $(document).ready(function () {
@@ -132,7 +142,7 @@
         function getOptions(optionType) {
             $.ajax({
                 url: "/Book",
-                type: "GET",
+                type: "post",
                 data: {optionType: optionType},
                 success: function (data) {
                     $("#" + optionType + "Select").append(data);

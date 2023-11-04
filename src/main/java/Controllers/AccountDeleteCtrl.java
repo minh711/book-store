@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DuyenLTM
  */
-public class AccountDelete extends HttpServlet {
+public class AccountDeleteCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

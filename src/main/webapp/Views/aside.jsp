@@ -52,7 +52,7 @@
                 </a>
                 <div class="collapse hide" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/Account/List" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Tài khoản</a></li>
+                        <li><a href="/Manager/Account/List" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Tài khoản</a></li>
                     </ul>
                 </div>
             </li>

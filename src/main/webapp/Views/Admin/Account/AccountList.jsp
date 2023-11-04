@@ -48,7 +48,7 @@
                                         </c:if>
                                         <td class="${TextColor}">${account.isAvailString}</td>
 
-                                        <td> <a style="text-decoration: none;" href="/Account/Detail?id=${account.id}">Chi tiết</a></td>
+                                        <td> <a style="text-decoration: none;" href="/Manager/Account/Detail?id=${account.id}">Chi tiết</a></td>
                                     </tr>s
                                 </c:forEach>
                             </tbody>

@@ -133,7 +133,7 @@ document.addEventListener('click', function(event) {
 // History
 function loadHistory() {
     $.ajax({
-        url: "/BookTransactionCtrl",
+        url: "/Manager/Book/Transaction",
         type: "get",
         dataType: "json",
         success: function (data) {
@@ -165,7 +165,7 @@ function revert(button) {
     let id = $(button).data("id");
     if (confirm('Xác nhận hoàn tác?')) {
         $.ajax({
-            url: "/BookTransactionCtrl",
+            url: "/Manager/Book/Transaction",
             type: "post",
             data: {deleteId: id},
             success: function () {
@@ -181,7 +181,7 @@ function addNew() {
     quantity = quantityInp.val();
     total = totalInp.val();
     $.ajax({
-        url: "/BookTransactionCtrl",
+        url: "/Manager/Book/Transaction",
         type: "post",
         data: {bookId: bookId, distributorId: distributorId, quantity: quantity, total: total},
         success: function () {

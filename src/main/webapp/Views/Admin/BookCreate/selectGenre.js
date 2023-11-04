@@ -29,7 +29,7 @@ document.addEventListener('click', function(event) {
 
 function loadGenres() {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {loadGenres: "true"},
         dataType: "json",
@@ -108,7 +108,7 @@ function removeGenre(id) {
 
 function addNewGenre(newGenre) {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {addNewGenre: "true", newGenre},
         success: function () {

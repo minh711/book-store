@@ -15,7 +15,7 @@
             <jsp:include page="/Views/aside.jsp"/>
 
             <div class="container">
-                <form id="submit" action="/BookCreateCtrl" method="post" enctype="multipart/form-data">
+                <form id="submit" action="/Manager/Book/Create" method="post" enctype="multipart/form-data">
 
                     <h1 class="text-center mt-3 mb-3">Thêm sách mới</h1>
 

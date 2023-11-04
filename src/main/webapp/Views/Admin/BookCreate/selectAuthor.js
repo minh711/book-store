@@ -30,7 +30,7 @@ document.addEventListener('click', function(event) {
 
 function loadAuthors() {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {loadAuthors: "true"},
         dataType: "json",
@@ -109,7 +109,7 @@ function removeAuthor(id) {
 
 function addNewAuthor(newAuthor) {
     $.ajax({
-        url: "/BookCreateCtrl",
+        url: "/Manager/Book/Create",
         type: "post",
         data: {addNewAuthor: "true", newAuthor},
         success: function () {

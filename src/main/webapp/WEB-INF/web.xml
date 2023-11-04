@@ -81,8 +81,8 @@
         <servlet-class>Controllers.CartDeleteCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AccountDelete</servlet-name>
-        <servlet-class>Controllers.AccountDelete</servlet-class>
+        <servlet-name>AccountDeleteCtrl</servlet-name>
+        <servlet-class>Controllers.AccountDeleteCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileUpdate</servlet-name>
@@ -162,11 +162,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountCreateCtrl</servlet-name>
-        <url-pattern>/Account/Create</url-pattern>
+        <url-pattern>/Manager/Account/Create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookDetailCtrl</servlet-name>
-        <url-pattern>/Book/Detail</url-pattern>
+        <url-pattern>/Manager/Book/Detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginCtrl</servlet-name>
@@ -194,19 +194,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookTransactionCtrl</servlet-name>
-        <url-pattern>/BookTransactionCtrl</url-pattern>
+        <url-pattern>/Manager/Book/Transaction</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountListCtrl</servlet-name>
-        <url-pattern>/Account/List</url-pattern>
+        <url-pattern>/Manager/Account/List</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountUpdateCtrl</servlet-name>
-        <url-pattern>/Account/Update</url-pattern>
+        <url-pattern>/Manager/Account/Update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountDetailCtrl</servlet-name>
-        <url-pattern>/Account/Detail</url-pattern>
+        <url-pattern>/Manager/Account/Detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>orderListCustomerCtrl</servlet-name>
@@ -214,7 +214,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookCreateCtrl</servlet-name>
-        <url-pattern>/BookCreateCtrl</url-pattern>
+        <url-pattern>/Manager/Book/Create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookUpdateCtrl</servlet-name>
@@ -225,8 +225,8 @@
         <url-pattern>/Delete/Book</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AccountDelete</servlet-name>
-        <url-pattern>/Account/Delete</url-pattern>
+        <servlet-name>AccountDeleteCtrl</servlet-name>
+        <url-pattern>/Manager/Account/Delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProfileUpdate</servlet-name>
