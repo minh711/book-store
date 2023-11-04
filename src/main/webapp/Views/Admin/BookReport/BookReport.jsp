@@ -59,14 +59,13 @@
             </aside>
             <div class="container">
 
-                <div class="row justify-content-center mb-3">
+                <div class="row mb-3">
                     <div class="col-md-12">
-                        <div class="row mt-2">
-                            <div class="col-md-10"><canvas id="myChart" style="width:100%;max-width:800px"></canvas></div>
-                            <div class="col-md-2 d-flex justify-content-start card p-2 align-items-end">
+                        <div class="row mt-2 justify-content-center">s
+                            <div class="d-flex card p-2 align-items-center">
                                 <div>
                                     <div class="text-center text-info" style="font-size: 20px">Tổng kết</div>
-                                    <div>
+                                    <div class="d-flex justify-content-center">
                                         <div class="card p-2 m-3">
                                             <div class="text-success">Còn hàng</div>
                                             <div class="text-center">${requestScope.dataBookAvailable}</div>

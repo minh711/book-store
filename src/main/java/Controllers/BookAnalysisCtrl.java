@@ -61,7 +61,7 @@ public class BookAnalysisCtrl extends HttpServlet {
             request.setAttribute("dataBookNotAvailable", countBookNotAvailable);
             request.setAttribute("dataBookOutStock", countBookOutStock);
             request.setAttribute("BookDetail", bookdetail);
-            request.getRequestDispatcher("/Views/Admin/BookList/BookList.jsp").forward(request, response);
+            request.getRequestDispatcher("/Views/Admin/BookReport/BookReport.jsp").forward(request, response);
         } catch (IOException | ServletException e) {
             System.out.println(e);
         }
@@ -108,7 +108,7 @@ public class BookAnalysisCtrl extends HttpServlet {
             request.setAttribute("dataBookOutStock", countBookOutStock);
 
             request.setAttribute("BookDetail", bookdetail);
-            request.getRequestDispatcher("/Views/Admin/BookList/BookList.jsp").forward(request, response);
+            request.getRequestDispatcher("/Views/Admin/BookReport/BookReport.jsp").forward(request, response);
 
         } catch (ParseException e) {
         }
