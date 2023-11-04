@@ -15,11 +15,12 @@ public class BookTransactionMgr {
     private int quantity;
     private Timestamp date;
     private int total;
+    private String executor;
 
     public BookTransactionMgr() {
     }
 
-    public BookTransactionMgr(int id, String thumbnail, int bookId, String title, String distributor, int quantity, Timestamp date, int total) {
+    public BookTransactionMgr(int id, String thumbnail, int bookId, String title, String distributor, int quantity, Timestamp date, int total, String executor) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.bookId = bookId;
@@ -28,7 +29,10 @@ public class BookTransactionMgr {
         this.quantity = quantity;
         this.date = date;
         this.total = total;
+        this.executor = executor;
     }
+
+    
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public int getId() {
@@ -93,6 +97,14 @@ public class BookTransactionMgr {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public String getExecutor() {
+        return executor;
+    }
+
+    public void setExecutor(String executor) {
+        this.executor = executor;
     }
     // </editor-fold>
 }

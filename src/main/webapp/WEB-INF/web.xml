@@ -45,10 +45,6 @@
         <servlet-class>Controllers.DistributorCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BookAdminCtrl</servlet-name>
-        <servlet-class>Controllers.BookAdminCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BookTransactionCtrl</servlet-name>
         <servlet-class>Controllers.BookTransactionCtrl</servlet-class>
     </servlet>
@@ -91,10 +87,6 @@
     <servlet>
         <servlet-name>AddressCtrl</servlet-name>
         <servlet-class>Controllers.AddressCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BookSearch</servlet-name>
-        <servlet-class>Controllers.BookSearch</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OrderListCtrl</servlet-name>
@@ -141,10 +133,6 @@
         <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BookSelectType</servlet-name>
-        <servlet-class>Controllers.BookSelectType</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CartDataCtrl</servlet-name>
         <servlet-class>Controllers.CartDataCtrl</servlet-class>
     </servlet>
@@ -187,10 +175,6 @@
     <servlet-mapping>
         <servlet-name>DistributorCtrl</servlet-name>
         <url-pattern>/DistributorCtrl</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BookAdminCtrl</servlet-name>
-        <url-pattern>/Manager/Book</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookTransactionCtrl</servlet-name>
@@ -237,10 +221,6 @@
         <url-pattern>/Address</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BookSearch</servlet-name>
-        <url-pattern>/BookSearch</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>OrderListCtrl</servlet-name>
         <url-pattern>/Order/List</url-pattern>
     </servlet-mapping>
@@ -268,10 +248,6 @@
     <servlet-mapping>
         <servlet-name>CancelOTPCtrl</servlet-name>
         <url-pattern>/Cancel</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BookSelectType</servlet-name>
-        <url-pattern>/BookSelectType</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CartDataCtrl</servlet-name>

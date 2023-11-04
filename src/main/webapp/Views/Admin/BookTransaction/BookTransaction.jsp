@@ -6,6 +6,7 @@
 <head>
     <title>Sample</title>
     <jsp:include page="/Views/head.jsp"/>
+    <link rel="stylesheet" href="/Assets/DataTables-1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Admin/BookTransaction/style.css"/>
 </head>
 
@@ -66,6 +67,8 @@
                             <th>Số lượng</th>
                             <th>Giá nhập</th>
                             <th>Ngày nhập</th>
+                            <th>Người phụ trách</th>
+                            <th>Nhà phân phối</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -79,6 +82,7 @@
     <jsp:include page="/Views/footer.jsp"/>
     
     <jsp:include page="/Views/foot.jsp"/>
+    <script src="/Assets/DataTables-1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="/Views/Admin/BookTransaction/script.js"></script>
 </body>
 

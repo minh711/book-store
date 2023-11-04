@@ -1,9 +1,4 @@
-$(document).ready(function () {
-    loadDistributors();
-    loadBooks();
-    loadHistory();
-});
-
+// Initilization
 var distributorId;
 var bookId;
 const quantityInp = $("input[name='quantity']");
@@ -18,6 +13,20 @@ const selectDistributorSelectBtn = selectDistributorContainer.querySelector(".se
 const selectDistributorSearchInp = selectDistributorContainer.querySelector("input");
 const selectDistributorOptions = selectDistributorContainer.querySelector(".options");
 const selectDistributorContent = selectDistributorContainer.querySelector(".content");
+
+// Select Book Container
+var books = [];
+const selectBookContainer = document.querySelector(".select-book-container");
+const selectBookSelectBtn = selectBookContainer.querySelector(".select-btn");
+const selectBookSearchInp = selectBookContainer.querySelector("input");
+const selectBookOptions = selectBookContainer.querySelector(".options");
+const selectBookContent = selectBookContainer.querySelector(".content");
+
+$(document).ready(function () {
+    loadDistributors();
+    loadBooks();
+    loadHistory();
+});
 
 function loadDistributors() {
     $.ajax({
@@ -51,7 +60,7 @@ selectDistributorSearchInp.addEventListener("keyup", () => {
     let searchedVal = selectDistributorSearchInp.value;
     arr = distributors.filter(data => {
         return data.distributor.toLowerCase().includes(searchedVal.toLowerCase());
-    }).map(data => `<li onclick="updateDistributor(this); data-id=${data.id}">${data.distributor}</li>`).join("");
+    }).map(data => `<li onclick="updateDistributor(this);" data-id=${data.id}">${data.distributor}</li>`).join("");
     selectDistributorOptions.innerHTML = arr;
 });
 
@@ -70,17 +79,9 @@ document.addEventListener('click', function(event) {
 });
 // End Select Distributor Container
 
-// Select Book Container
-var books = [];
-const selectBookContainer = document.querySelector(".select-book-container");
-const selectBookSelectBtn = selectBookContainer.querySelector(".select-btn");
-const selectBookSearchInp = selectBookContainer.querySelector("input");
-const selectBookOptions = selectBookContainer.querySelector(".options");
-const selectBookContent = selectBookContainer.querySelector(".content");
-
 function loadBooks() {
     $.ajax({
-        url: "/Manager/Book",
+        url: "/Manager/Book/Transaction",
         type: "post",
         data: {isLoadBooks: true},
         dataType: "json",
@@ -111,7 +112,7 @@ selectBookSearchInp.addEventListener("keyup", () => {
     let searchedVal = selectBookSearchInp.value;
     arr = books.filter(data => {
         return data.title.toLowerCase().includes(searchedVal.toLowerCase()) || data.id.toString().includes(searchedVal);
-    }).map(data => `<li onclick="updateBook(this); data-id="${data.id}""><img class="thumbnail" src="/Images/${data.thumnail}">#${data.id} | ${data.title}</li>`).join("");
+    }).map(data => `<li onclick="updateBook(this);" data-id="${data.id}""><img class="thumbnail" src="/Images/${data.thumnail}">#${data.id} | ${data.title}</li>`).join("");
     selectBookOptions.innerHTML = arr;
 });
 
@@ -134,7 +135,8 @@ document.addEventListener('click', function(event) {
 function loadHistory() {
     $.ajax({
         url: "/Manager/Book/Transaction",
-        type: "get",
+        type: "post",
+        data: {isLoadHistory: true},
         dataType: "json",
         success: function (data) {
             let history = $("#history");
@@ -151,6 +153,8 @@ function loadHistory() {
                     item.quantity,
                     item.total,
                     item.date, 
+                    item.executor,
+                    item.distributor,
                     '<div class="btn btn-link" onclick="return revert(this);" data-id="' + item.id + '">Hoàn tác</div>'
                 ]);
             });

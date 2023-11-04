@@ -4,8 +4,10 @@
  */
 package Controllers;
 
+import DAOs.DBModelDAOs.BookDAO;
 import DAOs.DBModelDAOs.BookTransactionDAO;
 import DAOs.MgrModelDAOs.BookTransactionMgrDAO;
+import Models.DBModels.Book;
 import Models.DBModels.BookTransaction;
 import Models.MgrModels.BookTransactionMgr;
 import com.google.gson.Gson;
@@ -35,14 +37,7 @@ public class BookTransactionCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BookTransactionMgrDAO bookTransactionMgrDAO = new BookTransactionMgrDAO();
-        BookTransactionMgr[] bookTransactionMgrs = bookTransactionMgrDAO.getAll();
-        
-        String json = new Gson().toJson(bookTransactionMgrs);
-        
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        request.getRequestDispatcher("/Views/Admin/BookTransaction/BookTransaction.jsp").forward(request, response);
     }
 
     /**
@@ -56,10 +51,33 @@ public class BookTransactionCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Load Books
+        if (request.getParameter("isLoadBooks") != null && request.getParameter("isLoadBooks").equals("true")) {
+            BookDAO bookDAO = new BookDAO();
+            Book[] books = bookDAO.getAll();
+            String json = new Gson().toJson(books);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+        
+        //Load history
+        if (request.getParameter("isLoadHistory") != null && request.getParameter("isLoadHistory").equals("true")) {
+            BookTransactionMgrDAO bookTransactionMgrDAO = new BookTransactionMgrDAO();
+            BookTransactionMgr[] bookTransactionMgrs = bookTransactionMgrDAO.getAll();
+            String json = new Gson().toJson(bookTransactionMgrs);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+        
         // Delete
         if (request.getParameter("deleteId") != null && !request.getParameter("deleteId").equals("")) {
             int id = Integer.valueOf(request.getParameter("deleteId"));
             BookTransactionDAO bookTransactionDAO = new BookTransactionDAO();
+            BookDAO bookDAO = new BookDAO();
+            BookTransaction bookTransaction = bookTransactionDAO.getBookTransaction(id);
+            bookDAO.updateQuantity(bookTransaction.getBookId(),(-1) * bookTransaction.getQuantity());
             bookTransactionDAO.delete(id);
         }
         
@@ -81,7 +99,10 @@ public class BookTransactionCtrl extends HttpServlet {
                 total
             ); 
             BookTransactionDAO bookTransactionDAO = new BookTransactionDAO();
+            BookDAO bookDAO = new BookDAO();
+            
             bookTransactionDAO.addNew(bookTransaction);
+            bookDAO.updateQuantity(bookId, quantity);
         }
     }
 }

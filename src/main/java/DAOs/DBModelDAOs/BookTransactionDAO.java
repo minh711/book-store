@@ -60,6 +60,39 @@ public class BookTransactionDAO {
     }
     
     /**
+     * Get BookTransaction by its ID.
+     * @author MinhTD
+     * @param id ID of the Book Transaction
+     * @return BookTransaction object.
+     */
+    public BookTransaction getBookTransaction(int id) {
+        BookTransaction bt = null;
+        String sql
+                = "SELECT * "
+                + "FROM BookTransaction "
+                + "WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                bt = new BookTransaction(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getTimestamp(6),
+                        rs.getInt(7)
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bt;
+    }
+    
+    /**
      * Add new Book Transaction.
      * 
      * @param bookTransaction Book Transaction object.

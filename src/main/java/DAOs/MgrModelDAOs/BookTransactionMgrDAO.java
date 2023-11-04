@@ -44,13 +44,16 @@ public class BookTransactionMgrDAO {
                 + "    Distributor.distributor, "
                 + "    BookTransaction.quantity, "
                 + "    BookTransaction.date, "
-                + "    BookTransaction.total "
+                + "    BookTransaction.total,"
+                + "    Account.fullName "
                 + "FROM "
                 + "    BookTransaction " 
                 + "JOIN "
                 + "    Book ON BookTransaction.bookId = Book.id "
                 + "JOIN "
                 + "    Distributor ON BookTransaction.distributorId = Distributor.id "
+                + "JOIN "
+                + "    Account ON BookTransaction.executorId = Account.id "
                 + "ORDER BY BookTransaction.date DESC;";
         try {
             ps = conn.prepareStatement(sql);
@@ -64,7 +67,8 @@ public class BookTransactionMgrDAO {
                         rs.getNString(5),
                         rs.getInt(6),
                         rs.getTimestamp(7),
-                        rs.getInt(8)
+                        rs.getInt(8),
+                        rs.getString(9)
                 ));
             }
         } catch (SQLException ex) {

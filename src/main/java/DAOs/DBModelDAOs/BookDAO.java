@@ -392,4 +392,21 @@ public class BookDAO extends DbConnection {
         }
         return book;
     }
+    
+    public int updateQuantity(int bookId, int quantity) {
+        int result = 0;
+        String sql
+                = "UPDATE Book "
+                + "SET quantity = quantity + ? "
+                + "WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, quantity);
+            ps.setInt(2, bookId);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }
