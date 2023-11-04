@@ -13,8 +13,8 @@
         <servlet-class>Controllers.LoginCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateOrderCtrl</servlet-name>
-        <servlet-class>Controllers.CreateOrderCtrl</servlet-class>
+        <servlet-name>OrderCreateCtrl</servlet-name>
+        <servlet-class>Controllers.OrderCreateCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookDetailCtrl</servlet-name>
@@ -29,8 +29,8 @@
         <servlet-class>Controllers.CartCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>orderDetailCustomerCtrl</servlet-name>
-        <servlet-class>Controllers.orderDetailCustomerCtrl</servlet-class>
+        <servlet-name>OrderDetailCtrl</servlet-name>
+        <servlet-class>Controllers.OrderDetailCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterCtrl</servlet-name>
@@ -53,8 +53,8 @@
         <servlet-class>Controllers.AccountDetailCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>orderListCustomerCtrl</servlet-name>
-        <servlet-class>Controllers.orderListCustomerCtrl</servlet-class>
+        <servlet-name>OrderHistoryCtrl</servlet-name>
+        <servlet-class>Controllers.OrderHistoryCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookCreateCtrl</servlet-name>
@@ -69,8 +69,8 @@
         <servlet-class>Controllers.AccountDeleteCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProfileUpdate</servlet-name>
-        <servlet-class>Controllers.ProfileUpdate</servlet-class>
+        <servlet-name>ProfileCtrl</servlet-name>
+        <servlet-class>Controllers.ProfileCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddressCtrl</servlet-name>
@@ -105,12 +105,16 @@
         <servlet-class>Controllers.BookBrowseCtrl</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CreateOrderCtrl</servlet-name>
-        <url-pattern>/CreateOrder</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AccountCreateCtrl</servlet-name>
         <url-pattern>/Manager/Account/Create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookDetailCtrl</servlet-name>
+        <url-pattern>/Manager/Book/Detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderCreateCtrl</servlet-name>
+        <url-pattern>/Order/Create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookDetailCtrl</servlet-name>
@@ -125,8 +129,8 @@
         <url-pattern>/Cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>orderDetailCustomerCtrl</servlet-name>
-        <url-pattern>/orderDetailCustomerCtrl</url-pattern>
+        <servlet-name>OrderDetailCtrl</servlet-name>
+        <url-pattern>/Order/Detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterCtrl</servlet-name>
@@ -149,8 +153,8 @@
         <url-pattern>/Manager/Account/Detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>orderListCustomerCtrl</servlet-name>
-        <url-pattern>/orderListCustomerCtrl</url-pattern>
+        <servlet-name>OrderHistoryCtrl</servlet-name>
+        <url-pattern>/Order/History</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookCreateCtrl</servlet-name>
@@ -165,8 +169,8 @@
         <url-pattern>/Manager/Account/Delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProfileUpdate</servlet-name>
-        <url-pattern>/Profile/Update</url-pattern>
+        <servlet-name>ProfileCtrl</servlet-name>
+        <url-pattern>/Profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddressCtrl</servlet-name>
@@ -174,11 +178,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderListCtrl</servlet-name>
-        <url-pattern>/Order/List</url-pattern>
+        <url-pattern>/Manager/Order/List</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderStatusUpdate</servlet-name>
-        <url-pattern>/OrderStatusUpdate</url-pattern>
+        <url-pattern>/Manager/Order/Detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderAddNewAddressCtrl</servlet-name>

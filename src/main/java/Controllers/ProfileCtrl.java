@@ -17,9 +17,8 @@ import java.util.logging.Logger;
  *
  * @author DuyenLTM
  */
-public class ProfileUpdate extends HttpServlet {
+public class ProfileCtrl extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -38,7 +37,6 @@ public class ProfileUpdate extends HttpServlet {
         request.setAttribute("profileDetail", accountDAO.getAccountDetails(1));
         request.setAttribute("profileAddress", accAddressDAO.getAll(1));
         request.getRequestDispatcher("/Views/Customer/ProfileUpdate/ProfileUpdate.jsp").forward(request, response);
-
     }
 
     /**
@@ -64,12 +62,11 @@ public class ProfileUpdate extends HttpServlet {
 
             ProfileDAO dao = new ProfileDAO();
             Account account = new Account(id, fullName, phone, email, gender, birthday, username, password);
-            int kq=0;
-            kq=dao.UpdateCustomer(account);
+            int kq = 0;
+            kq = dao.UpdateCustomer(account);
             response.sendRedirect("/Views/Customer/Home/Home.jsp");
-
-        } catch (Exception e) {
-            Logger.getLogger(ProfileUpdate.class.getName()).log(Level.SEVERE, null, e);
+        } catch (IOException | NumberFormatException e) {
+            Logger.getLogger(ProfileCtrl.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }

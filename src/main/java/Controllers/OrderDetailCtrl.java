@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controllers;
 
 import DAOs.DBModelDAOs.OrderDAO;
@@ -26,7 +22,7 @@ import java.util.ArrayList;
  *
  * @author HienHT
  */
-public class orderDetailCustomerCtrl extends HttpServlet {
+public class OrderDetailCtrl extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -40,21 +36,16 @@ public class orderDetailCustomerCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        
         // create objects
         OrderItemDAO orderItemDao = new OrderItemDAO();
         OrderDAO orderDao = new OrderDAO();
         OrderStatusDetailDAO orderStatusDetailDAO = new OrderStatusDetailDAO();
         OrderStatusDAO orderStatusDAO = new OrderStatusDAO();
         
-        
         // suppose the OrderID is retrieve from the request
         int OrderID = Integer.parseInt(request.getParameter("id"));
-         request.setAttribute("OrderID", OrderID);
+        request.setAttribute("OrderID", OrderID);
          
-         
-        
         // get the items of an order and its information
         ArrayList<OrderItem> listItem = orderItemDao.getOrderItemByID(OrderID);
         Order order = orderDao.getOrderByID(OrderID);
@@ -63,8 +54,6 @@ public class orderDetailCustomerCtrl extends HttpServlet {
         int currentStatus = orderStatusDetailDAO.getCurrentStatus(OrderID).getOrderStatusId();
         int previousStatus = orderStatusDetailDAO.getPreviousStatus(OrderID).getOrderStatusId();
         String currentStatusName = orderStatusDAO.getOrderStatusName(currentStatus);
-         
-        
         
         // set attributes used in JSP
         try {
@@ -77,7 +66,7 @@ public class orderDetailCustomerCtrl extends HttpServlet {
                  request.setAttribute("OrderID", OrderID);
                 request.getRequestDispatcher("Views/Customer/OrderDetail/orderDetail.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (ServletException | IOException e) {
             System.out.println(e);
         }
     }
@@ -93,17 +82,15 @@ public class orderDetailCustomerCtrl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // suppose the OrderID is retrieve from the request
+        int orderID = Integer.parseInt(request.getParameter("OrderID"));
 
-       // suppose the OrderID is retrieve from the request
-       int orderID = Integer.parseInt(request.getParameter("OrderID"));
-        
-       //  add cancel information 
+        //  add cancel information 
         OrderStatusDetail orderStatusDetail = new OrderStatusDetail(1, new Timestamp(System.currentTimeMillis()), orderID, 5);
         OrderStatusDetailDAO orderStatusDetailDAO = new OrderStatusDetailDAO();
         orderStatusDetailDAO.AddOrderStatusDetail(orderStatusDetail);
-        response.sendRedirect("orderDetailCustomerCtrl?id=" + orderID);
+        response.sendRedirect("Order/Detail?id=" + orderID);
     }
-
 }
 
 

@@ -47,7 +47,7 @@
         <main class="bg-light">
             <div class="container">
                 <h1 class="text-center mt-3 mb-3">Thông tin đơn hàng</h1>
-                <form id="myForm" method="post" action="CreateOrder" enctype="multipart/form-data">
+                <form id="myForm" method="post" action="/Order/Create" enctype="multipart/form-data">
                     <input type="hidden" name="data" value="${requestScope.jsonList}">
                     <table class="table table-bordered">
                         <thead>
