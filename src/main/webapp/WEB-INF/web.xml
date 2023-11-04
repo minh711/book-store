@@ -25,7 +25,7 @@
         <servlet-class>Controllers.AccountCreateCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Cart</servlet-name>
+        <servlet-name>CartCtrl</servlet-name>
         <servlet-class>Controllers.CartCtrl</servlet-class>
     </servlet>
     <servlet>
@@ -67,10 +67,6 @@
     <servlet>
         <servlet-name>BookUpdateCtrl</servlet-name>
         <servlet-class>Controllers.BookUpdateCtrl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CartDeleteCtrl</servlet-name>
-        <servlet-class>Controllers.CartDeleteCtrl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AccountDeleteCtrl</servlet-name>
@@ -129,10 +125,6 @@
         <servlet-class>Controllers.CancelOTPCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CartDataCtrl</servlet-name>
-        <servlet-class>Controllers.CartDataCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>HomePageCtrl</servlet-name>
         <servlet-class>Controllers.HomePageCtrl</servlet-class>
     </servlet>
@@ -157,7 +149,7 @@
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Cart</servlet-name>
+        <servlet-name>CartCtrl</servlet-name>
         <url-pattern>/Cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -195,10 +187,6 @@
     <servlet-mapping>
         <servlet-name>BookUpdateCtrl</servlet-name>
         <url-pattern>/Manager/Book/Update</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CartDeleteCtrl</servlet-name>
-        <url-pattern>/Delete/Book</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountDeleteCtrl</servlet-name>
@@ -240,10 +228,6 @@
     <servlet-mapping>
         <servlet-name>CancelOTPCtrl</servlet-name>
         <url-pattern>/Cancel</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CartDataCtrl</servlet-name>
-        <url-pattern>/Cart/Data</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomePageCtrl</servlet-name>

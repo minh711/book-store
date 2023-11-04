@@ -84,7 +84,7 @@
                         </div>
                         <div class="d-flex">
                             <div class="p-2 mx-2 text-dark" id="TotalCart">Tổng cộng: </div>
-                            <div> <button class="btn btn-danger p-2" type="submit" id="btnOrder">Mua hàng</button></div>
+                            <input name="btnSubmit" class="btn btn-danger p-2" type="submit" id="btnOrder" value="Mua hàng">
                         </div>
                     </div>
                 </form>
@@ -215,8 +215,9 @@
                     calculateTotalCart();
                     $.ajax({
                         type: "POST",
-                        url: "${pageContext.request.contextPath}/Delete/Book",
+                        url: "/Cart",
                         data: {
+                            isDeleteCartItem: true,
                             bookId: bookId,
                             customerId: customerId
                         },
@@ -302,7 +303,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "${pageContext.request.contextPath}/Cart/Data",
+                    url: "/Cart",
                     data :{ jsonData : jsonData}, 
                     dataType: "json",
                     success: function (response) {
