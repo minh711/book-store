@@ -20,8 +20,8 @@
             }
 
             .carousel-item img {
-                width: 100%;
-                height: 100%;
+                width: 500px;
+                height: 450px;
                 object-fit: contain;
             }
         </style>
@@ -150,7 +150,7 @@
                                                 <p class="mx-2 text-black-50">(10 đánh giá)</p>
                                             </div>
 
-                                            <div class="text-danger mb-3">Số lượng còn lại: ${bookDetail.getSoleTotal()}</div>
+                                            <div class="text-danger mb-3">Số lượng còn lại: ${bookDetail.quantity}</div>
                                             <div class="d-flex">
                                                 <div class="text-nowrap mx-2 d-flex align-items-center">Số lượng</div>
                                                 <div class="input-group d-flex justify-content-start align-items-center">
@@ -268,7 +268,7 @@
 
             //Limit the smallest quantity, and the largest
             const minQuantity = 1;
-            const maxQuantity = ${bookDetail.soleTotal};
+            const maxQuantity = ${bookDetail.quantity};
 
             //Check the condition if the Decrease button is pressed
             decreaseBtn.addEventListener("click", () => {

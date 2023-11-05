@@ -53,20 +53,63 @@ function addDistributor() {
 function updateDistributor(selectedLi) {
     selectDistributorSelectBtn.firstElementChild.innerText = selectedLi.innerText;
     distributorId = $(selectedLi).data("id");
+    
     selectDistributorContainer.classList.toggle("active");
+    addDistributor();
 }
 
+
+
 selectDistributorSearchInp.addEventListener("keyup", () => {
-    let arr = []; 
-    let searchedVal = selectDistributorSearchInp.value;
-    arr = distributors.filter(data => {
-        return data.distributor.toLowerCase().includes(searchedVal.toLowerCase());
-    }).map(data => `<li onclick="updateDistributor(this);" data-id=${data.id}">${data.distributor}</li>`).join("");
-    selectDistributorOptions.innerHTML = arr;
+    searchDistributor();
 });
+
+function searchDistributor() {
+    let arr = [];
+    let searchedVal = selectDistributorSearchInp.value.trim();
+    arr = distributors
+        .filter(data => {
+            return data.distributor.toLowerCase().includes(searchedVal.toLowerCase());
+        })
+        .map(data => `<li onclick="updateDistributor(this);" data-id="${data.id}">${data.distributor}</li>`)
+        .join("");
+    
+    let isUnique = true;
+    for (const item of distributors) {
+        if (item.distributor.toLowerCase() === searchedVal.toLowerCase().trim()) {
+            isUnique = false;
+            break;
+        }
+    }
+    if (isUnique && searchedVal !== "") {
+        selectDistributorOptions.innerHTML = "";
+        selectDistributorOptions.innerHTML = arr;
+        selectDistributorOptions.insertAdjacentHTML('afterbegin', `<li onclick="addNewDistributor('${searchedVal}');">Thêm nhà phân phối mới mới <span class="fw-bold mx-2">${searchedVal}</span></li>`);
+    } else {
+        selectDistributorOptions.innerHTML = "";
+        selectDistributorOptions.innerHTML = arr;
+    }
+}
+
+function addNewDistributor(newDistributor) {
+    $.ajax({
+        url: "/Manager/Book/Transaction",
+        type: "post",
+        data: {addDistributor: newDistributor.trim()},
+        success: function () {
+            loadDistributors();
+            selectDistributorSearchInp.value = newDistributor;
+            searchDistributor();
+        },
+        error: function (xhr) {
+        }
+    });
+}
 
 selectDistributorSelectBtn.addEventListener("click", () => {
     selectDistributorContainer.classList.toggle("active");
+    selectDistributorSearchInp.value = null;
+    searchDistributor();
 });
 
 document.addEventListener('click', function(event) {
@@ -109,16 +152,22 @@ function updateBook(selectedLi) {
 }
 
 selectBookSearchInp.addEventListener("keyup", () => {
-    let arr = []; 
+    searchBook();
+});
+
+function searchBook() {
+    let arr = [];
     let searchedVal = selectBookSearchInp.value;
     arr = books.filter(data => {
         return data.title.toLowerCase().includes(searchedVal.toLowerCase()) || data.id.toString().includes(searchedVal);
-    }).map(data => `<li onclick="updateBook(this);" data-id="${data.id}""><img class="thumbnail" src="/Images/${data.thumnail}">#${data.id} | ${data.title}</li>`).join("");
+    }).map(data => `<li onclick="updateBook(this);" data-id="${data.id}""><img class="thumbnail" src="/Images/${data.thumbnail}">#${data.id} | ${data.title}</li>`).join("");
     selectBookOptions.innerHTML = arr;
-});
+}
 
 selectBookSelectBtn.addEventListener("click", () => {
     selectBookContainer.classList.toggle("active");
+    selectBookSearchInp.value = null;
+    searchBook();
 });
 
 document.addEventListener('click', function(event) {

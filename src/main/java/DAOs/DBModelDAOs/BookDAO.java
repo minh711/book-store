@@ -345,14 +345,12 @@ public class BookDAO extends DbConnection {
     public int addNewBook(Book b) {
         int result = 0;
         String addBookQuery
-                = "SET IDENTITY_INSERT [Book] ON;"
-                + "INSERT INTO Book "
+                = "INSERT INTO Book "
                 + "(id, title, description, thumbnail, salePrice, price, discount, "
                 + "quantity, soleTotal, isAvailable, publisherId, languageId, "
                 + "totalRating, totalRatingStar, avgRating) "
                 + "VALUES"
-                + "(?, ?, ?, ?, ?, ?, ?, 0, 0, 1, ?, ?, 0, 0, 0)"
-                + "SET IDENTITY_INSERT [Book] OFF;";
+                + "(?, ?, ?, ?, ?, ?, ?, 0, 0, 1, ?, ?, 0, 0, 0)";
         try {
             ps = conn.prepareStatement(addBookQuery);
             ps.setInt(1, b.getId());

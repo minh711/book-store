@@ -56,25 +56,30 @@ public class RegisterCtrl extends HttpServlet {
                         HttpSession session = request.getSession();
                         Account newAccount = dao.checkUserByName(user);
 
+//                        session.setAttribute("accountId", newAccount.getId());
+//                        Cookie cId = new Cookie("accountId", newAccount.getId() + "");
+//                        cId.setMaxAge(3 * 24 * 60 * 60);
+//                        response.addCookie(cId);
+//
+//                        session.setAttribute("role", newAccount.getRoleId());
+//                        Cookie crd = new Cookie("role", newAccount.getRoleId() + "");
+//                        crd.setMaxAge(3 * 24 * 60 * 60);
+//                        response.addCookie(crd);
+//
+//                        session.setAttribute("role", newAccount.getUsername());
+//                        Cookie usn = new Cookie("username", newAccount.getUsername());
+//                        crd.setMaxAge(3 * 24 * 60 * 60);
+//                        response.addCookie(usn);
+//
+//                        session.setAttribute("password", newAccount.getPassword());
+//                        Cookie psw = new Cookie("password", newAccount.getPassword());
+//                        crd.setMaxAge(3 * 24 * 60 * 60);
+//                        response.addCookie(psw);
+
+                        int role = newAccount.getRoleId();
                         session.setAttribute("accountId", newAccount.getId());
-                        Cookie cId = new Cookie("accountId", newAccount.getId() + "");
-                        cId.setMaxAge(3 * 24 * 60 * 60);
-                        response.addCookie(cId);
-
-                        session.setAttribute("role", newAccount.getRoleId());
-                        Cookie crd = new Cookie("role", newAccount.getRoleId() + "");
-                        crd.setMaxAge(3 * 24 * 60 * 60);
-                        response.addCookie(crd);
-
-                        session.setAttribute("role", newAccount.getUsername());
-                        Cookie usn = new Cookie("username", newAccount.getUsername());
-                        crd.setMaxAge(3 * 24 * 60 * 60);
-                        response.addCookie(usn);
-
-                        session.setAttribute("password", newAccount.getPassword());
-                        Cookie psw = new Cookie("password", newAccount.getPassword());
-                        crd.setMaxAge(3 * 24 * 60 * 60);
-                        response.addCookie(psw);
+                        session.setAttribute("role", role);
+                        session.setAttribute("username", newAccount.getUsername());
 
                         response.sendRedirect("/Home");
                     } else {

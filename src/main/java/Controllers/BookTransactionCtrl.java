@@ -93,7 +93,14 @@ public class BookTransactionCtrl extends HttpServlet {
             bookTransactionDAO.delete(id);
         }
         
-        // Add new
+        // Add Distributor
+        if (request.getParameter("addDistributor") != null && !request.getParameter("addDistributor").equals("")) {
+            String distributor = request.getParameter("addDistributor");
+            DistributorDAO distributorDAO = new DistributorDAO();
+            distributorDAO.addNew(distributor);
+        }
+        
+        // Add new trasaction
         if (request.getParameter("bookId") != null && !request.getParameter("bookId").equals("")) {
             int bookId = Integer.valueOf(request.getParameter("bookId"));
             int distributorId = Integer.valueOf(request.getParameter("distributorId"));

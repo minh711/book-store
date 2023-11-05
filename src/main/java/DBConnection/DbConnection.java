@@ -25,7 +25,7 @@ public class DbConnection {
             // Rename to match your database here
             String server = "MINHPC\\SQLEXPRESS";
             String port = "1433";
-            String database = "SWP_v0";
+            String database = "SWP_v0_3";
             String user = "sa";
             String password = "123456";
           

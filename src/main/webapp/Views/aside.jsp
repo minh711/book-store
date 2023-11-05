@@ -12,7 +12,7 @@
         <hr>
         <ul class="list-unstyled">
             <li class="mb-1">
-                <a class="fs-5 link-dark text-decoration-none d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#report-collapse" aria-expanded="true">
+                <a href="/Manager/Report" class="fs-5 link-dark text-decoration-none d-inline-flex align-items-center rounded border-0">
                     Thống kê
                 </a>
             </li>
@@ -27,6 +27,7 @@
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li><a href="/Manager/Book/List" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Sách</a></li>
                         <li><a href="/Manager/Book/Attribute" class="mt-2 link-dark d-inline-flex text-decoration-none rounded">Danh mục Sách</a></li>
+                        <li><a href="/Manager/Book/Transaction" class="mt-2 link-dark d-inline-flex text-decoration-none rounded">Nhập Sách</a></li>
                     </ul>
                 </div>
             </li>
