@@ -250,7 +250,7 @@
                 let element = formatNumberElements[i];
                 let value = element.getAttribute('data-value');
                 let formattedValue = Number(value).toLocaleString();
-                element.textContent = formattedValue + ' VNÐ';
+                element.textContent = formattedValue + 'đ';
             }
 
             $(document).ready(function () {

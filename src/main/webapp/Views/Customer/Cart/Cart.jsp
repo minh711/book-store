@@ -33,7 +33,7 @@
                         <c:forEach items="${requestScope.CartList}" var="cart">
                             <tr>
                                 <td class="text-center">
-                                    <input class="form-check-input SelectBook" type="checkbox" style="width: 30px; height: 30px;">
+                                    <input ${cart.getBookQuantityRemain() != 0 ? '' : 'disabled'} class="form-check-input SelectBook" type="checkbox" style="width: 30px; height: 30px;">
                                 </td>
                                 <td>
                                     <div class="d-flex p-2">
@@ -45,8 +45,17 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center"><input class="font-weight-medium text-center BookPrice" type="text" style="border: none;pointer-events: none" readonly value="<fmt:formatNumber type="number" value="${cart.getBookprice()}" pattern="#,###" />"></td>
+                                <td class="text-center"><input class="font-weight-medium text-center BookPrice" type="text" style="border: none; pointer-events: none" readonly value="<fmt:formatNumber type="number" value="${cart.getBookprice()}" pattern="#,###"/>đ"></td>
                                 <td>
+                                    <div class="text-center">
+                                        <c:if test="${cart.getBookQuantityRemain() == 0}">
+                                            <div class="text-danger mb-3">Hết hàng</div>
+                                        </c:if>
+
+                                        <c:if test="${cart.getBookQuantityRemain() != 0}">
+                                            <div class="text-danger mb-3">Số lượng còn lại: ${cart.getBookQuantityRemain()}</div>
+                                        </c:if>
+                                    </div>
                                     <div class="d-flex">
                                         <div class="input-group d-flex justify-content-center align-items-center">
                                             <div class="input-group-btn">
@@ -55,8 +64,7 @@
                                                 </button>
                                             </div>
                                             <div class="mx-2"> 
-                                                <input type="text" class="form-control mx-3 text-center BookQuantity" style="width: 50px;" value="${cart.getBookquantity()}" min="1" max="${cart.getBookQuantityRemain()}">
-
+                                                <input type="number" min="1" max="bookDetail.quantity" class="form-control mx-2 text-center BookQuantity" style="width: 80px;" value="${cart.getBookquantity()}" min="1" max="${cart.getBookQuantityRemain()}">
                                             </div>
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-primary btn-plus increaseQuantity">
@@ -99,11 +107,14 @@
             function calculateTotalForProduct() {
                 $('.BookPrice').each(function (index) {
 
-                    var price = parseFloat($(this).val().replace(/[^0-9.-]+/g, ''));
+//                    var price = parseFloat($(this).val().replace(/[^0-9.-]+/g, ''));
+                    var price = parseFloat($(this).val().slice(0, -1).replace(/[^\d-]+/g, ''));
+                    console.log('Price : ' + price);
                     var quantity = parseInt($(this).closest('tr').find('.BookQuantity').val());
                     var total = price * quantity;
+                    console.log(total);
                     //Format numbers
-                    var formatTotalPrice = total.toLocaleString('en-US');
+                    var formatTotalPrice = total.toLocaleString() + 'đ';
                     // Update the value for the "totalEachProduct" input tag.
                     $(this).closest('tr').find('.totalEachProduct').val(formatTotalPrice);
                 });
@@ -222,7 +233,6 @@
                             customerId: customerId
                         },
                         success: function (response) {
-                            console.log(response);
                             const alertMessage = $('<div class="alert alert-success alert-dismissible fade show" role="alert"></div>');
                             alertMessage.html('<strong>Success:</strong> Đã xóa sản phẩm thành công.' +
                                     '</button>');
@@ -281,10 +291,7 @@
             });
 
             window.addEventListener('beforeunload', function (e) {
-                event.preventDefault();
                 sendCartDataToServlet();
-
-                e.returnValue = 'Bạn có chắc chắn muốn rời khỏi trang này?';
             });
 
             function sendCartDataToServlet() {
@@ -299,7 +306,6 @@
                 });
 
                 var jsonData = JSON.stringify(selectedItems);
-                console.log("Data sent to server:", jsonData);
 
                 $.ajax({
                     type: "POST",
@@ -307,7 +313,6 @@
                     data :{ jsonData : jsonData}, 
                     dataType: "json",
                     success: function (response) {
-                        console.log(response);
                     }
                 });
             }

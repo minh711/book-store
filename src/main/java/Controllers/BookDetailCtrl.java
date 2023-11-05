@@ -52,6 +52,7 @@ public class BookDetailCtrl extends HttpServlet {
                 request.setAttribute("BookGenre", genrelist);
                 request.setAttribute("BookPicture", bookpicturelist);
                 request.setAttribute("BookRating", bookratinglist);
+                request.setAttribute("addedSuccess", request.getParameter("addedSuccess"));
                 request.getRequestDispatcher("/Views/Customer/BookDetail/BookDetail.jsp").forward(request, response);
             }
         } catch (IOException | ServletException e) {
@@ -73,7 +74,8 @@ public class BookDetailCtrl extends HttpServlet {
         
         ArrayList<Cart> listcart = new ArrayList<>();
         CartDAO cart = new CartDAO();
-
+        BookDAO bookDAO = new BookDAO();
+        
         String customerid = request.getParameter("customerid");
         String bookid = request.getParameter("bookid");
         String quantity = request.getParameter("quantityBook");
@@ -86,11 +88,13 @@ public class BookDetailCtrl extends HttpServlet {
             if (listcart.size() != 0) {
                 int oldquantity = listcart.get(0).getQuantity();
                 int newquantity = oldquantity + quanTity;
-                cart.UpdateCart(bookId, cusId, newquantity);
-            }else {
-                cart.AddNewItemToCart(new Cart(cusId, quanTity, bookId));
+                cart.UpdateCart(newquantity, cusId, bookId);
+                bookDAO.updateQuantity(bookId, (-1) * quanTity);
+            } else {
+                cart.AddNewItemToCart(new Cart(quanTity, bookId, cusId));
+                bookDAO.updateQuantity(bookId, (-1) * quanTity);
             }
-            response.sendRedirect("Book");
+            response.sendRedirect("/Book/Detail?ID=" + bookId + "&addedSuccess=true");
         } catch (IOException e) {
             System.out.println(e);
         }

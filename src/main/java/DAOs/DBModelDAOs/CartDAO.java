@@ -62,12 +62,10 @@ public class CartDAO {
 
     public void AddNewItemToCart(Cart cart) {
 
-        String sqlquery = "INSERT INTO [dbo].[Cart]\n"
-                + "           ([quantity]\n"
-                + "           ,[bookId]\n"
-                + "           ,[customerId])\n"
-                + "     VALUES\n"
-                + "           (?,?,?)";
+        String sqlquery 
+                = "INSERT INTO [dbo].[Cart] "
+                + "    ([quantity], [bookId], [customerId]) "
+                + "VALUES (?,?,?)";
         try {
             ps = conn.prepareStatement(sqlquery);
             ps.setInt(1, cart.getQuantity());

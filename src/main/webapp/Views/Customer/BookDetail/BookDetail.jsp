@@ -34,10 +34,8 @@
             <div class="container">
                 <main class="d-flex bg-light">
                     <div class="container">
-
                         <div class="row mt-4">
                             <div class="col-sm-6">
-
                                 <div class="rounded bg-white p-4 mb-3">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <div>
@@ -70,20 +68,19 @@
                                     </div>
                                 </div>
 
-
-                                <form id="addToCart" method="post" action="Book">                   
+                                <form id="addToCart" method="post" action="/Book/Detail">                   
                                     <div class="d-flex align-items-center mb-3 justify-content-center">
-                                        <input type="hidden" name="customerid" value="1">
+                                        <input type="hidden" name="customerid" value="${accountId}">
                                         <input type="hidden" name="bookid" value ="${bookDetail.id}">
                                         <input type="hidden" id="quantityBook" name="quantityBook" value="">
                                         <div class="mx-2">
-                                            <button onclick="return authentication();" class="btn btn-outline-secondary" type="submit" onclick="showSuccess()">
+                                            <button ${bookDetail.quantity > 0 ? '' : 'disabled'} onclick="return authentication();" class="btn btn-outline-secondary" type="submit" onclick="showSuccess();">
                                                 <i class="fa fa-shopping-cart text-dark mx-2" aria-hidden="true""></i>
                                                 Thêm vào giỏ hàng
                                             </button>
                                         </div>
                                         <div class="mx-2">
-                                            <button onclick="return authentication();" class="btn btn-danger" style="width: 200px">Mua ngay</button>
+                                            <button ${bookDetail.quantity > 0 ? '' : 'disabled'} class="btn btn-danger" style="width: 200px">Mua ngay</button>
                                         </div>
                                     </div>
                                 </form>
@@ -149,19 +146,26 @@
                                                 </p>
                                                 <p class="mx-2 text-black-50">(10 đánh giá)</p>
                                             </div>
-
-                                            <div class="text-danger mb-3">Số lượng còn lại: ${bookDetail.quantity}</div>
+                                            
+                                            <c:if test="${bookDetail.quantity == 0}">
+                                                <div class="text-danger mb-3">Hết hàng</div>
+                                            </c:if>
+                                                
+                                            <c:if test="${bookDetail.quantity != 0}">
+                                                <div class="text-danger mb-3">Số lượng còn lại: ${bookDetail.quantity}</div>
+                                            </c:if>
+                                            
                                             <div class="d-flex">
-                                                <div class="text-nowrap mx-2 d-flex align-items-center">Số lượng</div>
+                                                <div class="text-nowrap d-flex align-items-center">Số lượng</div>
                                                 <div class="input-group d-flex justify-content-start align-items-center">
-                                                    <div class="input-group-btn">
+                                                    <div class="mx-2 input-group-btn">
                                                         <button class="btn btn-sm btn-primary btn-minus" id="decreaseQuantity">
                                                             <i class="fa fa-minus"></i>
                                                         </button>
                                                     </div>
                                                     <div> 
-                                                        <input type="text" class="form-control mx-3 text-center" style="width: 50px;"  id="cusEditQuantity" value="1"></div>
-                                                    <div class="input-group-btn">
+                                                        <input type="number" class="form-control text-center" style="width: 80px;" id="cusEditQuantity" value="1"></div>
+                                                    <div class="mx-2 input-group-btn">
                                                         <button class="btn btn-sm btn-primary btn-plus" id="increaseQuantity">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
@@ -262,6 +266,14 @@
 
         <jsp:include page="/Views/foot.jsp"/>
         <script>
+            $(document).ready(function() {
+                let addedSuccess = "${addedSuccess}";
+                console.log(addedSuccess);
+                if (addedSuccess === "true") {
+                    showSuccess();
+                }
+            });
+
             const quantityInput = document.getElementById("cusEditQuantity");
             const decreaseBtn = document.getElementById("decreaseQuantity");
             const increaseBtn = document.getElementById("increaseQuantity");
@@ -294,7 +306,6 @@
                 } else if (currentQuantity > maxQuantity) {
                     quantityInput.value = maxQuantity;
                 }
-
             });
 
             const addToCartForm = document.getElementById("addToCart");
@@ -303,9 +314,7 @@
 
             //Set the value to quantityBook when submitting a form
             addToCartForm.addEventListener("submit", function (event) {
-
                 const cusEditQuantityValue = cusEditQuantity.value;
-
                 quantityBook.value = cusEditQuantityValue;
             });
 
@@ -357,8 +366,11 @@
             }
             
             function authentication() {
-                alert("Bạn cần đăng nhập để thực hiện tính năng này");
-                return false;
+                let accountId= "${accountId}";
+                if (accountId === null || accountId === "") {
+                    alert("Bạn cần đăng nhập để thực hiện tính năng này");
+                    return false;
+                }
             }
         </script>
     </body>
