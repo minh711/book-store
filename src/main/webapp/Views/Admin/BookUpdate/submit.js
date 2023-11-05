@@ -36,6 +36,7 @@ $("#submit").submit(function(e){
         let thumbnailInput = document.getElementById('upload-thumbnail-input');
         
         if (isUpdateThumbnail) {
+            console.log("Thumbnail");
             if (thumbnailInput.files.length > 0) {
                 formData.append('thumbnail', thumbnailInput.files[0]);
             }
@@ -53,6 +54,8 @@ $("#submit").submit(function(e){
             processData: false,
             contentType: false,
             success: function () {
+                $(window).off('beforeunload');
+                window.location.href = "/Manager/Book/List";
             }
         });
     }

@@ -60,6 +60,8 @@ $("#submit").submit(function(e){
             success: function (data) {
                 if (data === "duplicateId") {
                     $("#errId").text("Đã xảy ra lỗi. Mã sách này đã tồn tại.");
+                } else {
+                    window.location.href = "/Manager/Book/List";
                 }
             }
         });
@@ -147,8 +149,10 @@ function validateSubmitBook() {
     } else if (salePrice <= 0) {
         errSalePrice.text("Giá tiền phải là số nguyên dương.");
         isInvalid = true;
-    } else if (salePrice > price) {
+    } else if (Number(salePrice) > Number(price)) {
+        console.log(Number(salePrice) + " " + Number(price));
         errSalePrice.text("Giá giảm không được lớn hơn giá gốc.");
+        isInvalid = true;
     }
     
     if (price === "") {

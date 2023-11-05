@@ -11,15 +11,7 @@
 
     <head>
         <title>Blank Page</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="${pageContext.request.contextPath}/Assets/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>     
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <jsp:include page="/Views/head.jsp"/>
         <style>
             .waittingTitle{
                 font-size: 1.1em;
@@ -92,67 +84,13 @@
     </head>
 
     <body>
-
-
-        <header class="d-flex justify-content-between" style="padding: 10px;">
-            <div class="d-flex align-items-center justify-content-between">
-                <img src="/image/logo.png" style="height: 40px;">
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <a class="text-dark text-center nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-bell mx-2"></i><br>
-                        Thông báo <span class="text-danger">(3)</span>
-                    </a>
-                    <div class="dropdown">
-                        <a class="text-dark nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Xin chào,<br>Admin
-                        </a>
-                        <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item p-2" href="#">Đơn hàng</a></li>
-                            <li><a class="dropdown-item p-2" href="#">Thông tin tài khoản</a></li>
-                            <li><a class="dropdown-item p-2" href="#">Đăng xuất <i class="fa fa-sign-out"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
+       <jsp:include page="/Views/header.jsp"/>
 
         <main class="bg-light d-flex">
-            <aside>
-                <div class="flex-shrink-0 p-3" style="width: 280px;">
-                    <a href="#"
-                       class="text-dark d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                        Quản trị
-                    </a>
-                    <ul class="list-unstyled ps-0">
-                        <li class="mb-1  bg-primary rounded">
-                            <a class="text-light nav-link">Thống kê</a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="text-dark nav-link">Danh sách Sách</a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="text-dark nav-link">Danh mục Sách</a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="text-dark nav-link">Danh sách Đơn hàng</a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="text-dark nav-link">Danh sách tài khoản</a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="text-dark nav-link">Danh sách Thông báo</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            <jsp:include page="/Views/aside.jsp"/>
+            
             <div class="container">
                 <div class="mt-2">
-
                     <div class="row d-flex justify-content-between">
                         <div class="col-md-4 p-2 ">
                             <div class="shadow pb-2 pr-2 rounded" style=" background-image: linear-gradient(to right,#EC4585, #B555A3);">  
@@ -213,11 +151,10 @@
                         </div>
                     </div>
 
-
                     <div class="row mt-2 bg-white p-3 shadow rounded-3">
                         <div class="col-md-12">
                             <h5 class="pt-3">Chọn khoảng thống kê</h5>
-                            <form action="/Manager/Order/Report" method="post" onsubmit="return validateDateRange();">
+                            <form action="/Manager/Report" method="post" onsubmit="return validateDateRange();">
                                 <div class="d-flex">
                                     <div class="d-flex align-items-center m-2">
                                         <label class="text-nowrap m-2">Từ ngày</label>
@@ -255,7 +192,6 @@
                                     <hr>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <hr class="hr">
@@ -273,7 +209,6 @@
                                                 <th scope="col">Trạng thái</th>
                                             </tr>
                                         </thead>
-
 
                                         <c:set var="orderDAO" value="${requestScope.orderDAO}" />
                                         <tbody>
@@ -301,37 +236,13 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </main>
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 p-4">
-                        <img src="/image/logo.png" alt="" style="height: 40px;">
-                        <div>
-                            <i class="fa fa-map-marker mx-2"></i>Địa chỉ: 600 Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ 
-                        </div>
-                    </div>
-                    <div class="col-md-4 p-4">
-                        <div class="d-flex">
-                            <i class="fa fa-envelope d-flex justify-content-center align-items-center mx-2"></i>
-                            <div>
-                                business@oceanbook.com
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 d-flex justify-content-between p-4">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-facebook-messenger"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <jsp:include page="/Views/footer.jsp"/>
 
+        <jsp:include page="/Views/foot.jsp"/>
+        
         <script>
             var options = {
                 series: [{
@@ -382,11 +293,7 @@
 
             var chart = new ApexCharts(document.querySelector("#chart"), options);
             chart.render();
-
-
         </script>
-
-
 
         <script>
             const xValues = ["Đã thành công", "Đang thực hiện", "Đã hủy"];
@@ -413,7 +320,6 @@
                         text: "Đơn hàng trong 3 tháng gần nhất",
                         fontSize: 24
                     }
-
                 }
             });
 
@@ -432,7 +338,6 @@
                         text: "Đơn hàng từ ${(requestScope.UserStartDate != null) ? requestScope.UserStartDate : StartWeek} đến ${(requestScope.UserEndDate != null) ? requestScope.UserEndDate : EndWeel} ",
                         fontSize: 24
                     }
-
                 }
             });
 
@@ -451,7 +356,6 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var cancels = document.querySelectorAll(".status");
                 cancels.forEach(function (subElement) {
-
                     var statusText = subElement.textContent.trim();
                     if (statusText === 'Đã hủy') {
 
@@ -463,8 +367,6 @@
                         subElement.classList.add("waitting");
 
                     }
-
-
                 });
 
                 var dates = document.querySelectorAll('.date');
@@ -509,5 +411,4 @@
             });
         </script>
     </body>
-
 </html>

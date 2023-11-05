@@ -114,7 +114,7 @@
                 </div>
                 
                 <h1 class="text-center mt-3">Danh sách Sách</h1>
-                <button class="btn btn-primary mb-3">Thêm Sách mới</button>
+                <a href="/Manager/Book/Create" class="btn btn-primary mb-3">Thêm Sách mới</a>
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-12">
                         <table id="example" class="display text-center mt-3">
@@ -150,7 +150,7 @@
                                         </c:if>
                                         <c:set var="TextColor" value="text-success"></c:set>
                                         <td class="${TextColor}">${book.isAvailable}</td>
-                                        <td> <a style="text-decoration: none;" href="/Book?id=${book.id}">Chi tiết</a></td>
+                                        <td><a style="text-decoration: none;" href="/Manager/Book/Update?ID=${book.id}">Chỉnh sửa</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

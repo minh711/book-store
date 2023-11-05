@@ -46,6 +46,7 @@ public class BookCreateCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("/Views/Admin/BookCreate/BookCreate.jsp").forward(request, response);
     }
 
     /**

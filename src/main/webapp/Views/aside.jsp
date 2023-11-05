@@ -5,7 +5,7 @@
             cursor: pointer;
         }
     </style>
-    <div class="flex-shrink-0 p-3" style="width: 280px;">
+    <div class="flex-shrink-0 p-3" style="width: 320px;">
         <h3>
             Admin
         </h3>

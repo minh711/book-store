@@ -127,8 +127,24 @@
     </c:if>
 
     <c:if test="${accountId != null}">
+        <c:if test="${role == 1}">
         <div class="d-flex justify-content-end" style="width: 30%;">
             <a href="/Cart" class="btn border-0 mx-2"><i class="fa fa-shopping-cart fa-xl mx-2"></i></a>
+        </div>
+        </c:if>
+        
+        <div class="btn-group">
+            <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Xin chào, ${username}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <c:if test="${role == 1}">
+                <li><a class="mb-2 dropdown-item" href="#">Đơn hàng</a></li>
+                </c:if>
+                <li><a class="dropdown-item" href="/Profile">Thông tin cá nhân</a></li>
+                <hr>
+                <li><a onclick="return confirm('Bạn có chắc muốn đăng xuất?');" class="dropdown-item" href="/Logout">Đăng xuất</a></li>
+            </ul>
         </div>
     </c:if>
        
@@ -158,5 +174,3 @@
         }
     </script>
 </header>
-    
-    

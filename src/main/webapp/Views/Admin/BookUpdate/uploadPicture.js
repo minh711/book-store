@@ -28,20 +28,20 @@ $(document).ready(function() {
             for (let i = 0; i < files.length; i++) {
                 fileContent.append("files", files[i]);
             }
-            fileContent.append('isUploadPictures', true);
+            fileContent.append("isUploadPictures", bookId);
             $.ajax({
                 type: "POST",
                 enctype: "multipart/form-data",
                 url: "/Manager/Book/Update",
                 data: fileContent,
-                traditional: true,
-                processData: false,
+                processData: false, 
                 contentType: false,
                 success: function () {
                     $('#upload-input').val('');
                     loadBookPictures();
                 }
             });
+            loadBookPictures();
         } 
     });
 

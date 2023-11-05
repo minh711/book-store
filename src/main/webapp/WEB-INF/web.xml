@@ -124,6 +124,10 @@
         <servlet-name>BookAnalysisCtrl</servlet-name>
         <servlet-class>Controllers.BookAnalysisCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutCtrl</servlet-name>
+        <servlet-class>Controllers.LogoutCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountCreateCtrl</servlet-name>
         <url-pattern>/Manager/Account/Create</url-pattern>
@@ -218,7 +222,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderReportCtrl</servlet-name>
-        <url-pattern>/Manager/Order/Report</url-pattern>
+        <url-pattern>/Manager/Report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookAttributeCtrl</servlet-name>
@@ -227,6 +231,10 @@
     <servlet-mapping>
         <servlet-name>BookAnalysisCtrl</servlet-name>
         <url-pattern>/Book/Analysis</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutCtrl</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

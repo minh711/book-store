@@ -49,6 +49,9 @@ public class BookUpdateCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int bookId = Integer.valueOf(request.getParameter("ID"));
+        request.setAttribute("bookId", bookId);
+        request.getRequestDispatcher("/Views/Admin/BookUpdate/BookUpdate.jsp").forward(request, response);
     }
 
     /**
@@ -195,40 +198,6 @@ public class BookUpdateCtrl extends HttpServlet {
             languageDAO.addNew(newLanguage);
         }
         // </editor-fold>
-        
-        // <editor-fold defaultstate="collapsed" desc="Load Book pictures">
-        if (request.getParameter("loadPictures") != null && request.getParameter("loadPictures").equals("true")) {
-            int bookId = 1; // temporaty
-
-            BookPictureDAO bookPictureDAO = new BookPictureDAO();
-            BookPicture bookPictures[] = bookPictureDAO.getAllByBookId(bookId);
-
-            PrintWriter out = response.getWriter();
-
-            for (BookPicture bp : bookPictures) {
-                out.println("<div class=\"mx-2 my-2 book-picture\" style=\"width: 120px; position: relative;\">\n"
-                        + "                    <img \n"
-                        + "                        style=\"width: 120px; height: 160px; object-fit: contain;\" \n"
-                        + "                        src=\"" + request.getContextPath() + "/Images/" + bp.getPicture() + "\"\n"
-                        + "                    >\n"
-                        + "                    \n"
-                        + "                    <div \n"
-                        + "                        style=\"position: absolute; top: 0; width: 100%; height: 100%;\" \n"
-                        + "                    >\n"
-                        + "                        <div class=\"d-flex justify-content-between align-items-center p-1\">\n"
-                        + "                            <input type=\"checkbox\" class=\"mx-2 delete-pic-checkbox\" data-id=\"" + bp.getId() + "\">\n"
-                        + "                            <div \n"
-                        + "                                onclick=\"return deleteBookPicture(this)\" \n"
-                        + "                                class=\"mx-2 delete-pic-button\" \n"
-                        + "                                data-id=\"" + bp.getId() + "\"\n"
-                        + "                            ><i class=\"fa-solid fa-trash\"></i></div>\n"
-                        + "                        </div>\n"
-                        + "                    </div>\n"
-                        + "                    \n"
-                        + "                </div>");
-            }
-        }
-        // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Add new Book Genre">
         if (request.getParameter("addNewBookGenre") != null && !request.getParameter("addNewBookGenre").equals("")) {
@@ -285,7 +254,7 @@ public class BookUpdateCtrl extends HttpServlet {
         // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="Upload Pictures">
-        if (request.getParameter("isUploadPictures") != null && request.getParameter("isUploadPictures").equals("true")) {
+        if (request.getParameter("isUploadPictures") != null && !request.getParameter("isUploadPictures").equals("")) {
             String[] pics = Utilities.FileMethods.UploadPictures(request, "files", "");
         
             /* Test for resizing picture, will use to get the book thumbnail.
@@ -297,7 +266,7 @@ public class BookUpdateCtrl extends HttpServlet {
 
             BookPictureDAO bookPictureDAO = new BookPictureDAO();
 
-            int bookId = 1;
+            int bookId = Integer.valueOf(request.getParameter("isUploadPictures"));
 
             for (int i = 0; i < length; i++) {
                 BookPicture bookPicture = new BookPicture(0, pics[i], bookId);
@@ -339,8 +308,10 @@ public class BookUpdateCtrl extends HttpServlet {
             }
 
             try {
-                publisherId = Integer.valueOf(request.getParameter("txtPublisherId"));
-                languageId = Integer.valueOf(request.getParameter("txtLanguageId"));
+                String publisherIdString = request.getParameter("txtPublisherId");
+                String languageIdString = request.getParameter("txtLanguageId");
+                publisherId = Integer.valueOf(publisherIdString);
+                languageId = Integer.valueOf(languageIdString);
             } catch (NumberFormatException e) {
                 System.out.println("Error in selecting publisher and language.");
             }

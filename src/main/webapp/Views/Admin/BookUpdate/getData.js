@@ -29,6 +29,7 @@ $(document).ready(function() {
             loadGenres();
             
             thumbnailURL = data.book.thumbnail;
+            console.log(thumbnailURL);
             if (thumbnailURL !== "") {
                 $('.upload-thumbnail').html(`<img style="width: 120px; height: 160px; object-fit: contain;" src="/Images/${thumbnailURL}" alt="Uploaded Image">`);
             }

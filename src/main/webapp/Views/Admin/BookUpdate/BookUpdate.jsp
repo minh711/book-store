@@ -164,7 +164,7 @@
     
     <jsp:include page="/Views/foot.jsp"/>
     <script>
-        const bookId = 1; // temporarily set it to 1
+        const bookId = ${bookId}; 
     </script>
     <script src="${pageContext.request.contextPath}/Views/Admin/BookUpdate/getData.js"></script>
     <script src="${pageContext.request.contextPath}/Views/Admin/BookUpdate/uploadPicture.js"></script>

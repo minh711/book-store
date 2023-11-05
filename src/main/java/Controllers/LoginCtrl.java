@@ -77,12 +77,27 @@ public class LoginCtrl extends HttpServlet {
                     response.addCookie(ci);
                     response.addCookie(cr);
                     response.addCookie(cp);
-
+                    
+                    int role = ifAccountExist.getRoleId();
+                    
                     session.setAttribute("accountId", ifAccountExist.getId());
-                    session.setAttribute("role", ifAccountExist.getRoleId());
+                    session.setAttribute("role", role);
                     session.setAttribute("username", ifAccountExist.getUsername());
-          
-                    response.sendRedirect("/Home");
+                    
+                    switch (role) {
+                        case 1: // Customer
+                            response.sendRedirect("/Home");
+                            break;
+                        case 2: // Book Manager
+                            response.sendRedirect("/Manager/Book/List");
+                            break;
+                        case 3: // Order Manager
+                            response.sendRedirect("/Manager/Order/List");
+                            break;
+                        case 4: // Admin
+                            response.sendRedirect("/Manager/Report");
+                            break;
+                    }
                 }
             }
         } catch (ServletException | IOException | SQLException ex) {
