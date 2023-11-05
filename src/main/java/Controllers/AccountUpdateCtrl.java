@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 
 /**
@@ -27,6 +28,13 @@ public class AccountUpdateCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int role = (int) session.getAttribute("role");
+        if (role != 4) {
+            response.sendRedirect("/Home");
+            return;
+        }
+        
         int id = Integer.valueOf(request.getParameter("id"));
         request.setAttribute("id", id);
         AccountDAO accountDAO = new AccountDAO();

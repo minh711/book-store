@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -60,7 +61,8 @@ public class OrderCreateCtrl extends HttpServlet {
             throws ServletException, IOException {
         // Add new Address
         if (request.getParameter("isAddNewAddress") != null && !request.getParameter("isAddNewAddress").equals("")) {
-            int customerId = 2;
+            HttpSession session = request.getSession();
+            int customerId = (int) session.getAttribute("accountId");
             // Retrieve data sent in the POST request
             String fullName = request.getParameter("fullName");
             String phoneNumber = request.getParameter("phoneNumber");

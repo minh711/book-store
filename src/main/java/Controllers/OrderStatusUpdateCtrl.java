@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -32,6 +33,13 @@ public class OrderStatusUpdateCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int role = (int) session.getAttribute("role");
+        if (role != 4 && role != 3) {
+            response.sendRedirect("/Home");
+            return;
+        }
+        
         // create objects
         OrderItemDAO orderItemDao = new OrderItemDAO();
         OrderDAO orderDao = new OrderDAO();
@@ -86,6 +94,9 @@ public class OrderStatusUpdateCtrl extends HttpServlet {
         OrderStatusDetail orderStatusDetail = new OrderStatusDetail(1, new Timestamp(System.currentTimeMillis()), orderID, requestingStatus);
         OrderStatusDetailDAO orderStatusDetailDAO = new OrderStatusDetailDAO();
         orderStatusDetailDAO.AddOrderStatusDetail(orderStatusDetail);
+        if (requestingStatus == 4) {
+            
+        }
         response.sendRedirect("Manager/Order/Detail?id=" + orderID);
     }
 }

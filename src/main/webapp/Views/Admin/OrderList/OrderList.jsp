@@ -132,7 +132,7 @@
                                             <td class="totals">${order.getSaleTotal()}</td>
                                             <td > <span class=" status"> ${orderDAO.getOrderStatusName(order.getId())} </span></td>
                                             <td class="text-primary"> 
-                                                <a href="OrderStatusUpdate?id=${order.getId()}">Chi tiết</a></td>
+                                                <a href="/Manager/Order/Detail?id=${order.getId()}">Chi tiết</a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

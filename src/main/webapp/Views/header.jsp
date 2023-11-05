@@ -139,7 +139,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <c:if test="${role == 1}">
-                <li><a class="mb-2 dropdown-item" href="#">Đơn hàng</a></li>
+                <li><a class="mb-2 dropdown-item" href="/Order/History">Đơn hàng</a></li>
                 </c:if>
                 <li><a class="dropdown-item" href="/Profile">Thông tin cá nhân</a></li>
                 <hr>

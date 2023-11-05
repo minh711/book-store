@@ -132,6 +132,53 @@
                                 <button class=" mt-3 btn btn-danger w-100" type="submit" onclick="return validateForm()">Lưu thay đổi</button>
                             </form>
                         </c:if>
+                        
+                        <c:if test="${profileDetail.roleName.equals('Admin')}">
+                            <form action="/Profile/Update?id=${customerId}" method="post">
+                                <h1 class="text-center mb-3">Thông tin tài khoản</h1>
+
+                                <label class="mb-2 text-primary text-opacity-50" >Họ và tên</label>
+                                <input type="text" class="form-control mb-3" value="${profileDetail.fullName}" name="fullName">
+
+                                <label class="mb-2 text-primary text-opacity-50"  >Số điện thoại</label>
+                                <input type="text" class="form-control mb-3" value="${profileDetail.phone}" name="phone">
+
+                                <label class="mb-2 text-primary text-opacity-50" >Địa chỉ Email</label>
+                                <input type="email" class="form-control mb-3" value="${profileDetail.email}" name="email">
+
+                                <label class="mb-2 text-primary text-opacity-50">Tên đăng nhập</label>
+                                <input type="text" class="form-control mb-3" readonly value="${profileDetail.username}" name="username">
+
+                                <label class="mb-2 text-primary text-opacity-50" >Mật khẩu</label>
+                                <input type="password" class="form-control mb-3" value="" name="password">
+
+                                <label class="mb-2 text-primary text-opacity-50" >Nhập lại mật khẩu</label>
+                                <input type="password" class="form-control mb-3" name="resetPWD">
+
+                                <label class="mb-2 text-primary text-opacity-50">Giới tính</label>
+                                <div class="d-flex mb-3"   >
+                                    <div class="form-check mx-2" >
+                                        <input type="radio" class="form-check-input" value="Nam" name="gender" ${profileDetail.gender=='Nam'?'checked':''}>
+                                        <label class="form-check-label">Nam</label>
+                                    </div>
+
+                                    <div class="form-check mx-2" >
+                                        <input type="radio" class="form-check-input" value="Nữ" name="gender" ${profileDetail.gender=='Nữ'?'checked':''}>
+                                        <label class="form-check-label">Nữ</label>
+                                    </div>
+
+                                    <div class="form-check mx-2" >
+                                        <input type="radio" class="form-check-input" value="Khác" name="gender" ${profileDetail.gender=='Khác'?'checked':''}>
+                                        <label class="form-check-label">Khác</label>
+                                    </div>                  
+                                </div>
+
+                                <label class="mb-2 text-primary text-opacity-50" >Ngày sinh</label>
+                                <input type="date" class="form-control mb-3" name="birthday" value="${profileDetail.birthdate}">
+
+                                <button class=" mt-3 btn btn-danger w-100" type="submit" onclick="return validateForm()">Lưu thay đổi</button>
+                            </form>
+                        </c:if>
                     </div>
                 </div>
             </div>

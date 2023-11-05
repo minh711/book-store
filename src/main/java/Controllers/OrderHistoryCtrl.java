@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,12 +28,14 @@ public class OrderHistoryCtrl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // suppose customerID is retrieve from session
-        int customerID = 1;
+        HttpSession session = request.getSession();
+        int customerId = (int) session.getAttribute("accountId");
+        
         OrderDAO orderDAO = new OrderDAO();
-        ArrayList<Order> orders = orderDAO.getCustomerOrderList(customerID);
+        ArrayList<Order> orders = orderDAO.getCustomerOrderList(customerId);
         request.setAttribute("orders", orders);
         request.setAttribute("orderDAO", orderDAO);
-        request.getRequestDispatcher("Views/Customer/OrderDetail/OrderHistory.jsp").forward(request, response);
+        request.getRequestDispatcher("/Views/Customer/OrderDetail/OrderHistory.jsp").forward(request, response);
     }
 
     /**

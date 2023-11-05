@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,7 +27,13 @@ public class OrderListCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+        HttpSession session = request.getSession();
+        int role = (int) session.getAttribute("role");
+        if (role != 4 && role != 3) {
+            response.sendRedirect("/Home");
+            return;
+        }
+        
         OrderDAO orderDAO = new OrderDAO();
         ArrayList<Order> orders = orderDAO.getOrderList();
         request.setAttribute("orders", orders);

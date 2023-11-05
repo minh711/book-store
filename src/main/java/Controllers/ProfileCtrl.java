@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,12 +31,13 @@ public class ProfileCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // ở trang nào đó khi nhấn nút muốn chỉnh profile sẽ gửi qua 1 id của account hiện tại
         AccountDAO accountDAO = new AccountDAO();
         AddressDAO accAddressDAO = new AddressDAO();
-        request.setAttribute("customerId", 1);
-        request.setAttribute("profileDetail", accountDAO.getAccountDetails(1));
-        request.setAttribute("profileAddress", accAddressDAO.getAll(1));
+        HttpSession session = request.getSession();
+        int accountId = (int) session.getAttribute("accountId");
+        request.setAttribute("customerId", accountId);
+        request.setAttribute("profileDetail", accountDAO.getAccountDetails(accountId));
+        request.setAttribute("profileAddress", accAddressDAO.getAll(accountId));
         request.getRequestDispatcher("/Views/Customer/ProfileUpdate/ProfileUpdate.jsp").forward(request, response);
     }
 

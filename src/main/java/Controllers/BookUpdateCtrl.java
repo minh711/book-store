@@ -24,6 +24,7 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -49,6 +50,13 @@ public class BookUpdateCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int role = (int) session.getAttribute("role");
+        if (role != 4 && role != 2) {
+            response.sendRedirect("/Home");
+            return;
+        }
+        
         int bookId = Integer.valueOf(request.getParameter("ID"));
         request.setAttribute("bookId", bookId);
         BookDAO bookDAO = new BookDAO();

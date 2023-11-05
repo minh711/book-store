@@ -19,6 +19,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -39,6 +40,13 @@ public class BookTransactionCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int role = (int) session.getAttribute("role");
+        if (role != 4 && role != 2) {
+            response.sendRedirect("/Home");
+            return;
+        }
+        
         request.getRequestDispatcher("/Views/Admin/BookTransaction/BookTransaction.jsp").forward(request, response);
     }
 

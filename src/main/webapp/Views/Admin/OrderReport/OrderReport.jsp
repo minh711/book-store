@@ -12,6 +12,8 @@
     <head>
         <title>Thống kê</title>
         <jsp:include page="/Views/head.jsp"/>
+        <script src="/Assets/ApexCharts-v3.44.0/ApexCharts.js"></script>    
+        <script src="/Assets/Chart.js-v2.9.4/Chat.js"></script>
         <style>
             .waittingTitle{
                 font-size: 1.1em;

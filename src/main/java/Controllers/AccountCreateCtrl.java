@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -29,6 +30,13 @@ public class AccountCreateCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int role = (int) session.getAttribute("role");
+        if (role != 4) {
+            response.sendRedirect("/Home");
+            return;
+        }
+        
         request.getRequestDispatcher("Views/Admin/Account/AccountCreate.jsp").forward(request, response);
     }
 

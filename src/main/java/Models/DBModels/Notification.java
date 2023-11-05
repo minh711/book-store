@@ -8,16 +8,16 @@ public class Notification {
     private int id;
     private String notifiation;
     private boolean isViewed;
-    private int notificationTypeId;
+    private int accountId;
 
     public Notification() {
     }
 
-    public Notification(int id, String notifiation, boolean isViewed, int notificationTypeId) {
+    public Notification(int id, String notifiation, boolean isViewed, int accountId) {
         this.id = id;
         this.notifiation = notifiation;
         this.isViewed = isViewed;
-        this.notificationTypeId = notificationTypeId;
+        this.accountId = accountId;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
@@ -44,13 +44,13 @@ public class Notification {
     public void setIsViewed(boolean isViewed) {
         this.isViewed = isViewed;
     }
-
-    public int getNotificationTypeId() {
-        return notificationTypeId;
+    
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setNotificationTypeId(int notificationTypeId) {
-        this.notificationTypeId = notificationTypeId;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
     // </editor-fold>
 }

@@ -38,8 +38,6 @@
         <jsp:include page="/Views/header.jsp"/>
 
         <main class="d-flex">
-            <jsp:include page="/Views/aside.jsp"/>
-            
             <div class="container">
                 <div class="container">
                     <h1 class="text-center mt-3">Lịch sử đơn hàng</h1>
@@ -64,7 +62,7 @@
                                         <td class="totals">${order.getSaleTotal()}</td>
                                         <td > <span class=" status"> ${orderDAO.getOrderStatusName(order.getId())} </span></td>
                                         <td class="text-primary"> 
-                                            <a href="orderDetailCustomerCtrl?id=${order.getId()}">Chi tiết</a></td>
+                                            <a href="/Order/Detail?id=${order.getId()}">Chi tiết</a></td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>

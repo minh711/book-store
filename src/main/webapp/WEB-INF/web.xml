@@ -109,10 +109,6 @@
         <servlet-class>Controllers.BookListCtrl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AccountAnalysis</servlet-name>
-        <servlet-class>Controllers.AccountAnalysis</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>OrderReportCtrl</servlet-name>
         <servlet-class>Controllers.OrderReportCtrl</servlet-class>
     </servlet>
@@ -215,10 +211,6 @@
     <servlet-mapping>
         <servlet-name>BookListCtrl</servlet-name>
         <url-pattern>/Manager/Book/List</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AccountAnalysis</servlet-name>
-        <url-pattern>/Account/Analysis</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderReportCtrl</servlet-name>
