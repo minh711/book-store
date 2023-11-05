@@ -637,4 +637,19 @@ public class BookDAO extends DbConnection {
         }
         return quantity;
     }
+    
+    public int setAvailability(int isAvailable, int bookId) {
+        int result = 0;
+        String sql 
+                = "UPDATE Book SET isAvailable = ? WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, isAvailable);
+            ps.setInt(2, bookId);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

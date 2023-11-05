@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ocean Book</title>
+        <title>Giỏ hàng</title>
         <jsp:include page="/Views/head.jsp"/>
     </head>
 
@@ -30,10 +30,10 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        <c:forEach items="${requestScope.CartList}" var="cart">
+                        <c:forEach items="${requestScope.CartList}" var="cart" varStatus="status">
                             <tr>
                                 <td class="text-center">
-                                    <input ${cart.getBookQuantityRemain() != 0 ? '' : 'disabled'} class="form-check-input SelectBook" type="checkbox" style="width: 30px; height: 30px;">
+                                    <input ${BookList[status.index].quantity != null ? '' : 'disabled'} class="form-check-input SelectBook" type="checkbox" style="width: 30px; height: 30px;">
                                 </td>
                                 <td>
                                     <div class="d-flex p-2">
@@ -48,12 +48,12 @@
                                 <td class="text-center"><input class="font-weight-medium text-center BookPrice" type="text" style="border: none; pointer-events: none" readonly value="<fmt:formatNumber type="number" value="${cart.getBookprice()}" pattern="#,###"/>đ"></td>
                                 <td>
                                     <div class="text-center">
-                                        <c:if test="${cart.getBookQuantityRemain() == 0}">
+                                        <c:if test="${BookList[status.index].quantity == null}">
                                             <div class="text-danger mb-3">Hết hàng</div>
                                         </c:if>
 
-                                        <c:if test="${cart.getBookQuantityRemain() != 0}">
-                                            <div class="text-danger mb-3">Số lượng còn lại: ${cart.getBookQuantityRemain()}</div>
+                                        <c:if test="${BookList[status.index].quantity != null}">
+                                            <div class="text-danger mb-3">Số lượng còn lại: ${BookList[status.index].quantity}</div>
                                         </c:if>
                                     </div>
                                     <div class="d-flex">
@@ -64,7 +64,7 @@
                                                 </button>
                                             </div>
                                             <div class="mx-2"> 
-                                                <input type="number" min="1" max="bookDetail.quantity" class="form-control mx-2 text-center BookQuantity" style="width: 80px;" value="${cart.getBookquantity()}" min="1" max="${cart.getBookQuantityRemain()}">
+                                                <input type="number" min="1" max="bookDetail.quantity" class="form-control mx-2 text-center BookQuantity" style="width: 80px;" value="${cart.getBookquantity()}" min="1" max="${BookList[status.index].quantity}">
                                             </div>
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-primary btn-plus increaseQuantity">
@@ -77,14 +77,13 @@
 
                                 <td class="text-center"><input class="font-weight-medium text-center totalEachProduct" type="text" style="border: none;pointer-events: none" readonly></td>
                                 <td class="text-center"><i class="fa fa-remove DeleteProduct" style="cursor: pointer" data-bookid="${cart.getBookid()}" data-customerid="${cart.getAccountid()}"></i></td>
-                        <input type ="hidden" class ="form-control mx-3 text-center BookQuantityRemain" value="${cart.getBookQuantityRemain()}">
+                        <input type ="hidden" class ="form-control mx-3 text-center BookQuantityRemain" value="${BookList[status.index].quantity}">
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
 
-
-                <form id="checkoutForm" method="post" action="${pageContext.request.contextPath}/Cart">
+                <form id="checkoutForm" method="post" action="/Cart">
                     <div class="bg-light p-4 mt-3 mb-3 d-flex justify-content-between align-items-center">
                         <div class="d-flex">
                             <div class="text-primary SelectAll" style="cursor: pointer">Chọn tất cả</div>
@@ -92,7 +91,8 @@
                         </div>
                         <div class="d-flex">
                             <div class="p-2 mx-2 text-dark" id="TotalCart">Tổng cộng: </div>
-                            <input name="btnSubmit" class="btn btn-danger p-2" type="submit" id="btnOrder" value="Mua hàng">
+                            <input type="hidden" name="btnSubmit" value="Mua hàng">
+                            <input class="btn btn-danger p-2" type="submit" id="btnOrder" value="Mua hàng">
                         </div>
                     </div>
                 </form>
@@ -119,6 +119,7 @@
                     $(this).closest('tr').find('.totalEachProduct').val(formatTotalPrice);
                 });
             }
+            
             // Function to calculate the total based on selected checkboxes
             function calculateTotalCart() {
                 var total = 0;
@@ -134,7 +135,6 @@
                 $('#TotalCart').text('Tổng cộng: ' + formattedTotal);
             }
 
-
             // Call a calculation function when a webpage loads
             $(document).ready(function () {
                 calculateTotalForProduct();
@@ -144,7 +144,7 @@
                 $('.BookQuantity').on('input', function () {
                     calculateTotalCart();
                     calculateTotalForProduct();
-                    sendCartDataToServlet();
+//                    sendCartDataToServlet();
                 });
 
                 $('.SelectBook').on("change", function () {
@@ -160,6 +160,7 @@
                 });
 
             });
+            
             //Function to decrease quantity of book in Cart
             $('.decreaseQuantity').on('click', function () {
                 var inputQuantity = $(this).closest('tr').find('.BookQuantity');
@@ -170,9 +171,10 @@
                     calculateTotalForProduct();
                     calculateTotalCart();
                     updateQuantity($(this).closest('tr'));
-                    sendCartDataToServlet();
+//                    sendCartDataToServlet();
                 }
             });
+            
             //Function to increase quantity of book in Cart
             $('.increaseQuantity').on('click', function () {
                 var inputQuantity = $(this).closest('tr').find('.BookQuantity');
@@ -183,9 +185,10 @@
                     calculateTotalForProduct();
                     calculateTotalCart();
                     updateQuantity($(this).closest('tr'));
-                    sendCartDataToServlet();
+//                    sendCartDataToServlet();
                 }
             });
+            
             function validateBookQuantity(inputElement) {
                 var currentQuantity = parseInt(inputElement.val());
                 var minQuantity = 1;
@@ -208,14 +211,17 @@
                 calculateTotalCart();
                 updateQuantity($(this).closest('tr'));
             });
+            
             //Select all book
             $('.SelectAll').on('click', function () {
-                $('.SelectBook').prop('checked', true);
+                $('.SelectBook:not(:disabled)').prop('checked', true);
             });
+            
             //Deselect all book
             $('.DeselectAll').on('click', function () {
                 $('.SelectBook').prop('checked', false);
             });
+            
             $('.DeleteProduct').on('click', function () {
                 var bookId = $(this).data('bookid');
                 var customerId = $(this).data('customerid');
@@ -225,7 +231,7 @@
                     calculateTotalForProduct();
                     calculateTotalCart();
                     $.ajax({
-                        type: "POST",
+                        type: "post",
                         url: "/Cart",
                         data: {
                             isDeleteCartItem: true,
@@ -250,7 +256,6 @@
                 var inputQuantity = $(tableRow).find('.BookQuantity');
                 var currentQuantity = parseInt(inputQuantity.val());
             }
-
 
             document.getElementById('checkoutForm').addEventListener('submit', function (event) {
                 //Prevent default form submission
@@ -291,7 +296,7 @@
             });
 
             window.addEventListener('beforeunload', function (e) {
-                sendCartDataToServlet();
+//                sendCartDataToServlet();
             });
 
             function sendCartDataToServlet() {
@@ -302,13 +307,13 @@
                     var customerId = tr.find('.DeleteProduct').data('customerid');
                     var bQuantity = tr.find('.BookQuantity').val();
                     var bookquantity = parseInt(bQuantity);
-                    selectedItems.push({bookId: bookId, quantity: bookquantity, customerId: customerId});
+                    selectedItems.push({quantity: bookquantity, bookId: bookId, customerId: customerId});
                 });
 
                 var jsonData = JSON.stringify(selectedItems);
-
+                console.log(jsonData);
                 $.ajax({
-                    type: "POST",
+                    type: "post",
                     url: "/Cart",
                     data :{ jsonData : jsonData}, 
                     dataType: "json",

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Bootstrap Example</title>
+        <title>Mua hàng</title>
         <jsp:include page="/Views/head.jsp"/>
         <style>
             .bankingDetails {
@@ -67,7 +67,7 @@
                                     <td>
                                         <div class="d-flex p-2">
                                             <img
-                                                src="${item.getThumbnail()}"
+                                                src="/Images/${item.getThumbnail()}"
 
                                                 class="rounded" alt="..." style="width: 100px; height: 100px; object-fit: contain;">
                                             <input type="hidden" name="thumbnailPath" value="${item.getThumbnail()}">

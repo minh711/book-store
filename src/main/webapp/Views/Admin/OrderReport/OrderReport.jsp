@@ -10,7 +10,7 @@
 <html lang="en">
 
     <head>
-        <title>Blank Page</title>
+        <title>Thống kê</title>
         <jsp:include page="/Views/head.jsp"/>
         <style>
             .waittingTitle{
@@ -18,15 +18,18 @@
                 font-weight: bold;
                 text-align: center;
             }
+            
             .finishTitle{
                 font-size: 1.8em;
                 font-weight: bold;
                 text-align: center;
             }
+            
             .terminateTitle{
                 font-size: 1.3em;
                 font-weight: bold;
             }
+            
             .boxTitle{
                 color: black;
                 font-weight: bold;
@@ -34,7 +37,6 @@
                 width: 32%;
                 border-bottom-right-radius:10px;
                 border-top-left-radius: 5px;
-
             }
 
             .waitting{
@@ -43,6 +45,7 @@
                 border-radius: 10px;
                 padding: 5px;
             }
+            
             .finish{
                 background-color: white;
                 color: black;
@@ -51,6 +54,7 @@
                 padding: 3px;
                 border: 2px solid #668CD4;
             }
+            
             .terminate{
                 background-color:#FFDADA;
                 color: #EF4848;
@@ -62,9 +66,11 @@
                 cursor: pointer;
 
             }
+            
             .tach{
                 margin-left: 3px;
             }
+            
             #chartButton{
                 padding: 5px;
                 border-radius: 15px;
@@ -74,6 +80,7 @@
                 background-image: linear-gradient(to right,#FEB82C, #EF7C57);
                 border: 2px solid #EF7C57;
             }
+            
             #chartButton:hover{
                 background-image: linear-gradient(to right,#EC4585, #B555A3);
                 font-weight: bold;
@@ -231,8 +238,6 @@
                             <button id="chartButton" class="btn">Change</button>
                             <canvas id="userChart" style="display: block; box-sizing: border-box;"></canvas>
                             <canvas id="myChart" style="display: none; box-sizing: border-box;"></canvas>
-
-
                         </div>
                     </div>
                 </div>
@@ -294,7 +299,6 @@
             var chart = new ApexCharts(document.querySelector("#chart"), options);
             chart.render();
         </script>
-
         <script>
             const xValues = ["Đã thành công", "Đang thực hiện", "Đã hủy"];
             const yValues = [${requestScope.finishPie}, ${(requestScope.waittingPie)-(requestScope.finishPie)-(requestScope.finishPie)}, ${requestScope.terminatePie}];
@@ -392,7 +396,6 @@
                         myCanvas.style.display = "block";
                     }
                 });
-
             });
 
             var rows = document.querySelectorAll("table tbody tr");

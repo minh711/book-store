@@ -10,7 +10,7 @@
 <html lang="en">
 
     <head>
-        <title>Blank Page</title>
+        <title>Lịch sử mua hàng</title>
         <jsp:include page="/Views/head.jsp"/>
         <style>
             .waitting{

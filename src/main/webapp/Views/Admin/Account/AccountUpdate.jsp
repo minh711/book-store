@@ -10,7 +10,7 @@
 <html lang="en">
 
     <head>
-        <title>Blank Page</title>
+        <title>Cập nhật tài khoản</title>
         <jsp:include page="/Views/head.jsp"/>
     </head>
 

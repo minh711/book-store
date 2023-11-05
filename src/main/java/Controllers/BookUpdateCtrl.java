@@ -51,6 +51,9 @@ public class BookUpdateCtrl extends HttpServlet {
             throws ServletException, IOException {
         int bookId = Integer.valueOf(request.getParameter("ID"));
         request.setAttribute("bookId", bookId);
+        BookDAO bookDAO = new BookDAO();
+        Book book = bookDAO.getBook(bookId);
+        request.setAttribute("isAvailable", book.isIsAvailable());
         request.getRequestDispatcher("/Views/Admin/BookUpdate/BookUpdate.jsp").forward(request, response);
     }
 
@@ -337,6 +340,26 @@ public class BookUpdateCtrl extends HttpServlet {
 
             BookDAO bookDAO = new BookDAO();
             bookDAO.update(book);
+        }
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Disable Book">
+        if (request.getParameter("btnDisableBook") != null && !request.getParameter("btnDisableBook").equals("")) {
+            int bookId = Integer.valueOf(request.getParameter("disableBookId"));
+            
+            BookDAO bookDAO = new BookDAO();
+            bookDAO.setAvailability(0, bookId);
+            response.sendRedirect("/Manager/Book/Update?ID=" + bookId);
+        }
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Enable Book">
+        if (request.getParameter("btnEnableBook") != null && !request.getParameter("btnDisableBook").equals("")) {
+            int bookId = Integer.valueOf(request.getParameter("disableBookId"));
+
+            BookDAO bookDAO = new BookDAO();
+            bookDAO.setAvailability(1, bookId);
+            response.sendRedirect("/Manager/Book/Update?ID=" + bookId);
         }
         // </editor-fold>
     }

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Blank Page</title>
+        <title>Thông tin cá nhân</title>
         <jsp:include page="/Views/head.jsp"/>
     </head>
 

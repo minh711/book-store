@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Register</title>
+        <title>Thiết đặt lại mật khẩu</title>
         <jsp:include page="/Views/head.jsp"/>
     </head>
 

@@ -57,7 +57,7 @@ public class CartCtrl extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Submit 
-        if (request.getParameter("btnSubmit") != null && request.getParameter("btnSubmit").equals("Mua hàng")) {
+        if (request.getParameter("btnSubmit") != null && !request.getParameter("btnSubmit").equals("")) {
             List<OrderItem> orderlist = new ArrayList<>();
             BookDAO book = new BookDAO();
             BookDetail b;
@@ -89,7 +89,6 @@ public class CartCtrl extends HttpServlet {
                 }
             } catch (NumberFormatException e) {}
         }
-        
 
         // Get Cart items
         String cItems = request.getParameter("jsonData");
@@ -100,15 +99,25 @@ public class CartCtrl extends HttpServlet {
 
             CartDAO cart = new CartDAO();
             for (Cart item : cartItems) {
+                ArrayList<Cart> oldCart = cart.GetCartByID(item.getCustomerId(), item.getBookId());
+                int diff = oldCart.get(0).getQuantity() - item.getQuantity();
+                System.out.println("Old: " + oldCart.get(0).getQuantity());
+                System.out.println("New: " + item.getQuantity());
+                System.out.println("Diff: " + diff);
+                BookDAO bookDAO = new BookDAO();
+                bookDAO.updateQuantity(item.getBookId(), diff);
                 cart.UpdateCart(item.getQuantity(), item.getCustomerId(), item.getBookId());
             }
         }
         
         // Delele Cart item
-        if (request.getParameter("isDeleteCartItem:") != null && request.getParameter("isDeleteCartItem:").equals("true")) {
+        if (request.getParameter("isDeleteCartItem") != null && request.getParameter("isDeleteCartItem").equals("true")) {
             CartDAO cart = new CartDAO();
             int bookID = Integer.parseInt(request.getParameter("bookId"));
             int customerID = Integer.parseInt(request.getParameter("customerId"));
+            ArrayList<Cart> cartItem = cart.GetCartByID(customerID, bookID);
+            BookDAO bookDAO = new BookDAO();
+            bookDAO.updateQuantity(bookID, cartItem.get(0).getQuantity());
             cart.RemoveUserCartProduct(customerID, bookID);
         }
     }

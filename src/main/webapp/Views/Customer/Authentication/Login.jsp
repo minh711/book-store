@@ -9,7 +9,7 @@
 <html lang="en">
 
     <head>
-        <title>Login</title>
+        <title>Đăng nhập</title>
         <jsp:include page="/Views/head.jsp"/>
     </head>
 

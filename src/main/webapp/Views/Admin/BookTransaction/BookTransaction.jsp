@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Sample</title>
+    <title>Nhập hàng</title>
     <jsp:include page="/Views/head.jsp"/>
     <link rel="stylesheet" href="/Assets/DataTables-1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/Admin/BookTransaction/style.css"/>

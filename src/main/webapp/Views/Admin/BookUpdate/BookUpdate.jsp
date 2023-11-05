@@ -1,11 +1,12 @@
 <%@page import="Models.DBModels.BookPicture"%>
 <%@page import="DAOs.DBModelDAOs.BookPictureDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Add Book Picture Component</title>
+    <title>Cập nhật Sách</title>
     <jsp:include page="/Views/head.jsp"/>
     <link rel="stylesheet" href="/Views/Admin/BookUpdate/select.css"/>
     <link rel="stylesheet" href="/Views/Admin/BookUpdate/pictures.css"/>
@@ -18,10 +19,21 @@
         <jsp:include page="/Views/aside.jsp"/>
         
         <div class="container">
-            <form id="submit" action="/Manager/Book/Create" method="post" enctype="multipart/form-data">
+            <h1 class="text-center mt-3 mb-3">Cập nhật Sách</h1>
+            <form class="mb-3" method="post" action="/Manager/Book/Update" enctype="multipart/form-data">
+                <input type="hidden" name="disableBookId" value="${bookId}">
                 
-                <h1 class="text-center mt-3 mb-3">Cập nhật Sách</h1>
+                <c:if test="${isAvailable}">
+                    <input onclick="return confirm('Bán có chắc muốn ngừng bán sản phẩm?');" type="submit" name="btnDisableBook" value="Ngưng bán" class="btn btn-danger">
+                </c:if>
+                
+                <c:if test="${!isAvailable}">
+                    <div class="text-danger mb-2">Sách đã ngừng bán</div>
+                    <input onclick="return confirm('Bán có chắc muốn tiếp tục bán trở lại?');" type="submit" name="btnEnableBook" value="Tiếp tục bán trở lại" class="btn btn-secondary">
+                </c:if>
+            </form>
             
+            <form id="submit" action="/Manager/Book/Update" method="post" enctype="multipart/form-data">
                 <h5>Mã sách</h5>
                 <div class="text-danger" id="errId"></div>
                 <input type="number" name="txtBookId" class="form-control mb-3" placeholder="Mã sách" readonly>

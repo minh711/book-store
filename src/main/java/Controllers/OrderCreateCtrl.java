@@ -164,7 +164,7 @@ public class OrderCreateCtrl extends HttpServlet {
         OrderStatusDetailDAO orderStadao = new OrderStatusDetailDAO();
         orderStadao.AddOrderStatusDetail(osd);
 
-        response.sendRedirect("orderDetailCustomerCtrl?id=" + LatestID);
+        response.sendRedirect("/Order/Detail?id=" + LatestID);
     }
 
     private String getPartValue(Part part) throws IOException {

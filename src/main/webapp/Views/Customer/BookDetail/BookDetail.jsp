@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ocean Book</title>
+        <title>Chi tiết</title>
         <jsp:include page="/Views/head.jsp"/>
         <style>
             .carousel {
@@ -80,7 +80,7 @@
                                             </button>
                                         </div>
                                         <div class="mx-2">
-                                            <button ${bookDetail.quantity > 0 ? '' : 'disabled'} class="btn btn-danger" style="width: 200px">Mua ngay</button>
+                                            <input type="submit" name="btnSubmit" ${bookDetail.quantity > 0 ? '' : 'disabled'} class="btn btn-danger" style="width: 200px" value="Mua ngay">
                                         </div>
                                     </div>
                                 </form>

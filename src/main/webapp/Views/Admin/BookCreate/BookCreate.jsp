@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add Book Picture Component</title>
+        <title>Thêm sách mới</title>
         <jsp:include page="/Views/head.jsp"/>
         <link rel="stylesheet" href="/Assets/fontawesome-free-6.4.2-web/css/all.min.css">
         <link rel="stylesheet" href="/Views/Admin/BookCreate/select.css"/>

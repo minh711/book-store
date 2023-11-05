@@ -9,7 +9,7 @@
 <html lang="en">
 
     <head>
-        <title>Blank Page</title>
+        <title>Tạo tài khoản mới</title>
         <jsp:include page="/Views/head.jsp"/>
     </head>
 

@@ -25,9 +25,9 @@
                 </a>
                 <div class="mt-3 mx-3 collapse hide" id="book-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/Manager/Book/List" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Sách</a></li>
-                        <li><a href="/Manager/Book/Attribute" class="mt-2 link-dark d-inline-flex text-decoration-none rounded">Danh mục Sách</a></li>
-                        <li><a href="/Manager/Book/Transaction" class="mt-2 link-dark d-inline-flex text-decoration-none rounded">Nhập Sách</a></li>
+                        <li><a href="/Manager/Book/List" class="fs-5 link-dark d-inline-flex text-decoration-none rounded">Danh sách Sách</a></li>
+                        <li><a href="/Manager/Book/Attribute" class="fs-5 mt-2 link-dark d-inline-flex text-decoration-none rounded">Danh mục Sách</a></li>
+                        <li><a href="/Manager/Book/Transaction" class="fs-5 mt-2 link-dark d-inline-flex text-decoration-none rounded">Nhập Sách</a></li>
                     </ul>
                 </div>
             </li>
@@ -40,7 +40,7 @@
                 </a>
                 <div class="mt-3 mx-3 collapse hide" id="order-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/Manager/Order/List" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Đơn hàng</a></li>
+                        <li><a href="/Manager/Order/List" class="fs-5 link-dark d-inline-flex text-decoration-none rounded">Danh sách Đơn hàng</a></li>
                     </ul>
                 </div>
             </li>
@@ -53,7 +53,7 @@
                 </a>
                 <div class="mt-3 mx-3 collapse hide" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/Manager/Account/List" class="link-dark d-inline-flex text-decoration-none rounded">Danh sách Tài khoản</a></li>
+                        <li><a href="/Manager/Account/List" class="fs-5 link-dark d-inline-flex text-decoration-none rounded">Danh sách Tài khoản</a></li>
                     </ul>
                 </div>
             </li>

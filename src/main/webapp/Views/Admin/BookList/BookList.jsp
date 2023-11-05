@@ -4,7 +4,7 @@
 <html lang="en">
 
     <head>
-        <title>Blank Page</title>
+        <title>Danh sách Sách</title>
         <jsp:include page="/Views/head.jsp"/>
         <style>
             .book-item {
@@ -149,7 +149,7 @@
                                             <c:set var="TextColor" value="text-danger"></c:set>
                                         </c:if>
                                         <c:set var="TextColor" value="text-success"></c:set>
-                                        <td class="${TextColor}">${book.isAvailable}</td>
+                                        <td class="${book.isAvailable == 'Ngừng bán' ? 'text-danger' : ''} ${TextColor}">${book.isAvailable}</td>
                                         <td><a style="text-decoration: none;" href="/Manager/Book/Update?ID=${book.id}">Chỉnh sửa</a></td>
                                     </tr>
                                 </c:forEach>

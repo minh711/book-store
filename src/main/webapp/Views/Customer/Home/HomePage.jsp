@@ -4,7 +4,7 @@
 <html>
 
     <head>
-        <title>Sample</title>
+        <title>Trang chủ</title>
         <jsp:include page="/Views/head.jsp"/>
         <style>
             .book-item {

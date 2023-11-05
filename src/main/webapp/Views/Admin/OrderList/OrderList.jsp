@@ -10,7 +10,7 @@
 <html lang="en">
 
     <head>
-        <title>Blank Page</title>
+        <title>Danh sách Đơn hàng</title>
         <jsp:include page="/Views/head.jsp"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/orderDetailCustomer/style.css">
         <style>

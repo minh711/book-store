@@ -7,7 +7,7 @@
 <html>
 
     <head>
-        <title>Sample</title>
+        <title>Tìm kiếm</title>
         <jsp:include page="/Views/head.jsp"/>
         <style>
             .book-item {
@@ -45,13 +45,14 @@
                         <h3>Kết quả tìm kiếm cho ${searchKey == null ? "" : "từ khóa "}${searchKey}${AuthorID == null ? "" : "Tác giả "}${PublisherID == null ? "" : "Nhà xuất bản "}${GenreID == null ? "" : "Thể loại "}${LanguageID == null ? "" : "Ngôn ngữ "}${Name}</h3>
                     </c:if>
                     
-                    
                     <div class="mt-4 d-flex align-items-center">
                         <div class="mx-2">Sắp xếp theo</div>
                         <a class="sort-btn mx-2" id="SortByBestSellerS"> Bán chạy nhất</a>
                         <a class="sort-btn mx-2" id="SortByBestSaleS"> Giảm nhiều nhất</a>
                         <a class="sort-btn mx-2" id="SortByHighestPriceS"> Giá từ cao đến thấp</a>
                         <a class="sort-btn mx-2" id="SortByLowestPriceS"> Giá từ thấp đến cao</a>
+                        <a class="sort-btn mx-2" id="SortByHighestAvgRating"> Đánh giá từ cao đến thấp</a>
+                        <a class="sort-btn mx-2" id="SortByLowestAvgRating"> Đánh giá từ thấp đến cao</a>
                     </div>
                     
                     <div class="row" id="bookSearchs">
@@ -79,6 +80,7 @@
                                                 <span class="format-number text-decoration-line-through text-muted" data-value="${book.price}"></span>
                                             </div>
                                         </div>
+                                            
                                         <div class="d-flex justify-content-center">
                                             <p>
                                                 <strong class="mx-2">${book.avgRating}</strong>
@@ -318,6 +320,37 @@
                     });
                 });
             });                                                                                                                                                                                                                                          // @author DuyenLTM
+            
+            //Average Rating from highest to lowest
+            $("#SortByHighestAvgRating").click(function () {
+                var books =JSON.parse(JSON.stringify(jsonn));
+                console.log(typeof books);
+                books.sort(function (a, b) {
+                    return b.avgRating - a.avgRating;
+                });
+                var bookDetails = $("#bookSearchs");
+                bookDetails.empty();
+
+                $.each(books, function (index, book) {
+                    var bookInfo = "<p>Title: " + book.title + "</p><p>Publisher: " + book.publisher + "</p><p>Language: " + book.language + "</p>";
+                    bookDetails.append("<div class='book-info'>" + bookInfo + "</div>");
+                });
+            });
+            
+            //Average Rating from lowest to highest
+            $("#SortByLowestAvgRating").click(function () {
+                var books =JSON.parse(JSON.stringify(jsonn));
+                books.sort(function (a, b) {
+                    return a.avgRating - b.avgRating;
+                });
+                var bookDetails = $("#bookSearchs");
+                bookDetails.empty();
+
+                $.each(books, function (index, book) {
+                    var bookInfo = "<p>Title: " + book.title + "</p><p>Publisher: " + book.publisher + "</p><p>Language: " + book.language + "</p>";
+                    bookDetails.append("<div class='book-info'>" + bookInfo + "</div>");
+                });
+            });
             
             function formatNumberElements() {
                 let formatNumberElements = document.getElementsByClassName('format-number');

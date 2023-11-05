@@ -26,7 +26,7 @@ public class SearchBookDAO {
         String sql = "SELECT distinct Book.id FROM Book \n"
                 + "                JOIN BookGenre ON BookGenre.bookId = Book.id \n"
                 + "                JOIN Genre ON BookGenre.genreId = Genre.id \n"
-                + "                WHERE Genre.id=?";
+                + "                WHERE Genre.id=? AND Book.isAvailable = 1";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, genreId);
@@ -45,7 +45,7 @@ public class SearchBookDAO {
         String sql = "select distinct Book.id\n"
                 + "from Book \n"
                 + "join [Language] on Book.languageId=[Language].id\n"
-                + "where [Language].id=?;";
+                + "where [Language].id=? AND Book.isAvailable = 1;";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, languageId);
@@ -64,7 +64,7 @@ public class SearchBookDAO {
         String sql = "select DISTINCT Book.id\n"
                 + "from Book \n"
                 + "join Publisher on Book.publisherId=Publisher.id\n"
-                + "where Publisher.id=?;";
+                + "where Publisher.id=? AND Book.isAvailable = 1;";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, publishId);
@@ -83,7 +83,7 @@ public class SearchBookDAO {
         String sql = "SELECT DISTINCT Book.id FROM Book "
                 + "JOIN BookAuthor ON BookAuthor.bookId = Book.id "
                 + "JOIN Author ON BookAuthor.authorId = Author.id "
-                + "WHERE Author.id=?";
+                + "WHERE Author.id=? AND Book.isAvailable = 1";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, authorId);
@@ -101,7 +101,7 @@ public class SearchBookDAO {
     //SEARCH DAOs
     public ArrayList<Integer> searchByBookId(String key) {
         ArrayList<Integer> bookIDs = new ArrayList<>();
-        String sql = "select id from Book where title like Lower(?);";
+        String sql = "select id from Book where title like Lower(?) AND Book.isAvailable = 1;";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + key + "%".toLowerCase());
@@ -120,7 +120,7 @@ public class SearchBookDAO {
         String sql = "SELECT Book.id FROM Book "
                 + "JOIN BookAuthor ON BookAuthor.bookId = Book.id "
                 + "JOIN Author ON BookAuthor.authorId = Author.id "
-                + "WHERE LOWER(Author.author) LIKE LOWER(?)";
+                + "WHERE LOWER(Author.author) LIKE LOWER(?) AND Book.isAvailable = 1";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + key + "%".toLowerCase());
@@ -139,7 +139,7 @@ public class SearchBookDAO {
         String sql = "select Book.id\n"
                 + "from Book \n"
                 + "join Publisher on Book.publisherId=Publisher.id\n"
-                + "where Lower(Publisher.publisher) like Lower(?)";
+                + "where Lower(Publisher.publisher) like Lower(?) AND Book.isAvailable = 1";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + key + "%".toLowerCase());
@@ -158,7 +158,7 @@ public class SearchBookDAO {
         String sql = "select Book.id\n"
                 + "from Book \n"
                 + "join [Language] on Book.languageId=[Language].id\n"
-                + "where Lower([Language].language) like Lower(?)";
+                + "where Lower([Language].language) like Lower(?) AND Book.isAvailable = 1";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + key + "%".toLowerCase());
@@ -177,7 +177,7 @@ public class SearchBookDAO {
         String sql = "SELECT Book.id FROM Book \n"
                 + "                JOIN BookGenre ON BookGenre.bookId = Book.id \n"
                 + "                JOIN Genre ON BookGenre.genreId = Genre.id \n"
-                + "                WHERE LOWER(Genre.genre) LIKE LOWER(?);";
+                + "                WHERE LOWER(Genre.genre) LIKE LOWER(?) AND Book.isAvailable = 1;";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + key + "%".toLowerCase());
