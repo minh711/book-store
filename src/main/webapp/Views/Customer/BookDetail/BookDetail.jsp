@@ -80,7 +80,7 @@
                                             </button>
                                         </div>
                                         <div class="mx-2">
-                                            <input type="submit" name="btnSubmit" ${bookDetail.quantity > 0 ? '' : 'disabled'} class="btn btn-danger" style="width: 200px" value="Mua ngay">
+                                            <input onclick="return authentication();" type="submit" name="btnSubmit" ${bookDetail.quantity > 0 ? '' : 'disabled'} class="btn btn-danger" style="width: 200px" value="Mua ngay">
                                         </div>
                                     </div>
                                 </form>

@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 /**
  * Class for managing a database connection using JDBC.
  */
@@ -25,7 +23,7 @@ public class DbConnection {
             // Rename to match your database here
             String server = "MINHPC\\SQLEXPRESS";
             String port = "1433";
-            String database = "SWP_v0_3";
+            String database = "G1_OBS";
             String user = "sa";
             String password = "123456";
           

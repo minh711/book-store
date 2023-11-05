@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -176,7 +177,8 @@ public class BookBrowseCtrl extends HttpServlet {
             BookDAO bookDAO = new BookDAO();
             Book[] books = bookDAO.getAll();
             request.setAttribute("isAll", "true");
-            request.setAttribute("books", books);
+            List<Book> booksArrayList = new ArrayList<>(Arrays.asList(books));
+            request.setAttribute("books", booksArrayList);
         }
         
         request.setAttribute("Name", request.getParameter("Name"));

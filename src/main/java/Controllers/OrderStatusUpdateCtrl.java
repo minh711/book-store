@@ -97,6 +97,6 @@ public class OrderStatusUpdateCtrl extends HttpServlet {
         if (requestingStatus == 4) {
             
         }
-        response.sendRedirect("Manager/Order/Detail?id=" + orderID);
+        response.sendRedirect("/Manager/Order/Detail?id=" + orderID);
     }
 }

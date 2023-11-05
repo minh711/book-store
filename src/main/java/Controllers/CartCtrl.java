@@ -46,11 +46,12 @@ public class CartCtrl extends HttpServlet {
             if (!list.isEmpty()) {
                 request.setAttribute("CartList", list);
                 request.setAttribute("BookList", bookDetailList);
-                request.getRequestDispatcher("Views/Customer/Cart/Cart.jsp").forward(request, response);
+//                request.getRequestDispatcher("Views/Customer/Cart/Cart.jsp").forward(request, response);
             }
-        } catch (IOException | ServletException e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
+        request.getRequestDispatcher("Views/Customer/Cart/Cart.jsp").forward(request, response);
     }
 
     @Override
@@ -66,7 +67,8 @@ public class CartCtrl extends HttpServlet {
             String[] customerIds = request.getParameterValues("customerIds");
             String[] quantities = request.getParameterValues("quantities");
 
-            int customerID = 1;
+            HttpSession session = request.getSession();
+            int customerID = (int) session.getAttribute("accountId");
             AddressDAO addressDao = new AddressDAO();
 
             try {
@@ -79,14 +81,14 @@ public class CartCtrl extends HttpServlet {
                     int bookQuantity = Integer.parseInt(quantity);
                     b = book.getBookDetailByID(bookID);
                     orderlist.add(new OrderItem(b.getId(), b.getTitle(), b.getPrice(), b.getSalePrice(), bookQuantity, b.getThumbnail()));
-
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    String jsonList = objectMapper.writeValueAsString(orderlist);
-                    request.setAttribute("jsonList", jsonList.replace("\"", "'"));
-                    request.setAttribute("OrderItems", orderlist);
-                    request.setAttribute("addresses", addressDao.getAll(customerID));
-                    request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
                 }
+                
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonList = objectMapper.writeValueAsString(orderlist);
+                request.setAttribute("jsonList", jsonList.replace("\"", "'"));
+                request.setAttribute("OrderItems", orderlist);
+                request.setAttribute("addresses", addressDao.getAll(customerID));
+                request.getRequestDispatcher("Views/Customer/OrderCreate/createOrder.jsp").forward(request, response);
             } catch (NumberFormatException e) {}
         }
 

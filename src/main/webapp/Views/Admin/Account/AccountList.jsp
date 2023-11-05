@@ -152,7 +152,7 @@
                 </div>
                 
                 <h1 class="text-center mt-3">Danh sách tài khoản</h1>
-                <a href="/Account" class="btn btn-primary mb-3">Thêm Tài khoản mới</a>
+                <a href="/Manager/Account/Create" class="btn btn-primary mb-3">Thêm Tài khoản mới</a>
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-12">
                         <table id="example" class="display mt-3">

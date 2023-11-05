@@ -94,7 +94,7 @@
                 <hr>
                 
                 <li>
-                    <a class="btn border-0 text-primary" href="#">Xem tất cả</a>
+                    <a class="btn border-0 text-primary" href="/Book">Xem tất cả</a>
                 </li>
             </ul>
         </div>

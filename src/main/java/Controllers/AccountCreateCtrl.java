@@ -72,16 +72,16 @@ public class AccountCreateCtrl extends HttpServlet {
                         request.setAttribute("accountList", accountDAO.getAccounts());
                         request.getRequestDispatcher("/Views/Admin/Account/AccountList.jsp").forward(request, response);
                     } else {
-                        request.getRequestDispatcher("Views/Admin/Account/AccountCreate.jsp").forward(request, response);
+                        request.getRequestDispatcher("/Views/Admin/Account/AccountCreate.jsp").forward(request, response);
                     }
                 } else {
                     request.setAttribute("error", "Tài khoản đã tồn tại do trùng địa chỉ email");
-                    request.getRequestDispatcher("Views/Admin/Account/AccountCreate.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Views/Admin/Account/AccountCreate.jsp").forward(request, response);
                 }
 
             } else {
                 request.setAttribute("error", "Tài khoản đã tồn tại do trùng số điện thoại");
-                request.getRequestDispatcher("Views/Admin/Account/AccountCreate.jsp").forward(request, response);
+                request.getRequestDispatcher("/Views/Admin/Account/AccountCreate.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountCreateCtrl.class.getName()).log(Level.SEVERE, null, ex);

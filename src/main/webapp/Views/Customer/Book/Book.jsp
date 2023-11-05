@@ -51,8 +51,6 @@
                         <a class="sort-btn mx-2" id="SortByBestSaleS"> Giảm nhiều nhất</a>
                         <a class="sort-btn mx-2" id="SortByHighestPriceS"> Giá từ cao đến thấp</a>
                         <a class="sort-btn mx-2" id="SortByLowestPriceS"> Giá từ thấp đến cao</a>
-                        <a class="sort-btn mx-2" id="SortByHighestAvgRating"> Đánh giá từ cao đến thấp</a>
-                        <a class="sort-btn mx-2" id="SortByLowestAvgRating"> Đánh giá từ thấp đến cao</a>
                     </div>
                     
                     <div class="row" id="bookSearchs">
@@ -108,6 +106,17 @@
         <jsp:include page="/Views/foot.jsp"/>
         <script src="${pageContext.request.contextPath}/Views/Customer/Home/script.js"></script>
         <script>
+            function formatNumberElements() {
+                let formatNumberElements = document.getElementsByClassName('format-number');
+
+                for (let i = 0; i < formatNumberElements.length; i++) {
+                    let element = formatNumberElements[i];
+                    let value = element.getAttribute('data-value');
+                    let formattedValue = Number(value).toLocaleString();
+                    element.textContent = formattedValue + ' VNÐ';
+                }
+            }
+            
             formatNumberElements();
 
             function goToBookDetail(bookId) {
@@ -320,48 +329,6 @@
                     });
                 });
             });                                                                                                                                                                                                                                          // @author DuyenLTM
-            
-            //Average Rating from highest to lowest
-            $("#SortByHighestAvgRating").click(function () {
-                var books =JSON.parse(JSON.stringify(jsonn));
-                console.log(typeof books);
-                books.sort(function (a, b) {
-                    return b.avgRating - a.avgRating;
-                });
-                var bookDetails = $("#bookSearchs");
-                bookDetails.empty();
-
-                $.each(books, function (index, book) {
-                    var bookInfo = "<p>Title: " + book.title + "</p><p>Publisher: " + book.publisher + "</p><p>Language: " + book.language + "</p>";
-                    bookDetails.append("<div class='book-info'>" + bookInfo + "</div>");
-                });
-            });
-            
-            //Average Rating from lowest to highest
-            $("#SortByLowestAvgRating").click(function () {
-                var books =JSON.parse(JSON.stringify(jsonn));
-                books.sort(function (a, b) {
-                    return a.avgRating - b.avgRating;
-                });
-                var bookDetails = $("#bookSearchs");
-                bookDetails.empty();
-
-                $.each(books, function (index, book) {
-                    var bookInfo = "<p>Title: " + book.title + "</p><p>Publisher: " + book.publisher + "</p><p>Language: " + book.language + "</p>";
-                    bookDetails.append("<div class='book-info'>" + bookInfo + "</div>");
-                });
-            });
-            
-            function formatNumberElements() {
-                let formatNumberElements = document.getElementsByClassName('format-number');
-
-                for (let i = 0; i < formatNumberElements.length; i++) {
-                    let element = formatNumberElements[i];
-                    let value = element.getAttribute('data-value');
-                    let formattedValue = Number(value).toLocaleString();
-                    element.textContent = formattedValue + ' VNÐ';
-                }
-            }
         </script>   
     </body>
 </html

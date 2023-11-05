@@ -50,7 +50,7 @@
             
             <div class="container">
                 <h1 class="text-center mt-3 mb-3">Thông tin đơn hàng</h1>
-                <form id="form"  method="post" action="OrderStatusUpdate" onsubmit="return validateForm()">
+                <form id="form"  method="post" action="/Manager/Order/Detail" onsubmit="return validateForm()">
                     <input type="hidden" id="orderID" name="OrderID" value="${requestScope.OrderID}">
 
                     <div class="border">

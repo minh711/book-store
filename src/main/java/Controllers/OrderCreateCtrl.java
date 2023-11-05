@@ -89,7 +89,8 @@ public class OrderCreateCtrl extends HttpServlet {
         Address address;
         
         //Assume customerID and item list retrieve from session 
-        int customerID = 2;
+        HttpSession session = request.getSession();
+        int customerID = (int) session.getAttribute("accountId");
         
         // Retrieve data from the form
         long currentTimeMillis = System.currentTimeMillis();
